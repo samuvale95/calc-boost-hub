@@ -19,8 +19,8 @@ export const Hero = () => {
             <Button variant="primary" size="lg" className="text-lg px-8">
               Inizia Subito
             </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8">
-              Scopri di Più
+            <Button variant="outline" size="lg" className="text-lg px-8" asChild>
+              <a href="/admin">Admin Dashboard</a>
             </Button>
           </div>
         </div>
