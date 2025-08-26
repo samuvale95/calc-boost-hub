@@ -15,14 +15,6 @@ export const Hero = () => {
             Accedi ai nostri strumenti avanzati di calcolo e ottieni risultati precisi 
             per le tue analisi professionali
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="primary" size="lg" className="text-lg px-8">
-              Inizia Subito
-            </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8" asChild>
-              <a href="/admin">Admin Dashboard</a>
-            </Button>
-          </div>
         </div>
       </div>
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
