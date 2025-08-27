@@ -15,9 +15,9 @@ export const PricingSection = () => {
   };
 
   return (
-    <section className="pt-12 pb-20 bg-background">
+    <section className="pt-6 pb-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Scegli la Tua Opzione
           </h2>
