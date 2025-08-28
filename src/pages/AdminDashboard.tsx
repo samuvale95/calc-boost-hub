@@ -11,6 +11,22 @@ import {
   TableHeader, 
   TableRow 
 } from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 import { 
   Users, 
   Search, 
@@ -64,9 +80,17 @@ const mockUsers = [
 
 const AdminDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [users, setUsers] = useState(mockUsers);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newUser, setNewUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    subscription: ""
+  });
   const { toast } = useToast();
 
-  const filteredUsers = mockUsers.filter(user =>
+  const filteredUsers = users.filter(user =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -109,6 +133,36 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleAddUser = () => {
+    if (!newUser.name || !newUser.email || !newUser.password || !newUser.subscription) {
+      toast({
+        title: "Errore",
+        description: "Tutti i campi sono obbligatori",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const user = {
+      id: String(users.length + 1),
+      name: newUser.name,
+      email: newUser.email,
+      subscription: newUser.subscription,
+      status: "attivo",
+      registrationDate: new Date().toISOString().split('T')[0],
+      lastLogin: new Date().toISOString().split('T')[0]
+    };
+
+    setUsers(prev => [...prev, user]);
+    setNewUser({ name: "", email: "", password: "", subscription: "" });
+    setIsModalOpen(false);
+    
+    toast({
+      title: "Utente Aggiunto",
+      description: `${user.name} è stato aggiunto con successo`
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-hero p-6">
       <div className="container mx-auto max-w-7xl">
@@ -124,7 +178,11 @@ const AdminDashboard = () => {
                 Amministra gli utenti della piattaforma
               </p>
             </div>
-            <Button variant="accent" className="flex items-center gap-2">
+            <Button 
+              variant="accent" 
+              className="flex items-center gap-2"
+              onClick={() => setIsModalOpen(true)}
+            >
               <UserPlus className="h-5 w-5" />
               Nuovo Utente
             </Button>
@@ -139,7 +197,7 @@ const AdminDashboard = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{mockUsers.length}</div>
+                <div className="text-2xl font-bold">{users.length}</div>
               </CardContent>
             </Card>
             <Card>
@@ -150,7 +208,7 @@ const AdminDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-primary">
-                  {mockUsers.filter(u => u.subscription === "annuale").length}
+                  {users.filter(u => u.subscription === "annuale").length}
                 </div>
               </CardContent>
             </Card>
@@ -162,7 +220,7 @@ const AdminDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-accent">
-                  {mockUsers.filter(u => u.subscription === "pdf").length}
+                  {users.filter(u => u.subscription === "pdf").length}
                 </div>
               </CardContent>
             </Card>
@@ -174,7 +232,7 @@ const AdminDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-accent">
-                  {mockUsers.filter(u => u.status === "attivo").length}
+                  {users.filter(u => u.status === "attivo").length}
                 </div>
               </CardContent>
             </Card>
@@ -275,6 +333,86 @@ const AdminDashboard = () => {
             </Table>
           </CardContent>
         </Card>
+
+        {/* Modal for adding new user */}
+        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2">
+                <UserPlus className="h-5 w-5" />
+                Aggiungi Nuovo Utente
+              </DialogTitle>
+              <DialogDescription>
+                Inserisci i dati del nuovo utente. L'accesso verrà creato senza richiesta di pagamento.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="name" className="text-right">
+                  Nome
+                </Label>
+                <Input
+                  id="name"
+                  value={newUser.name}
+                  onChange={(e) => setNewUser(prev => ({ ...prev, name: e.target.value }))}
+                  className="col-span-3"
+                  placeholder="Nome completo"
+                />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="email" className="text-right">
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={newUser.email}
+                  onChange={(e) => setNewUser(prev => ({ ...prev, email: e.target.value }))}
+                  className="col-span-3"
+                  placeholder="email@esempio.com"
+                />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="password" className="text-right">
+                  Password
+                </Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={newUser.password}
+                  onChange={(e) => setNewUser(prev => ({ ...prev, password: e.target.value }))}
+                  className="col-span-3"
+                  placeholder="Password temporanea"
+                />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="subscription" className="text-right">
+                  Abbonamento
+                </Label>
+                <Select
+                  value={newUser.subscription}
+                  onValueChange={(value) => setNewUser(prev => ({ ...prev, subscription: value }))}
+                >
+                  <SelectTrigger className="col-span-3">
+                    <SelectValue placeholder="Seleziona tipo" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="annuale">Abbonamento Annuale</SelectItem>
+                    <SelectItem value="pdf">Acquisto PDF</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setIsModalOpen(false)}>
+                Annulla
+              </Button>
+              <Button onClick={handleAddUser}>
+                Aggiungi Utente
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
