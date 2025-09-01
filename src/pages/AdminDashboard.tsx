@@ -20,16 +20,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import {
   Select,
   SelectContent,
   SelectItem,
@@ -92,8 +82,6 @@ const AdminDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUsers] = useState(mockUsers);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [passwordConfirm, setPasswordConfirm] = useState({ open: false, userId: "", userName: "" });
-  const [emailConfirm, setEmailConfirm] = useState({ open: false, userId: "", userEmail: "" });
   const [newUser, setNewUser] = useState({
     name: "",
     email: "",
@@ -108,29 +96,19 @@ const AdminDashboard = () => {
   );
 
   const handleGeneratePassword = (userId: string, userName: string) => {
-    setPasswordConfirm({ open: true, userId, userName });
-  };
-
-  const handleSendEmail = (userId: string, userEmail: string) => {
-    setEmailConfirm({ open: true, userId, userEmail });
-  };
-
-  const confirmGeneratePassword = () => {
     // Mockup - sarà implementato con Supabase
     toast({
       title: "Password Generata",
-      description: `Nuova password generata per ${passwordConfirm.userName}`
+      description: `Nuova password generata per ${userName}`
     });
-    setPasswordConfirm({ open: false, userId: "", userName: "" });
   };
 
-  const confirmSendEmail = () => {
+  const handleSendEmail = (userId: string, userEmail: string) => {
     // Mockup - sarà implementato con Supabase
     toast({
       title: "Email Inviata", 
-      description: `Credenziali inviate a ${emailConfirm.userEmail}`
+      description: `Credenziali inviate a ${userEmail}`
     });
-    setEmailConfirm({ open: false, userId: "", userEmail: "" });
   };
 
   const getStatusBadge = (status: string) => {
@@ -435,54 +413,6 @@ const AdminDashboard = () => {
             </DialogFooter>
           </DialogContent>
         </Dialog>
-
-        {/* Password Confirmation Modal */}
-        <AlertDialog open={passwordConfirm.open} onOpenChange={(open) => 
-          setPasswordConfirm(prev => ({ ...prev, open }))
-        }>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle className="flex items-center gap-2">
-                <Key className="h-5 w-5" />
-                Conferma Generazione Password
-              </AlertDialogTitle>
-              <AlertDialogDescription>
-                Sei sicuro di voler generare una nuova password per <strong>{passwordConfirm.userName}</strong>? 
-                Questa azione invaliderà la password corrente dell'utente.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Annulla</AlertDialogCancel>
-              <AlertDialogAction onClick={confirmGeneratePassword}>
-                Genera Password
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-
-        {/* Email Confirmation Modal */}
-        <AlertDialog open={emailConfirm.open} onOpenChange={(open) => 
-          setEmailConfirm(prev => ({ ...prev, open }))
-        }>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle className="flex items-center gap-2">
-                <Mail className="h-5 w-5" />
-                Conferma Invio Email
-              </AlertDialogTitle>
-              <AlertDialogDescription>
-                Sei sicuro di voler inviare le credenziali di accesso a <strong>{emailConfirm.userEmail}</strong>? 
-                L'utente riceverà un'email con le informazioni di login.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Annulla</AlertDialogCancel>
-              <AlertDialogAction onClick={confirmSendEmail}>
-                Invia Email
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
       </div>
     </div>
   );
