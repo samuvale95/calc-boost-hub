@@ -19,7 +19,6 @@ const quiz = quizJson.questions.map(question => ({
 
 const Quiz = () => {
   const [selectedAnswers, setSelectedAnswers] = useState<{[key: string]: string}>({});
-  const [quizResults, setQuizResults] = useState<{[key: string]: boolean}>({});
   const [showResults, setShowResults] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -32,17 +31,15 @@ const Quiz = () => {
   };
 
   const handleSubmitQuiz = () => {
-    
-    quiz.forEach(question => {
-      const selectedAnswer = selectedAnswers[question.id];
-    });
-    
     setShowResults(true);
+    toast({
+      title: "Quiz Completato!",
+      description: "Hai completato con successo il test di formazione medica.",
+    });
   };
 
   const resetQuiz = () => {
     setSelectedAnswers({});
-    setQuizResults({});
     setShowResults(false);
   };
 
@@ -117,50 +114,15 @@ const Quiz = () => {
               </div>
             ) : (
               <div className="space-y-6">
+                <div className="text-center py-8">
+                  <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
+                  <h2 className="text-2xl font-bold mb-2">Quiz Completato!</h2>
+                  <p className="text-muted-foreground text-lg">
+                    Hai completato con successo il test di formazione medica.
+                  </p>
+                </div>
                 
-                {quiz.map((question, index) => (
-                  <Card key={question.id} className="p-4">
-                    <div className="flex items-start gap-3 mb-3">
-                      {quizResults[question.id] ? (
-                        <CheckCircle className="h-5 w-5 text-green-500 mt-1 flex-shrink-0" />
-                      ) : (
-                        <XCircle className="h-5 w-5 text-red-500 mt-1 flex-shrink-0" />
-                      )}
-                      <h3 className="font-semibold text-lg">
-                        {index + 1}. {question.text}
-                      </h3>
-                    </div>
-                    
-                    <div className="space-y-2 ml-8">
-                      {question.response.map((option) => {
-                        const isSelected = selectedAnswers[question.id] === option.id;
-                        
-                        let optionClass = "p-3 rounded-lg border ";
-                        if (isSelected) {
-                          optionClass += "bg-red-50 border-red-200 text-red-800";
-                        } else {
-                          optionClass += "bg-gray-50 border-gray-200";
-                        }
-                        
-                        return (
-                          <div key={option.id} className={optionClass}>
-                            <div className="flex items-center space-x-3">
-                              <span className="text-sm font-medium">
-                                {option.id.toUpperCase()})
-                              </span>
-                              <span className="text-sm">{option.text}</span>
-                              {isSelected && (
-                                <XCircle className="h-4 w-4 text-red-500 ml-auto" />
-                              )}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </Card>
-                ))}
-                
-                <div className="flex gap-4 pt-4">
+                <div className="flex gap-4 pt-4 justify-center">
                   <Button onClick={resetQuiz} className="flex items-center gap-2">
                     <Play className="h-4 w-4" />
                     Rifai il Quiz
