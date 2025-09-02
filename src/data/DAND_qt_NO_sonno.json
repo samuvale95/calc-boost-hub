@@ -1,0 +1,1594 @@
+{
+    "questions": [
+        {
+            "text": "EQUILIBRIO",
+            "response": [
+                {
+                    "text": "Non ha equilibrio posturale",
+                    "points": 0
+                },
+                {
+                    "text": "Sta seduto con sostegno",
+                    "points": 17
+                },
+                {
+                    "text": "La posizione seduta è possibile ma con alcune cadute",
+                    "points": 33
+                },
+                {
+                    "text": "Sta seduto stabilmente",
+                    "points": 50
+                },
+                {
+                    "text": "L'equilibrio in stazione eretta è precario",
+                    "points": 67
+                },
+                {
+                    "text": "Sta in piedi stabilmente",
+                    "points": 83
+                },
+                {
+                    "text": "L'equilibrio è del tutto stabile (anche su un piede)",
+                    "points": 100
+                }
+            ],
+            "section": "MOTRICITÀ GROSSOLANA",
+            "subdom": 1,
+            "dom": "Mot"
+        },
+        {
+            "text": "SPOSTAMENTI",
+            "response": [
+                {
+                    "text": "Non si sposta in alcun modo",
+                    "points": 0
+                },
+                {
+                    "text": "Fa dei tentativi di spostamento",
+                    "points": 14
+                },
+                {
+                    "text": "Si sposta ad orologio/striscia/gattona con difficoltà o con movimenti non coordinati",
+                    "points": 29
+                },
+                {
+                    "text": "Si sposta ad orologio/striscia/gattona in modo adeguato per la sua età",
+                    "points": 43
+                },
+                {
+                    "text": "Cammina con sostegno con difficoltà o con movimenti non coordinati",
+                    "points": 57
+                },
+                {
+                    "text": "Cammina con sostegno in modo adeguato per la sua età",
+                    "points": 71
+                },
+                {
+                    "text": "Cammina in autonomia con difficoltà o con movimenti non coordinati",
+                    "points": 86
+                },
+                {
+                    "text": "Cammina in autonomia in modo adeguato per la sua età",
+                    "points": 100
+                }
+            ],
+            "section": "MOTRICITÀ GROSSOLANA",
+            "subdom": 1,
+            "dom": "Mot"
+        },
+        {
+            "text": "CORSA",
+            "response": [
+                {
+                    "text": "Non corre",
+                    "points": 0
+                },
+                {
+                    "text": "Corre trotterellando",
+                    "points": 25
+                },
+                {
+                    "text": "Corre ma con qualche caduta",
+                    "points": 50
+                },
+                {
+                    "text": "Corre senza cadere, ma ha difficoltà a cambiare direzione",
+                    "points": 75
+                },
+                {
+                    "text": "Corre in modo coordinato e con cambi di direzione, senza cadere",
+                    "points": 100
+                }
+            ],
+            "section": "MOTRICITÀ GROSSOLANA",
+            "subdom": 1,
+            "dom": "Mot"
+        },
+        {
+            "text": "FARE LE SCALE",
+            "response": [
+                {
+                    "text": "Non sale né scende le scale",
+                    "points": 0
+                },
+                {
+                    "text": "Fa le scale gattonando",
+                    "points": 33
+                },
+                {
+                    "text": "Sale e scende le scale con appoggio (tiene il corrimano o la mano dell'adulto), oppure senza alternare i piedi",
+                    "points": 67
+                },
+                {
+                    "text": "Sale e scende le scale senza sostegno ed alternando i piedi",
+                    "points": 100
+                }
+            ],
+            "section": "MOTRICITÀ GROSSOLANA",
+            "subdom": 1,
+            "dom": "Mot"
+        },
+        {
+            "text": "SALTARE",
+            "response": [
+                {
+                    "text": "Non salta (non riesce a staccare i piedi da terra)",
+                    "points": 0
+                },
+                {
+                    "text": "Salta alternando i piedi senza coordinarli",
+                    "points": 33
+                },
+                {
+                    "text": "Salta a piedi uniti in avanti",
+                    "points": 67
+                },
+                {
+                    "text": "Salta a piedi uniti da un gradino",
+                    "points": 100
+                }
+            ],
+            "section": "MOTRICITÀ GROSSOLANA",
+            "subdom": 1,
+            "dom": "Mot"
+        },
+        {
+            "text": "ANDARE IN BICICLETTA",
+            "response": [
+                {
+                    "text": "Non va in bicicletta",
+                    "points": 0
+                },
+                {
+                    "text": "Va in bici con le rotelline o con stabilizzatori (ad es. bici a tre ruote)",
+                    "points": 33
+                },
+                {
+                    "text": "Va in bici senza rotelline o altro stabilizzatore",
+                    "points": 67
+                },
+                {
+                    "text": "Va in bici senza stabilizzatore per almeno 10 minuti consecutivi",
+                    "points": 100
+                }
+            ],
+            "section": "MOTRICITÀ GROSSOLANA",
+            "subdom": 1,
+            "dom": "Mot"
+        },
+        {
+            "text": "GIOCO CON LA PALLA",
+            "response": [
+                {
+                    "text": "Non lancia né afferra la palla",
+                    "points": 0
+                },
+                {
+                    "text": "Riesce a lanciare la palla ma non la afferra",
+                    "points": 33
+                },
+                {
+                    "text": "Riesce a lanciare ed afferrare una palla grande",
+                    "points": 67
+                },
+                {
+                    "text": "Riesce a lanciare ed afferrare una palla piccola",
+                    "points": 100
+                }
+            ],
+            "section": "MOTRICITÀ GROSSOLANA",
+            "subdom": 1,
+            "dom": "Mot"
+        },
+        {
+            "text": "AUTONOMIA NELLA MARCIA",
+            "response": [
+                {
+                    "text": "Cammina meno di 5 minuti",
+                    "points": 0
+                },
+                {
+                    "text": "Cammina 5-15 min",
+                    "points": 25
+                },
+                {
+                    "text": "Cammina 15-30 min",
+                    "points": 50
+                },
+                {
+                    "text": "Cammina 30min-1 ora",
+                    "points": 75
+                },
+                {
+                    "text": "Cammina per il tempo necessario (gita in montagna, giro nei negozi..)",
+                    "points": 100
+                }
+            ],
+            "section": "MOTRICITÀ GROSSOLANA",
+            "subdom": 1,
+            "dom": "Mot"
+        },
+        {
+            "text": "AFFERRARE OGGETTI",
+            "response": [
+                {
+                    "text": "Non afferra in alcun modo",
+                    "points": 0
+                },
+                {
+                    "text": "La prensione è possibile ma molto difficile",
+                    "points": 20
+                },
+                {
+                    "text": "Prensione con partecipazione del pollice maldestra o incoordinata o fa cadere gli oggetti",
+                    "points": 40
+                },
+                {
+                    "text": "Prensione con partecipazione del pollice adeguata per età",
+                    "points": 60
+                },
+                {
+                    "text": "Pinza pollice-indice maldestra o incoordinata o fa cadere gli oggetti",
+                    "points": 80
+                },
+                {
+                    "text": "Pinza accurata pollice-indice adeguata per età",
+                    "points": 100
+                }
+            ],
+            "section": "MOTRICITÀ FINE",
+            "subdom": 2,
+            "dom": "Mot"
+        },
+        {
+            "text": "PUZZLES",
+            "response": [
+                {
+                    "text": "Non fa incastri né puzzles",
+                    "points": 0
+                },
+                {
+                    "text": "Esegue incastri semplici (posiziona un cerchio nel foro circolare, un quadrato nel foro quadrato...,)",
+                    "points": 33
+                },
+                {
+                    "text": "Esegue senza aiuto puzzles nuovi di più di 5 pezzi",
+                    "points": 67
+                },
+                {
+                    "text": "Esegue senza aiuto puzzles nuovi di più di 15/20 pezzi",
+                    "points": 100
+                }
+            ],
+            "section": "MOTRICITÀ FINE",
+            "subdom": 2,
+            "dom": "Mot"
+        },
+        {
+            "text": "DISEGNO",
+            "response": [
+                {
+                    "text": "Non è interessato a realizzare scarabocchi",
+                    "points": 0
+                },
+                {
+                    "text": "Scarabocchia spontaneamente, non necessariamente badando a quello che fa",
+                    "points": 20
+                },
+                {
+                    "text": "Può riprodurre un tratto su un foglio",
+                    "points": 40
+                },
+                {
+                    "text": "Copia delle figure semplici (cerchio, croce, quadrato)",
+                    "points": 60
+                },
+                {
+                    "text": "Disegna uno schema corporeo semplificato ('omino testone')",
+                    "points": 80
+                },
+                {
+                    "text": "Crea una figura umana e uno schema di casetta chiaramente riconoscibili",
+                    "points": 100
+                }
+            ],
+            "section": "MOTRICITÀ FINE",
+            "subdom": 2,
+            "dom": "Mot"
+        },
+        {
+            "text": "MOVIMENTO DI ROTAZIONE CON LE MANI (AVVITARE/SVITARE)",
+            "response": [
+                {
+                    "text": "Non avvita e non svita",
+                    "points": 0
+                },
+                {
+                    "text": "Inizia il movimento per avvitare e svitare",
+                    "points": 33
+                },
+                {
+                    "text": "Svita e avvita i coperchi dei barattoli o i tappi delle bottiglie",
+                    "points": 67
+                },
+                {
+                    "text": "Gira la chiave nelle serrature",
+                    "points": 100
+                }
+            ],
+            "section": "MOTRICITÀ FINE",
+            "subdom": 2,
+            "dom": "Mot"
+        },
+        {
+            "text": "FORBICI",
+            "response": [
+                {
+                    "text": "Non è in grado di usare le forbici",
+                    "points": 0
+                },
+                {
+                    "text": "Utilizza le forbici con impugnatura scorretta (ad es. a cesoia)",
+                    "points": 25
+                },
+                {
+                    "text": "Taglia con le forbici senza seguire una direzione precisa",
+                    "points": 50
+                },
+                {
+                    "text": "Taglia seguendo una linea dritta",
+                    "points": 75
+                },
+                {
+                    "text": "Taglia delle forme con le forbici (cerchio, quadrato, triangolo, ecc)",
+                    "points": 100
+                }
+            ],
+            "section": "MOTRICITÀ FINE",
+            "subdom": 2,
+            "dom": "Mot"
+        },
+        {
+            "text": "ALIMENTAZIONE",
+            "response": [
+                {
+                    "text": "Nutrito attraverso sonda gastrica",
+                    "points": 0
+                },
+                {
+                    "text": "Mangia se imboccato da adulti",
+                    "points": 33
+                },
+                {
+                    "text": "Mangia in autonomia con il cucchiaio",
+                    "points": 67
+                },
+                {
+                    "text": "Mangia autonomamemente con cucchiaio, forchetta e coltello",
+                    "points": 100
+                }
+            ],
+            "section": "ALIMENTAZIONE",
+            "subdom": 3,
+            "dom": "Aut"
+        },
+        {
+            "text": "MASTICAZIONE",
+            "response": [
+                {
+                    "text": "Nutrizione enterale (SNG, PEG...)",
+                    "points": 0
+                },
+                {
+                    "text": "Succhia",
+                    "points": 25
+                },
+                {
+                    "text": "Mangia cibo semi-solido",
+                    "points": 50
+                },
+                {
+                    "text": "Mangia piccoli bocconi ma non riesce a masticare il cibo o presenta una masticazione difficile",
+                    "points": 75
+                },
+                {
+                    "text": "La masticazione è efficace per tutte le consistenze",
+                    "points": 100
+                }
+            ],
+            "section": "ALIMENTAZIONE",
+            "subdom": 3,
+            "dom": "Aut"
+        },
+        {
+            "text": "DEGLUTIZIONE",
+            "response": [
+                {
+                    "text": "Fatica a contenere la saliva e a deglutire solidi e liquidi",
+                    "points": 0
+                },
+                {
+                    "text": "Fatica a contenere la saliva e a deglutire i liquidi, ma deglutisce i solidi",
+                    "points": 25
+                },
+                {
+                    "text": "Fatica a contenere la saliva e presenta accessi di tosse quando mangia",
+                    "points": 50
+                },
+                {
+                    "text": "Fatica a contenere la saliva senza difficoltà a deglutire",
+                    "points": 75
+                },
+                {
+                    "text": "Contiene la saliva e deglutisce in modo corretto",
+                    "points": 100
+                }
+            ],
+            "section": "ALIMENTAZIONE",
+            "subdom": 3,
+            "dom": "Aut"
+        },
+        {
+            "text": "APPETITO",
+            "response": [
+                {
+                    "text": "Molto scarso o molto marcato",
+                    "points": 0
+                },
+                {
+                    "text": "Scarso o marcato",
+                    "points": 50
+                },
+                {
+                    "text": "Normale",
+                    "points": 100
+                }
+            ],
+            "section": "ALIMENTAZIONE",
+            "subdom": 3,
+            "dom": "Aut"
+        },
+        {
+            "text": "IMITAZIONE",
+            "response": [
+                {
+                    "text": "Non presenta comportamenti di imitazione",
+                    "points": 0
+                },
+                {
+                    "text": "Può imitare l'altro immediatamente",
+                    "points": 33
+                },
+                {
+                    "text": "Può imitare l'altro dopo un intervallo di tempo",
+                    "points": 67
+                },
+                {
+                    "text": "Può imitare un atto complesso, come farsi la barba o truccarsi",
+                    "points": 100
+                }
+            ],
+            "section": "INTERAZIONE SOCIALE",
+            "subdom": 4,
+            "dom": "Lan"
+        },
+        {
+            "text": "ATTENZIONE CONGIUNTA, RISPOSTA ED INIZIATIVA",
+            "response": [
+                {
+                    "text": "Non mantiene il contatto visivo",
+                    "points": 0
+                },
+                {
+                    "text": "Presenza di contatto visivo prolungato (sguardo)",
+                    "points": 25
+                },
+                {
+                    "text": "Presenza di alternanza di sguardo tra l'oggetto e il genitore/interlocutore",
+                    "points": 50
+                },
+                {
+                    "text": "Capace di seguire lo sguardo dell'adulto diretto in una determinata direzione",
+                    "points": 75
+                },
+                {
+                    "text": "Può indirizzare l'attenzione dell'altro verso un oggetto o una situazione specifica (alternanza di sguardo, pointing)",
+                    "points": 100
+                }
+            ],
+            "section": "INTERAZIONE SOCIALE",
+            "subdom": 4,
+            "dom": "Lan"
+        },
+        {
+            "text": "INTERAZIONE SOCIALE, AMICIZIE",
+            "response": [
+                {
+                    "text": "Non manifesta interesse per i coetanei",
+                    "points": 0
+                },
+                {
+                    "text": "Osserva i coetanei in maniera spontanea ma non li sollecita",
+                    "points": 17
+                },
+                {
+                    "text": "Si avvicina ai coetanei senza interagire e ama essere tra le altre persone senza effettiva reciprocità",
+                    "points": 33
+                },
+                {
+                    "text": "Risponde alle interazioni iniziate da altri",
+                    "points": 50
+                },
+                {
+                    "text": "Inizia interazioni sociali con gli altri",
+                    "points": 67
+                },
+                {
+                    "text": "Inizia interazioni sociali con diverse persone contemporaneamente",
+                    "points": 83
+                },
+                {
+                    "text": "Struttura e mantiene relazioni di amicizia",
+                    "points": 100
+                }
+            ],
+            "section": "INTERAZIONE SOCIALE",
+            "subdom": 4,
+            "dom": "Lan"
+        },
+        {
+            "text": "EMPATIA",
+            "response": [
+                {
+                    "text": "Non tiene conto della presenza di altri/È indifferente alle persone che la circondano",
+                    "points": 0
+                },
+                {
+                    "text": "Reagisce alle espressioni emozionali degli altri (ad es. al sorriso)",
+                    "points": 25
+                },
+                {
+                    "text": "Mostra empatia e può consolare altri",
+                    "points": 50
+                },
+                {
+                    "text": "Tiene conto della presenza di altri nell'agire (ad es. divide dei dolci)",
+                    "points": 75
+                },
+                {
+                    "text": "Tiene conto degli stati mentali degli altri (pensieri, emozioni, credenze), per agire",
+                    "points": 100
+                }
+            ],
+            "section": "INTERAZIONE SOCIALE",
+            "subdom": 4,
+            "dom": "Lan"
+        },
+        {
+            "text": "UMORISMO",
+            "response": [
+                {
+                    "text": "Non capisce le battute/frasi scherzose/giochi di parole",
+                    "points": 0
+                },
+                {
+                    "text": "Mostra una certa comprensione delle battute e degli scherzi ma limitate ad alcune forme",
+                    "points": 33
+                },
+                {
+                    "text": "Capisce le battute e gli scherzi",
+                    "points": 67
+                },
+                {
+                    "text": "Può fare battute o dire frasi scherzose agli altri",
+                    "points": 100
+                }
+            ],
+            "section": "INTERAZIONE SOCIALE",
+            "subdom": 4,
+            "dom": "Lan"
+        },
+        {
+            "text": "COMPRENSIONE DELLE REGOLE E CONVENZIONI SOCIALI",
+            "response": [
+                {
+                    "text": "Non comprende le regole sociali",
+                    "points": 0
+                },
+                {
+                    "text": "Difficilmente comprende le regole sociali",
+                    "points": 33
+                },
+                {
+                    "text": "Comprende e rispetta le regole sociali semplici (ad es. distanza dagli altri, ricorda di abbassare la voce in certi luoghi, ecc.)",
+                    "points": 67
+                },
+                {
+                    "text": "Comprende e rispetta le regole sociali complesse (ad es. evitare di dire o fare cose offensive)",
+                    "points": 100
+                }
+            ],
+            "section": "INTERAZIONE SOCIALE",
+            "subdom": 4,
+            "dom": "Lan"
+        },
+        {
+            "text": "GIOCO SIMBOLICO",
+            "response": [
+                {
+                    "text": "Non gioca con i giocattoli",
+                    "points": 0
+                },
+                {
+                    "text": "Gioco d'imitazione funzionale: utilizza un oggetto secondo la sua funzione (ad es, un telefono per fingere di telefonare, una macchinina per fare un percorso, gioca con la cucinetta)",
+                    "points": 33
+                },
+                {
+                    "text": "Gioco simbolico: gioca modificando l'uso degli oggetti (ad es. finge che un pennarello sia un razzo), ma ancora poco sviluppato",
+                    "points": 67
+                },
+                {
+                    "text": "Gioco immaginativo: gioco ricco e simbolico, messa in scena di storie",
+                    "points": 100
+                }
+            ],
+            "section": "GIOCO",
+            "subdom": 5,
+            "dom": "Lan"
+        },
+        {
+            "text": "REGOLE NEI GIOCHI",
+            "response": [
+                {
+                    "text": "Non fa giochi collaborativi",
+                    "points": 0
+                },
+                {
+                    "text": "Gioca in modo collaborativo con altri (ad es. a palla)",
+                    "points": 33
+                },
+                {
+                    "text": "Partecipa a giochi semplici in rapporto all'età, rispettandone le regole (ad es. nascondino a 4 anni, calcio a 12 anni)",
+                    "points": 67
+                },
+                {
+                    "text": "Gioca ad almeno un gioco di società o di carte, comprende le regole di uno sport, ha competenza nel prendere decisioni e trovare strategie di gioco",
+                    "points": 100
+                }
+            ],
+            "section": "GIOCO",
+            "subdom": 5,
+            "dom": "Lan"
+        },
+        {
+            "text": "REAZIONE AI SUONI/COMPRENSIONE VERBALE",
+            "response": [
+                {
+                    "text": "Non reagisce a stimoli verbali",
+                    "points": 0
+                },
+                {
+                    "text": "Reagisce agli stimoli verbali dell'ambiente ma non li comprende (es. si gira verso chi parla)",
+                    "points": 25
+                },
+                {
+                    "text": "Comprende ed esegue ordini semplici e contestuali (es. \"apri la porta\")",
+                    "points": 50
+                },
+                {
+                    "text": "Comprende ed esegue ordini più complessi e senza indizi contestuali (es. \"vai a prendere le scarpe in camera\")",
+                    "points": 75
+                },
+                {
+                    "text": "Comprende i modi di dire e le espressioni figurate ('avere la luna', 'ce l'ho sulla punta delle lingua')",
+                    "points": 100
+                }
+            ],
+            "section": "COMUNICAZIONE E LINGUAGGIO",
+            "subdom": 6,
+            "dom": "Lan"
+        },
+        {
+            "text": "LINGUAGGIO ESPRESSIVO/PRODUZIONE VERBALE",
+            "response": [
+                {
+                    "text": "Non produce suoni",
+                    "points": 0
+                },
+                {
+                    "text": "Si esprime principalmente con suoni o sillabe",
+                    "points": 25
+                },
+                {
+                    "text": "Si esprime con parole singole",
+                    "points": 50
+                },
+                {
+                    "text": "Si esprime con frasi comprensibili",
+                    "points": 75
+                },
+                {
+                    "text": "Parla in modo adeguato",
+                    "points": 100
+                }
+            ],
+            "section": "COMUNICAZIONE E LINGUAGGIO",
+            "subdom": 7,
+            "dom": "Lan"
+        },
+        {
+            "text": "POINTING E LINGUAGGIO NON VERBALE",
+            "response": [
+                {
+                    "text": "Non indica con il dito",
+                    "points": 0
+                },
+                {
+                    "text": "Indica ciò che desidera",
+                    "points": 33
+                },
+                {
+                    "text": "Indica quello che gli interessa (per mostrare qualcosa a qualcuno)",
+                    "points": 67
+                },
+                {
+                    "text": "Utilizza una vasta gamma di gesti comunicativi, oltre all'indicazione (fare si con la testa, applaudire, fare il gesto del silenzio portando il dito alla bocca,...)",
+                    "points": 100
+                }
+            ],
+            "section": "COMUNICAZIONE E LINGUAGGIO",
+            "subdom": 7,
+            "dom": "Lan"
+        },
+        {
+            "text": "PRAGMATICA",
+            "response": [
+                {
+                    "text": "Non produce verbalizzazioni indirizzate all'altro, neppure lallazione",
+                    "points": 0
+                },
+                {
+                    "text": "Il linguaggio (lallazione, parole) è presente ma finalizzato solo ad esprimere i suoi bisogni, non per gli scambi comunicativi",
+                    "points": 25
+                },
+                {
+                    "text": "Il linguaggio (dalla lallazione alla frase) è rivolto all'altro con possibilità di scambio, anche breve (domanda/risposta)",
+                    "points": 50
+                },
+                {
+                    "text": "Il linguaggio (dalla lallazione alla frase) è rivolto all'altro con possibilità di costruire una breve conversazione",
+                    "points": 75
+                },
+                {
+                    "text": "Può partecipare ad una conversazione con vari scambi con l'altro, senza interrompere o sovrapporsi o saltare di palo in frasca",
+                    "points": 100
+                }
+            ],
+            "section": "COMUNICAZIONE E LINGUAGGIO",
+            "subdom": 7,
+            "dom": "Lan"
+        },
+        {
+            "text": "FLUENZA",
+            "response": [
+                {
+                    "text": "Parla sempre lentamente",
+                    "points": 0
+                },
+                {
+                    "text": "A volte parla lentamente",
+                    "points": 50
+                },
+                {
+                    "text": "Parla ad una velocità normale",
+                    "points": 100
+                }
+            ],
+            "section": "COMUNICAZIONE E LINGUAGGIO",
+            "subdom": 7,
+            "dom": "Lan"
+        },
+        {
+            "text": "ARTICOLAZIONE (se presente il linguaggio)",
+            "response": [
+                {
+                    "text": "linguaggio inintellegibile",
+                    "points": 0
+                },
+                {
+                    "text": "L'articolazione è variabile con un linguaggio difficile da comprendere",
+                    "points": 33
+                },
+                {
+                    "text": "Articolazione corretta tranne che per alcuni suoni",
+                    "points": 67
+                },
+                {
+                    "text": "L'articolazione è corretta per tutti i suoni",
+                    "points": 100
+                }
+            ],
+            "section": "COMUNICAZIONE E LINGUAGGIO",
+            "subdom": 7,
+            "dom": "Lan"
+        },
+        {
+            "text": "IGIENE PERSONALE",
+            "response": [
+                {
+                    "text": "Non si lava in autonomia",
+                    "points": 0
+                },
+                {
+                    "text": "Si lava con supervisione dal momento che non realizza bene i movimenti o dimentica dei passaggi",
+                    "points": 50
+                },
+                {
+                    "text": "Si lava in autonomia in modo adeguato",
+                    "points": 100
+                }
+            ],
+            "section": "AUTONOMIE PERSONALI",
+            "subdom": 8,
+            "dom": "Aut"
+        },
+        {
+            "text": "VESTIRSI",
+            "response": [
+                {
+                    "text": "Non si veste senza l'aiuto di altri, e non collabora quando viene vestito",
+                    "points": 0
+                },
+                {
+                    "text": "Collabora quando viene vestito (infila le braccia, le mani,...)",
+                    "points": 33
+                },
+                {
+                    "text": "Infila i pantaloni o la maglietta ma non abbottona e non chiude la cerniera",
+                    "points": 67
+                },
+                {
+                    "text": "Si veste in autonomia, chiusure incluse",
+                    "points": 100
+                }
+            ],
+            "section": "AUTONOMIE PERSONALI",
+            "subdom": 8,
+            "dom": "Aut"
+        },
+        {
+            "text": "CONTROLLO SFINTERICO",
+            "response": [
+                {
+                    "text": "Non chiede di andare in bagno e non si tiene pulito",
+                    "points": 0
+                },
+                {
+                    "text": "Chiede di andare in bagno ma non si tiene pulito",
+                    "points": 25
+                },
+                {
+                    "text": "Si tiene pulito di giorno con qualche incidento",
+                    "points": 50
+                },
+                {
+                    "text": "Si tiene pulito solo di giorno",
+                    "points": 75
+                },
+                {
+                    "text": "Si tiene pulito di giorno e di notte",
+                    "points": 100
+                }
+            ],
+            "section": "AUTONOMIE PERSONALI",
+            "subdom": 8,
+            "dom": "Aut"
+        },
+        {
+            "text": "SENSO DEL PERICOLO",
+            "response": [
+                {
+                    "text": "Non ha consapevolezza del pericolo",
+                    "points": 0
+                },
+                {
+                    "text": "Ha consapevolezza dei pericoli in casa (oggetti caldi o pericolosi in cucina, scale, finestre)",
+                    "points": 33
+                },
+                {
+                    "text": "Ha consapevolezza del pericolo all'esterno, negli ambienti più complessi (attende prima di attraversare, cammina sul marciapiede, da' la mano all'adulto,...)",
+                    "points": 67
+                },
+                {
+                    "text": "Evita le situazioni sociali pericolose (s'allontana da persone pericolose, non ricerca attività/giochi pericolosi)",
+                    "points": 100
+                }
+            ],
+            "section": "AUTONOMIE PERSONALI",
+            "subdom": 9,
+            "dom": "Aut"
+        },
+        {
+            "text": "LAVORI DI CASA",
+            "response": [
+                {
+                    "text": "Non aiuta nei lavori di casa",
+                    "points": 0
+                },
+                {
+                    "text": "Aiuta su richiesta per faccende semplici: sparecchiare oggetti infrangibili, passare la scopa...)",
+                    "points": 33
+                },
+                {
+                    "text": "Ajuta in faccende più complesse con supervisione (mescolare l'impasto di una torta, riempire la lavastoviglie,...)",
+                    "points": 67
+                },
+                {
+                    "text": "Aiuta svolgendo in autonomia alcune faccende (fare ordine, sparecchiare la tavola, passare la scopa, scaldare il cibo,...)",
+                    "points": 100
+                }
+            ],
+            "section": "AUTONOMIE PERSONALI",
+            "subdom": 9,
+            "dom": "Aut"
+        },
+        {
+            "text": "AUTONOMIA IN CUCINA",
+            "response": [
+                {
+                    "text": "Non prepara cibi",
+                    "points": 0
+                },
+                {
+                    "text": "Fa piccole preparazioni senza cottura (latte e cornflakes, panini)",
+                    "points": 33
+                },
+                {
+                    "text": "Aiuta a preparare alimenti da mescolare oppure da cucinare oppure utilizza il forno a microonde",
+                    "points": 67
+                },
+                {
+                    "text": "Utilizza padelle e forno in autonomia, prepara da solo alimenti che devono essere mescolati o cotti",
+                    "points": 100
+                }
+            ],
+            "section": "AUTONOMIE PERSONALI",
+            "subdom": 9,
+            "dom": "Aut"
+        },
+        {
+            "text": "TELEFONO",
+            "response": [
+                {
+                    "text": "Non parla al telefono",
+                    "points": 0
+                },
+                {
+                    "text": "Parla al telefono solo con persone conosciute",
+                    "points": 33
+                },
+                {
+                    "text": "Risponde e parla correttamente al telefono e cerca la persona richiesta",
+                    "points": 67
+                },
+                {
+                    "text": "Fa in autonomia chiamate telefoniche",
+                    "points": 100
+                }
+            ],
+            "section": "AUTONOMIE PERSONALI",
+            "subdom": 10,
+            "dom": "Aut"
+        },
+        {
+            "text": "USO DI TABLET E SMARTPHONES",
+            "response": [
+                {
+                    "text": "Non si interessa a tablet, cellulare O COMPUTER",
+                    "points": 0
+                },
+                {
+                    "text": "È in grado di usare tablet o cellulari ma solo per ripetere una singola operazione",
+                    "points": 25
+                },
+                {
+                    "text": "Dato un tablet/cellulare acceso, è in grado di attivare volontariamente diverse app",
+                    "points": 50
+                },
+                {
+                    "text": "Può svolgere compiti complessi CON TABLET/SMARTPHONES",
+                    "points": 75
+                },
+                {
+                    "text": "Può SVOLGERE compiti complessi con il computer",
+                    "points": 100
+                }
+            ],
+            "section": "AUTONOMIE PERSONALI",
+            "subdom": 10,
+            "dom": "Aut"
+        },
+        {
+            "text": "CONOSCENZE TEMPORALI",
+            "response": [
+                {
+                    "text": "Non è orientato nel tempo.",
+                    "points": 0
+                },
+                {
+                    "text": "Distingue ieri/oggi/domani",
+                    "points": 20
+                },
+                {
+                    "text": "Identifica il giorno della settimana",
+                    "points": 40
+                },
+                {
+                    "text": "Utilizza in autonomia solo gli orologi digitali (con i numeri scritti)",
+                    "points": 60
+                },
+                {
+                    "text": "Utilizza in autonomia tutti i tipi di orologia",
+                    "points": 80
+                },
+                {
+                    "text": "È in grado di utilizzare calendari, tabelle orarie,...",
+                    "points": 100
+                }
+            ],
+            "section": "AUTONOMIE PERSONALI",
+            "subdom": 10,
+            "dom": "Aut"
+        },
+        {
+            "text": "USO DEL DENARO",
+            "response": [
+                {
+                    "text": "Non comprende la funzione del denaro",
+                    "points": 0
+                },
+                {
+                    "text": "Comprende la funzione del denaro e denomina alcune monete e alcune banconote",
+                    "points": 33
+                },
+                {
+                    "text": "Può fare piccoli acquisti con supervisione o con l'uso della calcolatrice",
+                    "points": 67
+                },
+                {
+                    "text": "Può fare i propri acquisti in maniera autonoma",
+                    "points": 100
+                }
+            ],
+            "section": "AUTONOMIE PERSONALI",
+            "subdom": 10,
+            "dom": "Aut"
+        },
+        {
+            "text": "ALFABETO",
+            "response": [
+                {
+                    "text": "Non conosce le lettere",
+                    "points": 0
+                },
+                {
+                    "text": "Riconosce e denomina qualche lettera",
+                    "points": 33
+                },
+                {
+                    "text": "Riconosce e nomina tutte le lettere dell'alfabeto",
+                    "points": 67
+                },
+                {
+                    "text": "Ha acquisito il processo di fusione (B+A=BA)",
+                    "points": 100
+                }
+            ],
+            "section": "MEMORIA E APPRENDIMENTO SCOLARE",
+            "subdom": 11,
+            "dom": "Mem"
+        },
+        {
+            "text": "LETTURA",
+            "response": [
+                {
+                    "text": "Non sa leggere",
+                    "points": 0
+                },
+                {
+                    "text": "Decodifica alcune parole semplici ad alta frequenza (ad es. bisillabi piani)",
+                    "points": 33
+                },
+                {
+                    "text": "Sa leggere la gran parte delle parole anche con gruppi consonantici ed II",
+                    "points": 67
+                },
+                {
+                    "text": "Sa leggere dei testi in modo autonomo",
+                    "points": 100
+                }
+            ],
+            "section": "MEMORIA E APPRENDIMENTO SCOLARE",
+            "subdom": 11,
+            "dom": "Mem"
+        },
+        {
+            "text": "SCRITTURA (NON SU MODELLO)",
+            "response": [
+                {
+                    "text": "Non sa scrivere",
+                    "points": 0
+                },
+                {
+                    "text": "Può scrivere il proprio nome",
+                    "points": 33
+                },
+                {
+                    "text": "Può scrivere parole semplici",
+                    "points": 67
+                },
+                {
+                    "text": "Può scrivere frasi complete",
+                    "points": 100
+                }
+            ],
+            "section": "MEMORIA E APPRENDIMENTO SCOLARE",
+            "subdom": 11,
+            "dom": "Mem"
+        },
+        {
+            "text": "NUMERI ED ENUMERAZIONE",
+            "response": [
+                {
+                    "text": "Non conosce la conta numerica",
+                    "points": 0
+                },
+                {
+                    "text": "Sa contare fino a 10 senza interrompersi",
+                    "points": 33
+                },
+                {
+                    "text": "Può enumerare fino a 10 oggetti",
+                    "points": 67
+                },
+                {
+                    "text": "Può enumerare più di 10 oggetti",
+                    "points": 100
+                }
+            ],
+            "section": "MEMORIA E APPRENDIMENTO SCOLARE",
+            "subdom": 11,
+            "dom": "Mem"
+        },
+        {
+            "text": "CALCOLO",
+            "response": [
+                {
+                    "text": "Non svolge alcun calcolo",
+                    "points": 0
+                },
+                {
+                    "text": "Svolge somme o sottrazioni entro la decina (anche con le dita)",
+                    "points": 33
+                },
+                {
+                    "text": "Svolge in forma scritta somme o sottrazioni al di sopra della decina",
+                    "points": 67
+                },
+                {
+                    "text": "Svolge anche moltiplicazioni o divisioni (oltre a somme e sottrazioni)",
+                    "points": 100
+                }
+            ],
+            "section": "MEMORIA E APPRENDIMENTO SCOLARE",
+            "subdom": 11,
+            "dom": "Mem"
+        },
+        {
+            "text": "GESTIONE E COMPRENSIONE DELLE EMOZIONI",
+            "response": [
+                {
+                    "text": "Non gestisce affatto le proprie emozioni, con conseguenze importanti per le relazioni (emozioni eccessive o sproporzionate al contesto: es. scoppi di risate,..)",
+                    "points": 0
+                },
+                {
+                    "text": "Ha difficoltà a gestire le sue emozioni: passa rapidamente da un'emozione ad un'altra oppure le emozioni sono molto intense",
+                    "points": 25
+                },
+                {
+                    "text": "Mostra alcuni momenti di difficoltà di gestione delle emozioni, con conseguenze nelle relazioni",
+                    "points": 50
+                },
+                {
+                    "text": "Mostra alcuni momenti di difficoltà di gestione delle emozioni, senza conseguenze nelle relazioni",
+                    "points": 75
+                },
+                {
+                    "text": "Gestisce bene le emozioni",
+                    "points": 100
+                }
+            ],
+            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "subdom": 12,
+            "dom": "Emo"
+        },
+        {
+            "text": "TRISTEZZA",
+            "response": [
+                {
+                    "text": "Evoca idee e scenari suicidari o ha compiuto un tentativo di suicidio oppure ritiro totale legato alla tristezza",
+                    "points": 0
+                },
+                {
+                    "text": "Ha idee negative, si sente di scarso valore oppure, per i più giovani, passa dei lunghi momenti di ritiro dalle relazioni in relazione alla tristezza",
+                    "points": 25
+                },
+                {
+                    "text": "Piange molto, è triste per la maggior parte del tempo",
+                    "points": 50
+                },
+                {
+                    "text": "Può avere accessi di tristezza",
+                    "points": 75
+                },
+                {
+                    "text": "È triste solo raramente, quando il contesto lo giustifica (in relazione ad eventi di vita)",
+                    "points": 100
+                }
+            ],
+            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "subdom": 13,
+            "dom": "Emo"
+        },
+        {
+            "text": "ANSIA",
+            "response": [
+                {
+                    "text": "Ha preoccupazioni, ansie e paure che gli impediscono di fare certe cose con un impatto importante sulla vita quotidiana familiare (uscire, andare in certi posti) oppure disorganizzazione legata all'ansia, paura, preoccupazione",
+                    "points": 0
+                },
+                {
+                    "text": "È pauroso, ansioso, preoccupato la maggior parte del tempo ma senza importante impatto sul funzionamento abituale",
+                    "points": 25
+                },
+                {
+                    "text": "Qualche volta è preoccupato, ansioso o pauroso senza evidenti cause scatenanti",
+                    "points": 50
+                },
+                {
+                    "text": "Certe situazioni lo rendono preoccupato, ansioso o pauroso (il buio, il temporale)",
+                    "points": 75
+                },
+                {
+                    "text": "non è pauroso, ansioso o preoccupato",
+                    "points": 100
+                }
+            ],
+            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "subdom": 13,
+            "dom": "Emo"
+        },
+        {
+            "text": "RITIRO SOCIALE",
+            "response": [
+                {
+                    "text": "Presenta ritiro sociale, evita costantemente gli altri",
+                    "points": 0
+                },
+                {
+                    "text": "ha spesso momenti di ritiro importante, evita gli altri o ricerca la solitudine la maggior parte del tempo",
+                    "points": 25
+                },
+                {
+                    "text": "ha dei momenti di ritiro regolari al di fuori di situazioni particolari, ricerca qualche volta la solitudine",
+                    "points": 50
+                },
+                {
+                    "text": "ha qualche momento di ritiro legati a specifiche circostanze",
+                    "points": 75
+                },
+                {
+                    "text": "Non presenta ritiro sociale",
+                    "points": 100
+                }
+            ],
+            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "subdom": 13,
+            "dom": "Emo"
+        },
+        {
+            "text": "PASSAGGIO RAPIDO DA UN'ATTIVITÀ AD UN'ALTRA",
+            "response": [
+                {
+                    "text": "Passa rapidamente da un'attività all'altra, non può soffermarsi su un'attività più di un minuto",
+                    "points": 0
+                },
+                {
+                    "text": "Può soffermarsi qualche minuto su un'attività poi desidera passare ad altro",
+                    "points": 25
+                },
+                {
+                    "text": "Può rimanere concentrato unicamente su attività che gli piacciono",
+                    "points": 50
+                },
+                {
+                    "text": "Può rimanere concentrato su varie attività che necessitano di sforzo mentale sostenuto, ma con il supporto dell'adulto",
+                    "points": 75
+                },
+                {
+                    "text": "Mantiene a lungo ed in modo autonomo l'attenzione su un'attività o un gioco",
+                    "points": 100
+                }
+            ],
+            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "subdom": 14,
+            "dom": "Emo"
+        },
+        {
+            "text": "DIFFICOLTÀ DI ASCOLTO ED ATTENZIONE",
+            "response": [
+                {
+                    "text": "Non ascolta le consegne, non sembra ascoltare quando gli si parla (non in relazione a difficoltà di comprensione delle consegne), anche se non è occupato in un'attività",
+                    "points": 0
+                },
+                {
+                    "text": "Non ascolta le consegne, non sembra ascoltare quando gli si parla (non in relazione a difficoltà di comprensione delle consegne), quando è occupato o svolge un'attività",
+                    "points": 25
+                },
+                {
+                    "text": "Sembra altrove quando gli si parla, chiede spesso di ripetergli le consegne a quello che è stato appena detto",
+                    "points": 50
+                },
+                {
+                    "text": "Ascolta le consegne tranne quelle date qualche minuto prima",
+                    "points": 75
+                },
+                {
+                    "text": "Ascolta e segue le consegne in modo appropriato, anche quelle date alcuni minuti prima",
+                    "points": 100
+                }
+            ],
+            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "subdom": 14,
+            "dom": "Emo"
+        },
+        {
+            "text": "IPERATTIVITÀ MOTORIA",
+            "response": [
+                {
+                    "text": "È costantemente in movimento, non riesce a restare fermo",
+                    "points": 0
+                },
+                {
+                    "text": "Si muove molto sulla sedia, riesce difficilmente a stare seduto, è spesso in movimento",
+                    "points": 25
+                },
+                {
+                    "text": "Si muove molto sulla sedia, riesce difficilmente a stare seduto, è spesso in movimento ma può stare fermo per certe attività che lo interessano ed avere momenti di calma",
+                    "points": 50
+                },
+                {
+                    "text": "Mostra una certa agitazione in alcuni contesti (a scuola, durante attività lunghe e noiose)",
+                    "points": 75
+                },
+                {
+                    "text": "Non mostra particolare agitazione",
+                    "points": 100
+                }
+
+            ],
+            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "subdom": 14,
+            "dom": "Emo"
+
+        },
+        {
+            "text": "IMPULSIVITÀ",
+            "response": [
+                {
+                    "text": "È SISTEMATICAMENTE impulsivo, non può rimandare un'azione o frenare un comportamento (ad esempio: dare una risposta, afferrare un oggetto, toccare anche se gli è stato detto di non farlo, interrompere gli altri,...)",
+                    "points": 0
+                },
+                {
+                    "text": "È SPESSO impulsivo, fatica a posticipare un'azione o frenare un comportamento (ad esempio: dare una risposta, afferrare un oggetto, toccare anche se gli è stato detto di non farlo, interrompere gli altri,...)",
+                    "points": 25
+                },
+                {
+                    "text": "Mostra frequentemente difficoltà a controllarsi in specifiche situazioni, come nel gruppo o in contesti eccitanti (per esempio: attendere il turno nel gioco, interrompere una conversazione)",
+                    "points": 50
+                },
+                {
+                    "text": "Raramente presenta difficoltà a controllarsi nelle situazioni di gruppo oppure è raramente impulsivo nel quotidiano",
+                    "points": 75
+                },
+                {
+                    "text": "Non impulsivo, frena in modo efficace il suo comportamento e differisce le azioni",
+                    "points": 100
+                }
+            ],
+            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "subdom": 14,
+            "dom": "Emo"
+        },
+        {
+            "text": "STEREOTIPIE",
+            "response": [
+                {
+                    "text": "Stereotipie verbali (usa frasi bizzarre o ripete in continuazione le stesse cose) oppure motorie (saltellare, girare su se stesso, saltellare in modo ripetuto, agitare le braccia, movimenti bizzarri con mani e dita) molto frequenti ed invasive e che gli impediscono di fare altre attività la maggior parte del tempo",
+                    "points": 0
+                },
+                {
+                    "text": "Stereotípie verbali o motorie presenti ma interferenti solo con alcune attività",
+                    "points": 25
+                },
+                {
+                    "text": "Stereotipie verbali o motorie presenti ma non interferenti con alcuna altra attività",
+                    "points": 50
+                },
+                {
+                    "text": "Rare stereotipie verbali o motorie",
+                    "points": 75
+                },
+                {
+                    "text": "Stereotipie verbali o motorie assenti",
+                    "points": 100
+                }
+            ],
+            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "subdom": 15,
+            "dom": "Emo"
+        },
+        {
+            "text": "INTERESSI RISTRETTI O BIZZARRI",
+            "response": [
+                {
+                    "text": "Interessi ristretti (interessi bizzarri od eccessivi per oggetti o per idee), molto frequenti e anche invasivi, che gli impediscono di fare altre attività la maggior parte del tempo",
+                    "points": 0
+                },
+                {
+                    "text": "Interessi ristretti presenti ed interferenti con alcune attività",
+                    "points": 33
+                },
+                {
+                    "text": "Interessi ristretti presenti ma senza interferenza su altre attività",
+                    "points": 67
+                },
+                {
+                    "text": "Interessi ristretti assenti",
+                    "points": 100
+                }
+            ],
+            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "subdom": 15,
+            "dom": "Emo"
+        },
+        {
+            "text": "PARTICOLARITÀ SENSORIALI",
+            "response": [
+                {
+                    "text": "Eccessivo interesse o intolleranza rispetto a certe stimolazioni sensoriali (annusa, porta alla bocca, fa roteare gli oggetti, attratto dalle luci), molto frequenti e anche invasivi, che gli impediscono di fare altre attività la maggior parte del tempo",
+                    "points": 0
+                },
+                {
+                    "text": "Eccessivo interesse o intolleranza a certi stimoli sensoriali con interferenza solo su alcune attività",
+                    "points": 25
+                },
+                {
+                    "text": "Eccessivo interesse o intolleranza a certi stimoli sensoriali senza interferenza su alcune attività",
+                    "points": 50
+                },
+                {
+                    "text": "Rari eccessi di interesse o intolleranza a certi stimoli sensoriali",
+                    "points": 75
+                },
+                {
+                    "text": "Eccessi di interesse assenti",
+                    "points": 100
+                }
+            ],
+            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "subdom": 15,
+            "dom": "Emo"
+        },
+        {
+            "text": "NEOFOBIA",
+            "response": [
+                {
+                    "text": "Rifiuta sistematicamente le novità (luoghi, oggetti, o cibi nuovi...), cose che gli provocano paura ed ansia",
+                    "points": 0
+                },
+                {
+                    "text": "Tollera difficilmente le novità (i cibi nuovi,...), cose che provocano paura ed ansia, ma solo in alcune situazioni",
+                    "points": 33
+                },
+                {
+                    "text": "Evita le novità, ma le accetta con l'aiuto e il sostegno di altri",
+                    "points": 67
+                },
+                {
+                    "text": "Tollera bene le novità",
+                    "points": 100
+                }
+            ],
+            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "subdom": 15,
+            "dom": "Emo"
+        },
+        {
+            "text": "IRRITABILITÀ, OPPOSITIVITÀ, RABBIA",
+            "response": [
+                {
+                    "text": "Si mostra spesso irritabile, 'nervoso', tollera molto difficilmente la frustrazione (reazione al \"no\", cambi di programma), vuole fare ciò che desidera: urla, pianti, collera difficilmente gestibili",
+                    "points": 0
+                },
+                {
+                    "text": "Si mostra irritabile in relazione a specifiche situazioni, tollera difficilmente la frustrazione (reazione al \"no\"), vuole fare cio che desidera per alcune cose (ad es. l'uso del tablet), grida, pianti, collera che possono essere comunque gestiti",
+                    "points": 25
+                },
+                {
+                    "text": "Si mostra moderatamente irritabile, tende ad opporsi ma finisce per accettare",
+                    "points": 50
+                },
+                {
+                    "text": "Si mostra lievemente irritabile, la frustrazione è a volte difficile da gestire, senza collera (fa il broncio qualche minuto), senza oppositività e si autoregola.",
+                    "points": 75
+                },
+                {
+                    "text": "Tollera la frustrazione e non mostra particolare agitazione",
+                    "points": 100
+                }
+            ],
+            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "subdom": 16,
+            "dom": "Emo"
+        },
+        {
+            "text": "ENERGIA, DESIDERIO, CAPACITÀ NELL'ATTIVITÀ SPORTIVA",
+            "response": [
+                {
+                    "text": "Nessuna iniziativa motoria",
+                    "points": 0
+                },
+                {
+                    "text": "Pratica una attività motoria su sollecitazione",
+                    "points": 25
+                },
+                {
+                    "text": "Ha desiderio ma manca di energia per fare attività sportiva",
+                    "points": 50
+                },
+                {
+                    "text": "Può intraprendere e praticare un'attività occasionale o moderata",
+                    "points": 75
+                },
+                {
+                    "text": "Pratica regolarmente una attività fisica sportiva",
+                    "points": 100
+                }
+            ],
+            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "subdom": 17,
+            "dom": "Mot"
+        }
+    ]
+}

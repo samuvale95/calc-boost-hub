@@ -4,70 +4,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Brain, CheckCircle, XCircle, Play, Home } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
+import quizJson from "../data/DAND_qt_NO_sonno.json";
+import { v4 as uuidv4 } from "uuid";
 
 // Quiz mockup
-const mockQuiz = [
-  {
-    id: "1",
-    question: "Quale è la frequenza cardiaca normale a riposo per un adulto sano?",
-    options: [
-      { id: "a", text: "40-50 bpm", isCorrect: false },
-      { id: "b", text: "60-100 bpm", isCorrect: true },
-      { id: "c", text: "100-120 bpm", isCorrect: false },
-      { id: "d", text: "120-140 bpm", isCorrect: false }
-    ]
-  },
-  {
-    id: "2", 
-    question: "Qual è il primo intervento da fare in caso di arresto cardiaco?",
-    options: [
-      { id: "a", text: "Chiamare il medico", isCorrect: false },
-      { id: "b", text: "Iniziare la RCP (rianimazione cardiopolmonare)", isCorrect: true },
-      { id: "c", text: "Somministrare farmaci", isCorrect: false },
-      { id: "d", text: "Portare il paziente in ospedale", isCorrect: false }
-    ]
-  },
-  {
-    id: "3",
-    question: "A quale temperatura corporea si considera febbre alta in un adulto?",
-    options: [
-      { id: "a", text: "37.5°C", isCorrect: false },
-      { id: "b", text: "38.0°C", isCorrect: false },
-      { id: "c", text: "38.5°C", isCorrect: false },
-      { id: "d", text: "39.0°C o superiore", isCorrect: true }
-    ]
-  },
-  {
-    id: "4",
-    question: "Quale di questi è un segno di disidratazione grave?",
-    options: [
-      { id: "a", text: "Sete leggera", isCorrect: false },
-      { id: "b", text: "Pelle secca e mucose asciutte", isCorrect: true },
-      { id: "c", text: "Sudorazione eccessiva", isCorrect: false },
-      { id: "d", text: "Aumento dell'appetito", isCorrect: false }
-    ]
-  },
-  {
-    id: "5",
-    question: "Qual è la posizione corretta per un paziente incosciente che respira?",
-    options: [
-      { id: "a", text: "Supina (a pancia in su)", isCorrect: false },
-      { id: "b", text: "Prona (a pancia in giù)", isCorrect: false },
-      { id: "c", text: "Posizione laterale di sicurezza", isCorrect: true },
-      { id: "d", text: "Seduta", isCorrect: false }
-    ]
-  },
-  {
-    id: "6",
-    question: "Quale parametro vitale viene misurato con lo sfigmomanometro?",
-    options: [
-      { id: "a", text: "Temperatura corporea", isCorrect: false },
-      { id: "b", text: "Frequenza cardiaca", isCorrect: false },
-      { id: "c", text: "Pressione arteriosa", isCorrect: true },
-      { id: "d", text: "Frequenza respiratoria", isCorrect: false }
-    ]
-  }
-];
+const quiz = quizJson.questions.map(question => ({
+  id: uuidv4(),
+  ...question,
+  response: question.response.map((option: { text: string; points: number }, idx: number) => ({
+    id: uuidv4(),
+    ...option
+  }))
+}));
 
 const Quiz = () => {
   const [selectedAnswers, setSelectedAnswers] = useState<{[key: string]: string}>({});
@@ -84,22 +32,12 @@ const Quiz = () => {
   };
 
   const handleSubmitQuiz = () => {
-    const results: {[key: string]: boolean} = {};
     
-    mockQuiz.forEach(question => {
+    quiz.forEach(question => {
       const selectedAnswer = selectedAnswers[question.id];
-      const correctAnswer = question.options.find(opt => opt.isCorrect);
-      results[question.id] = selectedAnswer === correctAnswer?.id;
     });
     
-    setQuizResults(results);
     setShowResults(true);
-    
-    const correctCount = Object.values(results).filter(Boolean).length;
-    toast({
-      title: "Quiz Completato",
-      description: `Hai risposto correttamente a ${correctCount} domande su ${mockQuiz.length}`
-    });
   };
 
   const resetQuiz = () => {
@@ -134,18 +72,17 @@ const Quiz = () => {
           </div>
         </div>
 
-        {/* Quiz Content */}
         <Card>
           <CardContent className="p-6">
             {!showResults ? (
               <div className="space-y-6">
-                {mockQuiz.map((question, index) => (
+                {quiz.map((question, index) => (
                   <Card key={question.id} className="p-4">
                     <h3 className="font-semibold mb-4 text-lg">
-                      {index + 1}. {question.question}
+                      {index + 1}. {question.text}
                     </h3>
                     <div className="space-y-2">
-                      {question.options.map((option) => (
+                      {question.response.map((option) => (
                         <label
                           key={option.id}
                           className="flex items-center space-x-3 p-3 rounded-lg border hover:bg-accent/50 cursor-pointer transition-colors"
@@ -167,7 +104,7 @@ const Quiz = () => {
                 <div className="flex gap-4 pt-4">
                   <Button 
                     onClick={handleSubmitQuiz}
-                    disabled={Object.keys(selectedAnswers).length !== mockQuiz.length}
+                    disabled={Object.keys(selectedAnswers).length !== quiz.length}
                     className="flex items-center gap-2"
                   >
                     <Play className="h-4 w-4" />
@@ -180,18 +117,8 @@ const Quiz = () => {
               </div>
             ) : (
               <div className="space-y-6">
-                <div className="text-center p-6 bg-accent/20 rounded-lg">
-                  <h3 className="text-xl font-bold mb-2">Risultati del Quiz</h3>
-                  <p className="text-lg">
-                    Hai risposto correttamente a{" "}
-                    <span className="font-bold text-primary">
-                      {Object.values(quizResults).filter(Boolean).length}
-                    </span>{" "}
-                    domande su {mockQuiz.length}
-                  </p>
-                </div>
                 
-                {mockQuiz.map((question, index) => (
+                {quiz.map((question, index) => (
                   <Card key={question.id} className="p-4">
                     <div className="flex items-start gap-3 mb-3">
                       {quizResults[question.id] ? (
@@ -200,19 +127,16 @@ const Quiz = () => {
                         <XCircle className="h-5 w-5 text-red-500 mt-1 flex-shrink-0" />
                       )}
                       <h3 className="font-semibold text-lg">
-                        {index + 1}. {question.question}
+                        {index + 1}. {question.text}
                       </h3>
                     </div>
                     
                     <div className="space-y-2 ml-8">
-                      {question.options.map((option) => {
+                      {question.response.map((option) => {
                         const isSelected = selectedAnswers[question.id] === option.id;
-                        const isCorrect = option.isCorrect;
                         
                         let optionClass = "p-3 rounded-lg border ";
-                        if (isCorrect) {
-                          optionClass += "bg-green-50 border-green-200 text-green-800";
-                        } else if (isSelected && !isCorrect) {
+                        if (isSelected) {
                           optionClass += "bg-red-50 border-red-200 text-red-800";
                         } else {
                           optionClass += "bg-gray-50 border-gray-200";
@@ -225,10 +149,7 @@ const Quiz = () => {
                                 {option.id.toUpperCase()})
                               </span>
                               <span className="text-sm">{option.text}</span>
-                              {isCorrect && (
-                                <CheckCircle className="h-4 w-4 text-green-500 ml-auto" />
-                              )}
-                              {isSelected && !isCorrect && (
+                              {isSelected && (
                                 <XCircle className="h-4 w-4 text-red-500 ml-auto" />
                               )}
                             </div>
