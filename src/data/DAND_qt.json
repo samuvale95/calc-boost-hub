@@ -2,6 +2,7 @@
     "questions": [
         {
             "text": "EQUILIBRIO",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non ha equilibrio posturale",
@@ -38,6 +39,7 @@
         },
         {
             "text": "SPOSTAMENTI",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non si sposta in alcun modo",
@@ -78,6 +80,7 @@
         },
         {
             "text": "CORSA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non corre",
@@ -106,6 +109,7 @@
         },
         {
             "text": "FARE LE SCALE",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non sale né scende le scale",
@@ -130,6 +134,7 @@
         },
         {
             "text": "SALTARE",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non salta (non riesce a staccare i piedi da terra)",
@@ -154,6 +159,7 @@
         },
         {
             "text": "ANDARE IN BICICLETTA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non va in bicicletta",
@@ -178,6 +184,7 @@
         },
         {
             "text": "GIOCO CON LA PALLA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non lancia né afferra la palla",
@@ -202,6 +209,7 @@
         },
         {
             "text": "AUTONOMIA NELLA MARCIA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Cammina meno di 5 minuti",
@@ -230,6 +238,7 @@
         },
         {
             "text": "AFFERRARE OGGETTI",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non afferra in alcun modo",
@@ -262,6 +271,7 @@
         },
         {
             "text": "PUZZLES",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non fa incastri né puzzles",
@@ -286,6 +296,7 @@
         },
         {
             "text": "DISEGNO",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non è interessato a realizzare scarabocchi",
@@ -318,6 +329,7 @@
         },
         {
             "text": "MOVIMENTO DI ROTAZIONE CON LE MANI (AVVITARE/SVITARE)",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non avvita e non svita",
@@ -342,6 +354,7 @@
         },
         {
             "text": "FORBICI",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non è in grado di usare le forbici",
@@ -370,6 +383,7 @@
         },
         {
             "text": "ALIMENTAZIONE",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Nutrito attraverso sonda gastrica",
@@ -394,6 +408,7 @@
         },
         {
             "text": "MASTICAZIONE",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Nutrizione enterale (SNG, PEG...)",
@@ -422,6 +437,7 @@
         },
         {
             "text": "DEGLUTIZIONE",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Fatica a contenere la saliva e a deglutire solidi e liquidi",
@@ -450,6 +466,7 @@
         },
         {
             "text": "APPETITO",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Molto scarso o molto marcato",
@@ -470,6 +487,7 @@
         },
         {
             "text": "IMITAZIONE",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non presenta comportamenti di imitazione",
@@ -494,6 +512,7 @@
         },
         {
             "text": "ATTENZIONE CONGIUNTA, RISPOSTA ED INIZIATIVA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non mantiene il contatto visivo",
@@ -522,6 +541,7 @@
         },
         {
             "text": "INTERAZIONE SOCIALE, AMICIZIE",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non manifesta interesse per i coetanei",
@@ -558,6 +578,7 @@
         },
         {
             "text": "EMPATIA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non tiene conto della presenza di altri/È indifferente alle persone che la circondano",
@@ -586,6 +607,7 @@
         },
         {
             "text": "UMORISMO",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non capisce le battute/frasi scherzose/giochi di parole",
@@ -610,6 +632,7 @@
         },
         {
             "text": "COMPRENSIONE DELLE REGOLE E CONVENZIONI SOCIALI",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non comprende le regole sociali",
@@ -634,6 +657,7 @@
         },
         {
             "text": "GIOCO SIMBOLICO",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non gioca con i giocattoli",
@@ -658,6 +682,7 @@
         },
         {
             "text": "REGOLE NEI GIOCHI",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non fa giochi collaborativi",
@@ -682,6 +707,7 @@
         },
         {
             "text": "REAZIONE AI SUONI/COMPRENSIONE VERBALE",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non reagisce a stimoli verbali",
@@ -710,6 +736,7 @@
         },
         {
             "text": "LINGUAGGIO ESPRESSIVO/PRODUZIONE VERBALE",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non produce suoni",
@@ -738,6 +765,7 @@
         },
         {
             "text": "POINTING E LINGUAGGIO NON VERBALE",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non indica con il dito",
@@ -762,6 +790,7 @@
         },
         {
             "text": "PRAGMATICA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non produce verbalizzazioni indirizzate all'altro, neppure lallazione",
@@ -790,6 +819,7 @@
         },
         {
             "text": "FLUENZA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Parla sempre lentamente",
@@ -810,6 +840,7 @@
         },
         {
             "text": "ARTICOLAZIONE (se presente il linguaggio)",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "linguaggio inintellegibile",
@@ -834,6 +865,7 @@
         },
         {
             "text": "IGIENE PERSONALE",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non si lava in autonomia",
@@ -854,6 +886,7 @@
         },
         {
             "text": "VESTIRSI",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non si veste senza l'aiuto di altri, e non collabora quando viene vestito",
@@ -878,6 +911,7 @@
         },
         {
             "text": "CONTROLLO SFINTERICO",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non chiede di andare in bagno e non si tiene pulito",
@@ -906,6 +940,7 @@
         },
         {
             "text": "SENSO DEL PERICOLO",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non ha consapevolezza del pericolo",
@@ -930,6 +965,7 @@
         },
         {
             "text": "LAVORI DI CASA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non aiuta nei lavori di casa",
@@ -954,6 +990,7 @@
         },
         {
             "text": "AUTONOMIA IN CUCINA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non prepara cibi",
@@ -978,6 +1015,7 @@
         },
         {
             "text": "TELEFONO",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non parla al telefono",
@@ -1002,6 +1040,7 @@
         },
         {
             "text": "USO DI TABLET E SMARTPHONES",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non si interessa a tablet, cellulare O COMPUTER",
@@ -1030,6 +1069,7 @@
         },
         {
             "text": "CONOSCENZE TEMPORALI",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non è orientato nel tempo.",
@@ -1062,6 +1102,7 @@
         },
         {
             "text": "USO DEL DENARO",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non comprende la funzione del denaro",
@@ -1086,6 +1127,7 @@
         },
         {
             "text": "ALFABETO",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non conosce le lettere",
@@ -1110,6 +1152,7 @@
         },
         {
             "text": "LETTURA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non sa leggere",
@@ -1134,6 +1177,7 @@
         },
         {
             "text": "SCRITTURA (NON SU MODELLO)",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non sa scrivere",
@@ -1158,6 +1202,7 @@
         },
         {
             "text": "NUMERI ED ENUMERAZIONE",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non conosce la conta numerica",
@@ -1182,6 +1227,7 @@
         },
         {
             "text": "CALCOLO",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non svolge alcun calcolo",
@@ -1206,6 +1252,7 @@
         },
         {
             "text": "GESTIONE E COMPRENSIONE DELLE EMOZIONI",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non gestisce affatto le proprie emozioni, con conseguenze importanti per le relazioni (emozioni eccessive o sproporzionate al contesto: es. scoppi di risate,..)",
@@ -1234,6 +1281,7 @@
         },
         {
             "text": "TRISTEZZA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Evoca idee e scenari suicidari o ha compiuto un tentativo di suicidio oppure ritiro totale legato alla tristezza",
@@ -1262,6 +1310,7 @@
         },
         {
             "text": "ANSIA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Ha preoccupazioni, ansie e paure che gli impediscono di fare certe cose con un impatto importante sulla vita quotidiana familiare (uscire, andare in certi posti) oppure disorganizzazione legata all'ansia, paura, preoccupazione",
@@ -1290,6 +1339,7 @@
         },
         {
             "text": "RITIRO SOCIALE",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Presenta ritiro sociale, evita costantemente gli altri",
@@ -1318,6 +1368,7 @@
         },
         {
             "text": "PASSAGGIO RAPIDO DA UN'ATTIVITÀ AD UN'ALTRA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Passa rapidamente da un'attività all'altra, non può soffermarsi su un'attività più di un minuto",
@@ -1346,6 +1397,7 @@
         },
         {
             "text": "DIFFICOLTÀ DI ASCOLTO ED ATTENZIONE",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Non ascolta le consegne, non sembra ascoltare quando gli si parla (non in relazione a difficoltà di comprensione delle consegne), anche se non è occupato in un'attività",
@@ -1374,6 +1426,7 @@
         },
         {
             "text": "IPERATTIVITÀ MOTORIA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "È costantemente in movimento, non riesce a restare fermo",
@@ -1404,6 +1457,7 @@
         },
         {
             "text": "IMPULSIVITÀ",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "È SISTEMATICAMENTE impulsivo, non può rimandare un'azione o frenare un comportamento (ad esempio: dare una risposta, afferrare un oggetto, toccare anche se gli è stato detto di non farlo, interrompere gli altri,...)",
@@ -1432,6 +1486,7 @@
         },
         {
             "text": "STEREOTIPIE",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Stereotipie verbali (usa frasi bizzarre o ripete in continuazione le stesse cose) oppure motorie (saltellare, girare su se stesso, saltellare in modo ripetuto, agitare le braccia, movimenti bizzarri con mani e dita) molto frequenti ed invasive e che gli impediscono di fare altre attività la maggior parte del tempo",
@@ -1460,6 +1515,7 @@
         },
         {
             "text": "INTERESSI RISTRETTI O BIZZARRI",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Interessi ristretti (interessi bizzarri od eccessivi per oggetti o per idee), molto frequenti e anche invasivi, che gli impediscono di fare altre attività la maggior parte del tempo",
@@ -1484,6 +1540,7 @@
         },
         {
             "text": "PARTICOLARITÀ SENSORIALI",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Eccessivo interesse o intolleranza rispetto a certe stimolazioni sensoriali (annusa, porta alla bocca, fa roteare gli oggetti, attratto dalle luci), molto frequenti e anche invasivi, che gli impediscono di fare altre attività la maggior parte del tempo",
@@ -1512,6 +1569,7 @@
         },
         {
             "text": "NEOFOBIA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Rifiuta sistematicamente le novità (luoghi, oggetti, o cibi nuovi...), cose che gli provocano paura ed ansia",
@@ -1536,6 +1594,7 @@
         },
         {
             "text": "IRRITABILITÀ, OPPOSITIVITÀ, RABBIA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Si mostra spesso irritabile, 'nervoso', tollera molto difficilmente la frustrazione (reazione al \"no\", cambi di programma), vuole fare ciò che desidera: urla, pianti, collera difficilmente gestibili",
@@ -1564,6 +1623,7 @@
         },
         {
             "text": "ENERGIA, DESIDERIO, CAPACITÀ NELL'ATTIVITÀ SPORTIVA",
+            "type": "single-coice",
             "response": [
                 {
                     "text": "Nessuna iniziativa motoria",
@@ -1589,6 +1649,42 @@
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
             "subdom": 17,
             "dom": "Mot"
+        },
+        {
+            "text": "Quante ore dorme di notte complessivamente?",
+            "type": "numeric",
+            "response": {
+                "min": 0,
+                "max": 16,
+                "step": 0.5
+            },
+            "section": "SONNO (ma nella versione cartacea non è nominata)",
+            "subdom": 8,
+            "dom": "Sleep"
+        },
+        {
+            "text": "Quante ore dorme durante il giorno e il pomeriggio",
+            "type": "numeric",
+            "response": {
+                "min": 0,
+                "max": 8,
+                "step": 0.5
+            },
+            "section": "SONNO (ma nella versione cartacea non è nominata)",
+            "subdom": 18,
+            "dom": "Sleep"
+        },
+        {
+            "text": "Quante volte alla settimana si sveglia di notte richiedendo l'intervento del genitore?",
+            "type": "numeric",
+            "response": {
+                "min": 0,
+                "max": 50,
+                "step": 1
+            },
+            "section": "SONNO (ma nella versione cartacea non è nominata)",
+            "subdom": 19,
+            "dom": "Sleep"
         }
     ]
 }
