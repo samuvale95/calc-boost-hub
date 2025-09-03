@@ -14,6 +14,7 @@ export const API_CONFIG = {
   ENDPOINTS: {
     USERS: '/users',
     REGISTER: '/users/register',
+    REGENERATE_PASSWORD: '/users/{id}/regenerate-password',
   }
 };
 

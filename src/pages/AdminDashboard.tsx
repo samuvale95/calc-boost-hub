@@ -31,7 +31,6 @@ import {
   Users, 
   Search, 
   Key, 
-  Mail, 
   Calendar,
   UserPlus,
   Settings,
@@ -183,21 +182,38 @@ const AdminDashboard = () => {
     user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleGeneratePassword = (userId: string, userName: string) => {
-    // Mockup - sarà implementato con Supabase
+  const handleGeneratePassword = async (userId: string, userName: string) => {
+    // Show confirmation toast first
     toast({
-      title: "Password Generata",
-      description: `Nuova password generata per ${userName}`
+      title: "Conferma Rigenerazione Password",
+      description: `Sei sicuro di voler rigenerare la password per ${userName}?`,
+      action: (
+        <Button
+          variant="destructive"
+          size="sm"
+          onClick={async () => {
+            try {
+              await regeneratePassword(userId);
+              toast({
+                title: "Password Rigenerata",
+                description: `Nuova password generata e inviata per ${userName}`
+              });
+            } catch (err) {
+              toast({
+                title: "Errore",
+                description: err instanceof Error ? err.message : "Impossibile rigenerare la password",
+                variant: "destructive"
+              });
+            }
+          }}
+        >
+          Conferma
+        </Button>
+      ),
     });
   };
 
-  const handleSendEmail = (userId: string, userEmail: string) => {
-    // Mockup - sarà implementato con Supabase
-    toast({
-      title: "Email Inviata", 
-      description: `Credenziali inviate a ${userEmail}`
-    });
-  };
+
 
   const getStatusBadge = (status: string) => {
     switch (status) {
@@ -346,6 +362,29 @@ const AdminDashboard = () => {
       return transformedUser;
     } catch (err) {
       console.error('Errore nella registrazione utente:', err);
+      throw err;
+    }
+  };
+
+  const regeneratePassword = async (userId: string) => {
+    try {
+      const endpoint = API_CONFIG.ENDPOINTS.REGENERATE_PASSWORD.replace('{id}', userId);
+      const response = await fetch(buildApiUrl(endpoint), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `Errore HTTP: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result;
+    } catch (err) {
+      console.error('Errore nella rigenerazione password:', err);
       throw err;
     }
   };
@@ -544,15 +583,6 @@ const AdminDashboard = () => {
                             >
                               <Key className="h-4 w-4" />
                               Password
-                            </Button>
-                            <Button
-                              variant="outline" 
-                              size="sm"
-                              onClick={() => handleSendEmail(user.id, user.email)}
-                              className="flex items-center gap-1"
-                            >
-                              <Mail className="h-4 w-4" />
-                              Email
                             </Button>
                           </div>
                         </TableCell>
