@@ -13,6 +13,7 @@ export const API_CONFIG = {
   BASE_URL: getApiBaseUrl(),
   ENDPOINTS: {
     USERS: '/users',
+    REGISTER: '/users/register',
   }
 };
 

@@ -141,7 +141,7 @@ const AdminDashboard = () => {
         const data = await response.json();
         
         // Transform API data to match our User interface
-        const transformedUsers: User[] = data.map((user: ApiUser) => ({
+        const transformedUsers: User[] = data.users.map((user: ApiUser) => ({
           id: String(user.id),
           name: user.name,
           email: user.email,
@@ -221,7 +221,7 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleAddUser = () => {
+  const handleAddUser = async () => {
     if (!newUser.name || !newUser.email || !newUser.password || !newUser.subscription) {
       toast({
         title: "Errore",
@@ -231,24 +231,34 @@ const AdminDashboard = () => {
       return;
     }
 
-    const user = {
-      id: String(users.length + 1),
-      name: newUser.name,
-      email: newUser.email,
-      subscription: newUser.subscription,
-      status: "attivo",
-      registrationDate: new Date().toISOString().split('T')[0],
-      lastLogin: new Date().toISOString().split('T')[0]
-    };
-
-    setUsers(prev => [...prev, user]);
-    setNewUser({ name: "", email: "", password: "", subscription: "" });
-    setIsModalOpen(false);
-    
-    toast({
-      title: "Utente Aggiunto",
-      description: `${user.name} è stato aggiunto con successo`
-    });
+    try {
+      setIsLoading(true);
+      
+      const registeredUser = await registerUser(newUser);
+      
+      // Add the new user to the local state
+      setUsers(prev => [...prev, registeredUser]);
+      
+      // Reset form and close modal
+      setNewUser({ name: "", email: "", password: "", subscription: "" });
+      setIsModalOpen(false);
+      
+      toast({
+        title: "Utente Aggiunto",
+        description: `${registeredUser.name} è stato registrato con successo`
+      });
+      
+    } catch (err) {
+      console.error('Errore nella registrazione:', err);
+      
+      toast({
+        title: "Errore di Registrazione",
+        description: err instanceof Error ? err.message : "Impossibile registrare l'utente",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleRefreshUsers = async () => {
@@ -264,7 +274,7 @@ const AdminDashboard = () => {
       
       const data = await response.json();
       
-      const transformedUsers: User[] = data.map((user: ApiUser) => ({
+      const transformedUsers: User[] = data.users.map((user: ApiUser) => ({
         id: String(user.id),
         name: user.name,
         email: user.email,
@@ -292,6 +302,51 @@ const AdminDashboard = () => {
       });
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const registerUser = async (userData: {
+    name: string;
+    email: string;
+    password: string;
+    subscription: string;
+  }) => {
+    try {
+      const response = await fetch(buildApiUrl(API_CONFIG.ENDPOINTS.REGISTER), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: userData.name,
+          email: userData.email,
+          password: userData.password,
+          subscription: userData.subscription,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `Errore HTTP: ${response.status}`);
+      }
+
+      const newUserData = await response.json();
+      
+      // Transform the API response to match our User interface
+      const transformedUser: User = {
+        id: String(newUserData.id),
+        name: newUserData.name,
+        email: newUserData.email,
+        subscription: newUserData.subscription,
+        status: newUserData.is_active ? 'attivo' : 'scaduto',
+        registrationDate: newUserData.registration_date ? newUserData.registration_date.split('T')[0] : new Date().toISOString().split('T')[0],
+        lastLogin: newUserData.last_access ? newUserData.last_access.split('T')[0] : new Date().toISOString().split('T')[0]
+      };
+
+      return transformedUser;
+    } catch (err) {
+      console.error('Errore nella registrazione utente:', err);
+      throw err;
     }
   };
 
@@ -580,11 +635,18 @@ const AdminDashboard = () => {
               </div>
             </div>
             <DialogFooter>
-              <Button variant="outline" onClick={() => setIsModalOpen(false)}>
+              <Button variant="outline" onClick={() => setIsModalOpen(false)} disabled={isLoading}>
                 Annulla
               </Button>
-              <Button onClick={handleAddUser}>
-                Aggiungi Utente
+              <Button onClick={handleAddUser} disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                    Registrazione...
+                  </>
+                ) : (
+                  "Aggiungi Utente"
+                )}
               </Button>
             </DialogFooter>
           </DialogContent>
