@@ -14,6 +14,7 @@ export interface LoginResponse {
     email: string;
     subscription: string;
     status: string;
+    role: string;
     id: number;
     registration_date: string;
     last_access: string;

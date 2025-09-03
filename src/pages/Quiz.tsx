@@ -6,6 +6,7 @@ import { Brain, CheckCircle, XCircle, Play, Home, ChevronLeft, ChevronRight, Log
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useAdmin } from "@/hooks/useAdmin";
 import quizJson from "../data/DAND_qt.json";
 import { v4 as uuidv4 } from "uuid";
 
@@ -27,6 +28,7 @@ const Quiz = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  const { isUserAdmin } = useAdmin();
   const stepperRef = useRef<HTMLDivElement>(null);
 
   // Group questions by section
@@ -147,7 +149,13 @@ const Quiz = () => {
               </p>
               {user && (
                 <div className="text-sm text-muted-foreground mt-1">
-                  <p>Benvenuto, <span className="font-medium text-foreground">{user.name}</span></p>
+                  <p>Benvenuto, <span className="font-medium text-foreground">{user.name}</span>
+                    {user.role === 'admin' && (
+                      <span className="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                        👑 Admin
+                      </span>
+                    )}
+                  </p>
                   <p className="text-xs">Abbonamento: <span className="font-medium text-primary">{user.subscription}</span> • Status: <span className="font-medium text-green-600">{user.status}</span></p>
                 </div>
               )}

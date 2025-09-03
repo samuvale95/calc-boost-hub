@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, Lock, ArrowLeft, Loader2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useAdmin } from "@/hooks/useAdmin";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
@@ -12,6 +13,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, loading, isAuthenticated } = useAuth();
+  const { isUserAdmin } = useAdmin();
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
@@ -19,10 +21,10 @@ const Login = () => {
   // Redirect if already authenticated
   useEffect(() => {
     if (isAuthenticated) {
-      const from = location.state?.from?.pathname || "/admin";
+      const from = location.state?.from?.pathname || (isUserAdmin() ? "/admin" : "/quiz");
       navigate(from, { replace: true });
     }
-  }, [isAuthenticated, navigate, location]);
+  }, [isAuthenticated, navigate, location, isUserAdmin]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,7 +46,7 @@ const Login = () => {
           title: "Accesso riuscito!",
           description: "Benvenuto nel sistema",
         });
-        const from = location.state?.from?.pathname || "/admin";
+        const from = location.state?.from?.pathname || (isUserAdmin() ? "/admin" : "/quiz");
         navigate(from, { replace: true });
       } else {
         toast({

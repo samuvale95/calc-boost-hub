@@ -7,6 +7,7 @@ interface User {
   name: string;
   subscription: string;
   status: string;
+  role: string;
   registration_date: string;
   last_access: string;
   is_active: boolean;
@@ -17,6 +18,7 @@ interface User {
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
+  isAdmin: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
   loading: boolean;
@@ -93,6 +95,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const value: AuthContextType = {
     user,
     isAuthenticated: !!user,
+    isAdmin: !!user && user.role === 'admin',
     login,
     logout,
     loading
