@@ -1,10 +1,11 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Slider } from "@/components/ui/slider";
 import { Brain, CheckCircle, XCircle, Play, Home, ChevronLeft, ChevronRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
-import quizJson from "../data/DAND_qt_NO_sonno.json";
+import quizJson from "../data/DAND_qt.json";
 import { v4 as uuidv4 } from "uuid";
 
 // Quiz mockup
@@ -45,12 +46,21 @@ const Quiz = () => {
   const currentSection = sections[currentSectionIndex];
   const currentQuestion = currentSection?.questions[currentQuestionIndex];
   const totalQuestions = sections.reduce((total, section) => total + section.questions.length, 0);
-  const answeredQuestions = Object.keys(selectedAnswers).length;
+  const answeredQuestions = Object.keys(selectedAnswers).filter(key => 
+    selectedAnswers[key] !== undefined && selectedAnswers[key] !== ""
+  ).length;
 
   const handleAnswerSelect = (questionId: string, optionId: string) => {
     setSelectedAnswers(prev => ({
       ...prev,
       [questionId]: optionId
+    }));
+  };
+
+  const handleSliderChange = (questionId: string, value: number[]) => {
+    setSelectedAnswers(prev => ({
+      ...prev,
+      [questionId]: value[0].toString()
     }));
   };
 
@@ -89,7 +99,10 @@ const Quiz = () => {
     setCurrentQuestionIndex(0);
   };
 
-  const isCurrentQuestionAnswered = currentQuestion ? selectedAnswers[currentQuestion.id] : false;
+  const isCurrentQuestionAnswered = currentQuestion ? 
+    (currentQuestion.type === "numeric" ? 
+      selectedAnswers[currentQuestion.id] !== undefined && selectedAnswers[currentQuestion.id] !== "" :
+      selectedAnswers[currentQuestion.id]) : false;
   const isLastQuestion = currentSectionIndex === sections.length - 1 && 
                         currentQuestionIndex === currentSection.questions.length - 1;
 
@@ -165,11 +178,15 @@ const Quiz = () => {
                   <div ref={stepperRef} className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 py-4 pb-2">
                     <div className="flex gap-8 min-w-max px-6">
                       {sections.map((section, index) => {
-                        const sectionAnsweredQuestions = section.questions.filter(q => selectedAnswers[q.id]).length;
+                        const sectionAnsweredQuestions = section.questions.filter(q => 
+                      selectedAnswers[q.id] !== undefined && selectedAnswers[q.id] !== ""
+                    ).length;
                         const isCurrentSection = index === currentSectionIndex;
                         const isCompleted = sectionAnsweredQuestions === section.questions.length;
                         const isStarted = sectionAnsweredQuestions > 0;
-                        const isAccessible = index === 0 || sections[index - 1].questions.every(q => selectedAnswers[q.id]);
+                        const isAccessible = index === 0 || sections[index - 1].questions.every(q => 
+                          selectedAnswers[q.id] !== undefined && selectedAnswers[q.id] !== ""
+                        );
                         
                         return (
                           <div key={section.id} className="flex flex-col items-center relative flex-shrink-0">
@@ -249,24 +266,54 @@ const Quiz = () => {
                     <h3 className="font-semibold mb-6 text-xl">
                       {currentQuestion.text}
                     </h3>
-                    <div className="space-y-3">
-                      {currentQuestion.response.map((option) => (
-                        <label
-                          key={option.id}
-                          className="flex items-center space-x-3 p-4 rounded-lg border hover:bg-accent/50 cursor-pointer transition-colors"
-                        >
-                          <input
-                            type="radio"
-                            name={`question-${currentQuestion.id}`}
-                            value={option.id}
-                            checked={selectedAnswers[currentQuestion.id] === option.id}
-                            onChange={() => handleAnswerSelect(currentQuestion.id, option.id)}
-                            className="text-primary focus:ring-primary"
+                    
+                    {currentQuestion.type === "numeric" ? (
+                      <div className="space-y-4">
+                        <div className="text-center">
+                          <div className="text-3xl font-bold text-primary mb-2">
+                            {selectedAnswers[currentQuestion.id] || currentQuestion.options?.min || 0}
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            Valore selezionato
+                          </div>
+                        </div>
+                        
+                        <div className="px-4">
+                          <Slider
+                            value={[parseFloat(selectedAnswers[currentQuestion.id]) || currentQuestion.options?.min || 0]}
+                            onValueChange={(value) => handleSliderChange(currentQuestion.id, value)}
+                            min={currentQuestion.options?.min || 0}
+                            max={currentQuestion.options?.max || 100}
+                            step={currentQuestion.options?.step || 1}
+                            className="w-full"
                           />
-                          <span className="text-sm">{option.text}</span>
-                        </label>
-                      ))}
-                    </div>
+                        </div>
+                        
+                        <div className="flex justify-between text-sm text-muted-foreground">
+                          <span>Min: {currentQuestion.options?.min || 0}</span>
+                          <span>Max: {currentQuestion.options?.max || 100}</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        {currentQuestion.response.map((option) => (
+                          <label
+                            key={option.id}
+                            className="flex items-center space-x-3 p-4 rounded-lg border hover:bg-accent/50 cursor-pointer transition-colors"
+                          >
+                            <input
+                              type="radio"
+                              name={`question-${currentQuestion.id}`}
+                              value={option.id}
+                              checked={selectedAnswers[currentQuestion.id] === option.id}
+                              onChange={() => handleAnswerSelect(currentQuestion.id, option.id)}
+                              className="text-primary focus:ring-primary"
+                            />
+                            <span className="text-sm">{option.text}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
                   </Card>
                 )}
                 

@@ -1653,11 +1653,12 @@
         {
             "text": "Quante ore dorme di notte complessivamente?",
             "type": "numeric",
-            "response": {
+            "options":  {
                 "min": 0,
                 "max": 16,
                 "step": 0.5
             },
+            "response": [],
             "section": "SONNO (ma nella versione cartacea non è nominata)",
             "subdom": 8,
             "dom": "Sleep"
@@ -1665,11 +1666,12 @@
         {
             "text": "Quante ore dorme durante il giorno e il pomeriggio",
             "type": "numeric",
-            "response": {
+            "options": {
                 "min": 0,
                 "max": 8,
                 "step": 0.5
             },
+            "response": [],
             "section": "SONNO (ma nella versione cartacea non è nominata)",
             "subdom": 18,
             "dom": "Sleep"
@@ -1677,11 +1679,12 @@
         {
             "text": "Quante volte alla settimana si sveglia di notte richiedendo l'intervento del genitore?",
             "type": "numeric",
-            "response": {
+            "options": {
                 "min": 0,
                 "max": 50,
                 "step": 1
             },
+            "response": [],
             "section": "SONNO (ma nella versione cartacea non è nominata)",
             "subdom": 19,
             "dom": "Sleep"
