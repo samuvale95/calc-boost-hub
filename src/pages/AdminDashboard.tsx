@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -35,13 +35,41 @@ import {
   Calendar,
   UserPlus,
   Settings,
-  Brain
+  Brain,
+  Loader2,
+  RefreshCw
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { buildApiUrl, API_CONFIG } from "@/config/api";
 
-// Dati mockup
-const mockUsers = [
+// User interface
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  subscription: string;
+  status: string;
+  registrationDate: string;
+  lastLogin: string;
+}
+
+// API Response interface
+interface ApiUser {
+  id: number;
+  name: string;
+  email: string;
+  subscription: string;
+  status: string;
+  registration_date: string;
+  last_access: string | null;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+// Dati mockup (fallback)
+const mockUsers: User[] = [
   {
     id: "1",
     name: "Mario Rossi",
@@ -84,7 +112,9 @@ const mockUsers = [
 
 const AdminDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [users, setUsers] = useState(mockUsers);
+  const [users, setUsers] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newUser, setNewUser] = useState({
     name: "",
@@ -94,6 +124,59 @@ const AdminDashboard = () => {
   });
   const { toast } = useToast();
   const navigate = useNavigate();
+
+  // Fetch users from API
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        
+        const response = await fetch(buildApiUrl(API_CONFIG.ENDPOINTS.USERS));
+        
+        if (!response.ok) {
+          throw new Error(`Errore HTTP: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Transform API data to match our User interface
+        const transformedUsers: User[] = data.map((user: ApiUser) => ({
+          id: String(user.id),
+          name: user.name,
+          email: user.email,
+          subscription: user.subscription,
+          status: user.is_active ? 'attivo' : 'scaduto',
+          registrationDate: user.registration_date.split('T')[0], // Extract date part
+          lastLogin: user.last_access ? user.last_access.split('T')[0] : new Date().toISOString().split('T')[0]
+        }));
+        
+        setUsers(transformedUsers);
+        
+        toast({
+          title: "Utenti Caricati",
+          description: `${transformedUsers.length} utenti caricati con successo`
+        });
+        
+      } catch (err) {
+        console.error('Errore nel caricamento degli utenti:', err);
+        setError(err instanceof Error ? err.message : 'Errore sconosciuto');
+        
+        // Fallback to mock data in case of error
+        setUsers(mockUsers);
+        
+        toast({
+          title: "Errore di Connessione",
+          description: "Impossibile caricare gli utenti. Utilizzo dati di esempio.",
+          variant: "destructive"
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, [toast]);
 
   const filteredUsers = users.filter(user =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -168,6 +251,50 @@ const AdminDashboard = () => {
     });
   };
 
+  const handleRefreshUsers = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      
+      const response = await fetch(buildApiUrl(API_CONFIG.ENDPOINTS.USERS));
+      
+      if (!response.ok) {
+        throw new Error(`Errore HTTP: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      
+      const transformedUsers: User[] = data.map((user: ApiUser) => ({
+        id: String(user.id),
+        name: user.name,
+        email: user.email,
+        subscription: user.subscription,
+        status: user.is_active ? 'attivo' : 'scaduto',
+        registrationDate: user.registration_date.split('T')[0], // Extract date part
+        lastLogin: user.last_access ? user.last_access.split('T')[0] : new Date().toISOString().split('T')[0]
+      }));
+      
+      setUsers(transformedUsers);
+      
+      toast({
+        title: "Utenti Aggiornati",
+        description: `${transformedUsers.length} utenti caricati con successo`
+      });
+      
+    } catch (err) {
+      console.error('Errore nel refresh degli utenti:', err);
+      setError(err instanceof Error ? err.message : 'Errore sconosciuto');
+      
+      toast({
+        title: "Errore di Connessione",
+        description: "Impossibile aggiornare gli utenti.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-hero p-6">
       <div className="container mx-auto max-w-7xl">
@@ -184,6 +311,15 @@ const AdminDashboard = () => {
               </p>
             </div>
             <div className="flex gap-2">
+              <Button 
+                variant="outline" 
+                className="flex items-center gap-2"
+                onClick={handleRefreshUsers}
+                disabled={isLoading}
+              >
+                <RefreshCw className={`h-5 w-5 ${isLoading ? 'animate-spin' : ''}`} />
+                Aggiorna
+              </Button>
               <Button 
                 variant="accent" 
                 className="flex items-center gap-2"
@@ -283,69 +419,94 @@ const AdminDashboard = () => {
         {/* Users Table */}
         <Card className="mb-8">
           <CardHeader>
-            <CardTitle>Lista Utenti ({filteredUsers.length})</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              Lista Utenti ({filteredUsers.length})
+              {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+            </CardTitle>
+            {error && (
+              <div className="text-sm text-destructive bg-destructive/10 p-2 rounded">
+                ⚠️ Errore: {error}
+              </div>
+            )}
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Nome</TableHead>
-                  <TableHead>Email</TableHead>
-                  <TableHead>Abbonamento</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Registrazione</TableHead>
-                  <TableHead>Ultimo Accesso</TableHead>
-                  <TableHead>Azioni</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredUsers.map((user) => (
-                  <TableRow key={user.id}>
-                    <TableCell className="font-medium">{user.name}</TableCell>
-                    <TableCell className="text-muted-foreground">
-                      {user.email}
-                    </TableCell>
-                    <TableCell>
-                      {getSubscriptionBadge(user.subscription)}
-                    </TableCell>
-                    <TableCell>
-                      {getStatusBadge(user.status)}
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                        <Calendar className="h-4 w-4" />
-                        {new Date(user.registrationDate).toLocaleDateString('it-IT')}
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-sm text-muted-foreground">
-                      {new Date(user.lastLogin).toLocaleDateString('it-IT')}
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex gap-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleGeneratePassword(user.id, user.name)}
-                          className="flex items-center gap-1"
-                        >
-                          <Key className="h-4 w-4" />
-                          Password
-                        </Button>
-                        <Button
-                          variant="outline" 
-                          size="sm"
-                          onClick={() => handleSendEmail(user.id, user.email)}
-                          className="flex items-center gap-1"
-                        >
-                          <Mail className="h-4 w-4" />
-                          Email
-                        </Button>
-                      </div>
-                    </TableCell>
+            {isLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Loader2 className="h-6 w-6 animate-spin" />
+                  <span>Caricamento utenti...</span>
+                </div>
+              </div>
+            ) : (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Nome</TableHead>
+                    <TableHead>Email</TableHead>
+                    <TableHead>Abbonamento</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Registrazione</TableHead>
+                    <TableHead>Ultimo Accesso</TableHead>
+                    <TableHead>Azioni</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {filteredUsers.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
+                        {searchTerm ? 'Nessun utente trovato per la ricerca' : 'Nessun utente disponibile'}
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    filteredUsers.map((user) => (
+                      <TableRow key={user.id}>
+                        <TableCell className="font-medium">{user.name}</TableCell>
+                        <TableCell className="text-muted-foreground">
+                          {user.email}
+                        </TableCell>
+                        <TableCell>
+                          {getSubscriptionBadge(user.subscription)}
+                        </TableCell>
+                        <TableCell>
+                          {getStatusBadge(user.status)}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                            <Calendar className="h-4 w-4" />
+                            {new Date(user.registrationDate).toLocaleDateString('it-IT')}
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-sm text-muted-foreground">
+                          {new Date(user.lastLogin).toLocaleDateString('it-IT')}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleGeneratePassword(user.id, user.name)}
+                              className="flex items-center gap-1"
+                            >
+                              <Key className="h-4 w-4" />
+                              Password
+                            </Button>
+                            <Button
+                              variant="outline" 
+                              size="sm"
+                              onClick={() => handleSendEmail(user.id, user.email)}
+                              className="flex items-center gap-1"
+                            >
+                              <Mail className="h-4 w-4" />
+                              Email
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  )}
+                </TableBody>
+              </Table>
+            )}
           </CardContent>
         </Card>
 
