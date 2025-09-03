@@ -13,6 +13,7 @@ export const API_CONFIG = {
   BASE_URL: getApiBaseUrl(),
   ENDPOINTS: {
     USERS: '/users',
+    LOGIN: '/users/login',
     REGISTER: '/users/register',
     REGENERATE_PASSWORD: '/users/{id}/regenerate-password',
     DEACTIVATE_USER: '/users/{id}/deactivate',

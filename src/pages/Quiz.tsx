@@ -2,9 +2,10 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
-import { Brain, CheckCircle, XCircle, Play, Home, ChevronLeft, ChevronRight } from "lucide-react";
+import { Brain, CheckCircle, XCircle, Play, Home, ChevronLeft, ChevronRight, LogOut } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import quizJson from "../data/DAND_qt.json";
 import { v4 as uuidv4 } from "uuid";
 
@@ -25,6 +26,7 @@ const Quiz = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
   const stepperRef = useRef<HTMLDivElement>(null);
 
   // Group questions by section
@@ -99,6 +101,15 @@ const Quiz = () => {
     setCurrentQuestionIndex(0);
   };
 
+  const handleLogout = () => {
+    logout();
+    toast({
+      title: "Logout effettuato",
+      description: "Sei stato disconnesso con successo",
+    });
+    navigate("/login");
+  };
+
   const isCurrentQuestionAnswered = currentQuestion ? 
     (currentQuestion.type === "numeric" ? 
       selectedAnswers[currentQuestion.id] !== undefined && selectedAnswers[currentQuestion.id] !== "" :
@@ -134,15 +145,31 @@ const Quiz = () => {
               <p className="text-muted-foreground text-lg">
                 Test le tue conoscenze mediche con questo quiz di {totalQuestions} domande
               </p>
+              {user && (
+                <div className="text-sm text-muted-foreground mt-1">
+                  <p>Benvenuto, <span className="font-medium text-foreground">{user.name}</span></p>
+                  <p className="text-xs">Abbonamento: <span className="font-medium text-primary">{user.subscription}</span> • Status: <span className="font-medium text-green-600">{user.status}</span></p>
+                </div>
+              )}
             </div>
-            <Button 
-              variant="outline" 
-              className="flex items-center gap-2"
-              onClick={() => navigate("/admin")}
-            >
-              <Home className="h-5 w-5" />
-              Torna al Dashboard
-            </Button>
+            <div className="flex gap-2">
+              <Button 
+                variant="outline" 
+                className="flex items-center gap-2"
+                onClick={() => navigate("/admin")}
+              >
+                <Home className="h-5 w-5" />
+                Dashboard
+              </Button>
+              <Button 
+                variant="outline" 
+                className="flex items-center gap-2"
+                onClick={handleLogout}
+              >
+                <LogOut className="h-5 w-5" />
+                Logout
+              </Button>
+            </div>
           </div>
           
           {/* Progress and Section Info */}
