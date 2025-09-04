@@ -15,8 +15,6 @@ export const API_CONFIG = {
     USERS: '/users',
     REGISTER: '/users/register',
     REGENERATE_PASSWORD: '/users/{id}/regenerate-password',
-    DEACTIVATE_USER: '/users/{id}/deactivate',
-    ACTIVATE_USER: '/users/{id}/activate',
   }
 };
 
