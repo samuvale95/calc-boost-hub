@@ -75,7 +75,7 @@ const Quiz = () => {
           score: option.score,
           dom: question.dom,
           subdom: question.subdom,
-          numOptions: question.response.length // n opzioni per ciascuna domanda (serve per i calcoli!)
+          numOptions: question.response.length - 1 // n opzioni di ciascuna domanda - 1 (serve per i calcoli!)
         }
       }));
     }
@@ -98,7 +98,7 @@ const Quiz = () => {
         ...prev,
         [questionId]: {
           question: question.text,
-          score: value[0],      // il numero scelto
+          score: value[0], // il numero scelto
           dom: question.dom,
           subdom: question.subdom
         }
