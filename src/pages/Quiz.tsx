@@ -161,14 +161,16 @@ const Quiz = () => {
               )}
             </div>
             <div className="flex gap-2">
-              <Button 
-                variant="outline" 
-                className="flex items-center gap-2"
-                onClick={() => navigate("/admin")}
-              >
-                <Home className="h-5 w-5" />
-                Dashboard
-              </Button>
+              {isUserAdmin() && (
+                <Button 
+                  variant="outline" 
+                  className="flex items-center gap-2"
+                  onClick={() => navigate("/admin")}
+                >
+                  <Home className="h-5 w-5" />
+                  Dashboard
+                </Button>
+              )}
               <Button 
                 variant="outline" 
                 className="flex items-center gap-2"
@@ -402,14 +404,16 @@ const Quiz = () => {
                     <Play className="h-4 w-4" />
                     Rifai il Quiz
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    onClick={() => navigate("/admin")}
-                    className="flex items-center gap-2"
-                  >
-                    <Home className="h-4 w-4" />
-                    Torna al Dashboard
-                  </Button>
+                  {isUserAdmin() && (
+                    <Button 
+                      variant="outline" 
+                      onClick={() => navigate("/admin")}
+                      className="flex items-center gap-2"
+                    >
+                      <Home className="h-4 w-4" />
+                      Torna al Dashboard
+                    </Button>
+                  )}
                 </div>
               </div>
             )}
