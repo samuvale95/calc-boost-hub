@@ -1,20 +1,18 @@
 // API Configuration
 const getApiBaseUrl = () => {
-  // Check if we're in development mode
-  if (import.meta.env.DEV) {
-    return 'http://localhost:8000';
-  }
-  
-  // For production, you can set this via environment variable or hardcode
-  return import.meta.env.VITE_API_BASE_URL || 'https://your-production-api.com';
+  // Use environment variable if available, otherwise fallback to default
+  return import.meta.env.VITE_API_BASE_URL || 'https://radiant-peak-19300-dc15f27e243f.herokuapp.com';
 };
 
 export const API_CONFIG = {
   BASE_URL: getApiBaseUrl(),
   ENDPOINTS: {
     USERS: '/users',
+    LOGIN: '/users/login',
     REGISTER: '/users/register',
     REGENERATE_PASSWORD: '/users/{id}/regenerate-password',
+    DEACTIVATE_USER: '/users/{id}/deactivate',
+    ACTIVATE_USER: '/users/{id}/activate',
   }
 };
 

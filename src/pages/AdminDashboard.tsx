@@ -36,7 +36,9 @@ import {
   Settings,
   Brain,
   Loader2,
-  RefreshCw
+  RefreshCw,
+  UserX,
+  UserCheck
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -208,6 +210,104 @@ const AdminDashboard = () => {
           }}
         >
           Conferma
+        </Button>
+      ),
+    });
+  };
+
+  const handleDeactivateUser = async (userId: string, userName: string, userStatus: string) => {
+    // Don't allow deactivating already inactive users
+    if (userStatus === 'scaduto') {
+      toast({
+        title: "Utente già disattivato",
+        description: `${userName} è già disattivato`,
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Show confirmation toast
+    toast({
+      title: "Conferma Disattivazione Utente",
+      description: `Sei sicuro di voler disattivare ${userName}? L'utente non potrà più accedere alla piattaforma.`,
+      action: (
+        <Button
+          variant="destructive"
+          size="sm"
+          onClick={async () => {
+            try {
+              await deactivateUser(userId);
+              
+              // Update local state to reflect the change
+              setUsers(prev => prev.map(user => 
+                user.id === userId 
+                  ? { ...user, status: 'scaduto' }
+                  : user
+              ));
+              
+              toast({
+                title: "Utente Disattivato",
+                description: `${userName} è stato disattivato con successo`
+              });
+            } catch (err) {
+              toast({
+                title: "Errore",
+                description: err instanceof Error ? err.message : "Impossibile disattivare l'utente",
+                variant: "destructive"
+              });
+            }
+          }}
+        >
+          Disattiva
+        </Button>
+      ),
+    });
+  };
+
+  const handleReactivateUser = async (userId: string, userName: string, userStatus: string) => {
+    // Don't allow reactivating already active users
+    if (userStatus === 'attivo') {
+      toast({
+        title: "Utente già attivo",
+        description: `${userName} è già attivo`,
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Show confirmation toast
+    toast({
+      title: "Conferma Riattivazione Utente",
+      description: `Sei sicuro di voler riattivare ${userName}? L'utente potrà nuovamente accedere alla piattaforma.`,
+      action: (
+        <Button
+          variant="default"
+          size="sm"
+          onClick={async () => {
+            try {
+              await reactivateUser(userId);
+              
+              // Update local state to reflect the change
+              setUsers(prev => prev.map(user => 
+                user.id === userId 
+                  ? { ...user, status: 'attivo' }
+                  : user
+              ));
+              
+              toast({
+                title: "Utente Riattivato",
+                description: `${userName} è stato riattivato con successo`
+              });
+            } catch (err) {
+              toast({
+                title: "Errore",
+                description: err instanceof Error ? err.message : "Impossibile riattivare l'utente",
+                variant: "destructive"
+              });
+            }
+          }}
+        >
+          Riattiva
         </Button>
       ),
     });
@@ -385,6 +485,52 @@ const AdminDashboard = () => {
       return result;
     } catch (err) {
       console.error('Errore nella rigenerazione password:', err);
+      throw err;
+    }
+  };
+
+  const deactivateUser = async (userId: string) => {
+    try {
+      const endpoint = API_CONFIG.ENDPOINTS.DEACTIVATE_USER.replace('{id}', userId);
+      const response = await fetch(buildApiUrl(endpoint), {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `Errore HTTP: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result;
+    } catch (err) {
+      console.error('Errore nella disattivazione utente:', err);
+      throw err;
+    }
+  };
+
+  const reactivateUser = async (userId: string) => {
+    try {
+      const endpoint = API_CONFIG.ENDPOINTS.ACTIVATE_USER.replace('{id}', userId);
+      const response = await fetch(buildApiUrl(endpoint), {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `Errore HTTP: ${response.status}`);
+      }
+
+      const result = await response.json();
+      return result;
+    } catch (err) {
+      console.error('Errore nella riattivazione utente:', err);
       throw err;
     }
   };
@@ -584,6 +730,27 @@ const AdminDashboard = () => {
                               <Key className="h-4 w-4" />
                               Password
                             </Button>
+                            {user.status === 'attivo' ? (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleDeactivateUser(user.id, user.name, user.status)}
+                                className="flex items-center gap-1"
+                              >
+                                <UserX className="h-4 w-4" />
+                                Disattiva
+                              </Button>
+                            ) : (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleReactivateUser(user.id, user.name, user.status)}
+                                className="flex items-center gap-1"
+                              >
+                                <UserCheck className="h-4 w-4" />
+                                Riattiva
+                              </Button>
+                            )}
                           </div>
                         </TableCell>
                       </TableRow>
