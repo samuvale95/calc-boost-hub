@@ -1,5 +1,22 @@
 {
-    "questions": [
+    "questions": [        
+        {
+            "text": "NAZIONALITÀ",
+            "type": "single-coice",
+            "response": [
+                {
+                    "text": "Italiana",
+                    "points": -0.5
+                },
+                {
+                    "text": "Francese",
+                    "points": 0.5
+                }
+            ],
+            "section": "DATI PERSONALI",
+            "subdom": 0,
+            "dom": "Pers"
+        },
         {
             "text": "EQUILIBRIO",
             "type": "single-coice",
