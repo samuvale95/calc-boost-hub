@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import AdminRoute from "@/components/AdminRoute";
+import TokenExpiredModal from "@/components/TokenExpiredModal";
 import Index from "./pages/Index";
 import AdminDashboard from "./pages/AdminDashboard";
 import Login from "./pages/Login";
@@ -21,6 +22,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <TokenExpiredModal />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />

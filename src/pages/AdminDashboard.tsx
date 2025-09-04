@@ -42,7 +42,8 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import { buildApiUrl, API_CONFIG } from "@/config/api";
+import { useApi } from "@/hooks/useApi";
+import { API_CONFIG } from "@/config/api";
 
 // User interface
 interface User {
@@ -62,6 +63,7 @@ interface ApiUser {
   email: string;
   subscription: string;
   status: string;
+  role: string;
   registration_date: string;
   last_access: string | null;
   is_active: boolean;
@@ -69,45 +71,7 @@ interface ApiUser {
   updated_at: string;
 }
 
-// Dati mockup (fallback)
-const mockUsers: User[] = [
-  {
-    id: "1",
-    name: "Mario Rossi",
-    email: "mario.rossi@email.com",
-    subscription: "annuale",
-    status: "attivo",
-    registrationDate: "2024-01-15",
-    lastLogin: "2024-08-20"
-  },
-  {
-    id: "2", 
-    name: "Giulia Bianchi",
-    email: "giulia.bianchi@email.com",
-    subscription: "pdf",
-    status: "attivo",
-    registrationDate: "2024-02-22",
-    lastLogin: "2024-08-22"
-  },
-  {
-    id: "3",
-    name: "Luca Verde",
-    email: "luca.verde@email.com", 
-    subscription: "annuale",
-    status: "scaduto",
-    registrationDate: "2023-08-10",
-    lastLogin: "2024-07-15"
-  },
-  {
-    id: "4",
-    name: "Anna Neri",
-    email: "anna.neri@email.com",
-    subscription: "annuale", 
-    status: "attivo",
-    registrationDate: "2024-03-05",
-    lastLogin: "2024-08-25"
-  }
-];
+// Mock data removed - using empty list on error instead
 
 // Quiz mockup - removed (moved to Quiz.tsx)
 
@@ -116,6 +80,7 @@ const AdminDashboard = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [hasLoaded, setHasLoaded] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newUser, setNewUser] = useState({
     name: "",
@@ -125,21 +90,19 @@ const AdminDashboard = () => {
   });
   const { toast } = useToast();
   const navigate = useNavigate();
+  const api = useApi();
 
   // Fetch users from API
   useEffect(() => {
+    // Prevent multiple simultaneous calls
+    if (hasLoaded) return;
+    
     const fetchUsers = async () => {
       try {
         setIsLoading(true);
         setError(null);
         
-        const response = await fetch(buildApiUrl(API_CONFIG.ENDPOINTS.USERS));
-        
-        if (!response.ok) {
-          throw new Error(`Errore HTTP: ${response.status}`);
-        }
-        
-        const data = await response.json();
+        const data = await api.getUsers();
         
         // Transform API data to match our User interface
         const transformedUsers: User[] = data.users.map((user: ApiUser) => ({
@@ -153,6 +116,7 @@ const AdminDashboard = () => {
         }));
         
         setUsers(transformedUsers);
+        setHasLoaded(true);
         
         toast({
           title: "Utenti Caricati",
@@ -163,12 +127,13 @@ const AdminDashboard = () => {
         console.error('Errore nel caricamento degli utenti:', err);
         setError(err instanceof Error ? err.message : 'Errore sconosciuto');
         
-        // Fallback to mock data in case of error
-        setUsers(mockUsers);
+        // Leave users list empty on error
+        setUsers([]);
+        setHasLoaded(true); // Mark as loaded even on error to prevent retries
         
         toast({
           title: "Errore di Connessione",
-          description: "Impossibile caricare gli utenti. Utilizzo dati di esempio.",
+          description: "Impossibile caricare gli utenti. La lista rimane vuota.",
           variant: "destructive"
         });
       } finally {
@@ -177,7 +142,7 @@ const AdminDashboard = () => {
     };
 
     fetchUsers();
-  }, [toast]);
+  }, [hasLoaded, api, toast]); // Add dependencies back but with hasLoaded guard
 
   const filteredUsers = users.filter(user =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -381,14 +346,9 @@ const AdminDashboard = () => {
     try {
       setIsLoading(true);
       setError(null);
+      setHasLoaded(false); // Reset the flag to allow refresh
       
-      const response = await fetch(buildApiUrl(API_CONFIG.ENDPOINTS.USERS));
-      
-      if (!response.ok) {
-        throw new Error(`Errore HTTP: ${response.status}`);
-      }
-      
-      const data = await response.json();
+      const data = await api.getUsers();
       
       const transformedUsers: User[] = data.users.map((user: ApiUser) => ({
         id: String(user.id),
@@ -401,6 +361,7 @@ const AdminDashboard = () => {
       }));
       
       setUsers(transformedUsers);
+      setHasLoaded(true);
       
       toast({
         title: "Utenti Aggiornati",
@@ -411,9 +372,13 @@ const AdminDashboard = () => {
       console.error('Errore nel refresh degli utenti:', err);
       setError(err instanceof Error ? err.message : 'Errore sconosciuto');
       
+      // Leave users list empty on error
+      setUsers([]);
+      setHasLoaded(true);
+      
       toast({
         title: "Errore di Connessione",
-        description: "Impossibile aggiornare gli utenti.",
+        description: "Impossibile aggiornare gli utenti. La lista rimane vuota.",
         variant: "destructive"
       });
     } finally {
@@ -428,11 +393,9 @@ const AdminDashboard = () => {
     subscription: string;
   }) => {
     try {
-      const response = await fetch(buildApiUrl(API_CONFIG.ENDPOINTS.REGISTER), {
+      // Register doesn't require authentication, so we use the direct API service
+      const newUserData: ApiUser = await api.apiService.request(API_CONFIG.ENDPOINTS.REGISTER, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({
           name: userData.name,
           email: userData.email,
@@ -440,13 +403,6 @@ const AdminDashboard = () => {
           subscription: userData.subscription,
         }),
       });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || `Errore HTTP: ${response.status}`);
-      }
-
-      const newUserData = await response.json();
       
       // Transform the API response to match our User interface
       const transformedUser: User = {
@@ -468,20 +424,7 @@ const AdminDashboard = () => {
 
   const regeneratePassword = async (userId: string) => {
     try {
-      const endpoint = API_CONFIG.ENDPOINTS.REGENERATE_PASSWORD.replace('{id}', userId);
-      const response = await fetch(buildApiUrl(endpoint), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || `Errore HTTP: ${response.status}`);
-      }
-
-      const result = await response.json();
+      const result = await api.regeneratePassword(parseInt(userId));
       return result;
     } catch (err) {
       console.error('Errore nella rigenerazione password:', err);
@@ -491,20 +434,7 @@ const AdminDashboard = () => {
 
   const deactivateUser = async (userId: string) => {
     try {
-      const endpoint = API_CONFIG.ENDPOINTS.DEACTIVATE_USER.replace('{id}', userId);
-      const response = await fetch(buildApiUrl(endpoint), {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || `Errore HTTP: ${response.status}`);
-      }
-
-      const result = await response.json();
+      const result = await api.deactivateUser(parseInt(userId));
       return result;
     } catch (err) {
       console.error('Errore nella disattivazione utente:', err);
@@ -514,20 +444,7 @@ const AdminDashboard = () => {
 
   const reactivateUser = async (userId: string) => {
     try {
-      const endpoint = API_CONFIG.ENDPOINTS.ACTIVATE_USER.replace('{id}', userId);
-      const response = await fetch(buildApiUrl(endpoint), {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || `Errore HTTP: ${response.status}`);
-      }
-
-      const result = await response.json();
+      const result = await api.activateUser(parseInt(userId));
       return result;
     } catch (err) {
       console.error('Errore nella riattivazione utente:', err);
@@ -694,7 +611,9 @@ const AdminDashboard = () => {
                   {filteredUsers.length === 0 ? (
                     <TableRow>
                       <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
-                        {searchTerm ? 'Nessun utente trovato per la ricerca' : 'Nessun utente disponibile'}
+                        {error ? 'Errore nel caricamento degli utenti' : 
+                         searchTerm ? 'Nessun utente trovato per la ricerca' : 
+                         'Nessun utente disponibile'}
                       </TableCell>
                     </TableRow>
                   ) : (
