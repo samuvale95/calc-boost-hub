@@ -1,27 +1,17 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckIcon, FileText, Calculator } from "lucide-react";
-import { RegistrationSection } from "./RegistrationSection";
 
 export const PricingSection = () => {
-  const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
-  const [selectedSubscriptionType, setSelectedSubscriptionType] = useState<'pdf' | 'annuale' | null>(null);
-
   const handlePdfPurchase = () => {
-    setSelectedSubscriptionType('pdf');
-    setIsRegistrationOpen(true);
+    // TODO: Implementare acquisto PDF (one-time payment)
+    console.log("Acquisto PDF");
   };
 
   const handleSubscription = () => {
-    setSelectedSubscriptionType('annuale');
-    setIsRegistrationOpen(true);
-  };
-
-  const handleCloseRegistration = () => {
-    setIsRegistrationOpen(false);
-    setSelectedSubscriptionType(null);
+    // TODO: Implementare abbonamento annuale
+    console.log("Abbonamento annuale");
   };
 
   return (
@@ -139,13 +129,6 @@ export const PricingSection = () => {
           </Card>
         </div>
       </div>
-
-      {/* Registration Modal */}
-      <RegistrationSection
-        isOpen={isRegistrationOpen}
-        onClose={handleCloseRegistration}
-        subscriptionType={selectedSubscriptionType}
-      />
     </section>
   );
 };
