@@ -10,7 +10,7 @@
         }, 
         {
             "text": "GENERE",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Maschio",
@@ -27,7 +27,7 @@
         },   
         {
             "text": "NAZIONALITÀ",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Italiana",
@@ -44,7 +44,7 @@
         },
         {
             "text": "EQUILIBRIO",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non ha equilibrio posturale",
@@ -52,27 +52,27 @@
                 },
                 {
                     "text": "Sta seduto con sostegno",
-                    "score": 17
+                    "score": 1
                 },
                 {
                     "text": "La posizione seduta è possibile ma con alcune cadute",
-                    "score": 33
+                    "score": 2
                 },
                 {
                     "text": "Sta seduto stabilmente",
-                    "score": 50
+                    "score": 3
                 },
                 {
                     "text": "L'equilibrio in stazione eretta è precario",
-                    "score": 67
+                    "score": 4
                 },
                 {
                     "text": "Sta in piedi stabilmente",
-                    "score": 83
+                    "score": 5
                 },
                 {
                     "text": "L'equilibrio è del tutto stabile (anche su un piede)",
-                    "score": 100
+                    "score": 6
                 }
             ],
             "section": "MOTRICITÀ GROSSOLANA",
@@ -81,7 +81,7 @@
         },
         {
             "text": "SPOSTAMENTI",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non si sposta in alcun modo",
@@ -89,31 +89,31 @@
                 },
                 {
                     "text": "Fa dei tentativi di spostamento",
-                    "score": 14
+                    "score": 1
                 },
                 {
                     "text": "Si sposta ad orologio/striscia/gattona con difficoltà o con movimenti non coordinati",
-                    "score": 29
+                    "score": 2
                 },
                 {
                     "text": "Si sposta ad orologio/striscia/gattona in modo adeguato per la sua età",
-                    "score": 43
+                    "score": 3
                 },
                 {
                     "text": "Cammina con sostegno con difficoltà o con movimenti non coordinati",
-                    "score": 57
+                    "score": 4
                 },
                 {
                     "text": "Cammina con sostegno in modo adeguato per la sua età",
-                    "score": 71
+                    "score": 5
                 },
                 {
                     "text": "Cammina in autonomia con difficoltà o con movimenti non coordinati",
-                    "score": 86
+                    "score": 6
                 },
                 {
                     "text": "Cammina in autonomia in modo adeguato per la sua età",
-                    "score": 100
+                    "score": 7
                 }
             ],
             "section": "MOTRICITÀ GROSSOLANA",
@@ -122,7 +122,7 @@
         },
         {
             "text": "CORSA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non corre",
@@ -130,19 +130,19 @@
                 },
                 {
                     "text": "Corre trotterellando",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Corre ma con qualche caduta",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Corre senza cadere, ma ha difficoltà a cambiare direzione",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Corre in modo coordinato e con cambi di direzione, senza cadere",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "MOTRICITÀ GROSSOLANA",
@@ -151,7 +151,7 @@
         },
         {
             "text": "FARE LE SCALE",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non sale né scende le scale",
@@ -159,15 +159,15 @@
                 },
                 {
                     "text": "Fa le scale gattonando",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Sale e scende le scale con appoggio (tiene il corrimano o la mano dell'adulto), oppure senza alternare i piedi",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Sale e scende le scale senza sostegno ed alternando i piedi",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "MOTRICITÀ GROSSOLANA",
@@ -176,7 +176,7 @@
         },
         {
             "text": "SALTARE",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non salta (non riesce a staccare i piedi da terra)",
@@ -184,15 +184,15 @@
                 },
                 {
                     "text": "Salta alternando i piedi senza coordinarli",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Salta a piedi uniti in avanti",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Salta a piedi uniti da un gradino",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "MOTRICITÀ GROSSOLANA",
@@ -201,7 +201,7 @@
         },
         {
             "text": "ANDARE IN BICICLETTA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non va in bicicletta",
@@ -209,15 +209,15 @@
                 },
                 {
                     "text": "Va in bici con le rotelline o con stabilizzatori (ad es. bici a tre ruote)",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Va in bici senza rotelline o altro stabilizzatore",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Va in bici senza stabilizzatore per almeno 10 minuti consecutivi",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "MOTRICITÀ GROSSOLANA",
@@ -226,7 +226,7 @@
         },
         {
             "text": "GIOCO CON LA PALLA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non lancia né afferra la palla",
@@ -234,15 +234,15 @@
                 },
                 {
                     "text": "Riesce a lanciare la palla ma non la afferra",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Riesce a lanciare ed afferrare una palla grande",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Riesce a lanciare ed afferrare una palla piccola",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "MOTRICITÀ GROSSOLANA",
@@ -251,7 +251,7 @@
         },
         {
             "text": "AUTONOMIA NELLA MARCIA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Cammina meno di 5 minuti",
@@ -259,19 +259,19 @@
                 },
                 {
                     "text": "Cammina 5-15 min",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Cammina 15-30 min",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Cammina 30min-1 ora",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Cammina per il tempo necessario (gita in montagna, giro nei negozi..)",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "MOTRICITÀ GROSSOLANA",
@@ -280,7 +280,7 @@
         },
         {
             "text": "AFFERRARE OGGETTI",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non afferra in alcun modo",
@@ -288,23 +288,23 @@
                 },
                 {
                     "text": "La prensione è possibile ma molto difficile",
-                    "score": 20
+                    "score": 1
                 },
                 {
                     "text": "Prensione con partecipazione del pollice maldestra o incoordinata o fa cadere gli oggetti",
-                    "score": 40
+                    "score": 2
                 },
                 {
                     "text": "Prensione con partecipazione del pollice adeguata per età",
-                    "score": 60
+                    "score": 3
                 },
                 {
                     "text": "Pinza pollice-indice maldestra o incoordinata o fa cadere gli oggetti",
-                    "score": 80
+                    "score": 4
                 },
                 {
                     "text": "Pinza accurata pollice-indice adeguata per età",
-                    "score": 100
+                    "score": 5
                 }
             ],
             "section": "MOTRICITÀ FINE",
@@ -313,7 +313,7 @@
         },
         {
             "text": "PUZZLES",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non fa incastri né puzzles",
@@ -321,15 +321,15 @@
                 },
                 {
                     "text": "Esegue incastri semplici (posiziona un cerchio nel foro circolare, un quadrato nel foro quadrato...,)",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Esegue senza aiuto puzzles nuovi di più di 5 pezzi",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Esegue senza aiuto puzzles nuovi di più di 15/20 pezzi",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "MOTRICITÀ FINE",
@@ -338,7 +338,7 @@
         },
         {
             "text": "DISEGNO",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non è interessato a realizzare scarabocchi",
@@ -346,23 +346,23 @@
                 },
                 {
                     "text": "Scarabocchia spontaneamente, non necessariamente badando a quello che fa",
-                    "score": 20
+                    "score": 1
                 },
                 {
                     "text": "Può riprodurre un tratto su un foglio",
-                    "score": 40
+                    "score": 2
                 },
                 {
                     "text": "Copia delle figure semplici (cerchio, croce, quadrato)",
-                    "score": 60
+                    "score": 3
                 },
                 {
                     "text": "Disegna uno schema corporeo semplificato ('omino testone')",
-                    "score": 80
+                    "score": 4
                 },
                 {
                     "text": "Crea una figura umana e uno schema di casetta chiaramente riconoscibili",
-                    "score": 100
+                    "score": 5
                 }
             ],
             "section": "MOTRICITÀ FINE",
@@ -371,7 +371,7 @@
         },
         {
             "text": "MOVIMENTO DI ROTAZIONE CON LE MANI (AVVITARE/SVITARE)",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non avvita e non svita",
@@ -379,15 +379,15 @@
                 },
                 {
                     "text": "Inizia il movimento per avvitare e svitare",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Svita e avvita i coperchi dei barattoli o i tappi delle bottiglie",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Gira la chiave nelle serrature",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "MOTRICITÀ FINE",
@@ -396,7 +396,7 @@
         },
         {
             "text": "FORBICI",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non è in grado di usare le forbici",
@@ -404,19 +404,19 @@
                 },
                 {
                     "text": "Utilizza le forbici con impugnatura scorretta (ad es. a cesoia)",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Taglia con le forbici senza seguire una direzione precisa",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Taglia seguendo una linea dritta",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Taglia delle forme con le forbici (cerchio, quadrato, triangolo, ecc)",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "MOTRICITÀ FINE",
@@ -425,7 +425,7 @@
         },
         {
             "text": "ALIMENTAZIONE",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Nutrito attraverso sonda gastrica",
@@ -433,15 +433,15 @@
                 },
                 {
                     "text": "Mangia se imboccato da adulti",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Mangia in autonomia con il cucchiaio",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Mangia autonomamemente con cucchiaio, forchetta e coltello",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "ALIMENTAZIONE",
@@ -450,7 +450,7 @@
         },
         {
             "text": "MASTICAZIONE",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Nutrizione enterale (SNG, PEG...)",
@@ -458,19 +458,19 @@
                 },
                 {
                     "text": "Succhia",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Mangia cibo semi-solido",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Mangia piccoli bocconi ma non riesce a masticare il cibo o presenta una masticazione difficile",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "La masticazione è efficace per tutte le consistenze",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "ALIMENTAZIONE",
@@ -479,7 +479,7 @@
         },
         {
             "text": "DEGLUTIZIONE",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Fatica a contenere la saliva e a deglutire solidi e liquidi",
@@ -487,19 +487,19 @@
                 },
                 {
                     "text": "Fatica a contenere la saliva e a deglutire i liquidi, ma deglutisce i solidi",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Fatica a contenere la saliva e presenta accessi di tosse quando mangia",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Fatica a contenere la saliva senza difficoltà a deglutire",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Contiene la saliva e deglutisce in modo corretto",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "ALIMENTAZIONE",
@@ -508,7 +508,7 @@
         },
         {
             "text": "APPETITO",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Molto scarso o molto marcato",
@@ -516,11 +516,11 @@
                 },
                 {
                     "text": "Scarso o marcato",
-                    "score": 50
+                    "score": 1
                 },
                 {
                     "text": "Normale",
-                    "score": 100
+                    "score": 2
                 }
             ],
             "section": "ALIMENTAZIONE",
@@ -529,7 +529,7 @@
         },
         {
             "text": "IMITAZIONE",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non presenta comportamenti di imitazione",
@@ -537,15 +537,15 @@
                 },
                 {
                     "text": "Può imitare l'altro immediatamente",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Può imitare l'altro dopo un intervallo di tempo",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Può imitare un atto complesso, come farsi la barba o truccarsi",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "INTERAZIONE SOCIALE",
@@ -554,7 +554,7 @@
         },
         {
             "text": "ATTENZIONE CONGIUNTA, RISPOSTA ED INIZIATIVA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non mantiene il contatto visivo",
@@ -562,19 +562,19 @@
                 },
                 {
                     "text": "Presenza di contatto visivo prolungato (sguardo)",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Presenza di alternanza di sguardo tra l'oggetto e il genitore/interlocutore",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Capace di seguire lo sguardo dell'adulto diretto in una determinata direzione",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Può indirizzare l'attenzione dell'altro verso un oggetto o una situazione specifica (alternanza di sguardo, pointing)",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "INTERAZIONE SOCIALE",
@@ -583,7 +583,7 @@
         },
         {
             "text": "INTERAZIONE SOCIALE, AMICIZIE",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non manifesta interesse per i coetanei",
@@ -591,27 +591,27 @@
                 },
                 {
                     "text": "Osserva i coetanei in maniera spontanea ma non li sollecita",
-                    "score": 17
+                    "score": 1
                 },
                 {
                     "text": "Si avvicina ai coetanei senza interagire e ama essere tra le altre persone senza effettiva reciprocità",
-                    "score": 33
+                    "score": 2
                 },
                 {
                     "text": "Risponde alle interazioni iniziate da altri",
-                    "score": 50
+                    "score": 3
                 },
                 {
                     "text": "Inizia interazioni sociali con gli altri",
-                    "score": 67
+                    "score": 4
                 },
                 {
                     "text": "Inizia interazioni sociali con diverse persone contemporaneamente",
-                    "score": 83
+                    "score": 5
                 },
                 {
                     "text": "Struttura e mantiene relazioni di amicizia",
-                    "score": 100
+                    "score": 6
                 }
             ],
             "section": "INTERAZIONE SOCIALE",
@@ -620,7 +620,7 @@
         },
         {
             "text": "EMPATIA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non tiene conto della presenza di altri/È indifferente alle persone che la circondano",
@@ -628,19 +628,19 @@
                 },
                 {
                     "text": "Reagisce alle espressioni emozionali degli altri (ad es. al sorriso)",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Mostra empatia e può consolare altri",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Tiene conto della presenza di altri nell'agire (ad es. divide dei dolci)",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Tiene conto degli stati mentali degli altri (pensieri, emozioni, credenze), per agire",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "INTERAZIONE SOCIALE",
@@ -649,7 +649,7 @@
         },
         {
             "text": "UMORISMO",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non capisce le battute/frasi scherzose/giochi di parole",
@@ -657,15 +657,15 @@
                 },
                 {
                     "text": "Mostra una certa comprensione delle battute e degli scherzi ma limitate ad alcune forme",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Capisce le battute e gli scherzi",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Può fare battute o dire frasi scherzose agli altri",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "INTERAZIONE SOCIALE",
@@ -674,7 +674,7 @@
         },
         {
             "text": "COMPRENSIONE DELLE REGOLE E CONVENZIONI SOCIALI",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non comprende le regole sociali",
@@ -682,15 +682,15 @@
                 },
                 {
                     "text": "Difficilmente comprende le regole sociali",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Comprende e rispetta le regole sociali semplici (ad es. distanza dagli altri, ricorda di abbassare la voce in certi luoghi, ecc.)",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Comprende e rispetta le regole sociali complesse (ad es. evitare di dire o fare cose offensive)",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "INTERAZIONE SOCIALE",
@@ -699,7 +699,7 @@
         },
         {
             "text": "GIOCO SIMBOLICO",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non gioca con i giocattoli",
@@ -707,15 +707,15 @@
                 },
                 {
                     "text": "Gioco d'imitazione funzionale: utilizza un oggetto secondo la sua funzione (ad es, un telefono per fingere di telefonare, una macchinina per fare un percorso, gioca con la cucinetta)",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Gioco simbolico: gioca modificando l'uso degli oggetti (ad es. finge che un pennarello sia un razzo), ma ancora poco sviluppato",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Gioco immaginativo: gioco ricco e simbolico, messa in scena di storie",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "GIOCO",
@@ -724,7 +724,7 @@
         },
         {
             "text": "REGOLE NEI GIOCHI",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non fa giochi collaborativi",
@@ -732,15 +732,15 @@
                 },
                 {
                     "text": "Gioca in modo collaborativo con altri (ad es. a palla)",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Partecipa a giochi semplici in rapporto all'età, rispettandone le regole (ad es. nascondino a 4 anni, calcio a 12 anni)",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Gioca ad almeno un gioco di società o di carte, comprende le regole di uno sport, ha competenza nel prendere decisioni e trovare strategie di gioco",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "GIOCO",
@@ -749,7 +749,7 @@
         },
         {
             "text": "REAZIONE AI SUONI/COMPRENSIONE VERBALE",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non reagisce a stimoli verbali",
@@ -757,19 +757,19 @@
                 },
                 {
                     "text": "Reagisce agli stimoli verbali dell'ambiente ma non li comprende (es. si gira verso chi parla)",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Comprende ed esegue ordini semplici e contestuali (es. \"apri la porta\")",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Comprende ed esegue ordini più complessi e senza indizi contestuali (es. \"vai a prendere le scarpe in camera\")",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Comprende i modi di dire e le espressioni figurate ('avere la luna', 'ce l'ho sulla punta delle lingua')",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "COMUNICAZIONE E LINGUAGGIO",
@@ -778,7 +778,7 @@
         },
         {
             "text": "LINGUAGGIO ESPRESSIVO/PRODUZIONE VERBALE",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non produce suoni",
@@ -786,19 +786,19 @@
                 },
                 {
                     "text": "Si esprime principalmente con suoni o sillabe",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Si esprime con parole singole",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Si esprime con frasi comprensibili",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Parla in modo adeguato",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "COMUNICAZIONE E LINGUAGGIO",
@@ -807,7 +807,7 @@
         },
         {
             "text": "POINTING E LINGUAGGIO NON VERBALE",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non indica con il dito",
@@ -815,15 +815,15 @@
                 },
                 {
                     "text": "Indica ciò che desidera",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Indica quello che gli interessa (per mostrare qualcosa a qualcuno)",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Utilizza una vasta gamma di gesti comunicativi, oltre all'indicazione (fare si con la testa, applaudire, fare il gesto del silenzio portando il dito alla bocca,...)",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "COMUNICAZIONE E LINGUAGGIO",
@@ -832,7 +832,7 @@
         },
         {
             "text": "PRAGMATICA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non produce verbalizzazioni indirizzate all'altro, neppure lallazione",
@@ -840,19 +840,19 @@
                 },
                 {
                     "text": "Il linguaggio (lallazione, parole) è presente ma finalizzato solo ad esprimere i suoi bisogni, non per gli scambi comunicativi",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Il linguaggio (dalla lallazione alla frase) è rivolto all'altro con possibilità di scambio, anche breve (domanda/risposta)",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Il linguaggio (dalla lallazione alla frase) è rivolto all'altro con possibilità di costruire una breve conversazione",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Può partecipare ad una conversazione con vari scambi con l'altro, senza interrompere o sovrapporsi o saltare di palo in frasca",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "COMUNICAZIONE E LINGUAGGIO",
@@ -861,7 +861,7 @@
         },
         {
             "text": "FLUENZA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Parla sempre lentamente",
@@ -869,11 +869,11 @@
                 },
                 {
                     "text": "A volte parla lentamente",
-                    "score": 50
+                    "score": 1
                 },
                 {
                     "text": "Parla ad una velocità normale",
-                    "score": 100
+                    "score": 2
                 }
             ],
             "section": "COMUNICAZIONE E LINGUAGGIO",
@@ -882,7 +882,7 @@
         },
         {
             "text": "ARTICOLAZIONE (se presente il linguaggio)",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "linguaggio inintellegibile",
@@ -890,15 +890,15 @@
                 },
                 {
                     "text": "L'articolazione è variabile con un linguaggio difficile da comprendere",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Articolazione corretta tranne che per alcuni suoni",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "L'articolazione è corretta per tutti i suoni",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "COMUNICAZIONE E LINGUAGGIO",
@@ -907,7 +907,7 @@
         },
         {
             "text": "IGIENE PERSONALE",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non si lava in autonomia",
@@ -915,11 +915,11 @@
                 },
                 {
                     "text": "Si lava con supervisione dal momento che non realizza bene i movimenti o dimentica dei passaggi",
-                    "score": 50
+                    "score": 1
                 },
                 {
                     "text": "Si lava in autonomia in modo adeguato",
-                    "score": 100
+                    "score": 2
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
@@ -928,7 +928,7 @@
         },
         {
             "text": "VESTIRSI",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non si veste senza l'aiuto di altri, e non collabora quando viene vestito",
@@ -936,15 +936,15 @@
                 },
                 {
                     "text": "Collabora quando viene vestito (infila le braccia, le mani,...)",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Infila i pantaloni o la maglietta ma non abbottona e non chiude la cerniera",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Si veste in autonomia, chiusure incluse",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
@@ -953,7 +953,7 @@
         },
         {
             "text": "CONTROLLO SFINTERICO",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non chiede di andare in bagno e non si tiene pulito",
@@ -961,19 +961,19 @@
                 },
                 {
                     "text": "Chiede di andare in bagno ma non si tiene pulito",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Si tiene pulito di giorno con qualche incidento",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Si tiene pulito solo di giorno",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Si tiene pulito di giorno e di notte",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
@@ -982,7 +982,7 @@
         },
         {
             "text": "SENSO DEL PERICOLO",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non ha consapevolezza del pericolo",
@@ -990,15 +990,15 @@
                 },
                 {
                     "text": "Ha consapevolezza dei pericoli in casa (oggetti caldi o pericolosi in cucina, scale, finestre)",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Ha consapevolezza del pericolo all'esterno, negli ambienti più complessi (attende prima di attraversare, cammina sul marciapiede, da' la mano all'adulto,...)",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Evita le situazioni sociali pericolose (s'allontana da persone pericolose, non ricerca attività/giochi pericolosi)",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
@@ -1007,7 +1007,7 @@
         },
         {
             "text": "LAVORI DI CASA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non aiuta nei lavori di casa",
@@ -1015,15 +1015,15 @@
                 },
                 {
                     "text": "Aiuta su richiesta per faccende semplici: sparecchiare oggetti infrangibili, passare la scopa...)",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Ajuta in faccende più complesse con supervisione (mescolare l'impasto di una torta, riempire la lavastoviglie,...)",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Aiuta svolgendo in autonomia alcune faccende (fare ordine, sparecchiare la tavola, passare la scopa, scaldare il cibo,...)",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
@@ -1032,7 +1032,7 @@
         },
         {
             "text": "AUTONOMIA IN CUCINA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non prepara cibi",
@@ -1040,15 +1040,15 @@
                 },
                 {
                     "text": "Fa piccole preparazioni senza cottura (latte e cornflakes, panini)",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Aiuta a preparare alimenti da mescolare oppure da cucinare oppure utilizza il forno a microonde",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Utilizza padelle e forno in autonomia, prepara da solo alimenti che devono essere mescolati o cotti",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
@@ -1057,7 +1057,7 @@
         },
         {
             "text": "TELEFONO",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non parla al telefono",
@@ -1065,15 +1065,15 @@
                 },
                 {
                     "text": "Parla al telefono solo con persone conosciute",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Risponde e parla correttamente al telefono e cerca la persona richiesta",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Fa in autonomia chiamate telefoniche",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
@@ -1082,7 +1082,7 @@
         },
         {
             "text": "USO DI TABLET E SMARTPHONES",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non si interessa a tablet, cellulare O COMPUTER",
@@ -1090,19 +1090,19 @@
                 },
                 {
                     "text": "È in grado di usare tablet o cellulari ma solo per ripetere una singola operazione",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Dato un tablet/cellulare acceso, è in grado di attivare volontariamente diverse app",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Può svolgere compiti complessi CON TABLET/SMARTPHONES",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Può SVOLGERE compiti complessi con il computer",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
@@ -1111,7 +1111,7 @@
         },
         {
             "text": "CONOSCENZE TEMPORALI",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non è orientato nel tempo.",
@@ -1119,23 +1119,23 @@
                 },
                 {
                     "text": "Distingue ieri/oggi/domani",
-                    "score": 20
+                    "score": 1
                 },
                 {
                     "text": "Identifica il giorno della settimana",
-                    "score": 40
+                    "score": 2
                 },
                 {
                     "text": "Utilizza in autonomia solo gli orologi digitali (con i numeri scritti)",
-                    "score": 60
+                    "score": 3
                 },
                 {
                     "text": "Utilizza in autonomia tutti i tipi di orologia",
-                    "score": 80
+                    "score": 4
                 },
                 {
                     "text": "È in grado di utilizzare calendari, tabelle orarie,...",
-                    "score": 100
+                    "score": 5
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
@@ -1144,7 +1144,7 @@
         },
         {
             "text": "USO DEL DENARO",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non comprende la funzione del denaro",
@@ -1152,15 +1152,15 @@
                 },
                 {
                     "text": "Comprende la funzione del denaro e denomina alcune monete e alcune banconote",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Può fare piccoli acquisti con supervisione o con l'uso della calcolatrice",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Può fare i propri acquisti in maniera autonoma",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
@@ -1169,7 +1169,7 @@
         },
         {
             "text": "ALFABETO",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non conosce le lettere",
@@ -1177,15 +1177,15 @@
                 },
                 {
                     "text": "Riconosce e denomina qualche lettera",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Riconosce e nomina tutte le lettere dell'alfabeto",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Ha acquisito il processo di fusione (B+A=BA)",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "MEMORIA E APPRENDIMENTO SCOLARE",
@@ -1194,7 +1194,7 @@
         },
         {
             "text": "LETTURA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non sa leggere",
@@ -1202,15 +1202,15 @@
                 },
                 {
                     "text": "Decodifica alcune parole semplici ad alta frequenza (ad es. bisillabi piani)",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Sa leggere la gran parte delle parole anche con gruppi consonantici ed II",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Sa leggere dei testi in modo autonomo",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "MEMORIA E APPRENDIMENTO SCOLARE",
@@ -1219,7 +1219,7 @@
         },
         {
             "text": "SCRITTURA (NON SU MODELLO)",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non sa scrivere",
@@ -1227,15 +1227,15 @@
                 },
                 {
                     "text": "Può scrivere il proprio nome",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Può scrivere parole semplici",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Può scrivere frasi complete",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "MEMORIA E APPRENDIMENTO SCOLARE",
@@ -1244,7 +1244,7 @@
         },
         {
             "text": "NUMERI ED ENUMERAZIONE",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non conosce la conta numerica",
@@ -1252,15 +1252,15 @@
                 },
                 {
                     "text": "Sa contare fino a 10 senza interrompersi",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Può enumerare fino a 10 oggetti",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Può enumerare più di 10 oggetti",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "MEMORIA E APPRENDIMENTO SCOLARE",
@@ -1269,7 +1269,7 @@
         },
         {
             "text": "CALCOLO",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non svolge alcun calcolo",
@@ -1277,15 +1277,15 @@
                 },
                 {
                     "text": "Svolge somme o sottrazioni entro la decina (anche con le dita)",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Svolge in forma scritta somme o sottrazioni al di sopra della decina",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Svolge anche moltiplicazioni o divisioni (oltre a somme e sottrazioni)",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "MEMORIA E APPRENDIMENTO SCOLARE",
@@ -1294,7 +1294,7 @@
         },
         {
             "text": "GESTIONE E COMPRENSIONE DELLE EMOZIONI",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non gestisce affatto le proprie emozioni, con conseguenze importanti per le relazioni (emozioni eccessive o sproporzionate al contesto: es. scoppi di risate,..)",
@@ -1302,19 +1302,19 @@
                 },
                 {
                     "text": "Ha difficoltà a gestire le sue emozioni: passa rapidamente da un'emozione ad un'altra oppure le emozioni sono molto intense",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Mostra alcuni momenti di difficoltà di gestione delle emozioni, con conseguenze nelle relazioni",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Mostra alcuni momenti di difficoltà di gestione delle emozioni, senza conseguenze nelle relazioni",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Gestisce bene le emozioni",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
@@ -1323,7 +1323,7 @@
         },
         {
             "text": "TRISTEZZA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Evoca idee e scenari suicidari o ha compiuto un tentativo di suicidio oppure ritiro totale legato alla tristezza",
@@ -1331,19 +1331,19 @@
                 },
                 {
                     "text": "Ha idee negative, si sente di scarso valore oppure, per i più giovani, passa dei lunghi momenti di ritiro dalle relazioni in relazione alla tristezza",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Piange molto, è triste per la maggior parte del tempo",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Può avere accessi di tristezza",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "È triste solo raramente, quando il contesto lo giustifica (in relazione ad eventi di vita)",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
@@ -1352,7 +1352,7 @@
         },
         {
             "text": "ANSIA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Ha preoccupazioni, ansie e paure che gli impediscono di fare certe cose con un impatto importante sulla vita quotidiana familiare (uscire, andare in certi posti) oppure disorganizzazione legata all'ansia, paura, preoccupazione",
@@ -1360,19 +1360,19 @@
                 },
                 {
                     "text": "È pauroso, ansioso, preoccupato la maggior parte del tempo ma senza importante impatto sul funzionamento abituale",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Qualche volta è preoccupato, ansioso o pauroso senza evidenti cause scatenanti",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Certe situazioni lo rendono preoccupato, ansioso o pauroso (il buio, il temporale)",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "non è pauroso, ansioso o preoccupato",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
@@ -1381,7 +1381,7 @@
         },
         {
             "text": "RITIRO SOCIALE",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Presenta ritiro sociale, evita costantemente gli altri",
@@ -1389,19 +1389,19 @@
                 },
                 {
                     "text": "ha spesso momenti di ritiro importante, evita gli altri o ricerca la solitudine la maggior parte del tempo",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "ha dei momenti di ritiro regolari al di fuori di situazioni particolari, ricerca qualche volta la solitudine",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "ha qualche momento di ritiro legati a specifiche circostanze",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Non presenta ritiro sociale",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
@@ -1410,7 +1410,7 @@
         },
         {
             "text": "PASSAGGIO RAPIDO DA UN'ATTIVITÀ AD UN'ALTRA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Passa rapidamente da un'attività all'altra, non può soffermarsi su un'attività più di un minuto",
@@ -1418,19 +1418,19 @@
                 },
                 {
                     "text": "Può soffermarsi qualche minuto su un'attività poi desidera passare ad altro",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Può rimanere concentrato unicamente su attività che gli piacciono",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Può rimanere concentrato su varie attività che necessitano di sforzo mentale sostenuto, ma con il supporto dell'adulto",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Mantiene a lungo ed in modo autonomo l'attenzione su un'attività o un gioco",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
@@ -1439,7 +1439,7 @@
         },
         {
             "text": "DIFFICOLTÀ DI ASCOLTO ED ATTENZIONE",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Non ascolta le consegne, non sembra ascoltare quando gli si parla (non in relazione a difficoltà di comprensione delle consegne), anche se non è occupato in un'attività",
@@ -1447,19 +1447,19 @@
                 },
                 {
                     "text": "Non ascolta le consegne, non sembra ascoltare quando gli si parla (non in relazione a difficoltà di comprensione delle consegne), quando è occupato o svolge un'attività",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Sembra altrove quando gli si parla, chiede spesso di ripetergli le consegne a quello che è stato appena detto",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Ascolta le consegne tranne quelle date qualche minuto prima",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Ascolta e segue le consegne in modo appropriato, anche quelle date alcuni minuti prima",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
@@ -1468,7 +1468,7 @@
         },
         {
             "text": "IPERATTIVITÀ MOTORIA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "È costantemente in movimento, non riesce a restare fermo",
@@ -1476,19 +1476,19 @@
                 },
                 {
                     "text": "Si muove molto sulla sedia, riesce difficilmente a stare seduto, è spesso in movimento",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Si muove molto sulla sedia, riesce difficilmente a stare seduto, è spesso in movimento ma può stare fermo per certe attività che lo interessano ed avere momenti di calma",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Mostra una certa agitazione in alcuni contesti (a scuola, durante attività lunghe e noiose)",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Non mostra particolare agitazione",
-                    "score": 100
+                    "score": 4
                 }
 
             ],
@@ -1499,7 +1499,7 @@
         },
         {
             "text": "IMPULSIVITÀ",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "È SISTEMATICAMENTE impulsivo, non può rimandare un'azione o frenare un comportamento (ad esempio: dare una risposta, afferrare un oggetto, toccare anche se gli è stato detto di non farlo, interrompere gli altri,...)",
@@ -1507,19 +1507,19 @@
                 },
                 {
                     "text": "È SPESSO impulsivo, fatica a posticipare un'azione o frenare un comportamento (ad esempio: dare una risposta, afferrare un oggetto, toccare anche se gli è stato detto di non farlo, interrompere gli altri,...)",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Mostra frequentemente difficoltà a controllarsi in specifiche situazioni, come nel gruppo o in contesti eccitanti (per esempio: attendere il turno nel gioco, interrompere una conversazione)",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Raramente presenta difficoltà a controllarsi nelle situazioni di gruppo oppure è raramente impulsivo nel quotidiano",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Non impulsivo, frena in modo efficace il suo comportamento e differisce le azioni",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
@@ -1528,7 +1528,7 @@
         },
         {
             "text": "STEREOTIPIE",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Stereotipie verbali (usa frasi bizzarre o ripete in continuazione le stesse cose) oppure motorie (saltellare, girare su se stesso, saltellare in modo ripetuto, agitare le braccia, movimenti bizzarri con mani e dita) molto frequenti ed invasive e che gli impediscono di fare altre attività la maggior parte del tempo",
@@ -1536,19 +1536,19 @@
                 },
                 {
                     "text": "Stereotípie verbali o motorie presenti ma interferenti solo con alcune attività",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Stereotipie verbali o motorie presenti ma non interferenti con alcuna altra attività",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Rare stereotipie verbali o motorie",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Stereotipie verbali o motorie assenti",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
@@ -1557,7 +1557,7 @@
         },
         {
             "text": "INTERESSI RISTRETTI O BIZZARRI",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Interessi ristretti (interessi bizzarri od eccessivi per oggetti o per idee), molto frequenti e anche invasivi, che gli impediscono di fare altre attività la maggior parte del tempo",
@@ -1565,15 +1565,15 @@
                 },
                 {
                     "text": "Interessi ristretti presenti ed interferenti con alcune attività",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Interessi ristretti presenti ma senza interferenza su altre attività",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Interessi ristretti assenti",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
@@ -1582,7 +1582,7 @@
         },
         {
             "text": "PARTICOLARITÀ SENSORIALI",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Eccessivo interesse o intolleranza rispetto a certe stimolazioni sensoriali (annusa, porta alla bocca, fa roteare gli oggetti, attratto dalle luci), molto frequenti e anche invasivi, che gli impediscono di fare altre attività la maggior parte del tempo",
@@ -1590,19 +1590,19 @@
                 },
                 {
                     "text": "Eccessivo interesse o intolleranza a certi stimoli sensoriali con interferenza solo su alcune attività",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Eccessivo interesse o intolleranza a certi stimoli sensoriali senza interferenza su alcune attività",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Rari eccessi di interesse o intolleranza a certi stimoli sensoriali",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Eccessi di interesse assenti",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
@@ -1611,7 +1611,7 @@
         },
         {
             "text": "NEOFOBIA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Rifiuta sistematicamente le novità (luoghi, oggetti, o cibi nuovi...), cose che gli provocano paura ed ansia",
@@ -1619,15 +1619,15 @@
                 },
                 {
                     "text": "Tollera difficilmente le novità (i cibi nuovi,...), cose che provocano paura ed ansia, ma solo in alcune situazioni",
-                    "score": 33
+                    "score": 1
                 },
                 {
                     "text": "Evita le novità, ma le accetta con l'aiuto e il sostegno di altri",
-                    "score": 67
+                    "score": 2
                 },
                 {
                     "text": "Tollera bene le novità",
-                    "score": 100
+                    "score": 3
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
@@ -1636,7 +1636,7 @@
         },
         {
             "text": "IRRITABILITÀ, OPPOSITIVITÀ, RABBIA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Si mostra spesso irritabile, 'nervoso', tollera molto difficilmente la frustrazione (reazione al \"no\", cambi di programma), vuole fare ciò che desidera: urla, pianti, collera difficilmente gestibili",
@@ -1644,19 +1644,19 @@
                 },
                 {
                     "text": "Si mostra irritabile in relazione a specifiche situazioni, tollera difficilmente la frustrazione (reazione al \"no\"), vuole fare cio che desidera per alcune cose (ad es. l'uso del tablet), grida, pianti, collera che possono essere comunque gestiti",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Si mostra moderatamente irritabile, tende ad opporsi ma finisce per accettare",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Si mostra lievemente irritabile, la frustrazione è a volte difficile da gestire, senza collera (fa il broncio qualche minuto), senza oppositività e si autoregola.",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Tollera la frustrazione e non mostra particolare agitazione",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
@@ -1665,7 +1665,7 @@
         },
         {
             "text": "ENERGIA, DESIDERIO, CAPACITÀ NELL'ATTIVITÀ SPORTIVA",
-            "type": "single-coice",
+            "type": "single-choice",
             "response": [
                 {
                     "text": "Nessuna iniziativa motoria",
@@ -1673,19 +1673,19 @@
                 },
                 {
                     "text": "Pratica una attività motoria su sollecitazione",
-                    "score": 25
+                    "score": 1
                 },
                 {
                     "text": "Ha desiderio ma manca di energia per fare attività sportiva",
-                    "score": 50
+                    "score": 2
                 },
                 {
                     "text": "Può intraprendere e praticare un'attività occasionale o moderata",
-                    "score": 75
+                    "score": 3
                 },
                 {
                     "text": "Pratica regolarmente una attività fisica sportiva",
-                    "score": 100
+                    "score": 4
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",

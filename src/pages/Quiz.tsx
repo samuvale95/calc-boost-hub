@@ -54,19 +54,57 @@ const Quiz = () => {
     selectedAnswers[key] !== undefined && selectedAnswers[key] !== ""
   ).length;
 
+  // commentato perchè non mi interessa salvare l'id della risposta ma... vedi sotto
+  // const handleAnswerSelect = (questionId: string, optionId: string) => {
+  //   setSelectedAnswers(prev => ({
+  //     ...prev,
+  //     [questionId]: optionId
+  //   }));
+  // };
+
+  // questo dovrebbe peremttermi di salvare score, dom e subdom della risposta al posto di id (vedi sopra)
   const handleAnswerSelect = (questionId: string, optionId: string) => {
-    setSelectedAnswers(prev => ({
-      ...prev,
-      [questionId]: optionId
-    }));
+    const question = quiz.find(q => q.id === questionId);
+    const option = question?.response.find((opt: any) => opt.id === optionId);
+
+    if (question && option) {
+      setSelectedAnswers(prev => ({
+        ...prev,
+        [questionId]: {
+          question: question.text,
+          score: option.score,
+          dom: question.dom,
+          subdom: question.subdom,
+          numOptions: question.response.length // n opzioni per ciascuna domanda (serve per i calcoli!)
+        }
+      }));
+    }
   };
 
+  // come prima, id non mi interessa
+  // const handleSliderChange = (questionId: string, value: number[]) => {
+  //   setSelectedAnswers(prev => ({
+  //     ...prev,
+  //     [questionId]: value[0].toString()
+  //   }));
+  // };
+
+  // come prima mi interessano score, dom e subdom
   const handleSliderChange = (questionId: string, value: number[]) => {
-    setSelectedAnswers(prev => ({
-      ...prev,
-      [questionId]: value[0].toString()
-    }));
-  };
+    const question = quiz.find(q => q.id === questionId);
+
+    if (question) {
+      setSelectedAnswers(prev => ({
+        ...prev,
+        [questionId]: {
+          question: question.text,
+          score: value[0],      // il numero scelto
+          dom: question.dom,
+          subdom: question.subdom
+        }
+      }));
+    }
+  }; 
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < currentSection.questions.length - 1) {
