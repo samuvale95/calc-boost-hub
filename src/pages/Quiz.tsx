@@ -14,7 +14,7 @@ import { v4 as uuidv4 } from "uuid";
 const quiz = quizJson.questions.map(question => ({
   id: uuidv4(),
   ...question,
-  response: question.response.map((option: { text: string; points: number }, idx: number) => ({
+  response: question.response.map((option: { text: string; score: number }, idx: number) => ({
     id: uuidv4(),
     ...option
   }))
@@ -113,7 +113,7 @@ const Quiz = () => {
   };
 
   const isCurrentQuestionAnswered = currentQuestion ? 
-    (currentQuestion.type === "numeric" ? 
+    (currentQuestion.type === "closed-numeric" ? 
       selectedAnswers[currentQuestion.id] !== undefined && selectedAnswers[currentQuestion.id] !== "" :
       selectedAnswers[currentQuestion.id]) : false;
   const isLastQuestion = currentSectionIndex === sections.length - 1 && 
@@ -304,7 +304,7 @@ const Quiz = () => {
                       {currentQuestion.text}
                     </h3>
                     
-                    {currentQuestion.type === "numeric" ? (
+                    {currentQuestion.type === "closed-numeric" ? (
                       <div className="space-y-4">
                         <div className="text-center">
                           <div className="text-3xl font-bold text-primary mb-2">
