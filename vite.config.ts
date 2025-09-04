@@ -35,4 +35,5 @@ export default defineConfig(({ mode }) => ({
     // Ensure environment variables are properly defined
     'import.meta.env.DEV': mode === 'development',
   },
+  envPrefix: 'VITE_',
 }));
