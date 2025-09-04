@@ -19,9 +19,9 @@ class ApiService {
       'Content-Type': 'application/json',
     };
 
-    // Add authorization header if token exists (except for login and register)
+    // Add authorization header if token exists (except for auth endpoints)
     const token = authService.getAuthToken();
-    if (token && !endpoint.includes('/login') && !endpoint.includes('/register')) {
+    if (token && !endpoint.startsWith('/auth/')) {
       // Check if token is expired locally first
       if (tokenService.isTokenExpired(token)) {
         throw new Error('Token expired');

@@ -6,8 +6,8 @@ validateEnv();
 export const API_CONFIG = {
   ENDPOINTS: {
     USERS: '/users',
-    LOGIN: '/users/login',
-    REGISTER: '/users/register',
+    LOGIN: '/auth/login',
+    REGISTER: '/auth/register',
     VERIFY_TOKEN: '/auth/verify',
     REGENERATE_PASSWORD: '/users/{id}/regenerate-password',
     DEACTIVATE_USER: '/users/{id}/deactivate',
