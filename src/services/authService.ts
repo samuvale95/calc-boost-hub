@@ -55,15 +55,25 @@ class AuthService {
     };
 
     try {
+      console.log('Making API request to:', url);
+      console.log('Request config:', config);
+      
       const response = await fetch(url, config);
+      
+      console.log('Response status:', response.status);
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
       
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
+        console.error('API Error:', errorData);
         throw new Error(errorData.message || errorData.detail || `HTTP error! status: ${response.status}`);
       }
 
-      return await response.json();
+      const data = await response.json();
+      console.log('API Response:', data);
+      return data;
     } catch (error) {
+      console.error('Network/API Error:', error);
       if (error instanceof Error) {
         throw error;
       }
