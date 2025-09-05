@@ -15,12 +15,19 @@ export const Hero = () => {
             Strumenti specializzati per calcoli medici e analisi cliniche 
             con precisione professionale certificata
           </p>
-          <div className="flex justify-center gap-4">
-            <Button variant="outline" size="lg" className="text-lg px-8" asChild>
-              <a href="/login">Accedi al tuo Account</a>
-            </Button>
-            <Button variant="ghost" size="lg" className="text-lg px-8" asChild>
-              <a href="/profile">Il Mio Profilo</a>
+          <div className="flex justify-center">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="text-lg px-8"
+              onClick={() => {
+                const pricingSection = document.getElementById('pricing');
+                if (pricingSection) {
+                  pricingSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
+              Scegli il Tuo Piano
             </Button>
           </div>
         </div>
