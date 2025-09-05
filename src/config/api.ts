@@ -12,6 +12,7 @@ export const API_CONFIG = {
     REGENERATE_PASSWORD: '/users/{id}/regenerate-password',
     DEACTIVATE_USER: '/users/{id}/deactivate',
     ACTIVATE_USER: '/users/{id}/activate',
+    UPDATE_USER: '/users/{id}',
   }
 };
 

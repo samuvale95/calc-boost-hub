@@ -7,11 +7,11 @@ interface User {
   email: string;
   name: string;
   subscription: string;
-  status: string;
   role: string;
   registration_date: string;
   last_access: string;
   is_active: boolean;
+  subscription_expiry_date: string | null;
   created_at: string;
   updated_at: string;
 }

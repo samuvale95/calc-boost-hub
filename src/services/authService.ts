@@ -13,12 +13,12 @@ export interface LoginResponse {
     name: string;
     email: string;
     subscription: string;
-    status: string;
     role: string;
     id: number;
     registration_date: string;
     last_access: string;
     is_active: boolean;
+    subscription_expiry_date: string | null;
     created_at: string;
     updated_at: string;
   };

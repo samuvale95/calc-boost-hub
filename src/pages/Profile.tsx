@@ -48,14 +48,21 @@ const Profile = () => {
     
     try {
       setIsLoading(true);
-      // In a real app, you would fetch this from your API
-      // For now, we'll simulate the subscription status based on user data
+      
+      // Check if subscription is active based on expiry date
+      const now = new Date();
+      const expiryDate = user.subscription_expiry_date ? new Date(user.subscription_expiry_date) : null;
+      const isSubscriptionActive = expiryDate ? expiryDate > now : false;
+      
+      // Calculate days remaining
+      const daysRemaining = expiryDate ? Math.max(0, Math.ceil((expiryDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))) : 0;
+      
       const status = {
-        isActive: user.is_active,
+        isActive: user.is_active && isSubscriptionActive,
         subscriptionType: user.subscription,
-        expiresAt: user.last_access ? new Date(user.last_access) : null,
-        daysRemaining: user.is_active ? 30 : 0, // Simulated
-        canRenew: !user.is_active || (user.subscription === 'pdf' && user.is_active),
+        expiresAt: expiryDate,
+        daysRemaining: daysRemaining,
+        canRenew: !isSubscriptionActive || (user.subscription === 'pdf' && isSubscriptionActive),
       };
       setSubscriptionStatus(status);
     } catch (error) {
@@ -173,16 +180,11 @@ const Profile = () => {
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold">Il Mio Profilo</h1>
-              <p className="text-muted-foreground">
-                Gestisci il tuo account e il tuo abbonamento
-              </p>
-            </div>
-            <Button variant="outline" onClick={logout}>
-              Esci
-            </Button>
+          <div>
+            <h1 className="text-3xl font-bold">Il Mio Profilo</h1>
+            <p className="text-muted-foreground">
+              Gestisci il tuo account e il tuo abbonamento
+            </p>
           </div>
         </div>
 

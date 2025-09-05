@@ -38,7 +38,8 @@ import {
   Loader2,
   RefreshCw,
   UserX,
-  UserCheck
+  UserCheck,
+  Edit
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -51,7 +52,8 @@ interface User {
   name: string;
   email: string;
   subscription: string;
-  status: string;
+  isActive: boolean;
+  subscriptionExpiry: string | null;
   registrationDate: string;
   lastLogin: string;
 }
@@ -62,11 +64,11 @@ interface ApiUser {
   name: string;
   email: string;
   subscription: string;
-  status: string;
   role: string;
   registration_date: string;
   last_access: string | null;
   is_active: boolean;
+  subscription_expiry_date: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -87,6 +89,13 @@ const AdminDashboard = () => {
     email: "",
     password: "",
     subscription: ""
+  });
+  const [editExpiryModal, setEditExpiryModal] = useState({
+    isOpen: false,
+    userId: "",
+    userName: "",
+    currentExpiry: "",
+    isUpdating: false
   });
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -110,7 +119,8 @@ const AdminDashboard = () => {
           name: user.name,
           email: user.email,
           subscription: user.subscription,
-          status: user.is_active ? 'attivo' : 'scaduto',
+          isActive: user.is_active,
+          subscriptionExpiry: user.subscription_expiry_date,
           registrationDate: user.registration_date.split('T')[0], // Extract date part
           lastLogin: user.last_access ? user.last_access.split('T')[0] : new Date().toISOString().split('T')[0]
         }));
@@ -180,9 +190,9 @@ const AdminDashboard = () => {
     });
   };
 
-  const handleDeactivateUser = async (userId: string, userName: string, userStatus: string) => {
+  const handleDeactivateUser = async (userId: string, userName: string, userIsActive: boolean) => {
     // Don't allow deactivating already inactive users
-    if (userStatus === 'scaduto') {
+    if (!userIsActive) {
       toast({
         title: "Utente già disattivato",
         description: `${userName} è già disattivato`,
@@ -206,7 +216,7 @@ const AdminDashboard = () => {
               // Update local state to reflect the change
               setUsers(prev => prev.map(user => 
                 user.id === userId 
-                  ? { ...user, status: 'scaduto' }
+                  ? { ...user, isActive: false }
                   : user
               ));
               
@@ -229,9 +239,9 @@ const AdminDashboard = () => {
     });
   };
 
-  const handleReactivateUser = async (userId: string, userName: string, userStatus: string) => {
+  const handleReactivateUser = async (userId: string, userName: string, userIsActive: boolean) => {
     // Don't allow reactivating already active users
-    if (userStatus === 'attivo') {
+    if (userIsActive) {
       toast({
         title: "Utente già attivo",
         description: `${userName} è già attivo`,
@@ -255,7 +265,7 @@ const AdminDashboard = () => {
               // Update local state to reflect the change
               setUsers(prev => prev.map(user => 
                 user.id === userId 
-                  ? { ...user, status: 'attivo' }
+                  ? { ...user, isActive: true }
                   : user
               ));
               
@@ -280,14 +290,15 @@ const AdminDashboard = () => {
 
 
 
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case "attivo":
-        return <Badge className="bg-accent text-accent-foreground">Attivo</Badge>;
-      case "scaduto":
-        return <Badge variant="destructive">Scaduto</Badge>;
-      default:
-        return <Badge variant="secondary">Sconosciuto</Badge>;
+  const getStatusBadge = (user: User) => {
+    const now = new Date();
+    const expiryDate = user.subscriptionExpiry ? new Date(user.subscriptionExpiry) : null;
+    const isSubscriptionActive = expiryDate ? expiryDate > now : false;
+    
+    if (!user.isActive || !isSubscriptionActive) {
+      return <Badge variant="destructive">Scaduto</Badge>;
+    } else {
+      return <Badge className="bg-green-100 text-green-800">Attivo</Badge>;
     }
   };
 
@@ -299,6 +310,66 @@ const AdminDashboard = () => {
         return <Badge variant="outline">PDF</Badge>;
       default:
         return <Badge variant="secondary">Altro</Badge>;
+    }
+  };
+
+  const handleEditExpiryDate = (userId: string, userName: string, currentExpiry: string | null) => {
+    setEditExpiryModal({
+      isOpen: true,
+      userId,
+      userName,
+      currentExpiry: currentExpiry || ""
+    });
+  };
+
+  const handleUpdateExpiryDate = async () => {
+    try {
+      const newExpiryDate = editExpiryModal.currentExpiry;
+      
+      if (!newExpiryDate) {
+        toast({
+          title: "Errore",
+          description: "Inserisci una data di scadenza valida",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      setEditExpiryModal(prev => ({ ...prev, isUpdating: true }));
+
+      // Format the date to ISO string with timezone
+      const formattedDate = new Date(newExpiryDate + 'T23:59:59Z').toISOString();
+      
+      // Call API to update user
+      const endpoint = API_CONFIG.ENDPOINTS.UPDATE_USER.replace('{id}', editExpiryModal.userId);
+      const response = await api.apiService.request(endpoint, {
+        method: 'PUT',
+        body: JSON.stringify({
+          subscription_expiry_date: formattedDate
+        }),
+      });
+      
+      // Update local state
+      setUsers(prev => prev.map(user => 
+        user.id === editExpiryModal.userId 
+          ? { ...user, subscriptionExpiry: newExpiryDate }
+          : user
+      ));
+      
+      toast({
+        title: "Data di Scadenza Aggiornata",
+        description: `La data di scadenza per ${editExpiryModal.userName} è stata aggiornata`,
+      });
+      
+      setEditExpiryModal({ isOpen: false, userId: "", userName: "", currentExpiry: "", isUpdating: false });
+    } catch (error) {
+      console.error('Error updating expiry date:', error);
+      toast({
+        title: "Errore",
+        description: "Impossibile aggiornare la data di scadenza",
+        variant: "destructive",
+      });
+      setEditExpiryModal(prev => ({ ...prev, isUpdating: false }));
     }
   };
 
@@ -410,7 +481,8 @@ const AdminDashboard = () => {
         name: newUserData.name,
         email: newUserData.email,
         subscription: newUserData.subscription,
-        status: newUserData.is_active ? 'attivo' : 'scaduto',
+        isActive: newUserData.is_active,
+        subscriptionExpiry: newUserData.subscription_expiry_date,
         registrationDate: newUserData.registration_date ? newUserData.registration_date.split('T')[0] : new Date().toISOString().split('T')[0],
         lastLogin: newUserData.last_access ? newUserData.last_access.split('T')[0] : new Date().toISOString().split('T')[0]
       };
@@ -540,7 +612,7 @@ const AdminDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-accent">
-                  {users.filter(u => u.status === "attivo").length}
+                  {users.filter(u => u.isActive).length}
                 </div>
               </CardContent>
             </Card>
@@ -601,7 +673,8 @@ const AdminDashboard = () => {
                     <TableHead>Nome</TableHead>
                     <TableHead>Email</TableHead>
                     <TableHead>Abbonamento</TableHead>
-                    <TableHead>Status</TableHead>
+                    <TableHead>Stato</TableHead>
+                    <TableHead>Scadenza</TableHead>
                     <TableHead>Registrazione</TableHead>
                     <TableHead>Ultimo Accesso</TableHead>
                     <TableHead>Azioni</TableHead>
@@ -627,7 +700,25 @@ const AdminDashboard = () => {
                           {getSubscriptionBadge(user.subscription)}
                         </TableCell>
                         <TableCell>
-                          {getStatusBadge(user.status)}
+                          {getStatusBadge(user)}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm">
+                              {user.subscriptionExpiry 
+                                ? new Date(user.subscriptionExpiry).toLocaleDateString('it-IT')
+                                : 'N/A'
+                              }
+                            </span>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-6 w-6 p-0"
+                              onClick={() => handleEditExpiryDate(user.id, user.name, user.subscriptionExpiry)}
+                            >
+                              <Edit className="h-3 w-3" />
+                            </Button>
+                          </div>
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center gap-1 text-sm text-muted-foreground">
@@ -649,11 +740,11 @@ const AdminDashboard = () => {
                               <Key className="h-4 w-4" />
                               Password
                             </Button>
-                            {user.status === 'attivo' ? (
+                            {user.isActive ? (
                               <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={() => handleDeactivateUser(user.id, user.name, user.status)}
+                                onClick={() => handleDeactivateUser(user.id, user.name, user.isActive)}
                                 className="flex items-center gap-1"
                               >
                                 <UserX className="h-4 w-4" />
@@ -663,7 +754,7 @@ const AdminDashboard = () => {
                               <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={() => handleReactivateUser(user.id, user.name, user.status)}
+                                onClick={() => handleReactivateUser(user.id, user.name, user.isActive)}
                                 className="flex items-center gap-1"
                               >
                                 <UserCheck className="h-4 w-4" />
@@ -762,6 +853,54 @@ const AdminDashboard = () => {
                   </>
                 ) : (
                   "Aggiungi Utente"
+                )}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        {/* Edit Expiry Date Modal */}
+        <Dialog open={editExpiryModal.isOpen} onOpenChange={(open) => setEditExpiryModal(prev => ({ ...prev, isOpen: open }))}>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Modifica Data di Scadenza</DialogTitle>
+              <DialogDescription>
+                Aggiorna la data di scadenza per {editExpiryModal.userName}
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="expiry-date" className="text-right">
+                  Data Scadenza
+                </Label>
+                <Input
+                  id="expiry-date"
+                  type="date"
+                  value={editExpiryModal.currentExpiry}
+                  onChange={(e) => setEditExpiryModal(prev => ({ ...prev, currentExpiry: e.target.value }))}
+                  className="col-span-3"
+                />
+              </div>
+            </div>
+            <DialogFooter>
+              <Button 
+                variant="outline" 
+                onClick={() => setEditExpiryModal({ isOpen: false, userId: "", userName: "", currentExpiry: "", isUpdating: false })}
+                disabled={editExpiryModal.isUpdating}
+              >
+                Annulla
+              </Button>
+              <Button 
+                onClick={handleUpdateExpiryDate}
+                disabled={editExpiryModal.isUpdating}
+              >
+                {editExpiryModal.isUpdating ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                    Aggiornamento...
+                  </>
+                ) : (
+                  "Salva"
                 )}
               </Button>
             </DialogFooter>
