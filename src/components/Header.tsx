@@ -62,6 +62,20 @@ export const Header = () => {
     return location.pathname === path;
   };
 
+  const canAccessQuiz = () => {
+    if (!user) return false;
+    
+    // Admin can always access
+    if (isAdmin) return true;
+    
+    // Check if user has annual subscription and it's active
+    const now = new Date();
+    const expiryDate = user.subscription_expiry_date ? new Date(user.subscription_expiry_date) : null;
+    const isSubscriptionActive = expiryDate ? expiryDate > now : false;
+    
+    return user.subscription === 'annuale' && isSubscriptionActive;
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
@@ -82,14 +96,16 @@ export const Header = () => {
           <div className="hidden md:flex items-center gap-4">
             {isAuthenticated ? (
               <>
-                <Button
-                  variant={isActivePage("/quiz") ? "default" : "ghost"}
-                  onClick={handleQuizClick}
-                  className="flex items-center gap-2"
-                >
-                  <Calculator className="h-4 w-4" />
-                  Tool
-                </Button>
+                {canAccessQuiz() && (
+                  <Button
+                    variant={isActivePage("/quiz") ? "default" : "ghost"}
+                    onClick={handleQuizClick}
+                    className="flex items-center gap-2"
+                  >
+                    <Calculator className="h-4 w-4" />
+                    Tool
+                  </Button>
+                )}
                 
                 {isAdmin && (
                   <Button
@@ -153,14 +169,16 @@ export const Header = () => {
             <div className="space-y-2">
               {isAuthenticated ? (
                 <>
-                  <Button
-                    variant={isActivePage("/quiz") ? "default" : "ghost"}
-                    onClick={handleQuizClick}
-                    className="w-full justify-start"
-                  >
-                    <Calculator className="h-4 w-4 mr-2" />
-                    Tool Interattivo
-                  </Button>
+                  {canAccessQuiz() && (
+                    <Button
+                      variant={isActivePage("/quiz") ? "default" : "ghost"}
+                      onClick={handleQuizClick}
+                      className="w-full justify-start"
+                    >
+                      <Calculator className="h-4 w-4 mr-2" />
+                      Tool Interattivo
+                    </Button>
+                  )}
                   
                   {isAdmin && (
                     <Button

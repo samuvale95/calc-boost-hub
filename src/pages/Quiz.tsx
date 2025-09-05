@@ -156,7 +156,7 @@ const Quiz = () => {
                       </span>
                     )}
                   </p>
-                  <p className="text-xs">Abbonamento: <span className="font-medium text-primary">{user.subscription}</span> • Status: <span className="font-medium text-green-600">{user.status}</span></p>
+                  <p className="text-xs">Abbonamento: <span className="font-medium text-primary">{user.subscription}</span></p>
                 </div>
               )}
             </div>

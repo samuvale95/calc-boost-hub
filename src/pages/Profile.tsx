@@ -62,7 +62,6 @@ const Profile = () => {
         subscriptionType: user.subscription,
         expiresAt: expiryDate,
         daysRemaining: daysRemaining,
-        canRenew: !isSubscriptionActive || (user.subscription === 'pdf' && isSubscriptionActive),
       };
       setSubscriptionStatus(status);
     } catch (error) {
@@ -122,14 +121,14 @@ const Profile = () => {
     
     if (subscriptionType === 'pdf') {
       return {
-        title: 'Guida PDF',
+        title: 'PDF',
         description: 'Accesso alla guida PDF completa',
         icon: <Download className="h-5 w-5" />,
-        status: isActive ? 'Attivo' : 'Scaduto',
-        statusColor: isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800',
-        canRenew: true,
+        status: 'PDF',
+        statusColor: 'bg-blue-100 text-blue-800',
         price: PAYMENT_AMOUNTS.PDF,
-        period: 'una tantum'
+        period: 'una tantum',
+        isPdf: true
       };
     } else if (subscriptionType === 'annuale') {
       return {
@@ -138,9 +137,9 @@ const Profile = () => {
         icon: <Calculator className="h-5 w-5" />,
         status: isActive ? 'Attivo' : 'Scaduto',
         statusColor: isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800',
-        canRenew: true,
         price: PAYMENT_AMOUNTS.SUBSCRIPTION,
-        period: 'all\'anno'
+        period: 'all\'anno',
+        isPdf: false
       };
     }
     
@@ -256,7 +255,8 @@ const Profile = () => {
                     {subscriptionInfo.description}
                   </p>
                   
-                  {subscriptionStatus?.daysRemaining > 0 && (
+                  {/* Show days remaining only for annual subscriptions */}
+                  {!subscriptionInfo.isPdf && subscriptionStatus?.daysRemaining > 0 && (
                     <div className="bg-muted p-3 rounded-lg">
                       <div className="flex items-center gap-2 text-sm">
                         <Clock className="h-4 w-4" />
@@ -267,14 +267,39 @@ const Profile = () => {
                     </div>
                   )}
                   
-                  {subscriptionInfo.canRenew && (
+                  {/* PDF subscription - show upgrade option */}
+                  {subscriptionInfo.isPdf && (
+                    <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
+                      <div className="flex items-start gap-3">
+                        <Calculator className="h-5 w-5 text-blue-600 mt-0.5" />
+                        <div className="flex-1">
+                          <h4 className="font-medium text-blue-900 mb-1">
+                            Vuoi accedere al tool interattivo?
+                          </h4>
+                          <p className="text-sm text-blue-700 mb-3">
+                            Con l'abbonamento annuale potrai utilizzare il quiz interattivo e tutti gli strumenti avanzati.
+                          </p>
+                          <Button 
+                            onClick={() => setShowRenewal(true)}
+                            className="w-full"
+                            variant="default"
+                          >
+                            Attiva Abbonamento Annuale
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Annual subscription - show renewal only if expired */}
+                  {!subscriptionInfo.isPdf && !subscriptionStatus?.isActive && (
                     <div className="pt-4">
                       <Button 
                         onClick={() => setShowRenewal(true)}
                         className="w-full"
-                        variant={subscriptionStatus?.isActive ? "outline" : "default"}
+                        variant="default"
                       >
-                        {subscriptionStatus?.isActive ? "Rinnova Abbonamento" : "Attiva Abbonamento"}
+                        Rinnova Abbonamento
                       </Button>
                     </div>
                   )}
@@ -317,15 +342,18 @@ const Profile = () => {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <CreditCard className="h-5 w-5" />
-              Rinnova Abbonamento
+              {subscriptionInfo?.isPdf ? "Attiva Abbonamento Annuale" : "Rinnova Abbonamento"}
             </DialogTitle>
             <DialogDescription>
-              Completa il pagamento per rinnovare il tuo abbonamento
+              {subscriptionInfo?.isPdf 
+                ? "Completa il pagamento per attivare l'abbonamento annuale e accedere al tool interattivo"
+                : "Completa il pagamento per rinnovare il tuo abbonamento"
+              }
             </DialogDescription>
           </DialogHeader>
           <div className="flex-1 overflow-y-auto -mx-6 px-6">
             <PayPalCheckout
-              subscriptionType={user?.subscription as 'pdf' | 'annuale'}
+              subscriptionType={subscriptionInfo?.isPdf ? 'annuale' : (user?.subscription as 'pdf' | 'annuale')}
               userData={{
                 name: user?.name || '',
                 email: user?.email || '',

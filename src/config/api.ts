@@ -7,7 +7,7 @@ export const API_CONFIG = {
   ENDPOINTS: {
     USERS: '/users',
     LOGIN: '/auth/login',
-    REGISTER: '/auth/register',
+    REGISTER: '/users/register',
     VERIFY_TOKEN: '/auth/verify',
     REGENERATE_PASSWORD: '/users/{id}/regenerate-password',
     DEACTIVATE_USER: '/users/{id}/deactivate',
