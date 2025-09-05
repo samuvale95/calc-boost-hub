@@ -127,9 +127,6 @@ export const Header = () => {
                 <Button variant="ghost" asChild>
                   <a href="/login">Accedi</a>
                 </Button>
-                <Button asChild>
-                  <a href="/#pricing">Inizia Ora</a>
-                </Button>
               </div>
             )}
           </div>
@@ -198,9 +195,6 @@ export const Header = () => {
                 <>
                   <Button variant="ghost" asChild className="w-full justify-start">
                     <a href="/login">Accedi</a>
-                  </Button>
-                  <Button asChild className="w-full justify-start">
-                    <a href="/#pricing">Inizia Ora</a>
                   </Button>
                 </>
               )}
