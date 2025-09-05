@@ -50,7 +50,7 @@ export const PricingSection = () => {
                 Scarica la guida completa con tutti i calcoli e formule
               </CardDescription>
               <div className="flex items-center justify-center mt-4">
-                <span className="text-3xl font-bold">€29</span>
+                <span className="text-3xl font-bold">€10</span>
                 <span className="text-muted-foreground ml-2">una tantum</span>
               </div>
             </CardHeader>
@@ -100,7 +100,7 @@ export const PricingSection = () => {
                 Accesso completo al tool di calcolo avanzato
               </CardDescription>
               <div className="flex items-center justify-center mt-4">
-                <span className="text-3xl font-bold">€99</span>
+                <span className="text-3xl font-bold">€10</span>
                 <span className="text-muted-foreground ml-2">all'anno</span>
               </div>
             </CardHeader>

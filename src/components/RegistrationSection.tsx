@@ -22,10 +22,12 @@ import {
   FileText,
   Calculator,
   Eye,
-  EyeOff
+  EyeOff,
+  CreditCard
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { buildApiUrl, API_CONFIG } from "@/config/api";
+import { PayPalCheckout } from "./PayPalCheckout";
 
 interface RegistrationSectionProps {
   isOpen: boolean;
@@ -44,6 +46,8 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
   const [isSuccess, setIsSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
+  const [paymentData, setPaymentData] = useState<any>(null);
   const { toast } = useToast();
 
   const handleInputChange = (field: string, value: string) => {
@@ -92,9 +96,15 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
       return;
     }
 
+    // Proceed to payment step
+    setShowPayment(true);
+  };
+
+  const handlePaymentSuccess = async (paymentData: any) => {
     try {
       setIsLoading(true);
       
+      // Register user with payment confirmation
       const response = await fetch(buildApiUrl(API_CONFIG.ENDPOINTS.REGISTER), {
         method: 'POST',
         headers: {
@@ -105,6 +115,8 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
           email: formData.email,
           password: formData.password,
           subscription: subscriptionType,
+          paymentId: paymentData.orderId,
+          paymentStatus: paymentData.status,
         }),
       });
 
@@ -114,12 +126,12 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
       }
 
       const newUser = await response.json();
-      
+      setPaymentData(paymentData);
       setIsSuccess(true);
       
       toast({
-        title: "Registrazione Completata!",
-        description: `Benvenuto ${newUser.name}! Il tuo account è stato creato con successo.`,
+        title: "Registrazione e Pagamento Completati!",
+        description: `Benvenuto ${newUser.name}! Il tuo account è stato creato e il pagamento è stato elaborato con successo.`,
       });
 
     } catch (err) {
@@ -135,11 +147,22 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
     }
   };
 
+  const handlePaymentError = (error: any) => {
+    console.error('Payment error:', error);
+    setShowPayment(false);
+  };
+
+  const handlePaymentCancel = () => {
+    setShowPayment(false);
+  };
+
   const handleClose = () => {
     setFormData({ name: "", email: "", password: "", confirmPassword: "" });
     setIsSuccess(false);
     setShowPassword(false);
     setShowConfirmPassword(false);
+    setShowPayment(false);
+    setPaymentData(null);
     onClose();
   };
 
@@ -150,7 +173,7 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
           title: 'Acquisto Guida PDF',
           description: 'Registrazione per il download della guida PDF',
           icon: <FileText className="h-6 w-6" />,
-          price: '€29',
+          price: '€10',
           period: 'una tantum'
         };
       case 'annuale':
@@ -158,7 +181,7 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
           title: 'Abbonamento Annuale',
           description: 'Registrazione per l\'accesso al tool interattivo',
           icon: <Calculator className="h-6 w-6" />,
-          price: '€99',
+          price: '€10',
           period: 'all\'anno'
         };
       default:
@@ -181,10 +204,10 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-green-600">
               <CheckCircle className="h-6 w-6" />
-              Registrazione Completata!
+              Registrazione e Pagamento Completati!
             </DialogTitle>
             <DialogDescription>
-              La tua registrazione è stata completata con successo.
+              La tua registrazione e il pagamento sono stati completati con successo.
             </DialogDescription>
           </DialogHeader>
           <div className="py-6 text-center">
@@ -197,15 +220,73 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
                 Il tuo account è stato creato con successo per <strong>{formData.email}</strong>
               </p>
             </div>
+            {paymentData && (
+              <div className="bg-muted p-4 rounded-lg mb-4">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <CreditCard className="h-4 w-4 text-green-600" />
+                  <span className="font-medium text-sm">Pagamento Confermato</span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  ID Pagamento: {paymentData.orderId}
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Importo: €{paymentData.amount}
+                </p>
+              </div>
+            )}
             <div className="bg-muted p-4 rounded-lg mb-4">
               <p className="text-sm text-muted-foreground">
                 Puoi ora accedere al sistema utilizzando le credenziali che hai inserito.
+                {subscriptionType === 'pdf' ? ' La guida PDF sarà disponibile per il download.' : ' Il tuo abbonamento annuale è attivo.'}
               </p>
             </div>
           </div>
           <DialogFooter>
             <Button onClick={handleClose} className="w-full">
               Chiudi
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    );
+  }
+
+  if (showPayment) {
+    return (
+      <Dialog open={isOpen} onOpenChange={handleClose}>
+        <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <CreditCard className="h-6 w-6" />
+              Completamento Pagamento
+            </DialogTitle>
+            <DialogDescription>
+              Completa il pagamento per finalizzare la tua registrazione
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="py-4">
+            <PayPalCheckout
+              subscriptionType={subscriptionType!}
+              userData={{
+                name: formData.name,
+                email: formData.email,
+              }}
+              onPaymentSuccess={handlePaymentSuccess}
+              onPaymentError={handlePaymentError}
+              onCancel={handlePaymentCancel}
+            />
+          </div>
+
+          <DialogFooter>
+            <Button 
+              variant="outline" 
+              onClick={handlePaymentCancel}
+              disabled={isLoading}
+              className="w-full"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Torna alla Registrazione
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -374,12 +455,12 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
             {isLoading ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Registrazione...
+                Elaborazione...
               </>
             ) : (
               <>
-                <CheckCircle className="h-4 w-4" />
-                Completa Registrazione
+                <CreditCard className="h-4 w-4" />
+                Procedi al Pagamento
               </>
             )}
           </Button>
