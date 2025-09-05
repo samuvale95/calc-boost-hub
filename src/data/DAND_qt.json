@@ -3,10 +3,14 @@
         {
             "text": "ETÀ",
             "type": "open-numeric",
-            "response": {
-                "anni": "",
-                "mesi": ""
-            },
+            "fields": [
+                {
+                    "text": "Anni"
+                },
+                {
+                    "text": "Mesi"
+                }
+            ],
             "section": "DATI PERSONALI",
             "subdom": 0,
             "dom": "Pers"
@@ -1724,7 +1728,11 @@
         {
             "text": "Quante volte alla settimana si sveglia di notte richiedendo l'intervento del genitore?",
             "type": "open-numeric",
-            "response": "",
+            "fields": [
+                {
+                    "text": "Numero di risvegli"
+                }
+            ],
             "section": "SONNO",
             "subdom": 19,
             "dom": "Sleep"

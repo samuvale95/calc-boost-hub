@@ -54,15 +54,8 @@ const Quiz = () => {
     selectedAnswers[key] !== undefined && selectedAnswers[key] !== ""
   ).length;
 
-  // commentato perchè non mi interessa salvare l'id della risposta ma... vedi sotto
-  // const handleAnswerSelect = (questionId: string, optionId: string) => {
-  //   setSelectedAnswers(prev => ({
-  //     ...prev,
-  //     [questionId]: optionId
-  //   }));
-  // };
 
-  // questo dovrebbe peremttermi di salvare score, dom e subdom della risposta al posto di id (vedi sopra)
+  // per calcoli mi interessano score, dom, subdom, prop
   const handleAnswerSelect = (questionId: string, optionId: string) => {
     const question = quiz.find(q => q.id === questionId);
     const option = question?.response.find((opt: any) => opt.id === optionId);
@@ -81,15 +74,7 @@ const Quiz = () => {
     }
   };
 
-  // come prima, id non mi interessa
-  // const handleSliderChange = (questionId: string, value: number[]) => {
-  //   setSelectedAnswers(prev => ({
-  //     ...prev,
-  //     [questionId]: value[0].toString()
-  //   }));
-  // };
-
-  // come prima mi interessano score, dom e subdom
+  // come prima, per calcoli mi interessano score, dom, subdom, prop
   const handleSliderChange = (questionId: string, value: number[]) => {
     const question = quiz.find(q => q.id === questionId);
 
@@ -371,7 +356,7 @@ const Quiz = () => {
                       </div>
                     ) : (
                       <div className="space-y-3">
-                        {currentQuestion.response.map((option) => (
+                        {currentQuestion.responses.map((option) => (
                           <label
                             key={option.id}
                             className="flex items-center space-x-3 p-4 rounded-lg border hover:bg-accent/50 cursor-pointer transition-colors"
