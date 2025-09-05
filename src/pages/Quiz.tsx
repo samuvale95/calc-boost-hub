@@ -75,7 +75,7 @@ const Quiz = () => {
           score: option.score,
           dom: question.dom,
           subdom: question.subdom,
-          numOptions: question.response.length - 1 // n opzioni di ciascuna domanda - 1 (serve per i calcoli!)
+          prop: 1 / question.response.length - 1, // valore percentuale di ciascuna risposta da moltiplicare per lo score
         }
       }));
     }

@@ -3,7 +3,10 @@
         {
             "text": "ETÀ",
             "type": "open-numeric",
-            "response": "",
+            "response": {
+                "anni": "",
+                "mesi": ""
+            },
             "section": "DATI PERSONALI",
             "subdom": 0,
             "dom": "Pers"
@@ -1701,7 +1704,7 @@
                 "step": 0.5
             },
             "response": [],
-            "section": "SONNO (ma nella versione cartacea non è nominata)",
+            "section": "SONNO",
             "subdom": 8,
             "dom": "Sleep"
         },
@@ -1714,20 +1717,15 @@
                 "step": 0.5
             },
             "response": [],
-            "section": "SONNO (ma nella versione cartacea non è nominata)",
+            "section": "SONNO",
             "subdom": 18,
             "dom": "Sleep"
         },
         {
             "text": "Quante volte alla settimana si sveglia di notte richiedendo l'intervento del genitore?",
-            "type": "closed-numeric",
-            "options": {
-                "min": 0,
-                "max": 50,
-                "step": 1
-            },
-            "response": [],
-            "section": "SONNO (ma nella versione cartacea non è nominata)",
+            "type": "open-numeric",
+            "response": "",
+            "section": "SONNO",
             "subdom": 19,
             "dom": "Sleep"
         }
