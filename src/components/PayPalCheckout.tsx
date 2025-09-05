@@ -141,21 +141,22 @@ export const PayPalCheckout = (props: PayPalCheckoutProps) => {
 
   return (
     <PayPalScriptProvider options={PAYPAL_CONFIG}>
-      <Card className="w-full max-w-md mx-auto">
-        <CardHeader className="text-center">
+      <div className="w-full">
+        <div className="text-center mb-4">
           <div className="flex justify-center mb-4">
             <div className="p-3 bg-blue-100 rounded-full">
               <CreditCard className="h-8 w-8 text-blue-600" />
             </div>
           </div>
-          <CardTitle className="text-xl">
+          <h3 className="text-xl font-semibold">
             {subscriptionType === 'pdf' ? 'Acquisto Guida PDF' : 'Abbonamento Annuale'}
-          </CardTitle>
-          <CardDescription>
+          </h3>
+          <p className="text-sm text-muted-foreground">
             {description}
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
+          </p>
+        </div>
+        
+        <div className="space-y-4">
           <div className="bg-muted p-4 rounded-lg">
             <div className="flex justify-between items-center mb-2">
               <span className="font-medium">Importo:</span>
@@ -181,8 +182,8 @@ export const PayPalCheckout = (props: PayPalCheckoutProps) => {
           </div>
           
           <PayPalButtonWrapper {...props} />
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </PayPalScriptProvider>
   );
 };
