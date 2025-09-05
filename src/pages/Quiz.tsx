@@ -14,7 +14,7 @@ import { v4 as uuidv4 } from "uuid";
 const quiz = quizJson.questions.map(question => ({
   id: uuidv4(),
   ...question,
-  response: question.response.map((option: { text: string; points: number }, idx: number) => ({
+  response: question.response.map((option: { text: string; score: number }, idx: number) => ({
     id: uuidv4(),
     ...option
   }))
@@ -54,19 +54,57 @@ const Quiz = () => {
     selectedAnswers[key] !== undefined && selectedAnswers[key] !== ""
   ).length;
 
+  // commentato perchè non mi interessa salvare l'id della risposta ma... vedi sotto
+  // const handleAnswerSelect = (questionId: string, optionId: string) => {
+  //   setSelectedAnswers(prev => ({
+  //     ...prev,
+  //     [questionId]: optionId
+  //   }));
+  // };
+
+  // questo dovrebbe peremttermi di salvare score, dom e subdom della risposta al posto di id (vedi sopra)
   const handleAnswerSelect = (questionId: string, optionId: string) => {
-    setSelectedAnswers(prev => ({
-      ...prev,
-      [questionId]: optionId
-    }));
+    const question = quiz.find(q => q.id === questionId);
+    const option = question?.response.find((opt: any) => opt.id === optionId);
+
+    if (question && option) {
+      setSelectedAnswers(prev => ({
+        ...prev,
+        [questionId]: {
+          question: question.text,
+          score: option.score,
+          dom: question.dom,
+          subdom: question.subdom,
+          prop: 1 / question.response.length - 1, // valore percentuale di ciascuna risposta da moltiplicare per lo score
+        }
+      }));
+    }
   };
 
+  // come prima, id non mi interessa
+  // const handleSliderChange = (questionId: string, value: number[]) => {
+  //   setSelectedAnswers(prev => ({
+  //     ...prev,
+  //     [questionId]: value[0].toString()
+  //   }));
+  // };
+
+  // come prima mi interessano score, dom e subdom
   const handleSliderChange = (questionId: string, value: number[]) => {
-    setSelectedAnswers(prev => ({
-      ...prev,
-      [questionId]: value[0].toString()
-    }));
-  };
+    const question = quiz.find(q => q.id === questionId);
+
+    if (question) {
+      setSelectedAnswers(prev => ({
+        ...prev,
+        [questionId]: {
+          question: question.text,
+          score: value[0], // il numero scelto
+          dom: question.dom,
+          subdom: question.subdom
+        }
+      }));
+    }
+  }; 
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < currentSection.questions.length - 1) {
@@ -113,7 +151,7 @@ const Quiz = () => {
   };
 
   const isCurrentQuestionAnswered = currentQuestion ? 
-    (currentQuestion.type === "numeric" ? 
+    (currentQuestion.type === "closed-numeric" ? 
       selectedAnswers[currentQuestion.id] !== undefined && selectedAnswers[currentQuestion.id] !== "" :
       selectedAnswers[currentQuestion.id]) : false;
   const isLastQuestion = currentSectionIndex === sections.length - 1 && 
@@ -304,7 +342,7 @@ const Quiz = () => {
                       {currentQuestion.text}
                     </h3>
                     
-                    {currentQuestion.type === "numeric" ? (
+                    {currentQuestion.type === "closed-numeric" ? (
                       <div className="space-y-4">
                         <div className="text-center">
                           <div className="text-3xl font-bold text-primary mb-2">
