@@ -3,12 +3,15 @@
         {
             "text": "ETÀ",
             "type": "open-numeric",
-            "fields": [
+            "response": [
                 {
-                    "text": "Anni"
+                    "text": "Anno di nascita",
+                    "min": "1900"
                 },
                 {
-                    "text": "Mesi"
+                    "text": "Mese di nascita",
+                    "min": "1",
+                    "max": "12"
                 }
             ],
             "section": "DATI PERSONALI",
@@ -1728,7 +1731,7 @@
         {
             "text": "Quante volte alla settimana si sveglia di notte richiedendo l'intervento del genitore?",
             "type": "open-numeric",
-            "fields": [
+            "response": [
                 {
                     "text": "Numero di risvegli"
                 }

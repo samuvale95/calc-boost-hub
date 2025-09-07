@@ -10,26 +10,72 @@ import { useAdmin } from "@/hooks/useAdmin";
 import quizJson from "../data/DAND_qt.json";
 import { v4 as uuidv4 } from "uuid";
 
+// Types for quiz answers
+interface AnswerData {
+  question: string;
+  score: number;
+  dom: string;
+  subdom: number;
+  prop?: number;
+  [key: string]: string | number; // For open-numeric fields
+}
+
+// Types for quiz options
+interface QuizOption {
+  id: string;
+  text: string;
+  score?: number;
+  min?: string;
+  max?: string;
+}
+
+// Types for JSON options (before mapping)
+interface JsonOption {
+  text: string;
+  score?: number;
+  min?: string;
+  max?: string;
+}
+
 // Quiz mockup
 const quiz = quizJson.questions.map(question => ({
   id: uuidv4(),
   ...question,
-  response: question.response.map((option: { text: string; score: number }, idx: number) => ({
+  response: question.response.map((option: JsonOption, idx: number) => ({
     id: uuidv4(),
     ...option
-  }))
+  } as QuizOption))
 }));
 
 const Quiz = () => {
-  const [selectedAnswers, setSelectedAnswers] = useState<{[key: string]: string}>({});
+  const [selectedAnswers, setSelectedAnswers] = useState<{[key: string]: AnswerData}>({});
   const [showResults, setShowResults] = useState(false);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [inputErrors, setInputErrors] = useState<{[key: string]: string}>({});
   const { toast } = useToast();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const { isUserAdmin } = useAdmin();
   const stepperRef = useRef<HTMLDivElement>(null);
+
+  // Validate numeric input
+  const validateNumericInput = (value: string, min?: string, max?: string): string | null => {
+    if (!value) return null;
+    
+    const numValue = parseFloat(value);
+    if (isNaN(numValue)) return "Inserisci un numero valido";
+    
+    if (min && numValue < parseFloat(min)) {
+      return `Il valore deve essere almeno ${min}`;
+    }
+    
+    if (max && numValue > parseFloat(max)) {
+      return `Il valore deve essere al massimo ${max}`;
+    }
+    
+    return null;
+  };
 
   // Group questions by section
   const sections = useMemo(() => {
@@ -50,15 +96,30 @@ const Quiz = () => {
   const currentSection = sections[currentSectionIndex];
   const currentQuestion = currentSection?.questions[currentQuestionIndex];
   const totalQuestions = sections.reduce((total, section) => total + section.questions.length, 0);
-  const answeredQuestions = Object.keys(selectedAnswers).filter(key => 
-    selectedAnswers[key] !== undefined && selectedAnswers[key] !== ""
-  ).length;
+  const answeredQuestions = Object.keys(selectedAnswers).filter(key => {
+    const answer = selectedAnswers[key];
+    if (!answer) return false;
+    
+    // For open-numeric questions, check if at least one field is filled and no errors
+    const question = quiz.find(q => q.id === key);
+    if (question?.type === "open-numeric") {
+      const hasValidInput = question.response.some(option => 
+        answer[option.text] !== undefined && answer[option.text] !== ""
+      );
+      const hasErrors = question.response.some(option => 
+        inputErrors[`${key}-${option.text}`]
+      );
+      return hasValidInput && !hasErrors;
+    }
+    
+    return true;
+  }).length;
 
 
   // per calcoli mi interessano score, dom, subdom, prop
   const handleAnswerSelect = (questionId: string, optionId: string) => {
     const question = quiz.find(q => q.id === questionId);
-    const option = question?.response.find((opt: any) => opt.id === optionId);
+    const option = question?.response.find((opt: { id: string; text: string; score: number }) => opt.id === optionId);
 
     if (question && option) {
       setSelectedAnswers(prev => ({
@@ -69,7 +130,7 @@ const Quiz = () => {
           dom: question.dom,
           subdom: question.subdom,
           prop: 1 / question.response.length - 1, // valore percentuale di ciascuna risposta da moltiplicare per lo score
-        }
+        } as AnswerData
       }));
     }
   };
@@ -86,7 +147,7 @@ const Quiz = () => {
           score: value[0], // il numero scelto
           dom: question.dom,
           subdom: question.subdom
-        }
+        } as AnswerData
       }));
     }
   }; 
@@ -121,6 +182,7 @@ const Quiz = () => {
 
   const resetQuiz = () => {
     setSelectedAnswers({});
+    setInputErrors({});
     setShowResults(false);
     setCurrentSectionIndex(0);
     setCurrentQuestionIndex(0);
@@ -137,8 +199,17 @@ const Quiz = () => {
 
   const isCurrentQuestionAnswered = currentQuestion ? 
     (currentQuestion.type === "closed-numeric" ? 
-      selectedAnswers[currentQuestion.id] !== undefined && selectedAnswers[currentQuestion.id] !== "" :
-      selectedAnswers[currentQuestion.id]) : false;
+      selectedAnswers[currentQuestion.id] !== undefined :
+      currentQuestion.type === "open-numeric" ?
+      selectedAnswers[currentQuestion.id] !== undefined && 
+      currentQuestion.response.some(option => 
+        selectedAnswers[currentQuestion.id]?.[option.text] !== undefined && 
+        selectedAnswers[currentQuestion.id]?.[option.text] !== ""
+      ) &&
+      !currentQuestion.response.some(option => 
+        inputErrors[`${currentQuestion.id}-${option.text}`]
+      ) :
+      selectedAnswers[currentQuestion.id] !== undefined) : false;
   const isLastQuestion = currentSectionIndex === sections.length - 1 && 
                         currentQuestionIndex === currentSection.questions.length - 1;
 
@@ -238,15 +309,43 @@ const Quiz = () => {
                   <div ref={stepperRef} className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 py-4 pb-2">
                     <div className="flex gap-8 min-w-max px-6">
                       {sections.map((section, index) => {
-                        const sectionAnsweredQuestions = section.questions.filter(q => 
-                      selectedAnswers[q.id] !== undefined && selectedAnswers[q.id] !== ""
-                    ).length;
+                        const sectionAnsweredQuestions = section.questions.filter(q => {
+                          const answer = selectedAnswers[q.id];
+                          if (!answer) return false;
+                          
+                          // For open-numeric questions, check if at least one field is filled and no errors
+                          if (q.type === "open-numeric") {
+                            const hasValidInput = q.response.some(option => 
+                              answer[option.text] !== undefined && answer[option.text] !== ""
+                            );
+                            const hasErrors = q.response.some(option => 
+                              inputErrors[`${q.id}-${option.text}`]
+                            );
+                            return hasValidInput && !hasErrors;
+                          }
+                          
+                          return true;
+                        }).length;
                         const isCurrentSection = index === currentSectionIndex;
                         const isCompleted = sectionAnsweredQuestions === section.questions.length;
                         const isStarted = sectionAnsweredQuestions > 0;
-                        const isAccessible = index === 0 || sections[index - 1].questions.every(q => 
-                          selectedAnswers[q.id] !== undefined && selectedAnswers[q.id] !== ""
-                        );
+                        const isAccessible = index === 0 || sections[index - 1].questions.every(q => {
+                          const answer = selectedAnswers[q.id];
+                          if (!answer) return false;
+                          
+                          // For open-numeric questions, check if at least one field is filled and no errors
+                          if (q.type === "open-numeric") {
+                            const hasValidInput = q.response.some(option => 
+                              answer[option.text] !== undefined && answer[option.text] !== ""
+                            );
+                            const hasErrors = q.response.some(option => 
+                              inputErrors[`${q.id}-${option.text}`]
+                            );
+                            return hasValidInput && !hasErrors;
+                          }
+                          
+                          return true;
+                        });
                         
                         return (
                           <div key={section.id} className="flex flex-col items-center relative flex-shrink-0">
@@ -331,7 +430,7 @@ const Quiz = () => {
                       <div className="space-y-4">
                         <div className="text-center">
                           <div className="text-3xl font-bold text-primary mb-2">
-                            {selectedAnswers[currentQuestion.id] || currentQuestion.options?.min || 0}
+                            {selectedAnswers[currentQuestion.id]?.score || currentQuestion.options?.min || 0}
                           </div>
                           <div className="text-sm text-muted-foreground">
                             Valore selezionato
@@ -340,7 +439,7 @@ const Quiz = () => {
                         
                         <div className="px-4">
                           <Slider
-                            value={[parseFloat(selectedAnswers[currentQuestion.id]) || currentQuestion.options?.min || 0]}
+                            value={[selectedAnswers[currentQuestion.id]?.score || currentQuestion.options?.min || 0]}
                             onValueChange={(value) => handleSliderChange(currentQuestion.id, value)}
                             min={currentQuestion.options?.min || 0}
                             max={currentQuestion.options?.max || 100}
@@ -354,9 +453,75 @@ const Quiz = () => {
                           <span>Max: {currentQuestion.options?.max || 100}</span>
                         </div>
                       </div>
+                    ) : currentQuestion.type === "open-numeric" ? (
+                      <div className="space-y-4">
+                        <div className="text-center">
+                          <div className="text-lg font-medium text-muted-foreground mb-4">
+                            Inserisci il valore numerico
+                          </div>
+                        </div>
+                        
+                        <div className="flex flex-col gap-4">
+                          {currentQuestion.response.map((option, index) => (
+                            <div key={index} className="flex items-center gap-3">
+                              <label className="text-sm font-medium min-w-[80px]">
+                                {option.text}:
+                              </label>
+                              <div className="flex-1">
+                                <input
+                                  type="number"
+                                  value={selectedAnswers[currentQuestion.id]?.[option.text] || ''}
+                                  onChange={(e) => {
+                                    const value = e.target.value;
+                                    const errorKey = `${currentQuestion.id}-${option.text}`;
+                                    
+                                    // Validate input
+                                    const error = validateNumericInput(value, option.min, option.max);
+                                    setInputErrors(prev => ({
+                                      ...prev,
+                                      [errorKey]: error || ''
+                                    }));
+                                    
+                                    setSelectedAnswers(prev => ({
+                                      ...prev,
+                                      [currentQuestion.id]: {
+                                        ...(typeof prev[currentQuestion.id] === 'object' ? prev[currentQuestion.id] : {}),
+                                        [option.text]: value,
+                                        question: currentQuestion.text,
+                                        dom: currentQuestion.dom,
+                                        subdom: currentQuestion.subdom,
+                                        score: value ? parseFloat(value) : 0
+                                      }
+                                    }));
+                                  }}
+                                  className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${
+                                    inputErrors[`${currentQuestion.id}-${option.text}`] 
+                                      ? 'border-red-500 bg-red-50' 
+                                      : 'border-gray-300'
+                                  }`}
+                                  placeholder={`Inserisci ${option.text.toLowerCase()}`}
+                                  min={option.min || "0"}
+                                  max={option.max || undefined}
+                                  step="1"
+                                />
+                                {(option.min || option.max) && (
+                                  <div className="text-xs text-muted-foreground mt-1">
+                                    Range: {option.min || "0"} - {option.max || "∞"}
+                                  </div>
+                                )}
+                                {inputErrors[`${currentQuestion.id}-${option.text}`] && (
+                                  <div className="text-xs text-red-500 mt-1">
+                                    {inputErrors[`${currentQuestion.id}-${option.text}`]}
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     ) : (
                       <div className="space-y-3">
-                        {currentQuestion.responses.map((option) => (
+                        {currentQuestion.response.map((option) => (
                           <label
                             key={option.id}
                             className="flex items-center space-x-3 p-4 rounded-lg border hover:bg-accent/50 cursor-pointer transition-colors"
@@ -365,7 +530,7 @@ const Quiz = () => {
                               type="radio"
                               name={`question-${currentQuestion.id}`}
                               value={option.id}
-                              checked={selectedAnswers[currentQuestion.id] === option.id}
+                              checked={selectedAnswers[currentQuestion.id]?.score === option.score}
                               onChange={() => handleAnswerSelect(currentQuestion.id, option.id)}
                               className="text-primary focus:ring-primary"
                             />
