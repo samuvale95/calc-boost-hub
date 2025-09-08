@@ -10,11 +10,6 @@ export interface QuizData {
   };
   questions: any[];
   sections: any[];
-  summary: {
-    totalQuestions: number;
-    answeredQuestions: number;
-    completionRate: string;
-  };
 }
 
 export const generateQuizPDF = async (quizData: QuizData, selectedAnswers: { [key: string]: any }) => {

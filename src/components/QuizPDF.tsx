@@ -34,33 +34,6 @@ const styles = StyleSheet.create({
     color: '#6b7280',
     marginBottom: 5,
   },
-  summary: {
-    backgroundColor: '#f8fafc',
-    padding: 15,
-    borderRadius: 5,
-    marginBottom: 20,
-    border: '1 solid #e5e7eb',
-  },
-  summaryTitle: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    marginBottom: 8,
-    color: '#374151',
-  },
-  summaryRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 4,
-  },
-  summaryLabel: {
-    fontSize: 10,
-    color: '#6b7280',
-  },
-  summaryValue: {
-    fontSize: 10,
-    fontWeight: 'bold',
-    color: '#374151',
-  },
   section: {
     marginBottom: 20,
   },
@@ -207,22 +180,6 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers }) 
           </Text>
         </View>
 
-        {/* Summary */}
-        <View style={styles.summary}>
-          <Text style={styles.summaryTitle}>Riepilogo Quiz</Text>
-          <View style={styles.summaryRow}>
-            <Text style={styles.summaryLabel}>Domande totali:</Text>
-            <Text style={styles.summaryValue}>{quizData.summary.totalQuestions}</Text>
-          </View>
-          <View style={styles.summaryRow}>
-            <Text style={styles.summaryLabel}>Domande risposte:</Text>
-            <Text style={styles.summaryValue}>{quizData.summary.answeredQuestions}</Text>
-          </View>
-          <View style={styles.summaryRow}>
-            <Text style={styles.summaryLabel}>Percentuale completamento:</Text>
-            <Text style={styles.summaryValue}>{quizData.summary.completionRate}</Text>
-          </View>
-        </View>
 
         {/* Questions by Section */}
         {Object.entries(questionsBySection).map(([sectionName, questions]) => (

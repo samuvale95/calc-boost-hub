@@ -207,12 +207,7 @@ const Quiz = () => {
           completedAt: new Date().toISOString()
         },
         questions: quiz,
-        sections: sections,
-        summary: {
-          totalQuestions,
-          answeredQuestions,
-          completionRate: `${Math.round((answeredQuestions / totalQuestions) * 100)}%`
-        }
+        sections: sections
       };
 
       await generateQuizPDF(quizData, selectedAnswers);
