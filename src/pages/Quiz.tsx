@@ -2,13 +2,14 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
-import { Brain, CheckCircle, XCircle, Play, Home, ChevronLeft, ChevronRight, LogOut } from "lucide-react";
+import { Brain, CheckCircle, XCircle, Play, Home, ChevronLeft, ChevronRight, LogOut, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAdmin } from "@/hooks/useAdmin";
 import quizJson from "../data/DAND_qt.json";
 import { v4 as uuidv4 } from "uuid";
+import { generateQuizPDF, QuizData } from "@/utils/pdfGenerator";
 
 // Types for quiz answers
 interface AnswerData {
@@ -195,6 +196,39 @@ const Quiz = () => {
       description: "Sei stato disconnesso con successo",
     });
     navigate("/login");
+  };
+
+  const handleGeneratePDF = async () => {
+    try {
+      const quizData: QuizData = {
+        user: {
+          name: user?.name || 'Utente',
+          email: user?.email || '',
+          completedAt: new Date().toISOString()
+        },
+        questions: quiz,
+        sections: sections,
+        summary: {
+          totalQuestions,
+          answeredQuestions,
+          completionRate: `${Math.round((answeredQuestions / totalQuestions) * 100)}%`
+        }
+      };
+
+      await generateQuizPDF(quizData, selectedAnswers);
+      
+      toast({
+        title: "PDF Generato!",
+        description: "Il file PDF è stato scaricato con successo.",
+      });
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      toast({
+        title: "Errore",
+        description: "Impossibile generare il PDF. Riprova più tardi.",
+        variant: "destructive",
+      });
+    }
   };
 
   const isCurrentQuestionAnswered = currentQuestion ? 
@@ -588,6 +622,10 @@ const Quiz = () => {
                 </div>
                 
                 <div className="flex gap-4 pt-4 justify-center">
+                  <Button onClick={handleGeneratePDF} className="flex items-center gap-2">
+                    <Download className="h-4 w-4" />
+                    Scarica PDF
+                  </Button>
                   <Button onClick={resetQuiz} className="flex items-center gap-2">
                     <Play className="h-4 w-4" />
                     Rifai il Quiz
