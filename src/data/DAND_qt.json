@@ -1,12 +1,16 @@
 {
     "questions": [     
         {
-            "text": "ETÀ",
+            "text": "ETÀ (in anni e mesi)",
             "type": "open-numeric",
-            "response": {
-                "anni": "",
-                "mesi": ""
-            },
+            "response": [
+                {
+                    "text": "Anni"
+                },
+                {
+                    "text": "Mesi"
+                }
+            ],
             "section": "DATI PERSONALI",
             "subdom": 0,
             "dom": "Pers"
@@ -1705,7 +1709,7 @@
             },
             "response": [],
             "section": "SONNO",
-            "subdom": 18,
+            "subdom": 8,
             "dom": "Sleep"
         },
         {
@@ -1724,7 +1728,11 @@
         {
             "text": "Quante volte alla settimana si sveglia di notte richiedendo l'intervento del genitore?",
             "type": "open-numeric",
-            "response": "",
+            "response": [
+                {
+                    "text": "Numero di risvegli"
+                }
+            ],
             "section": "SONNO",
             "subdom": 19,
             "dom": "Sleep"
