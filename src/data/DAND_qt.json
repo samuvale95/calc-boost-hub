@@ -1,14 +1,16 @@
 {
     "questions": [     
         {
-            "text": "ETÀ (in anni e mesi)",
+            "text": "ETÀ in anni e mesi, ad es. se il paziente ha 3 anni e 4 mesi scrivere 3 nella casella 'Anni' e 4 in quella 'Mesi'",
             "type": "open-numeric",
             "response": [
                 {
-                    "text": "Anni"
+                    "text": "Anni",
+                    "score": ""
                 },
                 {
-                    "text": "Mesi"
+                    "text": "Mesi",
+                    "score": ""
                 }
             ],
             "section": "DATI PERSONALI",
@@ -286,6 +288,35 @@
             "dom": "Mot"
         },
         {
+            "text": "ENERGIA, DESIDERIO, CAPACITÀ NELL'ATTIVITÀ SPORTIVA",
+            "type": "single-choice",
+            "response": [
+                {
+                    "text": "Nessuna iniziativa motoria",
+                    "score": 0
+                },
+                {
+                    "text": "Pratica una attività motoria su sollecitazione",
+                    "score": 1
+                },
+                {
+                    "text": "Ha desiderio ma manca di energia per fare attività sportiva",
+                    "score": 2
+                },
+                {
+                    "text": "Può intraprendere e praticare un'attività occasionale o moderata",
+                    "score": 3
+                },
+                {
+                    "text": "Pratica regolarmente una attività fisica sportiva",
+                    "score": 4
+                }
+            ],
+            "section": "MOTRICITÀ GROSSOLANA",
+            "subdom": 2,
+            "dom": "Mot"
+        },
+        {
             "text": "AFFERRARE OGGETTI",
             "type": "single-choice",
             "response": [
@@ -315,7 +346,7 @@
                 }
             ],
             "section": "MOTRICITÀ FINE",
-            "subdom": 2,
+            "subdom": 3,
             "dom": "Mot"
         },
         {
@@ -340,7 +371,7 @@
                 }
             ],
             "section": "MOTRICITÀ FINE",
-            "subdom": 2,
+            "subdom": 3,
             "dom": "Mot"
         },
         {
@@ -373,7 +404,7 @@
                 }
             ],
             "section": "MOTRICITÀ FINE",
-            "subdom": 2,
+            "subdom": 3,
             "dom": "Mot"
         },
         {
@@ -398,7 +429,7 @@
                 }
             ],
             "section": "MOTRICITÀ FINE",
-            "subdom": 2,
+            "subdom": 3,
             "dom": "Mot"
         },
         {
@@ -427,112 +458,8 @@
                 }
             ],
             "section": "MOTRICITÀ FINE",
-            "subdom": 2,
+            "subdom": 3,
             "dom": "Mot"
-        },
-        {
-            "text": "ALIMENTAZIONE",
-            "type": "single-choice",
-            "response": [
-                {
-                    "text": "Nutrito attraverso sonda gastrica",
-                    "score": 0
-                },
-                {
-                    "text": "Mangia se imboccato da adulti",
-                    "score": 1
-                },
-                {
-                    "text": "Mangia in autonomia con il cucchiaio",
-                    "score": 2
-                },
-                {
-                    "text": "Mangia autonomamemente con cucchiaio, forchetta e coltello",
-                    "score": 3
-                }
-            ],
-            "section": "ALIMENTAZIONE",
-            "subdom": 3,
-            "dom": "Aut"
-        },
-        {
-            "text": "MASTICAZIONE",
-            "type": "single-choice",
-            "response": [
-                {
-                    "text": "Nutrizione enterale (SNG, PEG...)",
-                    "score": 0
-                },
-                {
-                    "text": "Succhia",
-                    "score": 1
-                },
-                {
-                    "text": "Mangia cibo semi-solido",
-                    "score": 2
-                },
-                {
-                    "text": "Mangia piccoli bocconi ma non riesce a masticare il cibo o presenta una masticazione difficile",
-                    "score": 3
-                },
-                {
-                    "text": "La masticazione è efficace per tutte le consistenze",
-                    "score": 4
-                }
-            ],
-            "section": "ALIMENTAZIONE",
-            "subdom": 3,
-            "dom": "Aut"
-        },
-        {
-            "text": "DEGLUTIZIONE",
-            "type": "single-choice",
-            "response": [
-                {
-                    "text": "Fatica a contenere la saliva e a deglutire solidi e liquidi",
-                    "score": 0
-                },
-                {
-                    "text": "Fatica a contenere la saliva e a deglutire i liquidi, ma deglutisce i solidi",
-                    "score": 1
-                },
-                {
-                    "text": "Fatica a contenere la saliva e presenta accessi di tosse quando mangia",
-                    "score": 2
-                },
-                {
-                    "text": "Fatica a contenere la saliva senza difficoltà a deglutire",
-                    "score": 3
-                },
-                {
-                    "text": "Contiene la saliva e deglutisce in modo corretto",
-                    "score": 4
-                }
-            ],
-            "section": "ALIMENTAZIONE",
-            "subdom": 3,
-            "dom": "Aut"
-        },
-        {
-            "text": "APPETITO",
-            "type": "single-choice",
-            "response": [
-                {
-                    "text": "Molto scarso o molto marcato",
-                    "score": 0
-                },
-                {
-                    "text": "Scarso o marcato",
-                    "score": 1
-                },
-                {
-                    "text": "Normale",
-                    "score": 2
-                }
-            ],
-            "section": "ALIMENTAZIONE",
-            "subdom": 3,
-            "dom": "Aut"
         },
         {
             "text": "IMITAZIONE",
@@ -913,6 +840,110 @@
             "dom": "Lan"
         },
         {
+            "text": "ALIMENTAZIONE",
+            "type": "single-choice",
+            "response": [
+                {
+                    "text": "Nutrito attraverso sonda gastrica",
+                    "score": 0
+                },
+                {
+                    "text": "Mangia se imboccato da adulti",
+                    "score": 1
+                },
+                {
+                    "text": "Mangia in autonomia con il cucchiaio",
+                    "score": 2
+                },
+                {
+                    "text": "Mangia autonomamemente con cucchiaio, forchetta e coltello",
+                    "score": 3
+                }
+            ],
+            "section": "ALIMENTAZIONE",
+            "subdom": 8,
+            "dom": "Aut"
+        },
+        {
+            "text": "MASTICAZIONE",
+            "type": "single-choice",
+            "response": [
+                {
+                    "text": "Nutrizione enterale (SNG, PEG...)",
+                    "score": 0
+                },
+                {
+                    "text": "Succhia",
+                    "score": 1
+                },
+                {
+                    "text": "Mangia cibo semi-solido",
+                    "score": 2
+                },
+                {
+                    "text": "Mangia piccoli bocconi ma non riesce a masticare il cibo o presenta una masticazione difficile",
+                    "score": 3
+                },
+                {
+                    "text": "La masticazione è efficace per tutte le consistenze",
+                    "score": 4
+                }
+            ],
+            "section": "ALIMENTAZIONE",
+            "subdom": 8,
+            "dom": "Aut"
+        },
+        {
+            "text": "DEGLUTIZIONE",
+            "type": "single-choice",
+            "response": [
+                {
+                    "text": "Fatica a contenere la saliva e a deglutire solidi e liquidi",
+                    "score": 0
+                },
+                {
+                    "text": "Fatica a contenere la saliva e a deglutire i liquidi, ma deglutisce i solidi",
+                    "score": 1
+                },
+                {
+                    "text": "Fatica a contenere la saliva e presenta accessi di tosse quando mangia",
+                    "score": 2
+                },
+                {
+                    "text": "Fatica a contenere la saliva senza difficoltà a deglutire",
+                    "score": 3
+                },
+                {
+                    "text": "Contiene la saliva e deglutisce in modo corretto",
+                    "score": 4
+                }
+            ],
+            "section": "ALIMENTAZIONE",
+            "subdom": 8,
+            "dom": "Aut"
+        },
+        {
+            "text": "APPETITO",
+            "type": "single-choice",
+            "response": [
+                {
+                    "text": "Molto scarso o molto marcato",
+                    "score": 0
+                },
+                {
+                    "text": "Scarso o marcato",
+                    "score": 1
+                },
+                {
+                    "text": "Normale",
+                    "score": 2
+                }
+            ],
+            "section": "ALIMENTAZIONE",
+            "subdom": 8,
+            "dom": "Aut"
+        },
+        {
             "text": "IGIENE PERSONALE",
             "type": "single-choice",
             "response": [
@@ -930,7 +961,7 @@
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
-            "subdom": 8,
+            "subdom": 9,
             "dom": "Aut"
         },
         {
@@ -955,7 +986,7 @@
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
-            "subdom": 8,
+            "subdom": 9,
             "dom": "Aut"
         },
         {
@@ -984,7 +1015,7 @@
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
-            "subdom": 8,
+            "subdom": 9,
             "dom": "Aut"
         },
         {
@@ -1009,7 +1040,7 @@
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
-            "subdom": 9,
+            "subdom": 10,
             "dom": "Aut"
         },
         {
@@ -1034,7 +1065,7 @@
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
-            "subdom": 9,
+            "subdom": 10,
             "dom": "Aut"
         },
         {
@@ -1059,7 +1090,7 @@
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
-            "subdom": 9,
+            "subdom": 10,
             "dom": "Aut"
         },
         {
@@ -1084,7 +1115,7 @@
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
-            "subdom": 10,
+            "subdom": 11,
             "dom": "Aut"
         },
         {
@@ -1113,7 +1144,7 @@
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
-            "subdom": 10,
+            "subdom": 11,
             "dom": "Aut"
         },
         {
@@ -1146,7 +1177,7 @@
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
-            "subdom": 10,
+            "subdom": 11,
             "dom": "Aut"
         },
         {
@@ -1171,7 +1202,7 @@
                 }
             ],
             "section": "AUTONOMIE PERSONALI",
-            "subdom": 10,
+            "subdom": 11,
             "dom": "Aut"
         },
         {
@@ -1196,7 +1227,7 @@
                 }
             ],
             "section": "MEMORIA E APPRENDIMENTO SCOLARE",
-            "subdom": 11,
+            "subdom": 12,
             "dom": "Mem"
         },
         {
@@ -1221,7 +1252,7 @@
                 }
             ],
             "section": "MEMORIA E APPRENDIMENTO SCOLARE",
-            "subdom": 11,
+            "subdom": 12,
             "dom": "Mem"
         },
         {
@@ -1246,7 +1277,7 @@
                 }
             ],
             "section": "MEMORIA E APPRENDIMENTO SCOLARE",
-            "subdom": 11,
+            "subdom": 12,
             "dom": "Mem"
         },
         {
@@ -1271,7 +1302,7 @@
                 }
             ],
             "section": "MEMORIA E APPRENDIMENTO SCOLARE",
-            "subdom": 11,
+            "subdom": 12,
             "dom": "Mem"
         },
         {
@@ -1296,7 +1327,7 @@
                 }
             ],
             "section": "MEMORIA E APPRENDIMENTO SCOLARE",
-            "subdom": 11,
+            "subdom": 12,
             "dom": "Mem"
         },
         {
@@ -1325,7 +1356,7 @@
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
-            "subdom": 12,
+            "subdom": 13,
             "dom": "Emo"
         },
         {
@@ -1354,7 +1385,7 @@
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
-            "subdom": 13,
+            "subdom": 14,
             "dom": "Emo"
         },
         {
@@ -1383,7 +1414,7 @@
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
-            "subdom": 13,
+            "subdom": 14,
             "dom": "Emo"
         },
         {
@@ -1412,7 +1443,7 @@
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
-            "subdom": 13,
+            "subdom": 14,
             "dom": "Emo"
         },
         {
@@ -1441,7 +1472,7 @@
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
-            "subdom": 14,
+            "subdom": 15,
             "dom": "Emo"
         },
         {
@@ -1470,7 +1501,7 @@
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
-            "subdom": 14,
+            "subdom": 15,
             "dom": "Emo"
         },
         {
@@ -1500,7 +1531,7 @@
 
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
-            "subdom": 14,
+            "subdom": 15,
             "dom": "Emo"
 
         },
@@ -1530,7 +1561,7 @@
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
-            "subdom": 14,
+            "subdom": 15,
             "dom": "Emo"
         },
         {
@@ -1559,7 +1590,7 @@
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
-            "subdom": 15,
+            "subdom": 16,
             "dom": "Emo"
         },
         {
@@ -1584,7 +1615,7 @@
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
-            "subdom": 15,
+            "subdom": 16,
             "dom": "Emo"
         },
         {
@@ -1613,7 +1644,7 @@
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
-            "subdom": 15,
+            "subdom": 16,
             "dom": "Emo"
         },
         {
@@ -1638,7 +1669,7 @@
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
-            "subdom": 15,
+            "subdom": 16,
             "dom": "Emo"
         },
         {
@@ -1667,37 +1698,8 @@
                 }
             ],
             "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
-            "subdom": 16,
-            "dom": "Emo"
-        },
-        {
-            "text": "ENERGIA, DESIDERIO, CAPACITÀ NELL'ATTIVITÀ SPORTIVA",
-            "type": "single-choice",
-            "response": [
-                {
-                    "text": "Nessuna iniziativa motoria",
-                    "score": 0
-                },
-                {
-                    "text": "Pratica una attività motoria su sollecitazione",
-                    "score": 1
-                },
-                {
-                    "text": "Ha desiderio ma manca di energia per fare attività sportiva",
-                    "score": 2
-                },
-                {
-                    "text": "Può intraprendere e praticare un'attività occasionale o moderata",
-                    "score": 3
-                },
-                {
-                    "text": "Pratica regolarmente una attività fisica sportiva",
-                    "score": 4
-                }
-            ],
-            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
             "subdom": 17,
-            "dom": "Mot"
+            "dom": "Emo"
         },
         {
             "text": "Quante ore dorme di notte complessivamente?",
@@ -1709,7 +1711,7 @@
             },
             "response": [],
             "section": "SONNO",
-            "subdom": 8,
+            "subdom": 18,
             "dom": "Sleep"
         },
         {
@@ -1730,7 +1732,8 @@
             "type": "open-numeric",
             "response": [
                 {
-                    "text": "Numero di risvegli"
+                    "text": "Numero di risvegli",
+                    "score": ""
                 }
             ],
             "section": "SONNO",

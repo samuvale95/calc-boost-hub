@@ -54,15 +54,7 @@ const Quiz = () => {
     selectedAnswers[key] !== undefined && selectedAnswers[key] !== ""
   ).length;
 
-  // commentato perchè non mi interessa salvare l'id della risposta ma... vedi sotto
-  // const handleAnswerSelect = (questionId: string, optionId: string) => {
-  //   setSelectedAnswers(prev => ({
-  //     ...prev,
-  //     [questionId]: optionId
-  //   }));
-  // };
-
-  // questo dovrebbe peremttermi di salvare score, dom e subdom della risposta al posto di id (vedi sopra)
+  // in output utente salvo score, dom e subdom della risposta
   const handleAnswerSelect = (questionId: string, optionId: string) => {
     const question = quiz.find(q => q.id === questionId);
     const option = question?.response.find((opt: any) => opt.id === optionId);
@@ -80,14 +72,6 @@ const Quiz = () => {
       }));
     }
   };
-
-  // come prima, id non mi interessa
-  // const handleSliderChange = (questionId: string, value: number[]) => {
-  //   setSelectedAnswers(prev => ({
-  //     ...prev,
-  //     [questionId]: value[0].toString()
-  //   }));
-  // };
 
   // come prima mi interessano score, dom e subdom
   const handleSliderChange = (questionId: string, value: number[]) => {
