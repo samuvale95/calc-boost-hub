@@ -1,0 +1,463 @@
+{
+    "efc98f9a-6ee5-446d-bebf-52b8bf9dc657": {
+        "question": "ETÀ",
+        "dom": "Pers",
+        "subdom": 0,
+        "score": 2000,
+        "Anno di nascita": "2000",
+        "Mese di nascita": "5"
+    },
+    "800b63a4-29c4-4a45-9d60-442230f3f315": {
+        "question": "GENERE",
+        "score": -0.5,
+        "dom": "Pers",
+        "subdom": 0,
+        "prop": -0.5
+    },
+    "1b44b526-95d8-4abc-80fb-cca0658f47c2": {
+        "question": "NAZIONALITÀ",
+        "score": -0.5,
+        "dom": "Pers",
+        "subdom": 0,
+        "prop": -0.5
+    },
+    "c1dfeb7b-fd10-47a3-a147-601a67d65ab7": {
+        "question": "EQUILIBRIO",
+        "score": 3,
+        "dom": "Mot",
+        "subdom": 1,
+        "prop": 0.1
+    },
+    "438fc86c-6b23-4232-b828-5be634ed3ca4": {
+        "question": "SPOSTAMENTI",
+        "score": 3,
+        "dom": "Mot",
+        "subdom": 1,
+        "prop": 0.1
+    },
+    "89e17173-6a20-4167-981e-984bbd2393c5": {
+        "question": "CORSA",
+        "score": 4,
+        "dom": "Mot",
+        "subdom": 1,
+        "prop": 0.1
+    },
+    "e6203f9e-3505-4fb9-a6a7-3aa08608fd38": {
+        "question": "FARE LE SCALE",
+        "score": 2,
+        "dom": "Mot",
+        "subdom": 1,
+        "prop": 0.1
+    },
+    "0bc96e35-da20-43af-b283-d43df189923c": {
+        "question": "SALTARE",
+        "score": 1,
+        "dom": "Mot",
+        "subdom": 1,
+        "prop": 0.1
+    },
+    "8fc2ea30-6673-46db-bfea-a9146b312d33": {
+        "question": "ANDARE IN BICICLETTA",
+        "score": 2,
+        "dom": "Mot",
+        "subdom": 1,
+        "prop": 0.1
+    },
+    "917f1fc2-cab1-4007-8fc8-cd0a41225ce1": {
+        "question": "GIOCO CON LA PALLA",
+        "score": 3,
+        "dom": "Mot",
+        "subdom": 1,
+        "prop": 0.1
+    },
+    "e389d89d-8668-45a2-ab51-9cbab123aa48": {
+        "question": "AUTONOMIA NELLA MARCIA",
+        "score": 2,
+        "dom": "Mot",
+        "subdom": 1,
+        "prop": 0.1
+    },
+    "30a403ad-e48d-4615-963d-23ff26699a36": {
+        "question": "AFFERRARE OGGETTI",
+        "score": 5,
+        "dom": "Mot",
+        "subdom": 2,
+        "prop": 0.1
+    },
+    "95bec152-c89d-471a-a8be-4e461e7333d4": {
+        "question": "PUZZLES",
+        "score": 0,
+        "dom": "Mot",
+        "subdom": 2,
+        "prop": 0.1
+    },
+    "7cd56a3d-5899-4969-a5d3-90bed3deb507": {
+        "question": "DISEGNO",
+        "score": 2,
+        "dom": "Mot",
+        "subdom": 2,
+        "prop": 0.1
+    },
+    "8a12d252-4ddd-4398-95a403c1b67130bd": {
+        "question": "MOVIMENTO DI ROTAZIONE CON LE MANI (AVVITARE/SVITARE)",
+        "score": 0,
+        "dom": "Mot",
+        "subdom": 2,
+        "prop": 0.1
+    },
+    "ca789fbd-b6c1-48b2-8cda-c3fdbe7320b0": {
+        "question": "FORBICI",
+        "score": 0,
+        "dom": "Mot",
+        "subdom": 2,
+        "prop": 0.1
+    },
+    "ac001304-2636-4ed2-83f9-c9aee23471a9": {
+        "question": "ALIMENTAZIONE",
+        "score": 0,
+        "dom": "Aut",
+        "subdom": 3,
+        "prop": 0.75
+    },
+    "b0e589bb-bd9b-4b62-84a8-44eb7153b966": {
+        "question": "MASTICAZIONE",
+        "score": 0,
+        "dom": "Aut",
+        "subdom": 3,
+        "prop": 0.8
+    },
+    "3a35a0a1-8221-4ec4-a398-26c97fbde045": {
+        "question": "DEGLUTIZIONE",
+        "score": 0,
+        "dom": "Aut",
+        "subdom": 3,
+        "prop": 0.8
+    },
+    "3170cc2b-2f9f-4df6-86f3-206cefe1cd78": {
+        "question": "APPETITO",
+        "score": 0,
+        "dom": "Aut",
+        "subdom": 3,
+        "prop": 0.6666666666666667
+    },
+    "aaf74157-6d26-40a7-87c00afd0747142d": {
+        "question": "IMITAZIONE",
+        "score": 0,
+        "dom": "Lan",
+        "subdom": 4,
+        "prop": 0.75
+    },
+    "9b353535-4d9e-4132-984c-5df18c473991": {
+        "question": "ATTENZIONE CONGIUNTA, RISPOSTA ED INIZIATIVA",
+        "score": 0,
+        "dom": "Lan",
+        "subdom": 4,
+        "prop": 0.8
+    },
+    "794bcf45-b2da-46e8-be87-a0b4307caae3": {
+        "question": "INTERAZIONE SOCIALE, AMICIZIE",
+        "score": 0,
+        "dom": "Lan",
+        "subdom": 4,
+        "prop": 0.8571428571428572
+    },
+    "656e597d-bb40-4a26-a747-37cbb4502dee": {
+        "question": "EMPATIA",
+        "score": 0,
+        "dom": "Lan",
+        "subdom": 4,
+        "prop": 0.8
+    },
+    "6af90ae4-cbd6-4c59-b1a6-5864471dc2f8": {
+        "question": "UMORISMO",
+        "score": 0,
+        "dom": "Lan",
+        "subdom": 4,
+        "prop": 0.75
+    },
+    "5bd2bbca0fc9-40ad-abad-d45905f08f74": {
+        "question": "COMPRENSIONE DELLE REGOLE E CONVENZIONI SOCIALI",
+        "score": 0,
+        "dom": "Lan",
+        "subdom": 4,
+        "prop": 0.75
+    },
+    "17232335-33f9-4abd-ac2d-44a11a5ddf31": {
+        "question": "GIOCO SIMBOLICO",
+        "score": 0,
+        "dom": "Lan",
+        "subdom": 5,
+        "prop": 0.75
+    },
+    "f4aa112c-6b7a-4dd4-bee3-97d59df23aab": {
+        "question": "REGOLE NEI GIOCHI",
+        "score": 0,
+        "dom": "Lan",
+        "subdom": 5,
+        "prop": 0.75
+    },
+    "47d8d432-8ad0-45ba-924f-e7894e429290": {
+        "question": "REAZIONE AI SUONI/COMPRENSIONE VERBALE",
+        "score": 0,
+        "dom": "Lan",
+        "subdom": 6,
+        "prop": 0.8
+    },
+    "f4d2ea1f-500e-4016-8550-ae89409f5337": {
+        "question": "LINGUAGGIO ESPRESSIVO/PRODUZIONE VERBALE",
+        "score": 0,
+        "dom": "Lan",
+        "subdom": 7,
+        "prop": 0.8
+    },
+    "b89632a7-2807-4e16-b2ed-80c00070796a": {
+        "question": "POINTING E LINGUAGGIO NON VERBALE",
+        "score": 0,
+        "dom": "Lan",
+        "subdom": 7,
+        "prop": 0.75
+    },
+    "5d300bba-49a0-476a-b020-dee90428c74a": {
+        "question": "PRAGMATICA",
+        "score": 0,
+        "dom": "Lan",
+        "subdom": 7,
+        "prop": 0.8
+    },
+    "6a8a2366-189a-4537-9998-4fcb4a48fe0a": {
+        "question": "FLUENZA",
+        "score": 0,
+        "dom": "Lan",
+        "subdom": 7,
+        "prop": 0.6666666666666667
+    },
+    "2eb7798b-ccf6-4760-ad7e-a56b85ade06e": {
+        "question": "ARTICOLAZIONE (se presente il linguaggio)",
+        "score": 0,
+        "dom": "Lan",
+        "subdom": 7,
+        "prop": 0.75
+    },
+    "a629af2d0c2a-4a07-8844-af910ca60286": {
+        "question": "IGIENE PERSONALE",
+        "score": 0,
+        "dom": "Aut",
+        "subdom": 8,
+        "prop": 0.6666666666666667
+    },
+    "a69857c0-4817-49d7-b737-cac76244b498": {
+        "question": "VESTIRSI",
+        "score": 0,
+        "dom": "Aut",
+        "subdom": 8,
+        "prop": 0.75
+    },
+    "cb5881ea-2b7b-4c40-bf07-fb7a39b70063": {
+        "question": "CONTROLLO SFINTERICO",
+        "score": 0,
+        "dom": "Aut",
+        "subdom": 8,
+        "prop": 0.8
+    },
+    "63adbbb3-7395-4e40-9e0c-edc96ad16637": {
+        "question": "SENSO DEL PERICOLO",
+        "score": 0,
+        "dom": "Aut",
+        "subdom": 9,
+        "prop": 0.75
+    },
+    "789a8bc3-2ecb-4754-924a-4a87b57b08e7": {
+        "question": "LAVORI DI CASA",
+        "score": 0,
+        "dom": "Aut",
+        "subdom": 9,
+        "prop": 0.75
+    },
+    "f23a8f35-d343-4976-9ba3-faedda33837f": {
+        "question": "AUTONOMIA IN CUCINA",
+        "score": 0,
+        "dom": "Aut",
+        "subdom": 9,
+        "prop": 0.75
+    },
+    "89f9c0c3-9636-49b4-a460-a221dcad87c5": {
+        "question": "TELEFONO",
+        "score": 0,
+        "dom": "Aut",
+        "subdom": 10,
+        "prop": 0.75
+    },
+    "1109e96b-1384-49b8-9d19-c0c921c274da": {
+        "question": "USO DI TABLET E SMARTPHONES",
+        "score": 0,
+        "dom": "Aut",
+        "subdom": 10,
+        "prop": 0.8
+    },
+    "6020ab3b-9429-4ef9-af59-b696742a794f": {
+        "question": "CONOSCENZE TEMPORALI",
+        "score": 0,
+        "dom": "Aut",
+        "subdom": 10,
+        "prop": 0.8333333333333334
+    },
+    "f4b0aa83-e97e-443d-9c6d-490a558c22f8": {
+        "question": "USO DEL DENARO",
+        "score": 0,
+        "dom": "Aut",
+        "subdom": 10,
+        "prop": 0.75
+    },
+    "09c45d57-c567-4331-83af-411f344c4930": {
+        "question": "ALFABETO",
+        "score": 0,
+        "dom": "Mem",
+        "subdom": 11,
+        "prop": 0.75
+    },
+    "7094bc01-7b9a-4e00-8dc1-25364252ce5d": {
+        "question": "LETTURA",
+        "score": 0,
+        "dom": "Mem",
+        "subdom": 11,
+        "prop": 0.75
+    },
+    "edccfe09-af9d-4ffc-963d-8a1bab18516d": {
+        "question": "SCRITTURA (NON SU MODELLO)",
+        "score": 0,
+        "dom": "Mem",
+        "subdom": 11,
+        "prop": 0.75
+    },
+    "c6919581-5bb0-4462-80dd-c1d2d6f7bcc4": {
+        "question": "NUMERI ED ENUMERAZIONE",
+        "score": 0,
+        "dom": "Mem",
+        "subdom": 11,
+        "prop": 0.75
+    },
+    "a3f620f5-b8e0-4298-833e-f1ffd48e56e6": {
+        "question": "CALCOLO",
+        "score": 0,
+        "dom": "Mem",
+        "subdom": 11,
+        "prop": 0.75
+    },
+    "d8ad1444-1303-4c53-b039-53fd5fe26d83": {
+        "question": "GESTIONE E COMPRENSIONE DELLE EMOZIONI",
+        "score": 0,
+        "dom": "Emo",
+        "subdom": 12,
+        "prop": 0.8
+    },
+    "efd5f520-8350-46e7-8e9909401b629180": {
+        "question": "TRISTEZZA",
+        "score": 0,
+        "dom": "Emo",
+        "subdom": 13,
+        "prop": 0.8
+    },
+    "6b33ae23-eb12-4c70-96a1-25adf0601c51": {
+        "question": "ANSIA",
+        "score": 0,
+        "dom": "Emo",
+        "subdom": 13,
+        "prop": 0.8
+    },
+    "df3de182-a178-44e3-98bc-eeb16d772bfc": {
+        "question": "RITIRO SOCIALE",
+        "score": 0,
+        "dom": "Emo",
+        "subdom": 13,
+        "prop": 0.8
+    },
+    "d0855a29-37ef-4cd3-9e63-a161c99a8ac4": {
+        "question": "PASSAGGIO RAPIDO DA UN'ATTIVITÀ AD UN'ALTRA",
+        "score": 0,
+        "dom": "Emo",
+        "subdom": 14,
+        "prop": 0.8
+    },
+    "0f56d7ab-a036-437c-a200-e653e33af14f": {
+        "question": "DIFFICOLTÀ DI ASCOLTO ED ATTENZIONE",
+        "score": 0,
+        "dom": "Emo",
+        "subdom": 14,
+        "prop": 0.8
+    },
+    "ef1bd2b2-d50c-40ba-928a-45b58c455b37": {
+        "question": "IPERATTIVITÀ MOTORIA",
+        "score": 0,
+        "dom": "Emo",
+        "subdom": 14,
+        "prop": 0.8
+    },
+    "5694db0a-d1bc-4978-b37f-f72e6225b8f5": {
+        "question": "IMPULSIVITÀ",
+        "score": 0,
+        "dom": "Emo",
+        "subdom": 14,
+        "prop": 0.8
+    },
+    "de1e85ca-67f7-4c28-bf47-952fcc864315": {
+        "question": "STEREOTIPIE",
+        "score": 0,
+        "dom": "Emo",
+        "subdom": 15,
+        "prop": 0.8
+    },
+    "fe355017-b72b-4960-b2a8-6e50c0ba98cb": {
+        "question": "INTERESSI RISTRETTI O BIZZARRI",
+        "score": 0,
+        "dom": "Emo",
+        "subdom": 15,
+        "prop": 0.75
+    },
+    "e0e126ad-a717-4f45-a5cc-33ff50ed8877": {
+        "question": "PARTICOLARITÀ SENSORIALI",
+        "score": 0,
+        "dom": "Emo",
+        "subdom": 15,
+        "prop": 0.8
+    },
+    "0cd6d55c-fc25-408f-93a7-166a9687c2d3": {
+        "question": "NEOFOBIA",
+        "score": 0,
+        "dom": "Emo",
+        "subdom": 15,
+        "prop": 0.75
+    },
+    "aad95531-1484-4e37-894b-684e083e2a64": {
+        "question": "IRRITABILITÀ, OPPOSITIVITÀ, RABBIA",
+        "score": 0,
+        "dom": "Emo",
+        "subdom": 16,
+        "prop": 0.8
+    },
+    "fbc337a5-bd9b-4b74-a904-6b42e2c1241b": {
+        "question": "ENERGIA, DESIDERIO, CAPACITÀ NELL'ATTIVITÀ SPORTIVA",
+        "score": 0,
+        "dom": "Mot",
+        "subdom": 17,
+        "prop": -0.8
+    },
+    "ba38601d-6ca2-4438-a646-952639923c00": {
+        "question": "Quante ore dorme di notte complessivamente?",
+        "score": 8,
+        "dom": "Sleep",
+        "subdom": 18
+    },
+    "debf0a53-28c1-43e4-912c-cd7156a07178": {
+        "question": "Quante ore dorme durante il giorno e il pomeriggio",
+        "score": 4,
+        "dom": "Sleep",
+        "subdom": 18
+    },
+    "1edf389c-3471-4bc5-8b6c-118f092884e8": {
+        "question": "Quante volte alla settimana si sveglia di notte richiedendo l'intervento del genitore?",
+        "dom": "Sleep",
+        "subdom": 19,
+        "score": 2000,
+        "Numero di risvegli": "1"
+    }
+}
