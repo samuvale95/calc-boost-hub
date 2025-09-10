@@ -4,6 +4,12 @@ const { jStat } = pkg;
 import data from "./DAND_fake_output.json" with { type: "json" } // output utente
 import table from "./calc_table.json" with { type: "json" } // per parametri di pred
 
+export function moveResults(results) {
+  console.log("📊 Risultati ricevuti:", results);
+  // Qui puoi fare i tuoi calcoli, salvare in variabili,
+  // aggiornare strutture dati ecc.
+}
+
 // creo un array con i valori degli oggetti in data (gli oggetti in data erano l'uuid contenenti un oggetto risposta con le info utili)
 const responseArray = Object.values(data);
 

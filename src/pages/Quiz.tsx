@@ -10,6 +10,8 @@ import { useAdmin } from "@/hooks/useAdmin";
 import quizJson from "../data/DAND_qt.json";
 import { v4 as uuidv4 } from "uuid";
 import { generateQuizPDF, QuizData } from "@/utils/pdfGenerator";
+import { moveResults } from "../data/calc";
+
 
 // Types for quiz answers
 interface AnswerData {
@@ -116,7 +118,6 @@ const Quiz = () => {
     return true;
   }).length;
 
-  // in output utente salvo score, dom e subdom della risposta
   const handleAnswerSelect = (questionId: string, optionId: string) => {
     const question = quiz.find(q => q.id === questionId);
     const option = question?.response.find((opt: { id: string; text: string; score: number }) => opt.id === optionId);
@@ -135,7 +136,6 @@ const Quiz = () => {
     }
   };
 
-  // come prima mi interessano score, dom e subdom
   const handleSliderChange = (questionId: string, value: number[]) => {
     const question = quiz.find(q => q.id === questionId);
 
@@ -178,6 +178,11 @@ const Quiz = () => {
       title: "Quiz Completato!",
       description: "Hai completato con successo il test di formazione medica.",
     });
+
+    // passo i risultati a calc.js
+    const results = selectedAnswers
+    moveResults(results);
+  };
   };
 
   const resetQuiz = () => {
