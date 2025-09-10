@@ -5,12 +5,10 @@
             "type": "open-numeric",
             "response": [
                 { 
-                    "text": "Anni",
-                    "score": ""
+                    "text": "Anni"
                 },
                 {
-                    "text": "Mesi",
-                    "score": ""
+                    "text": "Mesi"
                 }
             ],
             "section": "DATI PERSONALI",
@@ -1732,8 +1730,7 @@
             "type": "open-numeric",
             "response": [
                 {
-                    "text": "Numero di risvegli",
-                    "score": ""
+                    "text": "Numero di risvegli"
                 }
             ],
             "section": "SONNO",
