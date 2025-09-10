@@ -185,7 +185,6 @@ const Quiz = () => {
     const results = selectedAnswers
     moveResults(results);
   };
-  };
 
   const resetQuiz = () => {
     setSelectedAnswers({});
