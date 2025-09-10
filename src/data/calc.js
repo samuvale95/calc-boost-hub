@@ -64,24 +64,24 @@ for (let i = 1; i <= 17; i++) {
 // calcolo ln(media) subdom 18
 allLnMeans["sub18"] = Math.log(responseArray.filter(resp => resp.subdom === 18).map(resp => resp.score).reduce((acc, val) => acc + val, 0) / 24);
 
-// calcolo Z ESCLUSO subdom 19
-const results = {}
+// // calcolo Z ESCLUSO subdom 19
+// const results = {}
 
-for (const [key, value] of Object.entries(allLnMeans)) {
-  const dom = table.find(item => item.dom === key); // può essere sub, dom o overall
-  const sd = dom.sd
-  const pred = dom.int + (dom.s_age*lnAge0) + (dom.s_nat*nat) + (dom.s_sex*sex) + (dom.s_sexnat*sex*nat)
-  results[key] = (value - pred) / sd
-}
+// for (const [key, value] of Object.entries(allLnMeans)) {
+//   const dom = table.find(item => item.dom === key); // può essere sub, dom o overall
+//   const sd = dom.sd
+//   const pred = dom.int + (dom.s_age*lnAge0) + (dom.s_nat*nat) + (dom.s_sex*sex) + (dom.s_sexnat*sex*nat)
+//   results[key] = (value - pred) / sd
+// }
 
-// calcolo Z subdom 19
-const nRisvegli = responseArray.find(item => item.subdom === 19).score // estrapolo score utente
-const sub19Mean = Math.exp(0.114 + (0.416*lnAge0) + (0.559*nat)) // calcolo media
-const alpha = 0.521648409
-const beta = sub19Mean / alpha
-results["sub19"] = jStat.gamma.cdf(nRisvegli, alpha, beta)
+// // calcolo Z subdom 19
+// const nRisvegli = responseArray.find(item => item.subdom === 19).score // estrapolo score utente
+// const sub19Mean = Math.exp(0.114 + (0.416*lnAge0) + (0.559*nat)) // calcolo media
+// const alpha = 0.521648409
+// const beta = sub19Mean / alpha
+// results["sub19"] = jStat.gamma.cdf(nRisvegli, alpha, beta)
 
-console.log(results)
+// console.log(results)
 
 
 
