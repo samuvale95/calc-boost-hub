@@ -10,6 +10,7 @@ import { useAdmin } from "@/hooks/useAdmin";
 import quizJson from "../data/DAND_qt.json";
 import { v4 as uuidv4 } from "uuid";
 import { generateQuizPDF, QuizData } from "@/utils/pdfGenerator";
+import { createMockQuizData } from "@/utils/quizMock";
 
 // Types for quiz answers
 interface AnswerData {
@@ -226,6 +227,35 @@ const Quiz = () => {
     }
   };
 
+  const handleTestPDF = async () => {
+    try {
+      const mockData = createMockQuizData();
+      const quizData: QuizData = {
+        user: {
+          name: user?.name || 'Test User',
+          email: user?.email || 'test@example.com',
+          completedAt: new Date().toISOString()
+        },
+        questions: mockData.questions,
+        sections: mockData.sections
+      };
+
+      await generateQuizPDF(quizData, mockData.answers);
+      
+      toast({
+        title: "PDF Test Generato!",
+        description: "Il file PDF di test è stato scaricato con successo.",
+      });
+    } catch (error) {
+      console.error('Error generating test PDF:', error);
+      toast({
+        title: "Errore",
+        description: "Impossibile generare il PDF di test.",
+        variant: "destructive",
+      });
+    }
+  };
+
   const isCurrentQuestionAnswered = currentQuestion ? 
     (currentQuestion.type === "closed-numeric" ? 
       selectedAnswers[currentQuestion.id] !== undefined :
@@ -284,6 +314,14 @@ const Quiz = () => {
               )}
             </div>
             <div className="flex gap-2">
+              <Button 
+                variant="outline" 
+                className="flex items-center gap-2"
+                onClick={handleTestPDF}
+              >
+                <Download className="h-5 w-5" />
+                Test PDF
+              </Button>
               {isUserAdmin() && (
                 <Button 
                   variant="outline" 

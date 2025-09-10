@@ -10,82 +10,55 @@ Font.register({
 const styles = StyleSheet.create({
   page: {
     flexDirection: 'column',
-    backgroundColor: '#ffffff',
-    padding: 30,
-    fontSize: 11,
+    padding: 20,
+    fontSize: 9,
     fontFamily: 'Helvetica',
-    lineHeight: 1.4,
   },
   header: {
-    marginBottom: 25,
-    paddingBottom: 15,
-    borderBottom: '2 solid #2563eb',
+    marginBottom: 20,
+    textAlign: 'center',
   },
   title: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 8,
-    color: '#1e40af',
-  },
-  subtitle: {
-    fontSize: 12,
-    textAlign: 'center',
-    color: '#6b7280',
     marginBottom: 5,
   },
+  subtitle: {
+    fontSize: 10,
+    marginBottom: 3,
+  },
   section: {
-    marginBottom: 20,
+    marginBottom: 15,
+    pageBreakInside: 'avoid',
   },
   sectionTitle: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#1f2937',
-    backgroundColor: '#f3f4f6',
-    padding: 8,
-    borderRadius: 3,
-  },
-  question: {
-    marginBottom: 12,
-    padding: 10,
-    backgroundColor: '#f9fafb',
-    borderLeft: '3 solid #3b82f6',
-    borderRadius: 2,
-  },
-  questionText: {
     fontSize: 12,
     fontWeight: 'bold',
-    marginBottom: 6,
-    color: '#1f2937',
+    marginBottom: 8,
+    backgroundColor: '#f5f5f5',
+    padding: 5,
+    borderBottom: '1 solid #333',
+  },
+  question: {
+    marginBottom: 8,
+    padding: 5,
+    border: '0.5 solid #ccc',
+    backgroundColor: '#fafafa',
+  },
+  questionText: {
+    fontSize: 9,
+    fontWeight: 'bold',
+    marginBottom: 3,
   },
   answer: {
-    fontSize: 10,
-    color: '#374151',
-    backgroundColor: '#ffffff',
-    padding: 6,
-    borderRadius: 2,
-    border: '1 solid #e5e7eb',
-  },
-  answerLabel: {
-    fontWeight: 'bold',
-    color: '#059669',
+    fontSize: 8,
+    marginLeft: 10,
   },
   noAnswer: {
-    fontSize: 10,
-    color: '#ef4444',
-    fontStyle: 'italic',
-  },
-  footer: {
-    position: 'absolute',
-    bottom: 30,
-    left: 30,
-    right: 30,
-    textAlign: 'center',
     fontSize: 8,
-    color: '#9ca3af',
-    borderTop: '1 solid #e5e7eb',
-    paddingTop: 10,
+    fontStyle: 'italic',
+    marginLeft: 10,
+    color: '#666',
   },
 });
 
@@ -113,39 +86,22 @@ const renderAnswer = (question: any, answer: any) => {
   }
 
   switch (question.type) {
-    case 'open-numeric':
+    case 'open-numeric': {
       const numericAnswers = Object.entries(answer)
         .filter(([key]) => !['question', 'score', 'dom', 'subdom', 'prop'].includes(key))
         .map(([key, value]) => `${key}: ${value}`)
         .join(', ');
-      return (
-        <Text style={styles.answer}>
-          <Text style={styles.answerLabel}>Risposta: </Text>
-          {numericAnswers || 'Nessun valore inserito'}
-        </Text>
-      );
+      return <Text style={styles.answer}>{numericAnswers || 'Nessun valore'}</Text>;
+    }
 
     case 'single-choice':
-      return (
-        <Text style={styles.answer}>
-          <Text style={styles.answerLabel}>Risposta: </Text>
-          {answer.question || 'Non selezionata'}
-          {answer.score !== undefined && (
-            <Text> (Score: {answer.score})</Text>
-          )}
-        </Text>
-      );
+      return <Text style={styles.answer}>{answer.question || 'Non selezionata'}</Text>;
 
     case 'closed-numeric':
-      return (
-        <Text style={styles.answer}>
-          <Text style={styles.answerLabel}>Valore: </Text>
-          {answer.score || 'Non impostato'}
-        </Text>
-      );
+      return <Text style={styles.answer}>{answer.score || 'Non impostato'}</Text>;
 
     default:
-      return <Text style={styles.noAnswer}>Tipo di domanda non supportato</Text>;
+      return <Text style={styles.noAnswer}>Non supportato</Text>;
   }
 };
 
@@ -165,19 +121,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers }) 
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>Quiz di Formazione Medica</Text>
-          <Text style={styles.subtitle}>Risultati del Test</Text>
-          <Text style={styles.subtitle}>
-            Completato da: {quizData.user.name}
-          </Text>
-          <Text style={styles.subtitle}>
-            Data: {new Date(quizData.user.completedAt).toLocaleDateString('it-IT', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit'
-            })}
-          </Text>
+          <Text style={styles.subtitle}>{quizData.user.name} - {new Date(quizData.user.completedAt).toLocaleDateString('it-IT')}</Text>
         </View>
 
 
@@ -185,7 +129,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers }) 
         {Object.entries(questionsBySection).map(([sectionName, questions]) => (
           <View key={sectionName} style={styles.section}>
             <Text style={styles.sectionTitle}>{sectionName}</Text>
-            {questions.map((question, index) => (
+            {(questions as any[]).map((question, index) => (
               <View key={question.id} style={styles.question}>
                 <Text style={styles.questionText}>
                   {index + 1}. {question.text}
@@ -196,10 +140,6 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers }) 
           </View>
         ))}
 
-        {/* Footer */}
-        <Text style={styles.footer}>
-          Generato automaticamente da Calc Boost Hub - {new Date().toLocaleDateString('it-IT')}
-        </Text>
       </Page>
     </Document>
   );
