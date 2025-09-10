@@ -5,10 +5,13 @@
             "type": "open-numeric",
             "response": [
                 { 
-                    "text": "Anni"
+                    "text": "Anni",
+                    "max": 150
                 },
                 {
-                    "text": "Mesi"
+                    "text": "Mesi",
+                    "min": 1,
+                    "max": 11
                 }
             ],
             "section": "DATI PERSONALI",
