@@ -36,8 +36,8 @@ const meanLnAge = 4.944218314
 const lnAge0 = Math.log(age) - meanLnAge
 
 // estrapolo genere e nazionalità
-const sex = responseArray.find(item => item.question === "GENERE").score
-const nat = responseArray.find(item => item.question === "NAZIONALITÀ").score
+// const sex = responseArray.find(item => item.question === "GENERE").score
+// const nat = responseArray.find(item => item.question === "NAZIONALITÀ").score
 
 // salvo ln(medie) 
 const allLnMeans = {};
