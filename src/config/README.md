@@ -1,48 +1,37 @@
-# API Configuration
+# Environment Variables Configuration
 
-This directory contains the API configuration for the application.
+This application requires the following environment variables to be set:
 
-## Environment Setup
+## Required Variables
 
-The application uses different API URLs based on the environment:
+### `VITE_API_BASE_URL`
+- **Description**: Base URL for the API endpoints
+- **Required**: Yes
+- **Example Development**: `http://localhost:8000/api/v1`
+- **Example Production**: `https://your-api-domain.com/api/v1`
 
-- **Development**: `http://localhost:8000`
-- **Production**: Configurable via environment variable `VITE_API_BASE_URL`
+## Setup Instructions
 
-## Configuration
+1. Create a `.env.local` file in the project root
+2. Add the required environment variables:
 
-### Development
-The API URL is automatically set to `http://localhost:8000` when running in development mode.
-
-### Production
-To set a custom API URL for production, you can:
-
-1. Set the environment variable `VITE_API_BASE_URL` in your deployment environment
-2. Or modify the `getApiBaseUrl()` function in `api.ts` to hardcode your production URL
-
-## Usage
-
-```typescript
-import { buildApiUrl, API_CONFIG } from '@/config/api';
-
-// Build a full API URL
-const usersUrl = buildApiUrl(API_CONFIG.ENDPOINTS.USERS);
-// Results in: http://localhost:8000/users (dev) or your-production-url/users (prod)
-
-// Direct access to base URL
-const baseUrl = API_CONFIG.BASE_URL;
+```bash
+# .env.local
+VITE_API_BASE_URL=http://localhost:8000/api/v1
 ```
 
-## Adding New Endpoints
+## Environment Files Priority
 
-To add new API endpoints, update the `ENDPOINTS` object in `api.ts`:
+1. `.env.local` (highest priority, not committed to git)
+2. `.env.development` (for development)
+3. `.env.production` (for production)
+4. `.env` (fallback)
 
-```typescript
-export const API_CONFIG = {
-  BASE_URL: getApiBaseUrl(),
-  ENDPOINTS: {
-    USERS: '/users',
-    NEW_ENDPOINT: '/new-endpoint', // Add your new endpoint here
-  }
-};
-```
+## Development vs Production
+
+- **Development**: Set `VITE_API_BASE_URL` to your local API server
+- **Production**: Set `VITE_API_BASE_URL` to your production API server
+
+## Error Handling
+
+If `VITE_API_BASE_URL` is not set, the application will throw an error on startup to prevent runtime issues.

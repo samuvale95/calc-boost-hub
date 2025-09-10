@@ -25,7 +25,7 @@ export const PricingSection = () => {
   };
 
   return (
-    <section className="pt-6 pb-20 bg-background">
+    <section id="pricing" className="pt-6 pb-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
@@ -50,7 +50,7 @@ export const PricingSection = () => {
                 Scarica la guida completa con tutti i calcoli e formule
               </CardDescription>
               <div className="flex items-center justify-center mt-4">
-                <span className="text-3xl font-bold">€29</span>
+                <span className="text-3xl font-bold">€10</span>
                 <span className="text-muted-foreground ml-2">una tantum</span>
               </div>
             </CardHeader>
@@ -100,7 +100,7 @@ export const PricingSection = () => {
                 Accesso completo al tool di calcolo avanzato
               </CardDescription>
               <div className="flex items-center justify-center mt-4">
-                <span className="text-3xl font-bold">€99</span>
+                <span className="text-3xl font-bold">€10</span>
                 <span className="text-muted-foreground ml-2">all'anno</span>
               </div>
             </CardHeader>

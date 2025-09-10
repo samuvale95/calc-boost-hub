@@ -13,12 +13,12 @@ export interface LoginResponse {
     name: string;
     email: string;
     subscription: string;
-    status: string;
     role: string;
     id: number;
     registration_date: string;
     last_access: string;
     is_active: boolean;
+    subscription_expiry_date: string | null;
     created_at: string;
     updated_at: string;
   };
@@ -83,15 +83,22 @@ class AuthService {
 
   async login(email: string, password: string): Promise<LoginResponse> {
     try {
-      const response = await this.makeRequest<LoginResponse>(
-        API_CONFIG.ENDPOINTS.LOGIN,
-        {
-          method: 'POST',
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      // Login doesn't require authentication, so we make a direct request
+      const url = buildApiUrl(API_CONFIG.ENDPOINTS.LOGIN);
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-      return response;
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || errorData.detail || `HTTP error! status: ${response.status}`);
+      }
+
+      return await response.json();
     } catch (error) {
       console.error('Login error:', error);
       throw error;
@@ -111,6 +118,32 @@ class AuthService {
   // Helper method to remove auth token from localStorage
   removeAuthToken(): void {
     localStorage.removeItem('authToken');
+  }
+
+  // Logout method (if your API has a logout endpoint)
+  async logout(): Promise<void> {
+    try {
+      // If your API has a logout endpoint, uncomment the following:
+      // await this.makeRequest('/users/logout', { method: 'POST' });
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Continue with local logout even if API call fails
+    } finally {
+      this.removeAuthToken();
+    }
+  }
+
+  // Get current user profile (authenticated)
+  async getCurrentUser(): Promise<any> {
+    return this.makeRequest('/users/me');
+  }
+
+  // Update user profile (authenticated)
+  async updateProfile(userData: any): Promise<any> {
+    return this.makeRequest('/users/me', {
+      method: 'PUT',
+      body: JSON.stringify(userData),
+    });
   }
 }
 

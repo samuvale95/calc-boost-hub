@@ -16,8 +16,18 @@ export const Hero = () => {
             con precisione professionale certificata
           </p>
           <div className="flex justify-center">
-            <Button variant="outline" size="lg" className="text-lg px-8" asChild>
-              <a href="/login">Accedi al tuo Account</a>
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="text-lg px-8"
+              onClick={() => {
+                const pricingSection = document.getElementById('pricing');
+                if (pricingSection) {
+                  pricingSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
+              Scegli il Tuo Piano
             </Button>
           </div>
         </div>

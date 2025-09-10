@@ -38,11 +38,13 @@ import {
   Loader2,
   RefreshCw,
   UserX,
-  UserCheck
+  UserCheck,
+  Edit
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import { buildApiUrl, API_CONFIG } from "@/config/api";
+import { useApi } from "@/hooks/useApi";
+import { API_CONFIG } from "@/config/api";
 
 // User interface
 interface User {
@@ -50,7 +52,8 @@ interface User {
   name: string;
   email: string;
   subscription: string;
-  status: string;
+  isActive: boolean;
+  subscriptionExpiry: string | null;
   registrationDate: string;
   lastLogin: string;
 }
@@ -61,53 +64,16 @@ interface ApiUser {
   name: string;
   email: string;
   subscription: string;
-  status: string;
+  role: string;
   registration_date: string;
   last_access: string | null;
   is_active: boolean;
+  subscription_expiry_date: string | null;
   created_at: string;
   updated_at: string;
 }
 
-// Dati mockup (fallback)
-const mockUsers: User[] = [
-  {
-    id: "1",
-    name: "Mario Rossi",
-    email: "mario.rossi@email.com",
-    subscription: "annuale",
-    status: "attivo",
-    registrationDate: "2024-01-15",
-    lastLogin: "2024-08-20"
-  },
-  {
-    id: "2", 
-    name: "Giulia Bianchi",
-    email: "giulia.bianchi@email.com",
-    subscription: "pdf",
-    status: "attivo",
-    registrationDate: "2024-02-22",
-    lastLogin: "2024-08-22"
-  },
-  {
-    id: "3",
-    name: "Luca Verde",
-    email: "luca.verde@email.com", 
-    subscription: "annuale",
-    status: "scaduto",
-    registrationDate: "2023-08-10",
-    lastLogin: "2024-07-15"
-  },
-  {
-    id: "4",
-    name: "Anna Neri",
-    email: "anna.neri@email.com",
-    subscription: "annuale", 
-    status: "attivo",
-    registrationDate: "2024-03-05",
-    lastLogin: "2024-08-25"
-  }
-];
+// Mock data removed - using empty list on error instead
 
 // Quiz mockup - removed (moved to Quiz.tsx)
 
@@ -116,6 +82,7 @@ const AdminDashboard = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [hasLoaded, setHasLoaded] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newUser, setNewUser] = useState({
     name: "",
@@ -123,23 +90,28 @@ const AdminDashboard = () => {
     password: "",
     subscription: ""
   });
+  const [editExpiryModal, setEditExpiryModal] = useState({
+    isOpen: false,
+    userId: "",
+    userName: "",
+    currentExpiry: "",
+    isUpdating: false
+  });
   const { toast } = useToast();
   const navigate = useNavigate();
+  const api = useApi();
 
   // Fetch users from API
   useEffect(() => {
+    // Prevent multiple simultaneous calls
+    if (hasLoaded) return;
+    
     const fetchUsers = async () => {
       try {
         setIsLoading(true);
         setError(null);
         
-        const response = await fetch(buildApiUrl(API_CONFIG.ENDPOINTS.USERS));
-        
-        if (!response.ok) {
-          throw new Error(`Errore HTTP: ${response.status}`);
-        }
-        
-        const data = await response.json();
+        const data = await api.getUsers();
         
         // Transform API data to match our User interface
         const transformedUsers: User[] = data.users.map((user: ApiUser) => ({
@@ -147,12 +119,14 @@ const AdminDashboard = () => {
           name: user.name,
           email: user.email,
           subscription: user.subscription,
-          status: user.is_active ? 'attivo' : 'scaduto',
+          isActive: user.is_active,
+          subscriptionExpiry: user.subscription_expiry_date,
           registrationDate: user.registration_date.split('T')[0], // Extract date part
           lastLogin: user.last_access ? user.last_access.split('T')[0] : new Date().toISOString().split('T')[0]
         }));
         
         setUsers(transformedUsers);
+        setHasLoaded(true);
         
         toast({
           title: "Utenti Caricati",
@@ -163,12 +137,13 @@ const AdminDashboard = () => {
         console.error('Errore nel caricamento degli utenti:', err);
         setError(err instanceof Error ? err.message : 'Errore sconosciuto');
         
-        // Fallback to mock data in case of error
-        setUsers(mockUsers);
+        // Leave users list empty on error
+        setUsers([]);
+        setHasLoaded(true); // Mark as loaded even on error to prevent retries
         
         toast({
           title: "Errore di Connessione",
-          description: "Impossibile caricare gli utenti. Utilizzo dati di esempio.",
+          description: "Impossibile caricare gli utenti. La lista rimane vuota.",
           variant: "destructive"
         });
       } finally {
@@ -177,7 +152,7 @@ const AdminDashboard = () => {
     };
 
     fetchUsers();
-  }, [toast]);
+  }, [hasLoaded, api, toast]); // Add dependencies back but with hasLoaded guard
 
   const filteredUsers = users.filter(user =>
     user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -215,9 +190,9 @@ const AdminDashboard = () => {
     });
   };
 
-  const handleDeactivateUser = async (userId: string, userName: string, userStatus: string) => {
+  const handleDeactivateUser = async (userId: string, userName: string, userIsActive: boolean) => {
     // Don't allow deactivating already inactive users
-    if (userStatus === 'scaduto') {
+    if (!userIsActive) {
       toast({
         title: "Utente già disattivato",
         description: `${userName} è già disattivato`,
@@ -241,7 +216,7 @@ const AdminDashboard = () => {
               // Update local state to reflect the change
               setUsers(prev => prev.map(user => 
                 user.id === userId 
-                  ? { ...user, status: 'scaduto' }
+                  ? { ...user, isActive: false }
                   : user
               ));
               
@@ -264,9 +239,9 @@ const AdminDashboard = () => {
     });
   };
 
-  const handleReactivateUser = async (userId: string, userName: string, userStatus: string) => {
+  const handleReactivateUser = async (userId: string, userName: string, userIsActive: boolean) => {
     // Don't allow reactivating already active users
-    if (userStatus === 'attivo') {
+    if (userIsActive) {
       toast({
         title: "Utente già attivo",
         description: `${userName} è già attivo`,
@@ -290,7 +265,7 @@ const AdminDashboard = () => {
               // Update local state to reflect the change
               setUsers(prev => prev.map(user => 
                 user.id === userId 
-                  ? { ...user, status: 'attivo' }
+                  ? { ...user, isActive: true }
                   : user
               ));
               
@@ -315,14 +290,15 @@ const AdminDashboard = () => {
 
 
 
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case "attivo":
-        return <Badge className="bg-accent text-accent-foreground">Attivo</Badge>;
-      case "scaduto":
-        return <Badge variant="destructive">Scaduto</Badge>;
-      default:
-        return <Badge variant="secondary">Sconosciuto</Badge>;
+  const getStatusBadge = (user: User) => {
+    const now = new Date();
+    const expiryDate = user.subscriptionExpiry ? new Date(user.subscriptionExpiry) : null;
+    const isSubscriptionActive = expiryDate ? expiryDate > now : false;
+    
+    if (!user.isActive || !isSubscriptionActive) {
+      return <Badge variant="destructive">Scaduto</Badge>;
+    } else {
+      return <Badge className="bg-green-100 text-green-800">Attivo</Badge>;
     }
   };
 
@@ -334,6 +310,66 @@ const AdminDashboard = () => {
         return <Badge variant="outline">PDF</Badge>;
       default:
         return <Badge variant="secondary">Altro</Badge>;
+    }
+  };
+
+  const handleEditExpiryDate = (userId: string, userName: string, currentExpiry: string | null) => {
+    setEditExpiryModal({
+      isOpen: true,
+      userId,
+      userName,
+      currentExpiry: currentExpiry || ""
+    });
+  };
+
+  const handleUpdateExpiryDate = async () => {
+    try {
+      const newExpiryDate = editExpiryModal.currentExpiry;
+      
+      if (!newExpiryDate) {
+        toast({
+          title: "Errore",
+          description: "Inserisci una data di scadenza valida",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      setEditExpiryModal(prev => ({ ...prev, isUpdating: true }));
+
+      // Format the date to ISO string with timezone
+      const formattedDate = new Date(newExpiryDate + 'T23:59:59Z').toISOString();
+      
+      // Call API to update user
+      const endpoint = API_CONFIG.ENDPOINTS.UPDATE_USER.replace('{id}', editExpiryModal.userId);
+      const response = await api.apiService.request(endpoint, {
+        method: 'PUT',
+        body: JSON.stringify({
+          subscription_expiry_date: formattedDate
+        }),
+      });
+      
+      // Update local state
+      setUsers(prev => prev.map(user => 
+        user.id === editExpiryModal.userId 
+          ? { ...user, subscriptionExpiry: newExpiryDate }
+          : user
+      ));
+      
+      toast({
+        title: "Data di Scadenza Aggiornata",
+        description: `La data di scadenza per ${editExpiryModal.userName} è stata aggiornata`,
+      });
+      
+      setEditExpiryModal({ isOpen: false, userId: "", userName: "", currentExpiry: "", isUpdating: false });
+    } catch (error) {
+      console.error('Error updating expiry date:', error);
+      toast({
+        title: "Errore",
+        description: "Impossibile aggiornare la data di scadenza",
+        variant: "destructive",
+      });
+      setEditExpiryModal(prev => ({ ...prev, isUpdating: false }));
     }
   };
 
@@ -381,14 +417,9 @@ const AdminDashboard = () => {
     try {
       setIsLoading(true);
       setError(null);
+      setHasLoaded(false); // Reset the flag to allow refresh
       
-      const response = await fetch(buildApiUrl(API_CONFIG.ENDPOINTS.USERS));
-      
-      if (!response.ok) {
-        throw new Error(`Errore HTTP: ${response.status}`);
-      }
-      
-      const data = await response.json();
+      const data = await api.getUsers();
       
       const transformedUsers: User[] = data.users.map((user: ApiUser) => ({
         id: String(user.id),
@@ -401,6 +432,7 @@ const AdminDashboard = () => {
       }));
       
       setUsers(transformedUsers);
+      setHasLoaded(true);
       
       toast({
         title: "Utenti Aggiornati",
@@ -411,9 +443,13 @@ const AdminDashboard = () => {
       console.error('Errore nel refresh degli utenti:', err);
       setError(err instanceof Error ? err.message : 'Errore sconosciuto');
       
+      // Leave users list empty on error
+      setUsers([]);
+      setHasLoaded(true);
+      
       toast({
         title: "Errore di Connessione",
-        description: "Impossibile aggiornare gli utenti.",
+        description: "Impossibile aggiornare gli utenti. La lista rimane vuota.",
         variant: "destructive"
       });
     } finally {
@@ -428,11 +464,9 @@ const AdminDashboard = () => {
     subscription: string;
   }) => {
     try {
-      const response = await fetch(buildApiUrl(API_CONFIG.ENDPOINTS.REGISTER), {
+      // Register doesn't require authentication, so we use the direct API service
+      const newUserData: ApiUser = await api.apiService.request(API_CONFIG.ENDPOINTS.REGISTER, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({
           name: userData.name,
           email: userData.email,
@@ -440,13 +474,6 @@ const AdminDashboard = () => {
           subscription: userData.subscription,
         }),
       });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || `Errore HTTP: ${response.status}`);
-      }
-
-      const newUserData = await response.json();
       
       // Transform the API response to match our User interface
       const transformedUser: User = {
@@ -454,7 +481,8 @@ const AdminDashboard = () => {
         name: newUserData.name,
         email: newUserData.email,
         subscription: newUserData.subscription,
-        status: newUserData.is_active ? 'attivo' : 'scaduto',
+        isActive: newUserData.is_active,
+        subscriptionExpiry: newUserData.subscription_expiry_date,
         registrationDate: newUserData.registration_date ? newUserData.registration_date.split('T')[0] : new Date().toISOString().split('T')[0],
         lastLogin: newUserData.last_access ? newUserData.last_access.split('T')[0] : new Date().toISOString().split('T')[0]
       };
@@ -468,20 +496,7 @@ const AdminDashboard = () => {
 
   const regeneratePassword = async (userId: string) => {
     try {
-      const endpoint = API_CONFIG.ENDPOINTS.REGENERATE_PASSWORD.replace('{id}', userId);
-      const response = await fetch(buildApiUrl(endpoint), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || `Errore HTTP: ${response.status}`);
-      }
-
-      const result = await response.json();
+      const result = await api.regeneratePassword(parseInt(userId));
       return result;
     } catch (err) {
       console.error('Errore nella rigenerazione password:', err);
@@ -491,20 +506,7 @@ const AdminDashboard = () => {
 
   const deactivateUser = async (userId: string) => {
     try {
-      const endpoint = API_CONFIG.ENDPOINTS.DEACTIVATE_USER.replace('{id}', userId);
-      const response = await fetch(buildApiUrl(endpoint), {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || `Errore HTTP: ${response.status}`);
-      }
-
-      const result = await response.json();
+      const result = await api.deactivateUser(parseInt(userId));
       return result;
     } catch (err) {
       console.error('Errore nella disattivazione utente:', err);
@@ -514,20 +516,7 @@ const AdminDashboard = () => {
 
   const reactivateUser = async (userId: string) => {
     try {
-      const endpoint = API_CONFIG.ENDPOINTS.ACTIVATE_USER.replace('{id}', userId);
-      const response = await fetch(buildApiUrl(endpoint), {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || `Errore HTTP: ${response.status}`);
-      }
-
-      const result = await response.json();
+      const result = await api.activateUser(parseInt(userId));
       return result;
     } catch (err) {
       console.error('Errore nella riattivazione utente:', err);
@@ -623,7 +612,7 @@ const AdminDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-accent">
-                  {users.filter(u => u.status === "attivo").length}
+                  {users.filter(u => u.isActive).length}
                 </div>
               </CardContent>
             </Card>
@@ -684,7 +673,8 @@ const AdminDashboard = () => {
                     <TableHead>Nome</TableHead>
                     <TableHead>Email</TableHead>
                     <TableHead>Abbonamento</TableHead>
-                    <TableHead>Status</TableHead>
+                    <TableHead>Stato</TableHead>
+                    <TableHead>Scadenza</TableHead>
                     <TableHead>Registrazione</TableHead>
                     <TableHead>Ultimo Accesso</TableHead>
                     <TableHead>Azioni</TableHead>
@@ -694,7 +684,9 @@ const AdminDashboard = () => {
                   {filteredUsers.length === 0 ? (
                     <TableRow>
                       <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
-                        {searchTerm ? 'Nessun utente trovato per la ricerca' : 'Nessun utente disponibile'}
+                        {error ? 'Errore nel caricamento degli utenti' : 
+                         searchTerm ? 'Nessun utente trovato per la ricerca' : 
+                         'Nessun utente disponibile'}
                       </TableCell>
                     </TableRow>
                   ) : (
@@ -708,7 +700,25 @@ const AdminDashboard = () => {
                           {getSubscriptionBadge(user.subscription)}
                         </TableCell>
                         <TableCell>
-                          {getStatusBadge(user.status)}
+                          {getStatusBadge(user)}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm">
+                              {user.subscriptionExpiry 
+                                ? new Date(user.subscriptionExpiry).toLocaleDateString('it-IT')
+                                : 'N/A'
+                              }
+                            </span>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-6 w-6 p-0"
+                              onClick={() => handleEditExpiryDate(user.id, user.name, user.subscriptionExpiry)}
+                            >
+                              <Edit className="h-3 w-3" />
+                            </Button>
+                          </div>
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center gap-1 text-sm text-muted-foreground">
@@ -730,11 +740,11 @@ const AdminDashboard = () => {
                               <Key className="h-4 w-4" />
                               Password
                             </Button>
-                            {user.status === 'attivo' ? (
+                            {user.isActive ? (
                               <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={() => handleDeactivateUser(user.id, user.name, user.status)}
+                                onClick={() => handleDeactivateUser(user.id, user.name, user.isActive)}
                                 className="flex items-center gap-1"
                               >
                                 <UserX className="h-4 w-4" />
@@ -744,7 +754,7 @@ const AdminDashboard = () => {
                               <Button
                                 variant="outline"
                                 size="sm"
-                                onClick={() => handleReactivateUser(user.id, user.name, user.status)}
+                                onClick={() => handleReactivateUser(user.id, user.name, user.isActive)}
                                 className="flex items-center gap-1"
                               >
                                 <UserCheck className="h-4 w-4" />
@@ -843,6 +853,54 @@ const AdminDashboard = () => {
                   </>
                 ) : (
                   "Aggiungi Utente"
+                )}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        {/* Edit Expiry Date Modal */}
+        <Dialog open={editExpiryModal.isOpen} onOpenChange={(open) => setEditExpiryModal(prev => ({ ...prev, isOpen: open }))}>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Modifica Data di Scadenza</DialogTitle>
+              <DialogDescription>
+                Aggiorna la data di scadenza per {editExpiryModal.userName}
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="expiry-date" className="text-right">
+                  Data Scadenza
+                </Label>
+                <Input
+                  id="expiry-date"
+                  type="date"
+                  value={editExpiryModal.currentExpiry}
+                  onChange={(e) => setEditExpiryModal(prev => ({ ...prev, currentExpiry: e.target.value }))}
+                  className="col-span-3"
+                />
+              </div>
+            </div>
+            <DialogFooter>
+              <Button 
+                variant="outline" 
+                onClick={() => setEditExpiryModal({ isOpen: false, userId: "", userName: "", currentExpiry: "", isUpdating: false })}
+                disabled={editExpiryModal.isUpdating}
+              >
+                Annulla
+              </Button>
+              <Button 
+                onClick={handleUpdateExpiryDate}
+                disabled={editExpiryModal.isUpdating}
+              >
+                {editExpiryModal.isUpdating ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                    Aggiornamento...
+                  </>
+                ) : (
+                  "Salva"
                 )}
               </Button>
             </DialogFooter>

@@ -1,22 +1,22 @@
-// API Configuration
-const getApiBaseUrl = () => {
-  // Use environment variable if available, otherwise fallback to default
-  return import.meta.env.VITE_API_BASE_URL || 'https://radiant-peak-19300-dc15f27e243f.herokuapp.com';
-};
+import { validateEnv, getApiUrl } from './env';
+
+// Validate environment variables on import
+validateEnv();
 
 export const API_CONFIG = {
-  BASE_URL: getApiBaseUrl(),
   ENDPOINTS: {
     USERS: '/users',
-    LOGIN: '/users/login',
+    LOGIN: '/auth/login',
     REGISTER: '/users/register',
+    VERIFY_TOKEN: '/auth/verify',
     REGENERATE_PASSWORD: '/users/{id}/regenerate-password',
     DEACTIVATE_USER: '/users/{id}/deactivate',
     ACTIVATE_USER: '/users/{id}/activate',
+    UPDATE_USER: '/users/{id}',
   }
 };
 
 // Helper function to build full API URLs
 export const buildApiUrl = (endpoint: string) => {
-  return `${API_CONFIG.BASE_URL}${endpoint}`;
+  return getApiUrl(endpoint);
 };
