@@ -113,7 +113,7 @@ const renderAnswer = (question: any, answer: any) => {
   }
 
   switch (question.type) {
-    case 'open-numeric':
+    case 'open-numeric': {
       const numericAnswers = Object.entries(answer)
         .filter(([key]) => !['question', 'score', 'dom', 'subdom', 'prop'].includes(key))
         .map(([key, value]) => `${key}: ${value}`)
@@ -124,6 +124,7 @@ const renderAnswer = (question: any, answer: any) => {
           {numericAnswers || 'Nessun valore inserito'}
         </Text>
       );
+    }
 
     case 'single-choice':
       return (
@@ -185,7 +186,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers }) 
         {Object.entries(questionsBySection).map(([sectionName, questions]) => (
           <View key={sectionName} style={styles.section}>
             <Text style={styles.sectionTitle}>{sectionName}</Text>
-            {questions.map((question, index) => (
+            {(questions as any[]).map((question, index) => (
               <View key={question.id} style={styles.question}>
                 <Text style={styles.questionText}>
                   {index + 1}. {question.text}
