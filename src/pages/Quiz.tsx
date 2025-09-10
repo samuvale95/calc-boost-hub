@@ -116,8 +116,7 @@ const Quiz = () => {
     return true;
   }).length;
 
-
-  // per calcoli mi interessano score, dom, subdom, prop
+  // in output utente salvo score, dom e subdom della risposta
   const handleAnswerSelect = (questionId: string, optionId: string) => {
     const question = quiz.find(q => q.id === questionId);
     const option = question?.response.find((opt: { id: string; text: string; score: number }) => opt.id === optionId);
@@ -130,13 +129,13 @@ const Quiz = () => {
           score: option.score,
           dom: question.dom,
           subdom: question.subdom,
-          prop: 1 / question.response.length - 1, // valore percentuale di ciascuna risposta da moltiplicare per lo score
+          prop: 1 / (question.response.length - 1), // valore percentuale di ciascuna risposta da moltiplicare per lo score
         } as AnswerData
       }));
     }
   };
 
-  // come prima, per calcoli mi interessano score, dom, subdom, prop
+  // come prima mi interessano score, dom e subdom
   const handleSliderChange = (questionId: string, value: number[]) => {
     const question = quiz.find(q => q.id === questionId);
 
