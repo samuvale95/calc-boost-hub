@@ -179,6 +179,8 @@ const Quiz = () => {
       description: "Hai completato con successo il test di formazione medica.",
     });
 
+    console.log(selectedAnswers) // vedo format selectedAnswers
+
     // passo i risultati a calc.js
     const results = selectedAnswers
     moveResults(results);
