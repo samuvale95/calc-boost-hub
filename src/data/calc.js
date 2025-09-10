@@ -30,7 +30,8 @@ function calcLnMean(arr) {
 }
 
 // calcolo ln(età in mesi) centrato
-const age = responseArray.find(item => item.question === "ETÀ").anni*12 + responseArray.find(item => item.question === "ETÀ").mesi
+const age = 40
+// responseArray.find(item => item.question === "ETÀ").anni*12 + responseArray.find(item => item.question === "ETÀ").mesi
 const meanLnAge = 4.944218314
 const lnAge0 = Math.log(age) - meanLnAge
 
