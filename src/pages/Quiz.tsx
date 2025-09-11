@@ -10,7 +10,7 @@ import { useAdmin } from "@/hooks/useAdmin";
 import quizJson from "../data/DAND_qt.json";
 import { v4 as uuidv4 } from "uuid";
 import { generateQuizPDF, QuizData } from "@/utils/pdfGenerator";
-import { moveResults } from "../data/calc";
+import { calcResults } from "../data/calc";
 
 
 // Types for quiz answers
@@ -179,11 +179,8 @@ const Quiz = () => {
       description: "Hai completato con successo il test di formazione medica.",
     });
 
-    console.log(selectedAnswers) // vedo format selectedAnswers
-
-    // passo i risultati a calc.js
-    const results = selectedAnswers
-    moveResults(results);
+    // calcolo i risultati con la funzione importata da calc.js
+    console.log("risultati!!!!", calcResults(selectedAnswers));
   };
 
   const resetQuiz = () => {
