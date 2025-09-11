@@ -180,7 +180,7 @@ const Quiz = () => {
     });
 
     // calcolo i risultati con la funzione importata da calc.js
-    console.log("risultati!!!!", calcResults(selectedAnswers));
+    console.log("RISULTATI:", calcResults(selectedAnswers));
   };
 
   const resetQuiz = () => {
