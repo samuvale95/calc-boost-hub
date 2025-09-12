@@ -12,6 +12,7 @@ import quizJson from "../data/DAND_qt.json";
 import { v4 as uuidv4 } from "uuid";
 import { generateQuizPDF, QuizData } from "@/utils/pdfGenerator";
 import * as calc from "@/utils/calc";
+import * as prepPDF from "@/utils/prepPDF";
 
 
 // Types for quiz answers
@@ -529,7 +530,8 @@ const Quiz = () => {
                                         [option.text]: Number(value),
                                         question: currentQuestion.text,
                                         dom: currentQuestion.dom,
-                                        subdom: currentQuestion.subdom
+                                        subdom: currentQuestion.subdom,
+                                        score: value ? parseFloat(value) : 0
                                       }
                                     }));
                                   }}

@@ -1,5 +1,5 @@
 import pkg from "jstat"; // per distribuzione gamma
-const { jStat } = pkg; 
+const { jStat } = pkg;
 
 import table from "../data/calc_table.json" with { type: "json" } // parametri di pred
 
@@ -26,7 +26,7 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: n
   // calcolo ln(età in mesi) centrato
   const ageQ = "ETÀ in anni e mesi, es. se il paziente ha 3 anni e 4 mesi scrivere 3 nella casella 'Anni' e 4 in quella 'Mesi'"
   const ageItem = responseArray.find((item: any) => item.question === ageQ);
-  const age = Number(ageItem?.Anni || 0) * 12 + Number(ageItem?.Mesi || 0);
+  const age = ageItem?.Anni || 0 * 12 + ageItem?.Mesi || 0;
   const meanLnAge = 4.944218314;
   const lnAge0 = Math.log(age) - meanLnAge;
 
@@ -64,28 +64,17 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: n
   for (const [key, value] of Object.entries(allLnMeans)) {
     const dom = table.find((item: any) => item.dom === key); // può essere sub, dom o overall
     const sd = dom?.sd || 1;
-    const pred = (dom?.int || 0) + ((dom?.s_age || 0)*lnAge0) + ((dom?.s_nat || 0)*nat) + ((dom?.s_sex || 0)*sex) + ((dom?.s_sexnat || 0)*sex*nat);
+    const pred = (dom?.int || 0) + ((dom?.s_age || 0) * lnAge0) + ((dom?.s_nat || 0) * nat) + ((dom?.s_sex || 0) * sex) + ((dom?.s_sexnat || 0) * sex * nat);
     results[key] = (value - pred) / sd;
   }
 
   // calcolo Z subdom 19
   const subdom19Item = responseArray.find((item: any) => item.subdom === 19);
   const nRisvegli = subdom19Item?.score || 0; // estrapolo score utente
-  const sub19Mean = Math.exp(0.114 + (0.416*lnAge0) + (0.559*nat)); // calcolo media
+  const sub19Mean = Math.exp(0.114 + (0.416 * lnAge0) + (0.559 * nat)); // calcolo media
   const alpha = 0.521648409;
   const beta = sub19Mean / alpha;
   results["sub19"] = jStat.gamma.cdf(nRisvegli, alpha, beta);
 
   return results
 }
-
-
-
-
-
-
-
-
-
-
-
