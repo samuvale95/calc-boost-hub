@@ -6,11 +6,12 @@
             "response": [
                 { 
                     "text": "Anni",
-                    "max": 150
+                    "min": 0,
+                    "max": 99
                 },
                 {
                     "text": "Mesi",
-                    "min": 1,
+                    "min": 0,
                     "max": 11
                 }
             ],
@@ -1733,7 +1734,8 @@
             "type": "open-numeric",
             "response": [
                 {
-                    "text": "Numero di risvegli"
+                    "text": "Numero di risvegli",
+                    "min": 0
                 }
             ],
             "section": "SONNO",
