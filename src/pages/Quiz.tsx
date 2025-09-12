@@ -131,10 +131,9 @@ const Quiz = () => {
         [questionId]: {
           question: question.text,
           response: option.text,
-          score: option.score,
+          score: option.score * 1 / (question.response.length - 1),
           dom: question.dom,
           subdom: question.subdom,
-          prop: 1 / (question.response.length - 1), // valore percentuale di ciascuna risposta da moltiplicare per lo score
         } as AnswerData
       }));
     }
