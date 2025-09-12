@@ -1,7 +1,7 @@
 {
     "questions": [     
         {
-            "text": "ETÀ in anni e mesi, es. se il paziente ha 3 anni e 4 mesi scrivere 3 nella casella 'Anni' e 4 in quella 'Mesi'",
+            "text": "ETÀ in anni e mesi (se il paziente ha 3 anni e 4 mesi scrivere 3 nella casella 'Anni' e 4 in quella 'Mesi')",
             "type": "open-numeric",
             "response": [
                 { 
