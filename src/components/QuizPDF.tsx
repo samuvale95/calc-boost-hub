@@ -239,13 +239,19 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers, ca
             <View style={styles.resultsSection}>
               <Text style={styles.resultsTitle}>Punteggio per Domini</Text>
               <View style={styles.table}>
-                {['Mot', 'Aut', 'Lan', 'Mem', 'Emo'].map(domain => (
-                  <View key={domain} style={styles.tableRow}>
+                {[
+                  {dom: 'Mot', label:"Abilità Motorie"},
+                  {dom: "Lan", label:"Linguaggio e Interazione Sociale"},
+                  {dom: "Aut", label:"Autonomie"},
+                  {dom: "Mem", label:"Memoria e Abilità Scolastiche"},
+                  {dom: "Emo", label:"Regolazione Comportamentale ed Emotiva"}
+                ].map(({dom, label}) => (
+                  <View key={dom} style={styles.tableRow}>
                     <View style={styles.tableCell}>
-                      <Text style={styles.tableCellLabel}>{domain}</Text>
+                      <Text style={styles.tableCellLabel}>{label}</Text>
                     </View>
                     <View style={styles.tableCell}>
-                      <Text style={styles.tableCellValue}>{calcResults[domain]?.toFixed(3) || 'N/A'}</Text>
+                      <Text style={styles.tableCellValue}>{calcResults[dom]?.toFixed(3) || 'N/A'}</Text>
                     </View>
                   </View>
                 ))}
