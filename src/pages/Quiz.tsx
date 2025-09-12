@@ -526,11 +526,10 @@ const Quiz = () => {
                                       ...prev,
                                       [currentQuestion.id]: {
                                         ...(typeof prev[currentQuestion.id] === 'object' ? prev[currentQuestion.id] : {}),
-                                        [option.text]: value,
+                                        [option.text]: Number(value),
                                         question: currentQuestion.text,
                                         dom: currentQuestion.dom,
-                                        subdom: currentQuestion.subdom,
-                                        score: value ? parseFloat(value) : 0
+                                        subdom: currentQuestion.subdom
                                       }
                                     }));
                                   }}
