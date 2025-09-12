@@ -87,6 +87,52 @@ const styles = StyleSheet.create({
     borderTop: '1 solid #e5e7eb',
     paddingTop: 10,
   },
+  table: {
+    marginBottom: 15,
+    border: '1 solid #e5e7eb',
+    borderRadius: 3,
+  },
+  tableHeader: {
+    backgroundColor: '#f3f4f6',
+    padding: 8,
+    borderBottom: '1 solid #e5e7eb',
+  },
+  tableRow: {
+    flexDirection: 'row',
+    borderBottom: '1 solid #e5e7eb',
+  },
+  tableCell: {
+    flex: 1,
+    padding: 8,
+    fontSize: 10,
+  },
+  tableCellLabel: {
+    fontWeight: 'bold',
+    color: '#374151',
+  },
+  tableCellValue: {
+    color: '#6b7280',
+  },
+  resultsSection: {
+    marginBottom: 20,
+  },
+  resultsTitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#1f2937',
+    backgroundColor: '#f3f4f6',
+    padding: 8,
+    borderRadius: 3,
+  },
+  patientName: {
+    fontSize: 12,
+    marginBottom: 20,
+    padding: 10,
+    border: '2 solid #e5e7eb',
+    borderRadius: 3,
+    backgroundColor: '#f9fafb',
+  },
 });
 
 interface QuizPDFProps {
@@ -98,13 +144,9 @@ interface QuizPDFProps {
     };
     questions: any[];
     sections: any[];
-    summary: {
-      totalQuestions: number;
-      answeredQuestions: number;
-      completionRate: string;
-    };
   };
   selectedAnswers: { [key: string]: any };
+  calcResults?: { [key: string]: number };
 }
 
 const renderAnswer = (question: any, answer: any) => {
@@ -150,7 +192,7 @@ const renderAnswer = (question: any, answer: any) => {
   }
 };
 
-const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers }) => {
+const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers, calcResults }) => {
   // Group questions by section
   const questionsBySection = quizData.questions.reduce((acc, question) => {
     if (!acc[question.section]) {
@@ -165,37 +207,89 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers }) 
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.title}>Quiz di Formazione Medica</Text>
-          <Text style={styles.subtitle}>Risultati del Test</Text>
-          <Text style={styles.subtitle}>
-            Completato da: {quizData.user.name}
-          </Text>
-          <Text style={styles.subtitle}>
-            Data: {new Date(quizData.user.completedAt).toLocaleDateString('it-IT', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit'
-            })}
-          </Text>
+          <Text style={styles.title}>Risultati Test di Formazione Medica</Text>
+          <Text style={styles.subtitle}>Report dei Risultati</Text>
+        </View>
+
+        {/* Patient Name Section */}
+        <View style={styles.patientName}>
+          <Text style={styles.resultsTitle}>Nome Paziente: _________________________</Text>
         </View>
 
 
-        {/* Questions by Section */}
-        {Object.entries(questionsBySection).map(([sectionName, questions]) => (
-          <View key={sectionName} style={styles.section}>
-            <Text style={styles.sectionTitle}>{sectionName}</Text>
-            {(questions as any[]).map((question, index) => (
-              <View key={question.id} style={styles.question}>
-                <Text style={styles.questionText}>
-                  {index + 1}. {question.text}
-                </Text>
-                {renderAnswer(question, selectedAnswers[question.id])}
+        {/* Results Sections */}
+        {calcResults && (
+          <>
+            {/* Overall Results */}
+            <View style={styles.resultsSection}>
+              <Text style={styles.resultsTitle}>Risultati Overall</Text>
+              <View style={styles.table}>
+                <View style={styles.tableRow}>
+                  <View style={styles.tableCell}>
+                    <Text style={styles.tableCellLabel}>Overall</Text>
+                  </View>
+                  <View style={styles.tableCell}>
+                    <Text style={styles.tableCellValue}>{calcResults.Overall?.toFixed(3) || 'N/A'}</Text>
+                  </View>
+                </View>
               </View>
-            ))}
-          </View>
-        ))}
+            </View>
+
+            {/* Domain Results */}
+            <View style={styles.resultsSection}>
+              <Text style={styles.resultsTitle}>Risultati per Domini</Text>
+              <View style={styles.table}>
+                {['Mot', 'Aut', 'Lan', 'Mem', 'Emo'].map(domain => (
+                  <View key={domain} style={styles.tableRow}>
+                    <View style={styles.tableCell}>
+                      <Text style={styles.tableCellLabel}>{domain}</Text>
+                    </View>
+                    <View style={styles.tableCell}>
+                      <Text style={styles.tableCellValue}>{calcResults[domain]?.toFixed(3) || 'N/A'}</Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
+            </View>
+
+            {/* Subdomain Results */}
+            <View style={styles.resultsSection}>
+              <Text style={styles.resultsTitle}>Risultati per Sottodomini</Text>
+              <View style={styles.table}>
+                {Array.from({length: 19}, (_, i) => i + 1).map(subdom => (
+                  <View key={subdom} style={styles.tableRow}>
+                    <View style={styles.tableCell}>
+                      <Text style={styles.tableCellLabel}>Subdom {subdom}</Text>
+                    </View>
+                    <View style={styles.tableCell}>
+                      <Text style={styles.tableCellValue}>{calcResults[`sub${subdom}`]?.toFixed(3) || 'N/A'}</Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
+            </View>
+
+            {/* Individual Item Results */}
+            <View style={styles.resultsSection}>
+              <Text style={styles.resultsTitle}>Punteggio per Ogni Item</Text>
+              <View style={styles.table}>
+                {Object.entries(selectedAnswers).map(([questionId, answer]) => {
+                  const question = quizData.questions.find(q => q.id === questionId);
+                  return (
+                    <View key={questionId} style={styles.tableRow}>
+                      <View style={styles.tableCell}>
+                        <Text style={styles.tableCellLabel}>{question?.text || questionId}</Text>
+                      </View>
+                      <View style={styles.tableCell}>
+                        <Text style={styles.tableCellValue}>{answer.score || 'N/A'}</Text>
+                      </View>
+                    </View>
+                  );
+                })}
+              </View>
+            </View>
+          </>
+        )}
 
         {/* Footer */}
         <Text style={styles.footer}>

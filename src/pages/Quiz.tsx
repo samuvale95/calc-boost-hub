@@ -10,7 +10,7 @@ import { useAdmin } from "@/hooks/useAdmin";
 import quizJson from "../data/DAND_qt.json";
 import { v4 as uuidv4 } from "uuid";
 import { generateQuizPDF, QuizData } from "@/utils/pdfGenerator";
-import { calcResults } from "../data/calc";
+import * as calc from "@/utils/calc";
 
 
 // Types for quiz answers
@@ -56,6 +56,7 @@ const Quiz = () => {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [inputErrors, setInputErrors] = useState<{[key: string]: string}>({});
+  const [calcResults, setCalcResults] = useState<{[key: string]: number}>({});
   const { toast } = useToast();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
@@ -179,8 +180,12 @@ const Quiz = () => {
       description: "Hai completato con successo il test di formazione medica.",
     });
 
-    // calcolo i risultati con la funzione importata da calc.js
-    console.log("RISULTATI:", calcResults(selectedAnswers));
+    // calcolo i risultati con la funzione importata da calc.ts
+    const calcResults_data = calc.calcResults(selectedAnswers);
+    console.log("📊 Risultati calcolati:", calcResults_data);
+    
+    // Salvo i risultati per il PDF
+    setCalcResults(calcResults_data);
   };
 
   const resetQuiz = () => {
@@ -189,6 +194,7 @@ const Quiz = () => {
     setShowResults(false);
     setCurrentSectionIndex(0);
     setCurrentQuestionIndex(0);
+    setCalcResults({});
   };
 
   const handleLogout = () => {
@@ -212,7 +218,7 @@ const Quiz = () => {
         sections: sections
       };
 
-      await generateQuizPDF(quizData, selectedAnswers);
+      await generateQuizPDF(quizData, selectedAnswers, calcResults);
       
       toast({
         title: "PDF Generato!",
