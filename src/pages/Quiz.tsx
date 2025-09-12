@@ -58,6 +58,7 @@ const Quiz = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [inputErrors, setInputErrors] = useState<{[key: string]: string}>({});
   const [calcResults, setCalcResults] = useState<{[key: string]: number}>({});
+  const [prepScoresPDF, setPrepScoresPDF] = useState<{}[]>([]);
   const [showResultsModal, setShowResultsModal] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -192,6 +193,7 @@ const Quiz = () => {
     
     // Salvo i risultati per il PDF
     setCalcResults(calcResults_data);
+    setPrepScoresPDF(prepScoresPDF_data)
   };
 
   const resetQuiz = () => {
