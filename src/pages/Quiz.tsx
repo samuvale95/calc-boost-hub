@@ -130,6 +130,7 @@ const Quiz = () => {
         ...prev,
         [questionId]: {
           question: question.text,
+          response: option.text,
           score: option.score,
           dom: question.dom,
           subdom: question.subdom,
@@ -184,6 +185,7 @@ const Quiz = () => {
 
     // calcolo i risultati con la funzione importata da calc.ts
     const calcResults_data = calc.calcResults(selectedAnswers);
+    console.log("Quiz Output:",selectedAnswers)
     console.log("📊 Risultati calcolati:", calcResults_data);
     
     // Salvo i risultati per il PDF
