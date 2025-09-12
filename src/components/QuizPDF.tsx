@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     borderBottom: '2 solid #2563eb',
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 8,
@@ -121,7 +121,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
     color: '#1f2937',
-    backgroundColor: '#f3f4f6',
     padding: 8,
     borderRadius: 3,
   },
@@ -229,7 +228,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers, ca
                     <Text style={styles.tableCellLabel}>Overall</Text>
                   </View>
                   <View style={styles.tableCell}>
-                    <Text style={styles.tableCellValue}>{calcResults.Overall?.toFixed(3) || 'N/A'}</Text>
+                    <Text style={styles.tableCellValue}>{calcResults.Overall?.toFixed(2) || 'N/A'}</Text>
                   </View>
                 </View>
               </View>
@@ -240,18 +239,18 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers, ca
               <Text style={styles.resultsTitle}>Punteggio per Domini</Text>
               <View style={styles.table}>
                 {[
-                  {dom: 'Mot', label:"Abilità Motorie"},
-                  {dom: "Lan", label:"Linguaggio e Interazione Sociale"},
+                  {dom: 'Mot', label:"Abilità motorie"},
+                  {dom: "Lan", label:"Linguaggio e interazione sociale"},
                   {dom: "Aut", label:"Autonomie"},
-                  {dom: "Mem", label:"Memoria e Abilità Scolastiche"},
-                  {dom: "Emo", label:"Regolazione Comportamentale ed Emotiva"}
+                  {dom: "Mem", label:"Memoria e abilità scolastiche"},
+                  {dom: "Emo", label:"Regolazione comportamentale ed emotiva"}
                 ].map(({dom, label}) => (
                   <View key={dom} style={styles.tableRow}>
                     <View style={styles.tableCell}>
                       <Text style={styles.tableCellLabel}>{label}</Text>
                     </View>
                     <View style={styles.tableCell}>
-                      <Text style={styles.tableCellValue}>{calcResults[dom]?.toFixed(3) || 'N/A'}</Text>
+                      <Text style={styles.tableCellValue}>{calcResults[dom]?.toFixed(2) || 'N/A'}</Text>
                     </View>
                   </View>
                 ))}
@@ -265,10 +264,10 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers, ca
                 {Array.from({length: 19}, (_, i) => i + 1).map(subdom => (
                   <View key={subdom} style={styles.tableRow}>
                     <View style={styles.tableCell}>
-                      <Text style={styles.tableCellLabel}>Sottodominio {subdom}</Text>
+                      <Text style={styles.tableCellLabel}>Sub {subdom}</Text>
                     </View>
                     <View style={styles.tableCell}>
-                      <Text style={styles.tableCellValue}>{calcResults[`sub${subdom}`]?.toFixed(3) || 'N/A'}</Text>
+                      <Text style={styles.tableCellValue}>{calcResults[`sub${subdom}`]?.toFixed(2) || 'N/A'}</Text>
                     </View>
                   </View>
                 ))}
