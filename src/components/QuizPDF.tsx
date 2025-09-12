@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
     color: '#1f2937',
+    backgroundColor: '#f3f4f6',
     padding: 8,
     borderRadius: 3,
   },
@@ -206,13 +207,13 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers, ca
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.title}>D-DAND</Text>
+          <Text style={styles.title}>Risultati Test di Formazione Medica</Text>
           <Text style={styles.subtitle}>Report dei Risultati</Text>
         </View>
 
         {/* Patient Name Section */}
         <View style={styles.patientName}>
-          <Text style={styles.resultsTitle}>Identificativo Paziente: _________________________</Text>
+          <Text style={styles.resultsTitle}>Nome Paziente: _________________________</Text>
         </View>
 
 
@@ -221,7 +222,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers, ca
           <>
             {/* Overall Results */}
             <View style={styles.resultsSection}>
-              <Text style={styles.resultsTitle}>Punteggio Overall</Text>
+              <Text style={styles.resultsTitle}>Risultati Overall</Text>
               <View style={styles.table}>
                 <View style={styles.tableRow}>
                   <View style={styles.tableCell}>
@@ -235,19 +236,13 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers, ca
             </View>
 
             {/* Domain Results */}
-            <View style={styles.resultsSection}> 
-              <Text style={styles.resultsTitle}>Punteggi per Domini</Text>
+            <View style={styles.resultsSection}>
+              <Text style={styles.resultsTitle}>Risultati per Domini</Text>
               <View style={styles.table}>
-                {[
-                  {domain: 'Mot', label: "Abilità Motorie"},
-                  {domain: "Lan", label:"Linguaggio e Interazione Sociale"},
-                  {domain: "Aut", label:"Autonomie"},
-                  {domain: "Mem", label:"Memoria e Abilità Scolastiche"},
-                  {domain: "Emo", label:"Regolazione Comportamentale ed Emotiva"}
-                ].map(({domain, label}) => (
+                {['Mot', 'Aut', 'Lan', 'Mem', 'Emo'].map(domain => (
                   <View key={domain} style={styles.tableRow}>
                     <View style={styles.tableCell}>
-                      <Text style={styles.tableCellLabel}>{label}</Text>
+                      <Text style={styles.tableCellLabel}>{domain}</Text>
                     </View>
                     <View style={styles.tableCell}>
                       <Text style={styles.tableCellValue}>{calcResults[domain]?.toFixed(3) || 'N/A'}</Text>
@@ -259,12 +254,12 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers, ca
 
             {/* Subdomain Results */}
             <View style={styles.resultsSection}>
-              <Text style={styles.resultsTitle}>Punteggi per Sottodomini</Text>
+              <Text style={styles.resultsTitle}>Risultati per Sottodomini</Text>
               <View style={styles.table}>
                 {Array.from({length: 19}, (_, i) => i + 1).map(subdom => (
                   <View key={subdom} style={styles.tableRow}>
                     <View style={styles.tableCell}>
-                      <Text style={styles.tableCellLabel}>Sottodominio {subdom}</Text>
+                      <Text style={styles.tableCellLabel}>Subdom {subdom}</Text>
                     </View>
                     <View style={styles.tableCell}>
                       <Text style={styles.tableCellValue}>{calcResults[`sub${subdom}`]?.toFixed(3) || 'N/A'}</Text>
@@ -276,7 +271,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers, ca
 
             {/* Individual Item Results */}
             <View style={styles.resultsSection}>
-              <Text style={styles.resultsTitle}>Punteggio per Item</Text>
+              <Text style={styles.resultsTitle}>Punteggio per Ogni Item</Text>
               <View style={styles.table}>
                 {Object.entries(selectedAnswers).map(([questionId, answer]) => {
                   const question = quizData.questions.find(q => q.id === questionId);
@@ -286,7 +281,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers, ca
                         <Text style={styles.tableCellLabel}>{question?.text || questionId}</Text>
                       </View>
                       <View style={styles.tableCell}>
-                        <Text style={styles.tableCellValue}>{Math.round(answer.score * answer.prop * 100) || 'N/A'}</Text>
+                        <Text style={styles.tableCellValue}>{answer.score || 'N/A'}</Text>
                       </View>
                     </View>
                   );
