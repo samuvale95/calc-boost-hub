@@ -20,7 +20,6 @@ interface AnswerData {
   score: number;
   dom: string;
   subdom: number;
-  prop?: number;
   [key: string]: string | number; // For open-numeric fields
 }
 

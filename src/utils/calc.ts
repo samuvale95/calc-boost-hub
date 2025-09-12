@@ -38,20 +38,20 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: n
 
   // calcolo ln(media) overall
   const overallItems = responseArray.filter((resp: any) => resp.subdom >= 1 && resp.subdom <= 17); // elimino subdom 0, 18, 19 
-  allLnMeans["Overall"] = calcLnMean(overallItems.map((item: any) => item.score*item.prop)) // calcolo ln(media) e aggiungo a allLnMeans
+  allLnMeans["Overall"] = calcLnMean(overallItems.map((item: any) => item.score)) // calcolo ln(media) e aggiungo a allLnMeans
 
   // calcolo ln(medie) doms
   const domNames = ["Mot", "Aut", "Lan", "Mem", "Emo"];
 
   for (const domName of domNames) {
     const items = responseArray.filter((resp: any) => resp.dom === domName); // filtro per dom
-    allLnMeans[domName] = calcLnMean(items.map((item: any) => item.score*item.prop)); // calcolo ln(media) e aggiungo a allLnMeans
+    allLnMeans[domName] = calcLnMean(items.map((item: any) => item.score)); // calcolo ln(media) e aggiungo a allLnMeans
   }
 
   // calcolo ln(medie) subdoms ESCLUSI 18 e 19
   for (let i = 1; i <= 17; i++) {
     const items = responseArray.filter((resp: any) => resp.subdom === i); // filtro per subdom
-    const mean = calcLnMean(items.map((item: any) => item.score*item.prop)); // calcolo ln(media)
+    const mean = calcLnMean(items.map((item: any) => item.score)); // calcolo ln(media)
     allLnMeans[`sub${i}`] = mean; // aggiungo ln(media) a allLnMeans
   }
 
