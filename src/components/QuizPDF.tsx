@@ -124,14 +124,6 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 3,
   },
-  // patientName: {
-  //   fontSize: 12,
-  //   marginBottom: 20,
-  //   padding: 10,
-  //   border: '2 solid #e5e7eb',
-  //   borderRadius: 3,
-  //   backgroundColor: '#f9fafb',
-  // },
 });
 
 interface QuizPDFProps {
@@ -207,7 +199,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
         </View>
 
         {/* Patient Name Section */}
-        <View>
+        <View style={styles.resultsSection}>
           <Text style={styles.resultsTitle}>Identificativo Paziente: ________________________________</Text>
         </View>
 
@@ -283,7 +275,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                       <View style={[styles.tableCell, { flex: 1 }]}>
                         <Text style={styles.tableCellValue}>{score || 'N/A'}</Text>
                       </View>
-                      <View style={styles.[styles.tableCell, { flex: 2 }]}>
+                      <View style={[styles.tableCell, { flex: 2 }]}>
                         <Text style={styles.tableCellValue}>{response || 'N/A'}</Text>
                       </View>
                     </View>
