@@ -124,6 +124,13 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 3,
   },
+    fillingLine: {
+    fontSize: 14,
+    marginBottom: 10,
+    color: '#1f2937',
+    padding: 8,
+    borderRadius: 3,
+  },
 });
 
 interface QuizPDFProps {
@@ -200,7 +207,8 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
 
         {/* Patient Name Section */}
         <View style={styles.resultsSection}>
-          <Text style={styles.resultsTitle}>Identificativo Paziente: ________________________________</Text>
+          <Text style={styles.resultsTitle}>Identificativo Paziente:</Text>
+          <Text style={styles.fillingLine}>________________________________</Text>
         </View>
 
 
@@ -269,14 +277,14 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                 {scoresPDF.map(({question, response = null, score}) => {
                   return (
                     <View key={question} style={styles.tableRow}>
-                      <View style={[styles.tableCell, { flex: 2 }]}>
-                        <Text style={styles.tableCellLabel}>{question || ''}</Text>
+                      <View style={[styles.tableCell, { flex: 1 }]}>
+                        <Text style={styles.tableCellLabel}>{question || 'N/A'}</Text>
                       </View>
                       <View style={[styles.tableCell, { flex: 1 }]}>
                         <Text style={styles.tableCellValue}>{score || 'N/A'}</Text>
                       </View>
                       <View style={[styles.tableCell, { flex: 2 }]}>
-                        <Text style={styles.tableCellValue}>{response || 'N/A'}</Text>
+                        <Text style={styles.tableCellValue}>{response || ''}</Text>
                       </View>
                     </View>
                   );
