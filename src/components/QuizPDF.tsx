@@ -268,13 +268,13 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                 {scoresPDF.map(({question, response = null, score}) => {
                   return (
                     <View key={question} style={styles.tableRow} wrap={false}>
-                      <View style={[styles.tableCell, { flex: 1, justifyContent: 'center', backgroundColor: 'yellow'}]}>
+                      <View style={[styles.tableCell, { flex: 1, justifyContent: 'center'}]}>
                         <Text style={styles.tableCellLabel}>{question || 'N/A'}</Text>
                       </View>
-                      <View style={[styles.tableCell, { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor:'blue' }]}>
+                      <View style={[styles.tableCell, { flex: 1, justifyContent: 'center', alignItems: 'center'}]}>
                         <Text style={styles.tableCellValue}>{score || 'N/A'}</Text>
                       </View>
-                      <View style={[styles.tableCell, { flex: 2, justifyContent: 'center', backgroundColor:'yellow' }]}>
+                      <View style={[styles.tableCell, { flex: 2, justifyContent: 'center'}]}>
                         <Text style={styles.tableCellValue}>{response || ''}</Text>
                       </View>
                     </View>
