@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: 'red',
+    color: '#1f2937',
     padding: 8,
     borderRadius: 3,
   },
@@ -268,13 +268,13 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                 {scoresPDF.map(({question, response = null, score}) => {
                   return (
                     <View key={question} style={styles.tableRow}>
-                      <View style={[styles.tableCell, { flex: 1 }]}>
+                      <View style={[styles.tableCell, { flex: 1, alignItems: 'center' }]}>
                         <Text style={styles.tableCellLabel}>{question || 'N/A'}</Text>
                       </View>
-                      <View style={[styles.tableCell, { flex: 1 }]}>
+                      <View style={[styles.tableCell, { flex: 1, justifyContent: 'center', alignItems: 'center' }]}>
                         <Text style={styles.tableCellValue}>{score || 'N/A'}</Text>
                       </View>
-                      <View style={[styles.tableCell, { flex: 2 }]}>
+                      <View style={[styles.tableCell, { flex: 2, alignItems: 'center' }]}>
                         <Text style={styles.tableCellValue}>{response || ''}</Text>
                       </View>
                     </View>
