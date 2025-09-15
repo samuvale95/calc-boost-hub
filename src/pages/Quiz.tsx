@@ -188,15 +188,15 @@ const Quiz = () => {
     console.log("📊 Risultati calcolati:", calcResults_data);
 
     // preparo gli scores con la funzione importata da prepPDF.ts
-    const scoresPDF = prepPDF.prepScoresPDF(selectedAnswers)
-    console.log("📊 Score preparati:", scoresPDF);
+    const prepScoresPDF_data = prepPDF.prepScoresPDF(selectedAnswers)
+    console.log("📊 Score preparati:", prepScoresPDF_data);
 
     // voglio vedere struttura di slectedAnswers
     console.log(selectedAnswers)
     
     // Salvo i risultati per il PDF
     setCalcResults(calcResults_data);
-    setPrepScoresPDF(scoresPDF)
+    setPrepScoresPDF(prepScoresPDF_data)
   };
 
   const resetQuiz = () => {
@@ -230,7 +230,7 @@ const Quiz = () => {
         sections: sections
       };
 
-      await generateQuizPDF(quizData, scoresPDF, calcResults); // genera il pdf
+      await generateQuizPDF(quizData, prepScoresPDF, calcResults); // genera il pdf
       
       toast({
         title: "PDF Generato!",
