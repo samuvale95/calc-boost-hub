@@ -124,14 +124,14 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 3,
   },
-  patientName: {
-    fontSize: 12,
-    marginBottom: 20,
-    padding: 10,
-    border: '2 solid #e5e7eb',
-    borderRadius: 3,
-    backgroundColor: '#f9fafb',
-  },
+  // patientName: {
+  //   fontSize: 12,
+  //   marginBottom: 20,
+  //   padding: 10,
+  //   border: '2 solid #e5e7eb',
+  //   borderRadius: 3,
+  //   backgroundColor: '#f9fafb',
+  // },
 });
 
 interface QuizPDFProps {
@@ -145,9 +145,9 @@ interface QuizPDFProps {
     sections: any[];
   };
   scoresPDF: {
-    question: string,
-    response?: string,
-    score: number
+    question: string;
+    response?: string;
+    score: number | string;
   }[];
   calcResults?: { [key: string]: number };
 }
@@ -207,8 +207,8 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
         </View>
 
         {/* Patient Name Section */}
-        <View style={styles.patientName}>
-          <Text style={styles.resultsTitle}>Identificativo Paziente: _________________________</Text>
+        <View>
+          <Text style={styles.resultsTitle}>Identificativo Paziente: ________________________________</Text>
         </View>
 
 
@@ -274,17 +274,16 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
             <View style={styles.resultsSection}>
               <Text style={styles.resultsTitle}>Punteggio per Item</Text>
               <View style={styles.table}>
-              
                 {scoresPDF.map(({question, response = null, score}) => {
                   return (
                     <View key={question} style={styles.tableRow}>
-                      <View style={styles.tableCell}>
-                        <Text style={styles.tableCellLabel}>{question || 'N/A'}</Text>
+                      <View style={[styles.tableCell, { flex: 2 }]}>
+                        <Text style={styles.tableCellLabel}>{question || ''}</Text>
                       </View>
-                      <View style={styles.tableCell}>
+                      <View style={[styles.tableCell, { flex: 1 }]}>
                         <Text style={styles.tableCellValue}>{score || 'N/A'}</Text>
                       </View>
-                      <View style={styles.tableCell}>
+                      <View style={styles.[styles.tableCell, { flex: 2 }]}>
                         <Text style={styles.tableCellValue}>{response || 'N/A'}</Text>
                       </View>
                     </View>

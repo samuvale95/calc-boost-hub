@@ -15,7 +15,7 @@ export interface QuizData {
 export interface ScoresPDF {
   question: string;
   response?: string;
-  score: number;
+  score: number | string;
 }[];
 
 export const generateQuizPDF = async (quizData: QuizData, scoresPDF: ScoresPDF, calcResults?: { [key: string]: number }) => {
