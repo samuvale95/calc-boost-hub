@@ -120,14 +120,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#1f2937',
-    padding: 8,
-    borderRadius: 3,
-  },
-    fillingLine: {
-    fontSize: 14,
-    marginBottom: 10,
-    color: '#1f2937',
+    color: 'red',
     padding: 8,
     borderRadius: 3,
   },
@@ -207,10 +200,8 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
 
         {/* Patient Name Section */}
         <View style={styles.resultsSection}>
-          <Text style={styles.resultsTitle}>Identificativo Paziente:</Text>
-          <Text style={styles.fillingLine}>________________________________</Text>
+          <Text style={styles.resultsTitle}>Identificativo Paziente: ________________________________</Text>
         </View>
-
 
         {/* Results Sections */}
         {calcResults && (
