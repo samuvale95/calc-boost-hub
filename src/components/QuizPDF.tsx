@@ -144,7 +144,11 @@ interface QuizPDFProps {
     questions: any[];
     sections: any[];
   };
-  selectedAnswers: { [key: string]: any };
+  scoresPDF: {
+    question: string,
+    response?: string,
+    score: number
+  }[];
   calcResults?: { [key: string]: number };
 }
 
@@ -191,15 +195,7 @@ const renderAnswer = (question: any, answer: any) => {
   }
 };
 
-const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers, calcResults }) => {
-  // Group questions by section
-  const questionsBySection = quizData.questions.reduce((acc, question) => {
-    if (!acc[question.section]) {
-      acc[question.section] = [];
-    }
-    acc[question.section].push(question);
-    return acc;
-  }, {} as { [key: string]: any[] });
+const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResults }) => {
 
   return (
     <Document>
@@ -278,15 +274,18 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, selectedAnswers, ca
             <View style={styles.resultsSection}>
               <Text style={styles.resultsTitle}>Punteggio per Item</Text>
               <View style={styles.table}>
-                {Object.entries(selectedAnswers).map(([questionId, answer]) => {
-                  const question = quizData.questions.find(q => q.id === questionId);
+              
+                {scoresPDF.map(([question, response = null, score]) => {
                   return (
-                    <View key={questionId} style={styles.tableRow}>
+                    <View key={question} style={styles.tableRow}>
                       <View style={styles.tableCell}>
-                        <Text style={styles.tableCellLabel}>{question?.text || questionId}</Text>
+                        <Text style={styles.tableCellLabel}>{question || 'N/A'}</Text>
                       </View>
                       <View style={styles.tableCell}>
-                        <Text style={styles.tableCellValue}>{answer.score || 'N/A'}</Text>
+                        <Text style={styles.tableCellValue}>{score || 'N/A'}</Text>
+                      </View>
+                      <View style={styles.tableCell}>
+                        <Text style={styles.tableCellValue}>{response || 'N/A'}</Text>
                       </View>
                     </View>
                   );

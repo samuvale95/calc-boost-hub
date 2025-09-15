@@ -10,7 +10,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useAdmin } from "@/hooks/useAdmin";
 import quizJson from "../data/DAND_qt.json";
 import { v4 as uuidv4 } from "uuid";
-import { generateQuizPDF, QuizData } from "@/utils/pdfGenerator";
+import { generateQuizPDF, QuizData, ScoresPDF } from "@/utils/pdfGenerator";
 import * as calc from "@/utils/calc";
 import * as prepPDF from "@/utils/prepPDF";
 
@@ -230,7 +230,7 @@ const Quiz = () => {
         sections: sections
       };
 
-      await generateQuizPDF(quizData, selectedAnswers, calcResults); // genera il pdf
+      await generateQuizPDF(quizData, scoresPDF, calcResults); // genera il pdf
       
       toast({
         title: "PDF Generato!",

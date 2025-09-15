@@ -12,10 +12,16 @@ export interface QuizData {
   sections: any[];
 }
 
-export const generateQuizPDF = async (quizData: QuizData, selectedAnswers: { [key: string]: any }, calcResults?: { [key: string]: number }) => {
+export interface ScoresPDF {
+  question: string;
+  response?: string;
+  score: number;
+}[];
+
+export const generateQuizPDF = async (quizData: QuizData, scoresPDF: ScoresPDF, calcResults?: { [key: string]: number }) => {
   try {
     // Generate PDF blob
-    const blob = await pdf(React.createElement(QuizPDFDocument, { quizData, selectedAnswers, calcResults })).toBlob();
+    const blob = await pdf(React.createElement(QuizPDFDocument, { quizData, scoresPDF, calcResults })).toBlob(); // crea il pdf
     
     // Create download link
     const url = URL.createObjectURL(blob);
