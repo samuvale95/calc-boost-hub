@@ -210,7 +210,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
             <View style={styles.resultsSection}>
               <Text style={styles.resultsTitle}>Punteggio Overall</Text>
               <View style={styles.table}>
-                <View style={styles.tableRow} wrap={false}>
+                <View style={styles.tableRow}>
                   <View style={styles.tableCell}>
                     <Text style={styles.tableCellLabel}>Overall</Text>
                   </View>
@@ -232,7 +232,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                   {dom: "Mem", label:"Memoria e abilità scolastiche"},
                   {dom: "Emo", label:"Regolazione comportamentale ed emotiva"}
                 ].map(({dom, label}) => (
-                  <View key={dom} style={styles.tableRow} wrap={false}>
+                  <View key={dom} style={styles.tableRow}>
                     <View style={styles.tableCell}>
                       <Text style={styles.tableCellLabel}>{label}</Text>
                     </View>
@@ -249,7 +249,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
               <Text style={styles.resultsTitle}>Punteggio per Sottodomini</Text>
               <View style={styles.table}>
                 {Array.from({length: 19}, (_, i) => i + 1).map(subdom => (
-                  <View key={subdom} style={styles.tableRow} wrap={false}>
+                  <View key={subdom} style={styles.tableRow}>
                     <View style={styles.tableCell}>
                       <Text style={styles.tableCellLabel}>Sub {subdom}</Text>
                     </View>
@@ -267,7 +267,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
               <View style={styles.table}>
                 {scoresPDF.map(({question, response = null, score}) => {
                   return (
-                    <View key={question} style={styles.tableRow} wrap={false}>
+                    <View key={question} style={styles.tableRow}>
                       <View style={[styles.tableCell, { flex: 1, justifyContent: 'center'}]}>
                         <Text style={styles.tableCellLabel}>{question || 'N/A'}</Text>
                       </View>
