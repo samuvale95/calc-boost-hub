@@ -185,14 +185,9 @@ const Quiz = () => {
 
     // calcolo i risultati con la funzione importata da calc.ts
     const calcResults_data = calc.calcResults(selectedAnswers);
-    console.log("📊 Risultati calcolati:", calcResults_data);
 
     // preparo gli scores con la funzione importata da prepPDF.ts
     const prepScoresPDF_data = prepPDF.prepScoresPDF(selectedAnswers)
-    console.log("📊 Score preparati:", prepScoresPDF_data);
-
-    // voglio vedere struttura di slectedAnswers
-    console.log(selectedAnswers)
     
     // Salvo i risultati per il PDF
     setCalcResults(calcResults_data);
