@@ -275,7 +275,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
               <Text style={styles.resultsTitle}>Punteggio per Item</Text>
               <View style={styles.table}>
               
-                {scoresPDF.map(([question, response = null, score]) => {
+                {scoresPDF.map(({question, response = null, score}) => {
                   return (
                     <View key={question} style={styles.tableRow}>
                       <View style={styles.tableCell}>
