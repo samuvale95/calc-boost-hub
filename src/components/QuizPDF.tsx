@@ -215,7 +215,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                     <Text style={styles.tableCellLabel}>Overall</Text>
                   </View>
                   <View style={styles.tableCell}>
-                    <Text style={styles.tableCellValue}>{calcResults.Overall?.toFixed(2) || 'N/A'}</Text>
+                    <Text style={styles.tableCellValue}>{calcResults.Overall?.toFixed(0) || 'N/A'}</Text>
                   </View>
                 </View>
               </View>
@@ -237,7 +237,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                       <Text style={styles.tableCellLabel}>{label}</Text>
                     </View>
                     <View style={styles.tableCell}>
-                      <Text style={styles.tableCellValue}>{calcResults[dom]?.toFixed(2) || 'N/A'}</Text>
+                      <Text style={styles.tableCellValue}>{calcResults[dom]?.toFixed(0) || 'N/A'}</Text>
                     </View>
                   </View>
                 ))}
