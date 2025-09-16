@@ -66,7 +66,7 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: n
     const sd = dom?.sd || 1; // estrapolo sd
     const pred = (dom?.int || 0) + ((dom?.s_age || 0) * lnAge0) + ((dom?.s_nat || 0) * nat) + ((dom?.s_sex || 0) * sex) + ((dom?.s_sexnat || 0) * sex * nat); // calcolo media prevista per la popolazione dei pari
     const z = (value - pred) / sd; // calcolo z
-    results[key] = jStat.normal.cdf(z, 0, 1); // calcolo percentile rispetto alla distribuzione normale standard
+    results[key] = jStat.normal.cdf(z, 0, 1) * 100; // calcolo percentile rispetto alla distribuzione normale standard
   }
 
   // calcolo percentile subdom 19
@@ -75,7 +75,7 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: n
   const sub19Mean = Math.exp(0.114 + (0.416 * lnAge0) + (0.559 * nat)); // calcolo media popolazione dei pari
   const alpha = 0.521648409;
   const beta = sub19Mean / alpha;
-  results["sub19"] = jStat.gamma.cdf(nRisvegli, alpha, beta); // calcolo percentile rispetto alla distribuzione gamma dei pari
+  results["sub19"] = jStat.gamma.cdf(nRisvegli, alpha, beta) * 100; // calcolo percentile rispetto alla distribuzione gamma dei pari
 
   return results
 }
