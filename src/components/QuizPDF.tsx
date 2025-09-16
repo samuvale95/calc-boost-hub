@@ -248,13 +248,33 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
             <View style={styles.resultsSection}>
               <Text style={styles.resultsTitle}>Punteggio per Sottodomini</Text>
               <View style={styles.table}>
-                {Array.from({length: 19}, (_, i) => i + 1).map(subdom => (
-                  <View key={subdom} style={styles.tableRow}>
+                {[
+                  {dom: 'sub1', label:"Grossomotorio"},
+                  {dom: "sub2", label:"Energia e sport"},
+                  {dom: "sub3", label:"Finemotorio"},
+                  {dom: "sub4", label:"Interazione sociale"},
+                  {dom: "sub5", label:"Gioco"},
+                  {dom: 'sub6', label:"Comprensione linguistica"},
+                  {dom: "sub7", label:"Produzione linguistica"},
+                  {dom: "sub8", label:"Alimentazione"},
+                  {dom: "sub9", label:"Autonomie personali"},
+                  {dom: "sub10", label:"Autonomie domestiche"},
+                  {dom: 'sub11', label:"Autonomie sociali"},
+                  {dom: "sub12", label:"Memoria e apprendimento"},
+                  {dom: "sub13", label:"Regolazione emotiva"},
+                  {dom: "sub14", label:"Comportamento internalizzante"},
+                  {dom: "sub15", label:"Attenzione e controllo motorio"},
+                  {dom: 'sub16', label:"Problemi sociali e comunicativi"},
+                  {dom: "sub17", label:"Produzione linguistica"},
+                  {dom: "sub18", label:"Ore di sonno totali"},
+                  {dom: "sub19", label:"Risvegli settimanali"}
+                ].map(({dom, label}) => (
+                  <View key={dom} style={styles.tableRow}>
                     <View style={styles.tableCell}>
-                      <Text style={styles.tableCellLabel}>Sub {subdom}</Text>
+                      <Text style={styles.tableCellLabel}>{label}</Text>
                     </View>
                     <View style={styles.tableCell}>
-                      <Text style={styles.tableCellValue}>{calcResults[`sub${subdom}`]?.toFixed(2) || 'N/A'}</Text>
+                      <Text style={styles.tableCellValue}>{calcResults[dom]?.toFixed(0) || 'N/A'}</Text>
                     </View>
                   </View>
                 ))}
