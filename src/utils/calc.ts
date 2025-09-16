@@ -58,23 +58,24 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: n
   // calcolo ln(media) subdom 18
   allLnMeans["sub18"] = Math.log(responseArray.filter((resp: any) => resp.subdom === 18).map((resp: any) => resp.score).reduce((acc: number, val: number) => acc + val, 0) / 24);
 
-  // calcolo Z ESCLUSO subdom 19
+  // calcolo percentile ESCLUSO subdom 19
   const results: { [key: string]: number } = {}
 
   for (const [key, value] of Object.entries(allLnMeans)) {
-    const dom = table.find((item: any) => item.dom === key); // può essere sub, dom o overall
-    const sd = dom?.sd || 1;
-    const pred = (dom?.int || 0) + ((dom?.s_age || 0) * lnAge0) + ((dom?.s_nat || 0) * nat) + ((dom?.s_sex || 0) * sex) + ((dom?.s_sexnat || 0) * sex * nat);
-    results[key] = (value - pred) / sd;
+    const dom = table.find((item: any) => item.dom === key); // trovo riga per overall/dom/subdom in table.js
+    const sd = dom?.sd || 1; // estrapolo sd
+    const pred = (dom?.int || 0) + ((dom?.s_age || 0) * lnAge0) + ((dom?.s_nat || 0) * nat) + ((dom?.s_sex || 0) * sex) + ((dom?.s_sexnat || 0) * sex * nat); // calcolo media prevista per la popolazione dei pari
+    const z = (value - pred) / sd; // calcolo z
+    results[key] = jStat.normal.cdf(z, 0, 1); // calcolo percentile rispetto alla distribuzione normale standard
   }
 
-  // calcolo Z subdom 19
+  // calcolo percentile subdom 19
   const subdom19Item = responseArray.find((item: any) => item.subdom === 19);
   const nRisvegli = subdom19Item?.score || 0; // estrapolo score utente
-  const sub19Mean = Math.exp(0.114 + (0.416 * lnAge0) + (0.559 * nat)); // calcolo media
+  const sub19Mean = Math.exp(0.114 + (0.416 * lnAge0) + (0.559 * nat)); // calcolo media popolazione dei pari
   const alpha = 0.521648409;
   const beta = sub19Mean / alpha;
-  results["sub19"] = jStat.gamma.cdf(nRisvegli, alpha, beta);
+  results["sub19"] = jStat.gamma.cdf(nRisvegli, alpha, beta); // calcolo percentile rispetto alla distribuzione gamma dei pari
 
   return results
 }
