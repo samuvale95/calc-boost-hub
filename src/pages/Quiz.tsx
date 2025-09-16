@@ -192,6 +192,9 @@ const Quiz = () => {
     // Salvo i risultati per il PDF
     setCalcResults(calcResults_data);
     setPrepScoresPDF(prepScoresPDF_data)
+
+    // stampo selectedAnswer a console che mi serve per test a foglio calc
+    console.log(selectedAnswers)
   };
 
   const resetQuiz = () => {
