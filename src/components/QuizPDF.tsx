@@ -265,7 +265,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                   {dom: "sub14", label:"Comportamento internalizzante"},
                   {dom: "sub15", label:"Attenzione e controllo motorio"},
                   {dom: 'sub16', label:"Problemi sociali e comunicativi"},
-                  {dom: "sub17", label:"Produzione linguistica"},
+                  {dom: "sub17", label:"Comportamento esternalizzante"},
                   {dom: "sub18", label:"Ore di sonno totali"},
                   {dom: "sub19", label:"Risvegli settimanali"}
                 ].map(({dom, label}) => (
