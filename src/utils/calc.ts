@@ -2,6 +2,7 @@ import pkg from "jstat"; // per distribuzione gamma
 const { jStat } = pkg;
 
 import table from "../data/calc_table.json" with { type: "json" } // parametri di pred
+// import data from "../utils/test_data.json" with { type: "json" }
 
 // creo funzione per calcolo meadia
 function calcMean(arr: number[]): number {
@@ -9,9 +10,9 @@ function calcMean(arr: number[]): number {
   const mean = (sum / arr.length);
   
   if (mean === 0) {
-    return 0.0001 // chiedi conferma a Toraldo
+    return 0.008162571 // chiedi conferma a Toraldo
   } else if (mean === 1) {
-    return 0.9999 // chiedi conferma a Toraldo
+    return 0.991837429 // chiedi conferma a Toraldo
   } else {
     return mean
   }
@@ -85,4 +86,4 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: n
   return results
 }
 
-console.log(calcResults(test_data))
+// console.log(calcResults(data))
