@@ -2,7 +2,6 @@ import pkg from "jstat"; // per distribuzione gamma
 const { jStat } = pkg;
 
 import table from "../data/calc_table.json" with { type: "json" } // parametri di pred
-import test_data from "../utils/test_data.json" with { type: "json" } // parametri di pred
 
 // creo funzione per calcolo meadia
 function calcMean(arr: number[]): number {
@@ -58,7 +57,7 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: n
   for (let i = 1; i <= 17; i++) {
     const items = responseArray.filter((resp: any) => resp.subdom === i); // filtro per subdom eslcudendo 0, 18, 19
     const subMean = calcMean(items.map((item: any) => item.score)) // calcolo media per subdom
-    allLogit[`sub${i}`] = calcLogit(subMean);; // calcolo logit e aggiungo a allLogit
+    allLogit[`sub${i}`] = calcLogit(subMean); // calcolo logit e aggiungo a allLogit
   }
 
   // DA RIVEDERE SUBDOM 18
