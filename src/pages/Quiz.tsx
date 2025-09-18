@@ -684,7 +684,7 @@ const Quiz = () => {
                   <div className="flex justify-between items-center">
                     <span className="font-medium">Overall</span>
                     <span className="text-lg font-bold text-blue-600">
-                      {calcResults.Overall?.toFixed(3) || 'N/A'}
+                      {calcResults.Overall || 'N/A'}
                     </span>
                   </div>
                 </div>
@@ -699,7 +699,7 @@ const Quiz = () => {
                       <div className="flex justify-between items-center">
                         <span className="font-medium">{domain}</span>
                         <span className="font-bold text-green-600">
-                          {calcResults[domain]?.toFixed(3) || 'N/A'}
+                          {calcResults[domain] || 'N/A'}
                         </span>
                       </div>
                     </div>
@@ -716,7 +716,7 @@ const Quiz = () => {
                       <div className="flex justify-between items-center">
                         <span className="font-medium">Sub{subdom}</span>
                         <span className="font-bold text-purple-600">
-                          {calcResults[`sub${subdom}`]?.toFixed(3) || 'N/A'}
+                          {calcResults[`sub${subdom}`] || 'N/A'}
                         </span>
                       </div>
                     </div>
