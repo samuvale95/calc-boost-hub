@@ -7,23 +7,21 @@ import table from "../data/calc_table.json" with { type: "json" } // parametri d
 // creo funzione per calcolo meadia
 function calcMean(arr: number[]): number {
   const sum = arr.reduce((acc, val) => acc + val, 0);
-  const mean = (sum / arr.length);
-  
-  if (mean === 0) {
-    return 0.008162571 // chiedi conferma a Toraldo
-  } else if (mean === 1) {
-    return 0.991837429 // chiedi conferma a Toraldo
-  } else {
-    return mean
-  }
+  return (sum / arr.length);
 }
 
 // creo funzione per calcolo logit
 function calcLogit(mean: number): number {
-  return Math.log(mean / (1- mean));
+  if (mean === 0) {
+    return -4.8
+  } else if (mean === 1) {
+    return 4.8
+  } else {
+    return Math.log(mean / (1- mean)); 
+  }
 }
 
-export function calcResults(answers: { [key: string]: any }): { [key: string]: number } {
+export function calcResults(answers: { [key: string]: any }): { [key: string]: {}[] } {
   const responseArray: any[] = Object.values(answers);
   const allLogit: { [key: string]: number } = {};
 
@@ -61,19 +59,28 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: n
     allLogit[`sub${i}`] = calcLogit(subMean); // calcolo logit e aggiungo a allLogit
   }
 
-  // DA RIVEDERE SUBDOM 18
+  // calcolo logit subdom 18
   const meanSub18 = responseArray.filter((resp: any) => resp.subdom === 18).map((resp: any) => resp.score).reduce((acc: number, val: number) => acc + val, 0) / 24 // calcolo media subdom 18 con formula apposita
   allLogit["sub18"] = calcLogit(meanSub18) // calcolo logit e aggiungo a allLogit
 
   // calcolo percentili ESCLUSO subdom 19
-  const results: { [key: string]: number } = {}
+  const results: { [key: string]: {}[] } = {}
 
   for (const [key, value] of Object.entries(allLogit)) {
     const dom = table.find((item: any) => item.dom === key); // trovo riga coefficienti per overall/dom/subdom in table.js
     const sd = dom.sd; // estrapolo sd
     const pred = (dom.int) + ((dom.s_age) * lnAge0) + ((dom.s_nat) * nat) + ((dom.s_sex) * sex) + ((dom.s_sexnat) * sex * nat); // calcolo media prevista per la popolazione dei pari
     const z = (value - pred) / sd; // calcolo z
-    results[key] = jStat.normal.cdf(z, 0, 1) * 100; // calcolo percentile rispetto alla distribuzione normale standard
+    const p = jStat.normal.cdf(z, 0, 1) * 100; // calcolo percentile rispetto alla distribuzione normale standard
+
+    // preparo risultati per PDF e aggiungo a results
+    if (value === - 4.8) {
+      results[key] = [{"z": z.toFixed(2)}, {"p": "< "+p.toFixed(0) }]
+    } else if (value === 4.8) {
+      results[key] = [{"z": z.toFixed(2)}, {"p": "> "+p.toFixed(0) }]
+    } else {
+      results[key] = [{"z": z.toFixed(2)}, {"p": p.toFixed(0) }]
+    }  
   }
 
   // calcolo percentile subdom 19
@@ -81,7 +88,10 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: n
   const sub19Mean = Math.exp(0.114 + (0.416 * lnAge0) + (0.559 * nat)); // calcolo media popolazione dei pari
   const alpha = 0.521648409;
   const beta = sub19Mean / alpha;
-  results["sub19"] = jStat.gamma.cdf(nRisvegli, alpha, beta) * 100; // calcolo percentile rispetto alla distribuzione gamma dei pari
+  const p19 = (jStat.gamma.cdf(nRisvegli, alpha, beta) * 100); // calcolo percentile rispetto alla distribuzione gamma dei pari
+
+  // preparo risultati per PDF e aggiungo a results
+  results["sub19"] = [{"z": "N/A"}, {"p": p19.toFixed(0)}]
 
   return results
 }
