@@ -215,7 +215,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                     <Text style={styles.tableCellLabel}>Overall</Text>
                   </View>
                   <View style={styles.tableCell}>
-                    <Text style={styles.tableCellValue}>{calcResults.Overall.p || 'N/A'}</Text>
+                    <Text style={styles.tableCellValue}>{calcResults.Overall.find(el => 'p' in el)?.p || 'N/A'}</Text>
                   </View>
                 </View>
               </View>
@@ -237,7 +237,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                       <Text style={styles.tableCellLabel}>{label}</Text>
                     </View>
                     <View style={styles.tableCell}>
-                      <Text style={styles.tableCellValue}>{calcResults[dom].p || 'N/A'}</Text>
+                      <Text style={styles.tableCellValue}>{calcResults[dom].find(el => 'p' in el)?.p || 'N/A'}</Text>
                     </View>
                   </View>
                 ))}
@@ -274,7 +274,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                       <Text style={styles.tableCellLabel}>{label}</Text>
                     </View>
                     <View style={styles.tableCell}>
-                      <Text style={styles.tableCellValue}>{calcResults[dom].p || 'N/A'}</Text>
+                      <Text style={styles.tableCellValue}>{calcResults[dom].find(el => 'p' in el)?.p || 'N/A'}</Text>
                     </View>
                   </View>
                 ))}
