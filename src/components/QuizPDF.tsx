@@ -214,10 +214,10 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                   <View style={styles.tableCell}>
                     <Text style={styles.tableCellLabel}>Overall</Text>
                   </View>
-                  <View style={styles.tableCell}>
+                     <View style={[styles.tableCell, { alignItems: 'center'}]}>
                     <Text style={styles.tableCellValue}>z:  {calcResults.Overall.find(el => 'z' in el)?.z || 'N/A'} percentile: {calcResults.Overall.find(el => 'p' in el)?.p || 'N/A'} </Text>
                   </View>
-                  <View style={styles.tableCell}>
+                    <View style={[styles.tableCell, { alignItems: 'center'}]}>
                     <Text style={styles.tableCellValue}>percentile:  {calcResults.Overall.find(el => 'p' in el)?.p || 'N/A'} </Text>
                   </View>
                 </View>
@@ -239,10 +239,10 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                     <View style={styles.tableCell}>
                       <Text style={styles.tableCellLabel}>{label}</Text>
                     </View>
-                    <View style={styles.tableCell}>
+                    <View style={[styles.tableCell, { alignItems: 'center'}]}>
                       <Text style={styles.tableCellValue}>z:  {calcResults[dom].find(el => 'z' in el)?.z || 'N/A'}</Text>
                     </View>
-                    <View style={styles.tableCell}>
+                    <View style={[styles.tableCell, { alignItems: 'center'}]}>
                       <Text style={styles.tableCellValue}>percentile:  {calcResults[dom].find(el => 'p' in el)?.p || 'N/A'}</Text>
                     </View>
                   </View>
@@ -279,10 +279,10 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                     <View style={styles.tableCell}>
                       <Text style={styles.tableCellLabel}>{label}</Text>
                     </View>
-                    <View style={styles.tableCell}>
+                    <View style={[styles.tableCell, { alignItems: 'center'}]}>
                       <Text style={styles.tableCellValue}>z:  {calcResults[dom].find(el => 'z' in el)?.z || 'N/A'}</Text>
                     </View>
-                    <View style={styles.tableCell}>
+                    <View style={[styles.tableCell, { alignItems: 'center'}]}>
                       <Text style={styles.tableCellValue}>percentile:  {calcResults[dom].find(el => 'p' in el)?.p || 'N/A'}</Text>
                     </View>
                   </View>
