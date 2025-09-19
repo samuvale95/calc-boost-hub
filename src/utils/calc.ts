@@ -74,9 +74,9 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: {
     const p = jStat.normal.cdf(z, 0, 1) * 100; // calcolo percentile rispetto alla distribuzione normale standard
 
     // preparo risultati per PDF e aggiungo a results
-    if (value === - 4.8) {
+    if (value === - 4.8 && p !== 0) {
       results[key] = {"z": z.toFixed(2), "p": "< "+p.toFixed(0) }
-    } else if (value === 4.8) {
+    } else if (value === 4.8 && p !== 100) {
       results[key] = {"z": z.toFixed(2), "p": "> "+p.toFixed(0) }
     } else {
       results[key] = {"z": z.toFixed(2), "p": p.toFixed(0) }

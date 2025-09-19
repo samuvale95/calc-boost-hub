@@ -109,9 +109,11 @@ const styles = StyleSheet.create({
   tableCellLabel: {
     fontWeight: 'bold',
     color: '#374151',
+    wordBreak: 'keep-all',
   },
   tableCellValue: {
     color: '#6b7280',
+    wordBreak: 'keep-all',
   },
   resultsSection: {
     marginBottom: 20,
