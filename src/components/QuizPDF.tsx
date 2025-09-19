@@ -215,7 +215,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                     <Text style={styles.tableCellLabel}>Overall</Text>
                   </View>
                      <View style={[styles.tableCell, { alignItems: 'center'}]}>
-                    <Text style={styles.tableCellValue}>z:  {calcResults.Overall.z || 'N/A'} percentile: {calcResults.Overall.find(el => 'p' in el)?.p || 'N/A'} </Text>
+                    <Text style={styles.tableCellValue}>z:  {calcResults.Overall.z || 'N/A'} </Text>
                   </View>
                     <View style={[styles.tableCell, { alignItems: 'center'}]}>
                     <Text style={styles.tableCellValue}>percentile:  {calcResults.Overall.p || 'N/A'} </Text>
