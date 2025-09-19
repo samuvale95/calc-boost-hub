@@ -2,7 +2,7 @@ import pkg from "jstat"; // per distribuzione gamma
 const { jStat } = pkg;
 
 import table from "../data/calc_table.json" with { type: "json" } // parametri di pred
-// import data from "../utils/test_data.json" with { type: "json" }
+import data from "../utils/test_data.json" with { type: "json" }
 
 // creo funzione per calcolo meadia
 function calcMean(arr: number[]): number {
@@ -70,16 +70,16 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: {
     const dom = table.find((item: any) => item.dom === key); // trovo riga coefficienti per overall/dom/subdom in table.js
     const sd = dom.sd; // estrapolo sd
     const pred = (dom.int) + ((dom.s_age) * lnAge0) + ((dom.s_nat) * nat) + ((dom.s_sex) * sex) + ((dom.s_sexnat) * sex * nat); // calcolo media prevista per la popolazione dei pari
-    const z = (value - pred) / sd; // calcolo z
-    const p = jStat.normal.cdf(z, 0, 1) * 100; // calcolo percentile rispetto alla distribuzione normale standard
+    const z = ((value - pred) / sd).toFixed(2); // calcolo z
+    const p = (jStat.normal.cdf(z, 0, 1) * 100).toFixed(0); // calcolo percentile rispetto alla distribuzione normale standard
 
     // preparo risultati per PDF e aggiungo a results
-    if (value === - 4.8 && p !== 0) {
-      results[key] = {"z": z.toFixed(2), "p": "< "+p.toFixed(0) }
-    } else if (value === 4.8 && p !== 100) {
-      results[key] = {"z": z.toFixed(2), "p": "> "+p.toFixed(0) }
+    if (value === - 4.8 && p !== "0") {
+      results[key] = {"z": z, "p": "< "+p }
+    } else if (value === 4.8 && p !== "100") {
+      results[key] = {"z": z, "p": "> "+p }
     } else {
-      results[key] = {"z": z.toFixed(2), "p": p.toFixed(0) }
+      results[key] = {"z": z, "p": p }
     }  
   }
 
@@ -96,4 +96,4 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: {
   return results
 }
 
-// console.log(calcResults(data))
+console.log(calcResults(data))
