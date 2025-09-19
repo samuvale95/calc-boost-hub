@@ -109,11 +109,15 @@ const styles = StyleSheet.create({
   tableCellLabel: {
     fontWeight: 'bold',
     color: '#374151',
-    wordBreak: 'keep-all',
+    whiteSpace: 'normal',
+    wordBreak: 'normal',
+    overflowWrap: 'normal',
   },
   tableCellValue: {
     color: '#6b7280',
-    wordBreak: 'keep-all',
+    whiteSpace: 'normal',
+    wordBreak: 'normal',
+    overflowWrap: 'normal',
   },
   resultsSection: {
     marginBottom: 20,
