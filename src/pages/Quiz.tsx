@@ -57,7 +57,7 @@ const Quiz = () => {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [inputErrors, setInputErrors] = useState<{[key: string]: string}>({});
-  const [calcResults, setCalcResults] = useState<{[key: string]: number}>({});
+  const [calcResults, setCalcResults] = useState<{ [key: string]: { z: string; p: string } }>({});
   const [prepScoresPDF, setPrepScoresPDF] = useState<{}[]>([]);
   const [showResultsModal, setShowResultsModal] = useState(false);
   const { toast } = useToast();
@@ -193,8 +193,6 @@ const Quiz = () => {
     setCalcResults(calcResults_data);
     setPrepScoresPDF(prepScoresPDF_data)
 
-    // stampo selectedAnswer a console che mi serve per test a foglio calc
-    console.log(selectedAnswers)
   };
 
   const resetQuiz = () => {

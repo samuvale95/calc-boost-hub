@@ -21,7 +21,7 @@ function calcLogit(mean: number): number {
   }
 }
 
-export function calcResults(answers: { [key: string]: any }): { [key: string]: {}[] } {
+export function calcResults(answers: { [key: string]: any }): { [key: string]: { z: string; p: string } } {
   const responseArray: any[] = Object.values(answers);
   const allLogit: { [key: string]: number } = {};
 
@@ -64,7 +64,7 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: {
   allLogit["sub18"] = calcLogit(meanSub18) // calcolo logit e aggiungo a allLogit
 
   // calcolo percentili ESCLUSO subdom 19
-  const results: { [key: string]: {}[] } = {}
+  const results: { [key: string]: { z: string; p: string } } = {};
 
   for (const [key, value] of Object.entries(allLogit)) {
     const dom = table.find((item: any) => item.dom === key); // trovo riga coefficienti per overall/dom/subdom in table.js
@@ -75,11 +75,11 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: {
 
     // preparo risultati per PDF e aggiungo a results
     if (value === - 4.8) {
-      results[key] = [{"z": z.toFixed(2)}, {"p": "< "+p.toFixed(0) }]
+      results[key] = {"z": z.toFixed(2), "p": "< "+p.toFixed(0) }
     } else if (value === 4.8) {
-      results[key] = [{"z": z.toFixed(2)}, {"p": "> "+p.toFixed(0) }]
+      results[key] = {"z": z.toFixed(2), "p": "> "+p.toFixed(0) }
     } else {
-      results[key] = [{"z": z.toFixed(2)}, {"p": p.toFixed(0) }]
+      results[key] = {"z": z.toFixed(2), "p": p.toFixed(0) }
     }  
   }
 
@@ -91,7 +91,7 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: {
   const p19 = (jStat.gamma.cdf(nRisvegli, alpha, beta) * 100); // calcolo percentile rispetto alla distribuzione gamma dei pari
 
   // preparo risultati per PDF e aggiungo a results
-  results["sub19"] = [{"z": "N/A"}, {"p": p19.toFixed(0)}]
+  results["sub19"] = {"z": "-", "p": p19.toFixed(0)}
 
   return results
 }

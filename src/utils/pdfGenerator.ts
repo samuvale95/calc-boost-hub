@@ -18,7 +18,7 @@ export interface ScoresPDF {
   score: number | string;
 }[];
 
-export const generateQuizPDF = async (quizData: QuizData, scoresPDF: ScoresPDF, calcResults?: { [key: string]: number }) => {
+export const generateQuizPDF = async (quizData: QuizData, scoresPDF: ScoresPDF, calcResults?: { [key: string]: { z: string; p: string } }) => {
   try {
     // Generate PDF blob
     const blob = await pdf(React.createElement(QuizPDFDocument, { quizData, scoresPDF, calcResults })).toBlob(); // crea il pdf
