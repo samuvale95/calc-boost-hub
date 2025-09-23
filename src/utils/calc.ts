@@ -79,7 +79,7 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: {
     } else if (value === 4.8 && p !== "100") {
       results[key] = {"z": z, "p": "> "+p }
     } else {
-      results[key] = {"z": z, "p": p }
+      results[key] = {"z": z, "p":"= "+p }
     }  
   }
 
@@ -91,7 +91,7 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: {
   const p19 = (jStat.gamma.cdf(nRisvegli, alpha, beta) * 100); // calcolo percentile rispetto alla distribuzione gamma dei pari
 
   // preparo risultati per PDF e aggiungo a results
-  results["sub19"] = {"z": "-", "p": p19.toFixed(0)}
+  results["sub19"] = {"z": "= /", "p": "= "+p19.toFixed(0)}
 
   return results
 }

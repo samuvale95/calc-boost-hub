@@ -217,10 +217,10 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                     <Text style={styles.tableCellLabel}>Overall</Text>
                   </View>
                      <View style={[styles.tableCell, { alignItems: 'center'}]}>
-                    <Text style={styles.tableCellValue}>z  {calcResults.Overall.z || 'N/A'} </Text>
+                    <Text style={styles.tableCellValue}>z {calcResults.Overall.z || 'N/A'} </Text>
                   </View>
                     <View style={[styles.tableCell, { alignItems: 'center'}]}>
-                    <Text style={styles.tableCellValue}>percentile  {calcResults.Overall.p || 'N/A'} </Text>
+                    <Text style={styles.tableCellValue}>percentile {calcResults.Overall.p || 'N/A'} </Text>
                   </View>
                 </View>
               </View>
@@ -242,10 +242,10 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                       <Text style={styles.tableCellLabel}>{label}</Text>
                     </View>
                     <View style={[styles.tableCell, { alignItems: 'center'}]}>
-                      <Text style={styles.tableCellValue}>z  {calcResults[dom].z || 'N/A'}</Text>
+                      <Text style={styles.tableCellValue}>z {calcResults[dom].z || 'N/A'}</Text>
                     </View>
                     <View style={[styles.tableCell, { alignItems: 'center'}]}>
-                      <Text style={styles.tableCellValue}>percentile  {calcResults[dom].p || 'N/A'}</Text>
+                      <Text style={styles.tableCellValue}>percentile {calcResults[dom].p || 'N/A'}</Text>
                     </View>
                   </View>
                 ))}
@@ -282,10 +282,10 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                       <Text style={styles.tableCellLabel}>{label}</Text>
                     </View>
                     <View style={[styles.tableCell, { alignItems: 'center'}]}>
-                      <Text style={styles.tableCellValue}>z  {calcResults[dom].z || 'N/A'}</Text>
+                      <Text style={styles.tableCellValue}>z {calcResults[dom].z || 'N/A'}</Text>
                     </View>
                     <View style={[styles.tableCell, { alignItems: 'center'}]}>
-                      <Text style={styles.tableCellValue}>percentile  {calcResults[dom].p || 'N/A'}</Text>
+                      <Text style={styles.tableCellValue}>percentile {calcResults[dom].p || 'N/A'}</Text>
                     </View>
                   </View>
                 ))}
@@ -300,13 +300,13 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                   return (
                     <View key={question} style={styles.tableRow}>
                       <View style={[styles.tableCell, { flex: 1, justifyContent: 'center'}]}>
-                        <Text style={styles.tableCellLabel}>{Array.from(question) || 'N/A'}</Text>
+                        <Text style={styles.tableCellLabel}>{question.split(' ') || 'N/A'}</Text>
                       </View>
                       <View style={[styles.tableCell, { flex: 1, justifyContent: 'center', alignItems: 'center'}]}>
                         <Text style={styles.tableCellValue}>{score ?? 'N/A'}</Text>
                       </View>
                       <View style={[styles.tableCell, { flex: 2, justifyContent: 'center'}]}>
-                        <Text style={styles.tableCellValue}>{Array.from(response) || ''}</Text>
+                        <Text style={styles.tableCellValue}>{response.split(' ') || ''}</Text>
                       </View>
                     </View>
                   );
