@@ -298,9 +298,9 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
               <View style={styles.table}>
                 {scoresPDF.map(({question, response = null, score}) => {
                   return (
-                    <View key={question} style={styles.tableRow}>
+                    <View key={question} style={styles.tableRow} wrap={false}>
                       <View style={[styles.tableCell, { flex: 1, justifyContent: 'center'}]}>
-                        <Text style={styles.tableCellLabel}>{question.split(' ').join(' ') || 'N/A'}</Text>
+                        <Text style={styles.tableCellLabel}>{question || 'N/A'}</Text>
                       </View>
                       <View style={[styles.tableCell, { flex: 1, justifyContent: 'center', alignItems: 'center'}]}>
                         <Text style={styles.tableCellValue}>{score ?? 'N/A'}</Text>

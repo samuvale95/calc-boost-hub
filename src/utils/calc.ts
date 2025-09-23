@@ -75,11 +75,11 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: {
 
     // preparo risultati per PDF e aggiungo a results
     if (value === - 4.8 && p !== "0") {
-      results[key] = {"z": z, "p": "< "+p }
+      results[key] = {"z": "= "+z, "p": "< "+p }
     } else if (value === 4.8 && p !== "100") {
-      results[key] = {"z": z, "p": "> "+p }
+      results[key] = {"z": "= "+z, "p": "> "+p }
     } else {
-      results[key] = {"z": z, "p":"= "+p }
+      results[key] = {"z": "= "+z, "p":"= "+p }
     }  
   }
 
