@@ -9,7 +9,8 @@ export function prepScoresPDF(answers: { [key: string]: any }): { question: stri
     if (item.question === ageQ) {
       scoresPDF.push({
         question: "ETÀ",
-        score: `${item.Anni || 0} anni e ${item.Mesi || 0} mesi`
+        score: item.Anni*12 + item.Mesi,
+        response: `${item.Anni} anni e ${item.Mesi} mesi`
       });
     } else {
       // Gestione per tutte le altre domande
