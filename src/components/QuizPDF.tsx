@@ -300,13 +300,13 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                   return (
                     <View key={question} style={styles.tableRow}>
                       <View style={[styles.tableCell, { flex: 1, justifyContent: 'center'}]}>
-                        <Text style={styles.tableCellLabel}>{question || 'N/A'}</Text>
+                        <Text style={styles.tableCellLabel}>{Array.from(question) || 'N/A'}</Text>
                       </View>
                       <View style={[styles.tableCell, { flex: 1, justifyContent: 'center', alignItems: 'center'}]}>
                         <Text style={styles.tableCellValue}>{score ?? 'N/A'}</Text>
                       </View>
                       <View style={[styles.tableCell, { flex: 2, justifyContent: 'center'}]}>
-                        <Text style={styles.tableCellValue}>{response || ''}</Text>
+                        <Text style={styles.tableCellValue}>{Array.from(response) || ''}</Text>
                       </View>
                     </View>
                   );
