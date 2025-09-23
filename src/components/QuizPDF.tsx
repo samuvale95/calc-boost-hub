@@ -7,6 +7,8 @@ Font.register({
   src: 'https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-light-webfont.ttf',
 });
 
+
+
 const styles = StyleSheet.create({
   page: {
     flexDirection: 'column',
@@ -296,15 +298,15 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
               <View style={styles.table}>
                 {scoresPDF.map(({question, response = null, score}) => {
                   return (
-                    <View key={question} style={styles.tableRow} wrap={false}>
+                    <View key={question} style={styles.tableRow}>
                       <View style={[styles.tableCell, { flex: 1, justifyContent: 'center'}]}>
-                        <Text wrap={false} style={styles.tableCellLabel}>{question || 'N/A'}</Text>
+                        <Text style={styles.tableCellLabel}>{question || 'N/A'}</Text>
                       </View>
                       <View style={[styles.tableCell, { flex: 1, justifyContent: 'center', alignItems: 'center'}]}>
                         <Text style={styles.tableCellValue}>{score ?? 'N/A'}</Text>
                       </View>
                       <View style={[styles.tableCell, { flex: 2, justifyContent: 'center'}]}>
-                        <Text wrap={false} style={styles.tableCellValue}>{response || ''}</Text>
+                        <Text style={styles.tableCellValue}>{response || ''}</Text>
                       </View>
                     </View>
                   );
