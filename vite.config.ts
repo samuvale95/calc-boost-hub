@@ -19,6 +19,9 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  optimizeDeps: {
+    exclude: ['@vite/client', '@vite/env'],
+  },
   build: {
     outDir: 'dist',
     sourcemap: false,

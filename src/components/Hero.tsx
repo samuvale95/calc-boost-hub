@@ -12,8 +12,7 @@ export const Hero = () => {
             <span className="block text-4xl md:text-5xl mt-1">Sanitario</span>
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Strumenti specializzati per calcoli medici e analisi cliniche 
-            con precisione professionale certificata
+            Strumenti specializzati per calcoli medici e analisi cliniche con precisione professionale certificata
           </p>
           <div className="flex justify-center">
             <Button 
