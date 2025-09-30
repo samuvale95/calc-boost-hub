@@ -7,12 +7,10 @@ export const Hero = () => {
       <div className="absolute inset-0 bg-black/20" />
       <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-foreground to-primary-glow bg-clip-text text-transparent">
-            Sistema di Calcolo
-            <span className="block text-4xl md:text-5xl mt-1">Sanitario</span>
-          </h1>
+          <img src="/logo.jpg" alt="logo D-DAND"/>
+          <span className="block text-4xl md:text-5xl mt-1">D-DAND</span>
           <p className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Strumenti specializzati per calcoli medici e analisi cliniche con precisione professionale certificata
+            Per una valutazioen completa della sindrome di Dravet
           </p>
           <div className="flex justify-center">
             <Button 
