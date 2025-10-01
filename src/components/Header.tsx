@@ -84,10 +84,10 @@ export const Header = () => {
           <div className="flex items-center gap-2">
             <Button 
               variant="ghost" 
-              className="text-lg font-bold p-0 h-auto"
+              className="text-lg font-bold p-0 h-auto hover:bg-transparent hover:text-inherit" // tolto effetto hover
               onClick={() => navigate("/")}
             >
-               D-DAND 
+              D-DAND
             </Button>
             {isAuthenticated && getSubscriptionBadge()}
           </div>
