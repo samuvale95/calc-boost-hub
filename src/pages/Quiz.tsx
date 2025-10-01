@@ -313,7 +313,7 @@ const Quiz = () => {
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
                 <div 
-                  className="bg-accent h-2 rounded-full transition-all duration-300" 
+                  className="bg-primary h-2 rounded-full transition-all duration-300" 
                   style={{ width: `${(answeredQuestions / totalQuestions) * 100}%` }}
                 ></div>
               </div>
@@ -378,7 +378,7 @@ const Quiz = () => {
                                 isCurrentSection
                                   ? 'bg-accent border-accent text-accent-foreground shadow-lg scale-110'
                                   : isCompleted
-                                  ? 'bg-green-500 border-green-500 text-white hover:bg-green-600 hover:scale-105'
+                                  ? 'bg-primary border-primary text-white hover:bg-primary hover:scale-105'
                                   : isStarted
                                   ? 'bg-yellow-500 border-yellow-500 text-white hover:bg-yellow-600 hover:scale-105'
                                   : isAccessible
@@ -399,7 +399,7 @@ const Quiz = () => {
                                 isCurrentSection 
                                   ? 'text-accent' 
                                   : isCompleted 
-                                  ? 'text-green-600' 
+                                  ? 'text-primary' 
                                   : isStarted 
                                   ? 'text-yellow-600' 
                                   : isAccessible 
@@ -596,7 +596,7 @@ const Quiz = () => {
             ) : (
               <div className="space-y-6">
                 <div className="text-center py-8">
-                  <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
+                  <CheckCircle className="h-16 w-16 text-primary mx-auto mb-4" />
                   <h2 className="text-2xl font-bold mb-2">Quiz Completato!</h2>
                   <p className="text-muted-foreground text-lg">
                     Hai completato con successo il test di formazione medica.
@@ -660,13 +660,13 @@ const Quiz = () => {
 
               {/* Domain Results */}
               <div>
-                <h3 className="text-lg font-semibold mb-3 text-green-600">Risultati per Domini</h3>
+                <h3 className="text-lg font-semibold mb-3 text-primary">Risultati per Domini</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                   {['Mot', 'Aut', 'Lan', 'Mem', 'Emo'].map(domain => (
                     <div key={domain} className="bg-gray-50 p-3 rounded-lg">
                       <div className="flex justify-between items-center">
                         <span className="font-medium">{domain}</span>
-                        <span className="font-bold text-green-600">
+                        <span className="font-bold text-primary">
                           {calcResults[domain] || 'N/A'}
                         </span>
                       </div>
