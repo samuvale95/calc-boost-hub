@@ -313,7 +313,7 @@ const Quiz = () => {
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
                 <div 
-                  className="bg-primary h-2 rounded-full transition-all duration-300" 
+                  className="bg-accent h-2 rounded-full transition-all duration-300" 
                   style={{ width: `${(answeredQuestions / totalQuestions) * 100}%` }}
                 ></div>
               </div>
