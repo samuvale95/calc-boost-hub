@@ -25,22 +25,20 @@ export const PaperSection = () => {
                 <div className="md:col-span-2 space-y-6">
                   <div>
                     <h3 className="text-2xl md:text-3xl font-bold mb-4">
-                      NOME TEST
+                      VALIDAZIONE
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      Descrizione del paper di ricerca che presenta un'analisi approfondita 
-                      dei metodi di calcolo sanitario e delle loro applicazioni cliniche. 
-                      Questo studio fornisce una revisione sistematica delle tecniche 
-                      più avanzate utilizzate nel campo della medicina computazionale, 
-                      offrendo nuove prospettive per il miglioramento della precisione 
-                      diagnostica e terapeutica.
+                      The D-DAND (Dravet Disease–Associated Neurodevelopmental and Neuropsychiatric Disorders) Scale is a new caregiver-administered interview designed to assess the wide range of developmental and behavioral comorbidities in Dravet Syndrome (DS) beyond seizures, and examines its preliminary psychometric properties in a large patient sample.
+                      Caregivers of 123 individuals with Dravet syndrome (age 3–41 years) were interviewed using the D-DAND in a two-phase study. In Phase 1 (N=80), D-DAND domain scores were compared with standard assessments (Vineland Adaptive Behavior Scales, Child Behavior Checklist, Childhood Autism Rating Scale, Behavior Rating Inventory of Executive Function, Sleep Disturbance Scale for Children). In Phase 2 (N=43), D-DAND was re-administered after ~2 weeks to evaluate test–retest reliability.
+                      The D-DAND captured a broad spectrum of abilities and problems across multiple functional domains. Test–retest reliability was excellent (overall score r≈0.98; median domain r≈0.89). D-DAND scores showed expected correlations with corresponding standardized measures (e.g., higher D-DAND adaptive scores with higher Vineland scores). Notably, minimal correlations in certain domains indicate that D-DAND measures unique Dravet-specific features not detected by generic scales.
+                      D-DAND is a novel, reliable tool for comprehensive evaluation of Dravet syndrome beyond seizures. It enables systematic tracking of developmental and behavioral issues in DS, facilitating early identification of needs and more personalized, whole-person care.
                     </p>
                   </div>
                   
                   <div>
                     <p className="text-sm text-muted-foreground mb-2">
-                      <strong>Autori:</strong> Dr. Marco Rossi, Prof. Anna Bianchi, 
-                      Dr. Giuseppe Verdi, Prof.ssa Maria Neri, Dr. Luca Blu
+                      <strong>Autori:</strong>
+                      D. A. Cambiare, S. Valente, A. Peluzzi
                     </p>
                   </div>
                 </div>
