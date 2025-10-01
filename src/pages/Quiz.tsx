@@ -376,7 +376,7 @@ const Quiz = () => {
                               disabled={!isAccessible}
                               className={`relative z-10 w-14 h-14 rounded-full border-2 flex items-center justify-center text-sm font-semibold transition-all duration-200 ${
                                 isCurrentSection
-                                  ? 'bg-primary border-primary text-primary-foreground shadow-lg scale-110'
+                                  ? 'bg-accent border-accent text-accent-foreground shadow-lg scale-110'
                                   : isCompleted
                                   ? 'bg-green-500 border-green-500 text-white hover:bg-green-600 hover:scale-105'
                                   : isStarted
@@ -397,7 +397,7 @@ const Quiz = () => {
                             <div className="mt-3 text-center w-32" title={section.name}>
                               <div className={`text-sm font-medium leading-tight ${
                                 isCurrentSection 
-                                  ? 'text-primary' 
+                                  ? 'text-accent' 
                                   : isCompleted 
                                   ? 'text-green-600' 
                                   : isStarted 
