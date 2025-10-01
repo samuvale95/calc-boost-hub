@@ -3,8 +3,7 @@ import heroImage from "@/assets/hero-dashboard.jpg";
 
 export const Hero = () => {
   return (
-    // tolto className bg-gradient-hero ovvero gradiente grigio dalla prima sezione
-    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+    <section className="relative bg-gradient-hero min-h-[80vh] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-black/20" />
       <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
@@ -13,7 +12,7 @@ export const Hero = () => {
             D-DAND
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Scala <strong>D</strong>esease <strong>A</strong>ssociated <strong>N</strong>europsychiatric <strong>D</strong>isorder per la sindrome di <strong>D</strong>ravet
+            <strong>D</strong>esease <strong>A</strong>ssociated <strong>N</strong>eurodevelopmental and <strong>N</strong>europsychiatric <strong>D</strong>isorders Scale per la sindrome di <strong>D</strong>ravet
           </p>
           <div className="flex justify-center">
             <Button 

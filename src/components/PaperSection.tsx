@@ -37,8 +37,7 @@ export const PaperSection = () => {
                   
                   <div>
                     <p className="text-sm text-muted-foreground mb-2">
-                      <strong>Autori:</strong>
-                      D. A. Cambiare, S. Valente, A. Peluzzi
+                      <strong>Autori:</strong> D. A. Cambiare, S. Valente, A. Peluzzi
                     </p>
                   </div>
                 </div>
