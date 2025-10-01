@@ -539,7 +539,7 @@ const Quiz = () => {
                         {currentQuestion.response.map((option) => (
                           <label
                             key={option.id}
-                            className="flex items-center space-x-3 p-4 rounded-lg border hover:bg-accent/50 cursor-pointer transition-colors"
+                            className="flex items-center space-x-3 p-4 rounded-lg border hover:bg-primary/50 cursor-pointer transition-colors"
                           >
                             <input
                               type="radio"
