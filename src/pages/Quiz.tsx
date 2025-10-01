@@ -274,7 +274,8 @@ const Quiz = () => {
   }, [currentSectionIndex]);
 
   return (
-    <div className="min-h-screen p-6">
+    
+    <div className="min-h-screen bg-gradient-hero p-6">
       <div className="container mx-auto max-w-4xl">
         {/* Header */}
         <div className="mb-8">
