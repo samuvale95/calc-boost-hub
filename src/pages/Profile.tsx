@@ -175,7 +175,7 @@ const Profile = () => {
   const subscriptionInfo = getSubscriptionInfo();
 
   return (
-    <div className="min-h-screen bg-background py-8">
+    <div className="min-h-screen bg-gradient-hero py-8">
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Header */}
         <div className="mb-8">
