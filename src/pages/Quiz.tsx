@@ -510,7 +510,7 @@ const Quiz = () => {
                                       }
                                     }));
                                   }}
-                                  className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${
+                                  className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent ${
                                     inputErrors[`${currentQuestion.id}-${option.text}`] 
                                       ? 'border-red-500 bg-red-50' 
                                       : 'border-gray-300'
@@ -540,7 +540,7 @@ const Quiz = () => {
                         {currentQuestion.response.map((option) => (
                           <label
                             key={option.id}
-                            className="flex items-center space-x-3 p-4 rounded-lg border hover:bg-primary/50 cursor-pointer transition-colors"
+                            className="flex items-center space-x-3 p-4 rounded-lg border hover:bg-accent/50 cursor-pointer transition-colors"
                           >
                             <input
                               type="radio"
