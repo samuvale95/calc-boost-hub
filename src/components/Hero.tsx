@@ -3,8 +3,8 @@ import heroImage from "@/assets/hero-dashboard.jpg";
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
-      {/* <div className="absolute inset-0 bg-black/20" /> */}
+    <section className="relative bg-gradient-hero min-h-[80vh] flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 bg-black/20" />
       <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <img src="/logo.png" alt="logo D-DAND" className="mx-auto" />
@@ -31,7 +31,7 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-      {/* <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent" /> */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 };
