@@ -87,7 +87,7 @@ export const Header = () => {
               className="text-lg font-bold p-0 h-auto"
               onClick={() => navigate("/")}
             >
-              Calc Boost Hub
+               D-DAND 
             </Button>
             {isAuthenticated && getSubscriptionBadge()}
           </div>

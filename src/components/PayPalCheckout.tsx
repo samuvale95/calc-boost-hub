@@ -45,7 +45,7 @@ const PayPalButtonWrapper = ({
         },
       ],
       application_context: {
-        brand_name: 'Calc Boost Hub',
+        brand_name: 'D-DAND',
         landing_page: 'NO_PREFERENCE',
         user_action: 'PAY_NOW',
       },
