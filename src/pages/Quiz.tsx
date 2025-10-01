@@ -316,14 +316,6 @@ const Quiz = () => {
                   style={{ width: `${(answeredQuestions / totalQuestions) * 100}%` }}
                 ></div>
               </div>
-              <div className="text-center">
-                <h2 className="text-xl font-semibold text-primary">
-                  {currentSection?.name}
-                </h2>
-                <p className="text-sm text-muted-foreground">
-                  Domanda {currentQuestionIndex + 1} di {currentSection?.questions.length} in questa sezione
-                </p>
-              </div>
               
               {/* Section Stepper */}
               <div className="mt-6">
