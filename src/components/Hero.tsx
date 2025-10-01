@@ -1,3 +1,4 @@
+// Hero.tsx
 import { Button } from "@/components/ui/button";
 
 export const Hero = () => {
@@ -30,8 +31,8 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* gradiente azzurro che parte dal bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#e6f4ff] to-transparent pointer-events-none" />
+      {/* gradiente di transizione verso l’azzurro */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#e6f4ff] pointer-events-none" />
     </section>
   );
 };
