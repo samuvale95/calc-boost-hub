@@ -274,7 +274,7 @@ const Quiz = () => {
   }, [currentSectionIndex]);
 
   return (
-    <div className="min-h-screen bg-gradient-hero p-6">
+    <div className="min-h-screen p-6">
       <div className="container mx-auto max-w-4xl">
         {/* Header */}
         <div className="mb-8">
@@ -282,11 +282,8 @@ const Quiz = () => {
             <div>
               <h1 className="text-4xl font-bold mb-2 flex items-center gap-3">
                 <Brain className="h-10 w-10 text-primary" />
-                Quiz di Formazione Medica
+                Questionario D-DAND
               </h1>
-              <p className="text-muted-foreground text-lg">
-                Test le tue conoscenze mediche con questo quiz di {totalQuestions} domande
-              </p>
               {user && (
                 <div className="text-sm text-muted-foreground mt-1">
                   <p>Benvenuto, <span className="font-medium text-foreground">{user.name}</span>
@@ -299,26 +296,6 @@ const Quiz = () => {
                   <p className="text-xs">Abbonamento: <span className="font-medium text-primary">{user.subscription}</span></p>
                 </div>
               )}
-            </div>
-            <div className="flex gap-2">
-              {isUserAdmin() && (
-                <Button 
-                  variant="outline" 
-                  className="flex items-center gap-2"
-                  onClick={() => navigate("/admin")}
-                >
-                  <Home className="h-5 w-5" />
-                  Dashboard
-                </Button>
-              )}
-              <Button 
-                variant="outline" 
-                className="flex items-center gap-2"
-                onClick={handleLogout}
-              >
-                <LogOut className="h-5 w-5" />
-                Logout
-              </Button>
             </div>
           </div>
           
