@@ -51,9 +51,9 @@ export const Header = () => {
     if (!user) return null;
     
     if (user.subscription === 'pdf') {
-      return <Badge variant="outline" className="text-xs pointer-events-none">PDF</Badge>; // tolto effetto hover
+      return <Badge variant="outline" className="text-xs">PDF</Badge>;
     } else if (user.subscription === 'annuale') {
-      return <Badge variant="default" className="text-xs pointer-events-none">Annual</Badge>; // tolto effetto hover
+      return <Badge variant="default" className="text-xs">Annual</Badge>;
     }
     return null;
   };
@@ -84,7 +84,7 @@ export const Header = () => {
           <div className="flex items-center gap-2">
             <Button 
               variant="ghost" 
-              className="text-lg font-bold p-0 h-auto pointer-events-none" // tolto effetto hover
+              className="text-lg font-bold p-0 h-auto hover:bg-transparent hover:text-inherit" // tolto effetto hover
               onClick={() => navigate("/")}
             >
               D-DAND
