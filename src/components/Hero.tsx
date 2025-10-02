@@ -11,7 +11,7 @@ export const Hero = () => {
             D-DAND
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-2xl mx-auto">
-            <strong>D</strong>esease <strong>A</strong>ssociated <strong>N</strong>eurodevelopmental and <strong>N</strong>europsychiatric <strong>D</strong>isorders Scale per la sindrome di <strong>D</strong>ravet
+            Scala <strong>D</strong>esease <strong>A</strong>ssociated <strong>N</strong>eurodevelopmental and <strong>N</strong>europsychiatric <strong>D</strong>isorders per la sindrome di <strong>D</strong>ravet
           </p>
           <div className="flex justify-center">
             <Button 
