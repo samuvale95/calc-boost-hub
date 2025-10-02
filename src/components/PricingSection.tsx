@@ -76,7 +76,7 @@ export const PricingSection = () => {
               <Button 
                 onClick={handlePdfPurchase}
                 className="w-full" 
-                variant="outline"
+                variant="outline2"
                 size="lg"
               >
                 Acquista PDF
@@ -108,7 +108,7 @@ export const PricingSection = () => {
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                  <span>Test completo in formato digitale</span>
+                  <span>Test digitale online</span>
                 </li>
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
