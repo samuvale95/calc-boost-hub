@@ -60,7 +60,7 @@ export const Header = () => {
     if (user.subscription === 'pdf') {
       return <Badge variant="outline" className="text-xs">PDF</Badge>;
     } else if (user.subscription === 'annuale') {
-      return <Badge variant="default" className="text-xs">Annual</Badge>; // override effetto hover
+      return <Badge variant="default" className="text-xs">Annual</Badge>;
     }
     return null;
   };
