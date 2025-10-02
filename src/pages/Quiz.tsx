@@ -2,8 +2,7 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent} from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { Brain, CheckCircle, Play, Home, ChevronLeft, ChevronRight, LogOut, Download, Eye } from "lucide-react";
+import { Brain, CheckCircle, Play, Home, ChevronLeft, ChevronRight, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
@@ -54,7 +53,6 @@ const quiz = quizJson.questions.map(question => ({
 const Quiz = () => {
   const [selectedAnswers, setSelectedAnswers] = useState<{[key: string]: AnswerData}>({});
   const [showResults, setShowResults] = useState(false);
-  const [showResultsModal, setShowResultsModal] = useState(false);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [inputErrors, setInputErrors] = useState<{[key: string]: string}>({});
@@ -603,10 +601,6 @@ const Quiz = () => {
                 </div>
                 
                 <div className="flex gap-4 pt-4 justify-center">
-                  <Button onClick={() => setShowResultsModal(true)} className="flex items-center gap-2">
-                    <Eye className="h-4 w-4" />
-                    Visualizza Risultati
-                  </Button>
                   <Button onClick={handleGeneratePDF} className="flex items-center gap-2">
                     <Download className="h-4 w-4" />
                     Scarica PDF
@@ -631,91 +625,6 @@ const Quiz = () => {
           </CardContent>
         </Card>
       </div>
-
-      {/* Results Modal */}
-      <Dialog open={showResultsModal} onOpenChange={setShowResultsModal}>
-        <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>Risultati del Test</DialogTitle>
-            <DialogDescription>
-              Ecco i risultati calcolati del tuo test di formazione medica
-            </DialogDescription>
-          </DialogHeader>
-          
-          {calcResults && Object.keys(calcResults).length > 0 && (
-            <div className="space-y-6">
-              {/* Overall Results */}
-              <div>
-                <h3 className="text-lg font-semibold mb-3 text-blue-600">Risultati Overall</h3>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <div className="flex justify-between items-center">
-                    <span className="font-medium">Overall</span>
-                    <span className="text-lg font-bold text-blue-600">
-                      {calcResults.Overall || 'N/A'}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Domain Results */}
-              <div>
-                <h3 className="text-lg font-semibold mb-3 text-green-600">Risultati per Domini</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {['Mot', 'Aut', 'Lan', 'Mem', 'Emo'].map(domain => (
-                    <div key={domain} className="bg-gray-50 p-3 rounded-lg">
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium">{domain}</span>
-                        <span className="font-bold text-green-600">
-                          {calcResults[domain] || 'N/A'}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Subdomain Results */}
-              <div>
-                <h3 className="text-lg font-semibold mb-3 text-purple-600">Risultati per Sottodomini</h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-                  {Array.from({length: 19}, (_, i) => i + 1).map(subdom => (
-                    <div key={subdom} className="bg-gray-50 p-2 rounded text-sm">
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium">Sub{subdom}</span>
-                        <span className="font-bold text-purple-600">
-                          {calcResults[`sub${subdom}`] || 'N/A'}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Individual Item Results */}
-              <div>
-                <h3 className="text-lg font-semibold mb-3 text-orange-600">Punteggio per Ogni Item</h3>
-                <div className="space-y-2 max-h-60 overflow-y-auto">
-                  {Object.entries(selectedAnswers).map(([questionId, answer]) => {
-                    const question = quiz.find(q => q.id === questionId);
-                    return (
-                      <div key={questionId} className="bg-gray-50 p-3 rounded text-sm">
-                        <div className="flex justify-between items-start">
-                          <span className="font-medium flex-1 mr-2">
-                            {question?.text || questionId}
-                          </span>
-                          <span className="font-bold text-orange-600 ml-2">
-                            {answer.score || 'N/A'}
-                          </span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };
