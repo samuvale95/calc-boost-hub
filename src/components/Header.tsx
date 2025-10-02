@@ -120,7 +120,7 @@ export const Header = () => {
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="flex items-center gap-2">
+                    <Button variant={isActivePage("/profile") ? "default" : "ghost"} className="flex items-center gap-2">
                       <User className="h-4 w-4" />
                       {user?.name}
                     </Button>
