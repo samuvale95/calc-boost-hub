@@ -51,7 +51,7 @@ export const Header = () => {
     if (!user) return null;
     
     if (user.subscription === 'pdf') {
-      return <Badge variant="outline" className="text-xs hover:bg-primary">PDF</Badge>; // override effetto hover di badge
+      return <Badge variant="outline" className="text-xs">PDF</Badge>;
     } else if (user.subscription === 'annuale') {
       return <Badge variant="default" className="text-xs">Annual</Badge>;
     }
