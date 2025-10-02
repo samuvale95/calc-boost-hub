@@ -318,7 +318,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
 
         {/* Footer */}
         <Text style={styles.footer}>
-          Generato automaticamente da Calc Boost Hub - {new Date().toLocaleDateString('it-IT')}
+          Risultati calcolati automaticamente - {new Date().toLocaleDateString('it-IT')}
         </Text>
       </Page>
     </Document>

@@ -25,14 +25,14 @@ export const PricingSection = () => {
   };
 
   return (
-    <section id="pricing" className="pt-6 pb-20 bg-background">
+    <section id="pricing" className="pt-6 pb-20 bg-[#e6f4ff]">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Scegli la Tua Opzione
+            I nostri Piani
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Accedi ai nostri strumenti di calcolo nel modo che preferisci
+            Accedi alla scala D-DAND in formato cartaceo o online
           </p>
         </div>
 
@@ -47,36 +47,36 @@ export const PricingSection = () => {
               </div>
               <CardTitle className="text-2xl mb-2">Guida PDF</CardTitle>
               <CardDescription className="text-base">
-                Scarica la guida completa con tutti i calcoli e formule
+                Scarica la guida completa e le tabelle per la correzione dei punteggi
               </CardDescription>
               <div className="flex items-center justify-center mt-4">
-                <span className="text-3xl font-bold">€10</span>
+                <span className="text-3xl font-bold">€599</span>
                 <span className="text-muted-foreground ml-2">una tantum</span>
               </div>
             </CardHeader>
             <CardContent>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
-                  <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                  <span>Guida completa in formato PDF</span>
+                  <CheckIcon className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
+                  <span>Test completo in formato PDF</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                  <span>Formule e esempi pratici</span>
+                  <CheckIcon className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
+                  <span>Formule e tabelle per calcolare i 25 outcome</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
+                  <CheckIcon className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
                   <span>Download immediato</span>
                 </li>
                 <li className="flex items-center">
-                  <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
+                  <CheckIcon className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
                   <span>Accesso illimitato</span>
                 </li>
               </ul>
               <Button 
                 onClick={handlePdfPurchase}
                 className="w-full" 
-                variant="outline"
+                variant="outline2"
                 size="lg"
               >
                 Acquista PDF
@@ -100,7 +100,7 @@ export const PricingSection = () => {
                 Accesso completo al tool di calcolo avanzato
               </CardDescription>
               <div className="flex items-center justify-center mt-4">
-                <span className="text-3xl font-bold">€10</span>
+                <span className="text-3xl font-bold">€199</span>
                 <span className="text-muted-foreground ml-2">all'anno</span>
               </div>
             </CardHeader>
@@ -108,19 +108,19 @@ export const PricingSection = () => {
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                  <span>Tool di calcolo interattivo</span>
+                  <span>Test digitale online</span>
                 </li>
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                  <span>Aggiornamenti automatici</span>
+                  <span>Calcolo automatico dei 25 outcome</span>
                 </li>
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                  <span>Supporto prioritario</span>
+                  <span>Risultati più precisi grazie all'applicazione diretta delle formule</span>
                 </li>
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                  <span>Esportazione risultati</span>
+                  <span>Report completo in PDF</span>
                 </li>
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />

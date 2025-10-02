@@ -11,6 +11,6 @@ export const PAYMENT_AMOUNTS = {
 } as const;
 
 export const PAYMENT_DESCRIPTIONS = {
-  PDF: 'Guida PDF - Calc Boost Hub',
-  SUBSCRIPTION: 'Abbonamento Annuale - Calc Boost Hub',
+  PDF: 'Guida PDF - D-DAND',
+  SUBSCRIPTION: 'Abbonamento Annuale - D-DAND',
 } as const;

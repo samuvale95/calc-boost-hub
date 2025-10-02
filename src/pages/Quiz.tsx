@@ -2,6 +2,7 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent} from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Brain, CheckCircle, Play, Home, ChevronLeft, ChevronRight, LogOut, Download, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
@@ -53,6 +54,7 @@ const quiz = quizJson.questions.map(question => ({
 const Quiz = () => {
   const [selectedAnswers, setSelectedAnswers] = useState<{[key: string]: AnswerData}>({});
   const [showResults, setShowResults] = useState(false);
+  const [showResultsModal, setShowResultsModal] = useState(false);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [inputErrors, setInputErrors] = useState<{[key: string]: string}>({});
@@ -271,6 +273,7 @@ const Quiz = () => {
   }, [currentSectionIndex]);
 
   return (
+    
     <div className="min-h-screen bg-gradient-hero p-6">
       <div className="container mx-auto max-w-4xl">
         {/* Header */}
@@ -279,11 +282,8 @@ const Quiz = () => {
             <div>
               <h1 className="text-4xl font-bold mb-2 flex items-center gap-3">
                 <Brain className="h-10 w-10 text-primary" />
-                Quiz di Formazione Medica
+                Questionario D-DAND
               </h1>
-              <p className="text-muted-foreground text-lg">
-                Test le tue conoscenze mediche con questo quiz di {totalQuestions} domande
-              </p>
               {user && (
                 <div className="text-sm text-muted-foreground mt-1">
                   <p>Benvenuto, <span className="font-medium text-foreground">{user.name}</span>
@@ -296,26 +296,6 @@ const Quiz = () => {
                   <p className="text-xs">Abbonamento: <span className="font-medium text-primary">{user.subscription}</span></p>
                 </div>
               )}
-            </div>
-            <div className="flex gap-2">
-              {isUserAdmin() && (
-                <Button 
-                  variant="outline" 
-                  className="flex items-center gap-2"
-                  onClick={() => navigate("/admin")}
-                >
-                  <Home className="h-5 w-5" />
-                  Dashboard
-                </Button>
-              )}
-              <Button 
-                variant="outline" 
-                className="flex items-center gap-2"
-                onClick={handleLogout}
-              >
-                <LogOut className="h-5 w-5" />
-                Logout
-              </Button>
             </div>
           </div>
           
@@ -335,14 +315,6 @@ const Quiz = () => {
                   className="bg-primary h-2 rounded-full transition-all duration-300" 
                   style={{ width: `${(answeredQuestions / totalQuestions) * 100}%` }}
                 ></div>
-              </div>
-              <div className="text-center">
-                <h2 className="text-xl font-semibold text-primary">
-                  {currentSection?.name}
-                </h2>
-                <p className="text-sm text-muted-foreground">
-                  Domanda {currentQuestionIndex + 1} di {currentSection?.questions.length} in questa sezione
-                </p>
               </div>
               
               {/* Section Stepper */}
@@ -403,9 +375,9 @@ const Quiz = () => {
                               disabled={!isAccessible}
                               className={`relative z-10 w-14 h-14 rounded-full border-2 flex items-center justify-center text-sm font-semibold transition-all duration-200 ${
                                 isCurrentSection
-                                  ? 'bg-primary border-primary text-primary-foreground shadow-lg scale-110'
+                                  ? 'bg-accent border-accent text-accent-foreground shadow-lg scale-110'
                                   : isCompleted
-                                  ? 'bg-green-500 border-green-500 text-white hover:bg-green-600 hover:scale-105'
+                                  ? 'bg-primary border-primary text-white hover:bg-primary hover:scale-105'
                                   : isStarted
                                   ? 'bg-yellow-500 border-yellow-500 text-white hover:bg-yellow-600 hover:scale-105'
                                   : isAccessible
@@ -424,9 +396,9 @@ const Quiz = () => {
                             <div className="mt-3 text-center w-32" title={section.name}>
                               <div className={`text-sm font-medium leading-tight ${
                                 isCurrentSection 
-                                  ? 'text-primary' 
+                                  ? 'text-accent' 
                                   : isCompleted 
-                                  ? 'text-green-600' 
+                                  ? 'text-primary' 
                                   : isStarted 
                                   ? 'text-yellow-600' 
                                   : isAccessible 
@@ -567,7 +539,7 @@ const Quiz = () => {
                         {currentQuestion.response.map((option) => (
                           <label
                             key={option.id}
-                            className="flex items-center space-x-3 p-4 rounded-lg border hover:bg-accent/50 cursor-pointer transition-colors"
+                            className="flex items-center space-x-3 p-4 rounded-lg border hover:bg-primary/50 cursor-pointer transition-colors"
                           >
                             <input
                               type="radio"
@@ -623,7 +595,7 @@ const Quiz = () => {
             ) : (
               <div className="space-y-6">
                 <div className="text-center py-8">
-                  <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
+                  <CheckCircle className="h-16 w-16 text-primary mx-auto mb-4" />
                   <h2 className="text-2xl font-bold mb-2">Quiz Completato!</h2>
                   <p className="text-muted-foreground text-lg">
                     Hai completato con successo il test di formazione medica.
@@ -631,6 +603,10 @@ const Quiz = () => {
                 </div>
                 
                 <div className="flex gap-4 pt-4 justify-center">
+                  <Button onClick={() => setShowResultsModal(true)} className="flex items-center gap-2">
+                    <Eye className="h-4 w-4" />
+                    Visualizza Risultati
+                  </Button>
                   <Button onClick={handleGeneratePDF} className="flex items-center gap-2">
                     <Download className="h-4 w-4" />
                     Scarica PDF
@@ -655,6 +631,91 @@ const Quiz = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Results Modal */}
+      <Dialog open={showResultsModal} onOpenChange={setShowResultsModal}>
+        <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Risultati del Test</DialogTitle>
+            <DialogDescription>
+              Ecco i risultati calcolati del tuo test di formazione medica
+            </DialogDescription>
+          </DialogHeader>
+          
+          {calcResults && Object.keys(calcResults).length > 0 && (
+            <div className="space-y-6">
+              {/* Overall Results */}
+              <div>
+                <h3 className="text-lg font-semibold mb-3 text-blue-600">Risultati Overall</h3>
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium">Overall</span>
+                    <span className="text-lg font-bold text-blue-600">
+                      {calcResults.Overall || 'N/A'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Domain Results */}
+              <div>
+                <h3 className="text-lg font-semibold mb-3 text-green-600">Risultati per Domini</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {['Mot', 'Aut', 'Lan', 'Mem', 'Emo'].map(domain => (
+                    <div key={domain} className="bg-gray-50 p-3 rounded-lg">
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">{domain}</span>
+                        <span className="font-bold text-green-600">
+                          {calcResults[domain] || 'N/A'}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Subdomain Results */}
+              <div>
+                <h3 className="text-lg font-semibold mb-3 text-purple-600">Risultati per Sottodomini</h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+                  {Array.from({length: 19}, (_, i) => i + 1).map(subdom => (
+                    <div key={subdom} className="bg-gray-50 p-2 rounded text-sm">
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">Sub{subdom}</span>
+                        <span className="font-bold text-purple-600">
+                          {calcResults[`sub${subdom}`] || 'N/A'}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Individual Item Results */}
+              <div>
+                <h3 className="text-lg font-semibold mb-3 text-orange-600">Punteggio per Ogni Item</h3>
+                <div className="space-y-2 max-h-60 overflow-y-auto">
+                  {Object.entries(selectedAnswers).map(([questionId, answer]) => {
+                    const question = quiz.find(q => q.id === questionId);
+                    return (
+                      <div key={questionId} className="bg-gray-50 p-3 rounded text-sm">
+                        <div className="flex justify-between items-start">
+                          <span className="font-medium flex-1 mr-2">
+                            {question?.text || questionId}
+                          </span>
+                          <span className="font-bold text-orange-600 ml-2">
+                            {answer.score || 'N/A'}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

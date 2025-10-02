@@ -53,7 +53,7 @@ export const Header = () => {
     if (user.subscription === 'pdf') {
       return <Badge variant="outline" className="text-xs">PDF</Badge>;
     } else if (user.subscription === 'annuale') {
-      return <Badge variant="default" className="text-xs">Annual</Badge>;
+      return <Badge variant="default" className="text-xs hover:bg-primary">Annual</Badge>; // override effetto hover
     }
     return null;
   };
@@ -84,10 +84,10 @@ export const Header = () => {
           <div className="flex items-center gap-2">
             <Button 
               variant="ghost" 
-              className="text-lg font-bold p-0 h-auto"
+              className="text-lg font-bold p-0 h-auto hover:bg-transparent hover:text-inherit" // tolto effetto hover
               onClick={() => navigate("/")}
             >
-              Calc Boost Hub
+              D-DAND
             </Button>
             {isAuthenticated && getSubscriptionBadge()}
           </div>
@@ -120,7 +120,10 @@ export const Header = () => {
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="flex items-center gap-2">
+                    <Button
+                      variant={isActivePage("/profile") ? "default" : "ghost"}
+                      className="flex items-center gap-2 data-[state=open]:bg-accent data-[state=open]:text-accent-foreground"
+                    >
                       <User className="h-4 w-4" />
                       {user?.name}
                     </Button>

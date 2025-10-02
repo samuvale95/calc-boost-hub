@@ -2,9 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Design system aggiornato: verde (#52a20b) e magenta (#c10798) come colori principali */
 
 @layer base {
   :root {
@@ -17,9 +15,15 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 215 25% 27%;
 
-    --primary: 210 100% 45%;
+    /* ✅ Verde come primary */
+    --primary: 95 87% 34%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 210 100% 55%;
+    --primary-glow: 95 87% 44%;
+
+    /* ✅ Magenta come accent */
+    --accent: 316 91% 40%;
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 316 91% 50%;
 
     --secondary: 210 25% 95%;
     --secondary-foreground: 215 25% 27%;
@@ -27,42 +31,38 @@ All colors MUST be HSL.
     --muted: 210 25% 95%;
     --muted-foreground: 215 15% 55%;
 
-    --accent: 175 60% 45%;
-    --accent-foreground: 0 0% 100%;
-    --accent-glow: 175 60% 55%;
-
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 210 25% 88%;
     --input: 210 25% 88%;
-    --ring: 210 100% 45%;
-    
-    /* Custom design tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(210, 100%, 45%) 0%, hsl(210, 100%, 55%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(175, 60%, 45%) 0%, hsl(175, 60%, 55%) 100%);
+    --ring: 95 87% 34%; /* allineato al primary */
+
+    /* ✅ Gradienti aggiornati */
+    --gradient-primary: linear-gradient(135deg, hsl(95, 87%, 34%) 0%, hsl(95, 87%, 44%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(316, 91%, 40%) 0%, hsl(316, 91%, 50%) 100%);
+    /* gradiente grigio */
     --gradient-hero: linear-gradient(135deg, hsl(210, 50%, 98%) 0%, hsl(210, 40%, 96%) 100%);
-    --shadow-glow: 0 0 40px hsl(210, 100%, 45%, 0.15);
-    --shadow-accent-glow: 0 0 40px hsl(175, 60%, 45%, 0.15);
+    /* gradiente azzurrino */
+    --gradient-blue: linear-gradient(135deg, hsl(200, 100%, 97%) 0%, hsl(200, 80%, 94%) 100%);
+
+
+    /* ✅ Glow aggiornati */
+    --shadow-glow: 0 0 40px hsl(95, 87%, 34%, 0.25);
+    --shadow-accent-glow: 0 0 40px hsl(316, 91%, 40%, 0.25);
+
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
+    --sidebar-primary: 95 87% 34%;
     --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
+    --sidebar-accent: 316 91% 40%;
+    --sidebar-accent-foreground: 0 0% 98%;
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 95 87% 34%;
   }
 
   .dark {
@@ -75,7 +75,8 @@ All colors MUST be HSL.
     --popover: 215 25% 8%;
     --popover-foreground: 210 25% 95%;
 
-    --primary: 210 100% 55%;
+    /* ✅ Primary e accent scuriti per dark mode */
+    --primary: 95 87% 44%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 215 25% 15%;
@@ -84,7 +85,7 @@ All colors MUST be HSL.
     --muted: 215 25% 15%;
     --muted-foreground: 215 15% 65%;
 
-    --accent: 175 60% 50%;
+    --accent: 316 91% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
@@ -92,15 +93,16 @@ All colors MUST be HSL.
 
     --border: 215 25% 20%;
     --input: 215 25% 20%;
-    --ring: 210 100% 55%;
+    --ring: 95 87% 44%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 95 87% 44%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-accent: 316 91% 50%;
+    --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 95 87% 44%;
   }
 }
 
