@@ -58,8 +58,6 @@ const PayPalButtonWrapper = ({
       
       const details = await actions.order.capture();
       
-      // Simulate API call to backend to verify payment
-      // In a real implementation, you would send the payment details to your backend
       console.log('Payment approved:', details);
       
       toast({

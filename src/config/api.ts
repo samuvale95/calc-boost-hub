@@ -13,6 +13,14 @@ export const API_CONFIG = {
     DEACTIVATE_USER: '/users/{id}/deactivate',
     ACTIVATE_USER: '/users/{id}/activate',
     UPDATE_USER: '/users/{id}',
+    // Payment endpoints
+    PAYMENTS: '/payments',
+    MY_PAYMENTS: '/payments/my-payments',
+    MY_PAYMENT_SUMMARY: '/payments/my-summary',
+    PAYMENT_BY_ID: '/payments/{id}',
+    // Admin payment endpoints
+    ALL_PAYMENTS: '/payments/all',
+    PAYMENT_STATS: '/payments/stats',
   }
 };
 

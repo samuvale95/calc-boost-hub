@@ -22,26 +22,169 @@ import {
   Download,
   Calculator,
   Loader2,
-  X
+  X,
+  Filter,
+  Search,
+  Euro,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
+import { usePayments } from "@/hooks/usePayments";
 import { PayPalCheckout } from "@/components/PayPalCheckout";
 import { PAYMENT_AMOUNTS, PAYMENT_DESCRIPTIONS } from "@/config/paypal";
 import { buildApiUrl, API_CONFIG } from "@/config/api";
+import { CreatePaymentRequest, Payment } from "@/services/paymentService";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { format } from "date-fns";
+import { it } from "date-fns/locale";
 
 const Profile = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const { toast } = useToast();
+  const { 
+    createPayment, 
+    paymentSummary, 
+    payments, 
+    getMyPaymentSummary, 
+    getMyPayments, 
+    isLoading: paymentsLoading 
+  } = usePayments();
   const [isLoading, setIsLoading] = useState(false);
   const [showRenewal, setShowRenewal] = useState(false);
   const [subscriptionStatus, setSubscriptionStatus] = useState<any>(null);
+  
+  // Payment history states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [statusFilter, setStatusFilter] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalPayments, setTotalPayments] = useState(0);
+  const [showPaymentHistory, setShowPaymentHistory] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated && user) {
       fetchSubscriptionStatus();
+      loadPaymentSummary();
     }
   }, [isAuthenticated, user]);
+
+  useEffect(() => {
+    if (showPaymentHistory) {
+      loadPayments();
+    }
+  }, [showPaymentHistory, currentPage, pageSize, statusFilter]);
+
+  const loadPaymentSummary = async () => {
+    try {
+      await getMyPaymentSummary();
+    } catch (error) {
+      console.error('Error loading payment summary:', error);
+    }
+  };
+
+  const loadPayments = async () => {
+    try {
+      const response = await getMyPayments(currentPage, pageSize, statusFilter || undefined);
+      setTotalPages(response.pages);
+      setTotalPayments(response.total);
+    } catch (error) {
+      console.error('Error loading payments:', error);
+    }
+  };
+
+  const handleRefresh = () => {
+    loadPayments();
+    loadPaymentSummary();
+  };
+
+  const handleStatusFilter = (status: string) => {
+    setStatusFilter(status === 'all' ? '' : status);
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  // Payment helper functions
+  const getStatusIcon = (status: Payment['status']) => {
+    switch (status) {
+      case 'completed':
+        return <CheckCircle className="h-4 w-4 text-green-600" />;
+      case 'pending':
+        return <Clock className="h-4 w-4 text-yellow-600" />;
+      case 'failed':
+        return <X className="h-4 w-4 text-red-600" />;
+      case 'cancelled':
+        return <AlertCircle className="h-4 w-4 text-gray-600" />;
+      case 'refunded':
+        return <RefreshCw className="h-4 w-4 text-blue-600" />;
+      default:
+        return <AlertCircle className="h-4 w-4 text-gray-600" />;
+    }
+  };
+
+  const getStatusColor = (status: Payment['status']) => {
+    switch (status) {
+      case 'completed':
+        return 'bg-green-100 text-green-800';
+      case 'pending':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'failed':
+        return 'bg-red-100 text-red-800';
+      case 'cancelled':
+        return 'bg-gray-100 text-gray-800';
+      case 'refunded':
+        return 'bg-blue-100 text-blue-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const getStatusLabel = (status: Payment['status']) => {
+    switch (status) {
+      case 'completed':
+        return 'Completato';
+      case 'pending':
+        return 'In Attesa';
+      case 'failed':
+        return 'Fallito';
+      case 'cancelled':
+        return 'Cancellato';
+      case 'refunded':
+        return 'Rimborsato';
+      default:
+        return status;
+    }
+  };
+
+  const getPaymentTypeIcon = (paymentType: string, subscriptionType?: string) => {
+    if (paymentType === 'pdf' || subscriptionType === 'pdf') {
+      return <Download className="h-4 w-4" />;
+    }
+    return <Calculator className="h-4 w-4" />;
+  };
+
+  const getPaymentTypeLabel = (payment: Payment) => {
+    if (payment.payment_type === 'pdf') {
+      return 'Guida PDF';
+    }
+    return payment.subscription_type === 'annuale' ? 'Abbonamento Annuale' : 'Abbonamento';
+  };
+
+  const filteredPayments = payments.filter(payment => {
+    if (!searchTerm) return true;
+    const searchLower = searchTerm.toLowerCase();
+    return (
+      payment.description.toLowerCase().includes(searchLower) ||
+      payment.id.toString().includes(searchLower) ||
+      (payment.paypal_order_id && payment.paypal_order_id.toLowerCase().includes(searchLower))
+    );
+  });
 
   const fetchSubscriptionStatus = async () => {
     if (!user) return;
@@ -80,17 +223,31 @@ const Profile = () => {
     try {
       setIsLoading(true);
       
-      // In a real app, you would send the payment data to your backend
-      // to update the subscription status
-      console.log('Renewal payment successful:', paymentData);
+      // Create payment record in backend
+      const paymentRequest: CreatePaymentRequest = {
+        amount: paymentData.amount,
+        currency: 'EUR',
+        subscription_type: paymentData.subscriptionType,
+        subscription_duration_days: paymentData.subscriptionType === 'annuale' ? 365 : 0,
+        description: paymentData.subscriptionType === 'annuale' 
+          ? 'Abbonamento annuale Calc Boost Hub' 
+          : 'Guida PDF Calc Boost Hub',
+        is_renewal: paymentData.subscriptionType === 'annuale',
+        auto_renewal_enabled: paymentData.subscriptionType === 'annuale',
+        paypal_order_id: paymentData.orderId,
+        paypal_payer_id: paymentData.paymentDetails?.payer?.payer_id || '',
+      };
+
+      await createPayment(paymentRequest);
       
       toast({
         title: "Rinnovo Completato!",
         description: "Il tuo abbonamento è stato rinnovato con successo.",
       });
       
-      // Refresh subscription status
+      // Refresh subscription status and payment summary
       await fetchSubscriptionStatus();
+      await loadPaymentSummary();
       setShowRenewal(false);
       
     } catch (error) {
@@ -316,22 +473,206 @@ const Profile = () => {
           </Card>
         </div>
 
-        {/* Payment History (placeholder) */}
+        {/* Payment History */}
         <Card className="mt-6">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <RefreshCw className="h-5 w-5" />
-              Cronologia Pagamenti
-            </CardTitle>
-            <CardDescription>
-              Visualizza la cronologia dei tuoi pagamenti
-            </CardDescription>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle className="flex items-center gap-2">
+                  <RefreshCw className="h-5 w-5" />
+                  Cronologia Pagamenti
+                </CardTitle>
+                <CardDescription>
+                  Visualizza e gestisci tutti i tuoi pagamenti
+                </CardDescription>
+              </div>
+              <Button 
+                variant="outline" 
+                onClick={() => setShowPaymentHistory(!showPaymentHistory)}
+              >
+                {showPaymentHistory ? 'Nascondi' : 'Mostra'} Dettagli
+              </Button>
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-center py-8 text-muted-foreground">
-              <CreditCard className="h-8 w-8 mx-auto mb-2" />
-              <p>La cronologia dei pagamenti sarà disponibile a breve</p>
-            </div>
+            {paymentSummary ? (
+              <div className="space-y-4">
+                <div className="grid gap-4 md:grid-cols-3">
+                  <div className="text-center p-4 bg-muted rounded-lg">
+                    <div className="text-2xl font-bold text-primary">
+                      {paymentSummary.total_payments}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Pagamenti Totali
+                    </div>
+                  </div>
+                  <div className="text-center p-4 bg-muted rounded-lg">
+                    <div className="text-2xl font-bold text-primary">
+                      €{paymentSummary.total_spent.toFixed(2)}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Totale Speso
+                    </div>
+                  </div>
+                  <div className="text-center p-4 bg-muted rounded-lg">
+                    <div className="text-2xl font-bold text-primary">
+                      {paymentSummary.subscription_type || 'Nessuno'}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Abbonamento Attuale
+                    </div>
+                  </div>
+                </div>
+
+                {/* Detailed Payment History */}
+                {showPaymentHistory && (
+                  <div className="space-y-4">
+                    <Separator />
+                    
+                    {/* Filters */}
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <div className="flex-1">
+                        <div className="relative">
+                          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                          <Input
+                            placeholder="Cerca per descrizione, ID o PayPal Order ID..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="pl-10"
+                          />
+                        </div>
+                      </div>
+                      <Select value={statusFilter || 'all'} onValueChange={handleStatusFilter}>
+                        <SelectTrigger className="w-full sm:w-48">
+                          <SelectValue placeholder="Filtra per stato" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">Tutti gli stati</SelectItem>
+                          <SelectItem value="completed">Completato</SelectItem>
+                          <SelectItem value="pending">In Attesa</SelectItem>
+                          <SelectItem value="failed">Fallito</SelectItem>
+                          <SelectItem value="cancelled">Cancellato</SelectItem>
+                          <SelectItem value="refunded">Rimborsato</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Select value={pageSize.toString()} onValueChange={(value) => setPageSize(Number(value))}>
+                        <SelectTrigger className="w-full sm:w-32">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="10">10</SelectItem>
+                          <SelectItem value="20">20</SelectItem>
+                          <SelectItem value="50">50</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Button onClick={handleRefresh} disabled={paymentsLoading} variant="outline">
+                        <RefreshCw className={`h-4 w-4 mr-2 ${paymentsLoading ? 'animate-spin' : ''}`} />
+                        Aggiorna
+                      </Button>
+                    </div>
+
+                    {/* Payments List */}
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <h4 className="font-medium">Pagamenti ({totalPayments})</h4>
+                      </div>
+                      
+                      {paymentsLoading ? (
+                        <div className="flex items-center justify-center py-8">
+                          <Loader2 className="h-6 w-6 animate-spin mr-2" />
+                          <span>Caricamento pagamenti...</span>
+                        </div>
+                      ) : filteredPayments.length === 0 ? (
+                        <div className="text-center py-8 text-muted-foreground">
+                          <CreditCard className="h-8 w-8 mx-auto mb-2" />
+                          <p>Nessun pagamento trovato</p>
+                        </div>
+                      ) : (
+                        <div className="space-y-2">
+                          {filteredPayments.map((payment) => (
+                            <div
+                              key={payment.id}
+                              className="border rounded-lg p-4 hover:bg-muted/50 transition-colors"
+                            >
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-3">
+                                  {getPaymentTypeIcon(payment.payment_type, payment.subscription_type)}
+                                  <div>
+                                    <div className="flex items-center gap-2">
+                                      <h3 className="font-medium">
+                                        {getPaymentTypeLabel(payment)}
+                                      </h3>
+                                      <Badge className={getStatusColor(payment.status)}>
+                                        <div className="flex items-center gap-1">
+                                          {getStatusIcon(payment.status)}
+                                          {getStatusLabel(payment.status)}
+                                        </div>
+                                      </Badge>
+                                    </div>
+                                    <p className="text-sm text-muted-foreground">
+                                      {payment.description}
+                                    </p>
+                                    <div className="flex items-center gap-4 text-xs text-muted-foreground mt-1">
+                                      <span>ID: {payment.id}</span>
+                                      {payment.paypal_order_id && (
+                                        <span>PayPal: {payment.paypal_order_id}</span>
+                                      )}
+                                      <span>
+                                        {format(new Date(payment.created_at), 'dd/MM/yyyy HH:mm', { locale: it })}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="text-right">
+                                  <div className="text-lg font-bold">€{payment.amount.toFixed(2)}</div>
+                                  <div className="text-sm text-muted-foreground">
+                                    {payment.currency}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Pagination */}
+                      {totalPages > 1 && (
+                        <div className="flex items-center justify-between mt-4">
+                          <div className="text-sm text-muted-foreground">
+                            Pagina {currentPage} di {totalPages} ({totalPayments} pagamenti totali)
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handlePageChange(currentPage - 1)}
+                              disabled={currentPage === 1 || paymentsLoading}
+                            >
+                              <ChevronLeft className="h-4 w-4" />
+                              Precedente
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handlePageChange(currentPage + 1)}
+                              disabled={currentPage === totalPages || paymentsLoading}
+                            >
+                              Successiva
+                              <ChevronRight className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="text-center py-8 text-muted-foreground">
+                <CreditCard className="h-8 w-8 mx-auto mb-2" />
+                <p>Caricamento cronologia pagamenti...</p>
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
