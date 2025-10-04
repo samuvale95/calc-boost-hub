@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export const Hero = () => {
   return (
-    <section className="relative bg-white min-h-[80vh] flex items-center justify-center overflow-hidden">
+    <section className="relative bg-gradient-hero min-h-[80vh] flex items-center justify-center overflow-hidden">
       <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <img src="/logo.png" alt="logo D-DAND" className="mx-auto" />
