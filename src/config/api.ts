@@ -21,6 +21,8 @@ export const API_CONFIG = {
     // Admin payment endpoints
     ALL_PAYMENTS: '/payments/all',
     PAYMENT_STATS: '/payments/stats',
+    // PDF download endpoint
+    DOWNLOAD_PDF: '/pdf/download',
   }
 };
 

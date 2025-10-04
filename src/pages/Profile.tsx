@@ -50,6 +50,7 @@ const Profile = () => {
     payments, 
     getMyPaymentSummary, 
     getMyPayments, 
+    downloadPDF,
     isLoading: paymentsLoading 
   } = usePayments();
   const [isLoading, setIsLoading] = useState(false);
@@ -411,6 +412,21 @@ const Profile = () => {
                   <p className="text-sm text-muted-foreground">
                     {subscriptionInfo.description}
                   </p>
+                  
+                  {/* Download PDF button for PDF subscriptions */}
+                  {subscriptionInfo.isPdf && (
+                    <div className="pt-4">
+                      <Button 
+                        onClick={() => downloadPDF()}
+                        className="w-full"
+                        variant="default"
+                        disabled={paymentsLoading}
+                      >
+                        <Download className="h-4 w-4 mr-2" />
+                        {paymentsLoading ? 'Scaricamento...' : 'Scarica PDF'}
+                      </Button>
+                    </div>
+                  )}
                   
                   {/* Show days remaining only for annual subscriptions */}
                   {!subscriptionInfo.isPdf && subscriptionStatus?.daysRemaining > 0 && (

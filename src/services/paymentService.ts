@@ -220,6 +220,62 @@ class PaymentService {
       }
     );
   }
+
+  /**
+   * Scarica il PDF predefinito o un PDF specifico tramite /api/v1/pdf/download
+   */
+  async downloadPDF(filename?: string): Promise<Blob> {
+    const url = buildApiUrl(API_CONFIG.ENDPOINTS.DOWNLOAD_PDF);
+    const params = new URLSearchParams();
+    
+    if (filename) {
+      params.append('filename', filename);
+    }
+    
+    const fullUrl = params.toString() ? `${url}?${params.toString()}` : url;
+    
+    const defaultHeaders: Record<string, string> = {};
+    
+    // Add authorization header
+    const token = authService.getAuthToken();
+    if (token) {
+      // Check if token is expired locally first
+      if (tokenService.isTokenExpired(token)) {
+        throw new Error('Token expired');
+      }
+      
+      defaultHeaders['Authorization'] = `Bearer ${token}`;
+    }
+
+    try {
+      const response = await fetch(fullUrl, {
+        method: 'GET',
+        headers: defaultHeaders,
+      });
+      
+      if (!response.ok) {
+        // Handle 401 Unauthorized specifically
+        if (response.status === 401) {
+          if (token) {
+            const isValid = await tokenService.validateTokenWithAPI(token);
+            if (!isValid) {
+              throw new Error('Token invalid or expired');
+            }
+          }
+          throw new Error('Unauthorized - please login again');
+        }
+        
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return await response.blob();
+    } catch (error) {
+      if (error instanceof Error) {
+        throw error;
+      }
+      throw new Error('Network error occurred');
+    }
+  }
 }
 
 export const paymentService = new PaymentService();

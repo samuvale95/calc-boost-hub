@@ -121,13 +121,56 @@ export const usePayments = () => {
     }
   }, [authenticatedRequest, toast]);
 
+  /**
+   * Scarica il PDF predefinito o un PDF specifico
+   */
+  const downloadPDF = useCallback(async (filename?: string): Promise<void> => {
+    try {
+      setIsLoading(true);
+      const blob = await authenticatedRequest(() => paymentService.downloadPDF(filename));
+      
+      // Create download link
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      
+      // Set filename
+      const defaultFilename = filename || 'calc-boost-hub-guida.pdf';
+      link.download = defaultFilename;
+      
+      // Trigger download
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // Clean up
+      window.URL.revokeObjectURL(url);
+      
+      toast({
+        title: "Download Avviato",
+        description: "Il PDF è stato scaricato con successo",
+      });
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Errore durante il download del PDF';
+      toast({
+        title: "Errore",
+        description: errorMessage,
+        variant: "destructive",
+      });
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  }, [authenticatedRequest, toast]);
+
   // Memoize the methods to prevent unnecessary re-renders
   const paymentMethods = useMemo(() => ({
     createPayment,
     getMyPayments,
     getMyPaymentSummary,
     getPaymentById,
-  }), [createPayment, getMyPayments, getMyPaymentSummary, getPaymentById]);
+    downloadPDF,
+  }), [createPayment, getMyPayments, getMyPaymentSummary, getPaymentById, downloadPDF]);
 
   return {
     ...paymentMethods,
