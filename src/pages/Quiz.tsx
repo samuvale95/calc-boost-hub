@@ -543,7 +543,7 @@ const Quiz = () => {
                               type="radio"
                               name={`question-${currentQuestion.id}`}
                               value={option.id}
-                              checked={selectedAnswers[currentQuestion.id]?.score === option.score}
+                              checked={selectedAnswers[currentQuestion.id]?.response === option.text}
                               onChange={() => handleAnswerSelect(currentQuestion.id, option.id)}
                               className="text-primary focus:ring-primary"
                             />
