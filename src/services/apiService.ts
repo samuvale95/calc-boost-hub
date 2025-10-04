@@ -112,7 +112,7 @@ class ApiService {
   // Password management
   async regeneratePassword(id: number): Promise<any> {
     return this.makeRequest(API_CONFIG.ENDPOINTS.REGENERATE_PASSWORD.replace('{id}', id.toString()), {
-      method: 'POST',
+      method: 'PATCH',
     });
   }
 
