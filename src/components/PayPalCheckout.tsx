@@ -158,7 +158,7 @@ export const PayPalCheckout = (props: PayPalCheckoutProps) => {
           <div className="bg-muted p-4 rounded-lg">
             <div className="flex justify-between items-center mb-2">
               <span className="font-medium">Importo:</span>
-              <span className="text-2xl font-bold">€{amount.toFixed(2)}</span>
+              <span className="text-2xl font-bold">€{amount}</span>
             </div>
             <div className="flex justify-between items-center text-sm text-muted-foreground">
               <span>Cliente:</span>

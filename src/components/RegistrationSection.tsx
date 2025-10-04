@@ -28,6 +28,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { buildApiUrl, API_CONFIG } from "@/config/api";
 import { PayPalCheckout } from "./PayPalCheckout";
+import { PAYMENT_AMOUNTS } from "@/config/paypal";
 
 interface RegistrationSectionProps {
   isOpen: boolean;
@@ -173,7 +174,7 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
           title: 'Acquisto Guida PDF',
           description: 'Registrazione per il download della guida PDF',
           icon: <FileText className="h-6 w-6" />,
-          price: '€10',
+          price: `€${PAYMENT_AMOUNTS.PDF}`,
           period: 'una tantum'
         };
       case 'annuale':
@@ -181,7 +182,7 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
           title: 'Abbonamento Annuale',
           description: 'Registrazione per l\'accesso al tool interattivo',
           icon: <Calculator className="h-6 w-6" />,
-          price: '€10',
+          price: `€${PAYMENT_AMOUNTS.SUBSCRIPTION}`,
           period: 'all\'anno'
         };
       default:

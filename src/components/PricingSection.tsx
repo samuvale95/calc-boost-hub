@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { CheckIcon, FileText, Calculator } from "lucide-react";
 import { RegistrationSection } from "./RegistrationSection";
+import { PAYMENT_AMOUNTS } from "@/config/paypal";
 
 export const PricingSection = () => {
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
@@ -50,7 +51,7 @@ export const PricingSection = () => {
                 Scarica la guida completa e le tabelle per la correzione dei punteggi
               </CardDescription>
               <div className="flex items-center justify-center mt-4">
-                <span className="text-3xl font-bold">€599</span>
+                <span className="text-3xl font-bold">€{PAYMENT_AMOUNTS.PDF}</span>
                 <span className="text-muted-foreground ml-2">una tantum</span>
               </div>
             </CardHeader>
@@ -100,7 +101,7 @@ export const PricingSection = () => {
                 Accesso completo al tool di calcolo avanzato
               </CardDescription>
               <div className="flex items-center justify-center mt-4">
-                <span className="text-3xl font-bold">€199</span>
+                <span className="text-3xl font-bold">€{PAYMENT_AMOUNTS.SUBSCRIPTION}</span>
                 <span className="text-muted-foreground ml-2">all'anno</span>
               </div>
             </CardHeader>

@@ -5,6 +5,14 @@ export const ENV = {
   // API Configuration
   API_BASE_URL: import.meta.env.VITE_API_BASE_URL,
   
+  // PayPal Configuration
+  PAYPAL_CLIENT_ID: import.meta.env.VITE_PAYPAL_CLIENT_ID,
+  PAYPAL_ENVIRONMENT: import.meta.env.VITE_PAYPAL_ENVIRONMENT,
+  
+  // Payment Amounts Configuration
+  PAYMENT_AMOUNT_PDF: import.meta.env.VITE_PAYMENT_AMOUNT_PDF,
+  PAYMENT_AMOUNT_SUBSCRIPTION: import.meta.env.VITE_PAYMENT_AMOUNT_SUBSCRIPTION,
+  
   // Development mode
   IS_DEV: import.meta.env.DEV,
   IS_PROD: import.meta.env.PROD,
@@ -16,7 +24,8 @@ export const ENV = {
 // Validation function
 export const validateEnv = (): void => {
   const requiredVars = [
-    { key: 'VITE_API_BASE_URL', value: ENV.API_BASE_URL }
+    { key: 'VITE_API_BASE_URL', value: ENV.API_BASE_URL },
+    { key: 'VITE_PAYPAL_CLIENT_ID', value: ENV.PAYPAL_CLIENT_ID }
   ];
 
   const missingVars = requiredVars.filter(({ value }) => !value);
@@ -29,6 +38,7 @@ export const validateEnv = (): void => {
       'See src/config/README.md for setup instructions.'
     );
   }
+
 };
 
 // Helper function to get API URL
