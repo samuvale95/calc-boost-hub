@@ -500,7 +500,7 @@ const Quiz = () => {
                                   inputMode="numeric"
                                   step="1"
                                   onKeyDown={(e) => {
-                                    if (e.key === '.' || e.key === ',') {
+                                    if (['e', 'E', '+', '-', '.', ','].includes(e.key)) {
                                       e.preventDefault();
                                     }
                                   }}
