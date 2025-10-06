@@ -67,18 +67,21 @@ const Quiz = () => {
   // Validate numeric input
   const validateNumericInput = (value: string, min?: string, max?: string): string | null => {
     if (!value) return null;
-    
-    const numValue = parseFloat(value);
-    if (isNaN(numValue)) return "Inserisci un numero valido";
-    
-    if (min && numValue < parseFloat(min)) {
+
+    // accetta solo interi
+    const intValue = parseInt(value, 10);
+    if (!/^-?\d+$/.test(value)) {
+      return "Inserisci un numero intero valido";
+    }
+
+    if (min && intValue < parseInt(min, 10)) {
       return `Il valore deve essere almeno ${min}`;
     }
-    
-    if (max && numValue > parseFloat(max)) {
+
+    if (max && intValue > parseInt(max, 10)) {
       return `Il valore deve essere al massimo ${max}`;
     }
-    
+
     return null;
   };
 
@@ -494,6 +497,13 @@ const Quiz = () => {
                               <div className="flex-1">
                                 <input
                                   type="number"
+                                  inputMode="numeric"
+                                  step="1"
+                                  onKeyDown={(e) => {
+                                    if (e.key === '.' || e.key === ',') {
+                                      e.preventDefault();
+                                    }
+                                  }}
                                   value={selectedAnswers[currentQuestion.id]?.[option.text] ?? ''}
                                   onChange={(e) => {
                                     const value = e.target.value;
