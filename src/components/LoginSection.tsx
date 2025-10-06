@@ -16,7 +16,6 @@ import {
   Mail, 
   Lock, 
   Loader2, 
-  CheckCircle, 
   ArrowLeft,
   Eye,
   EyeOff,
@@ -25,7 +24,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAdmin } from "@/hooks/useAdmin";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface LoginSectionProps {
   isOpen: boolean;
@@ -38,13 +37,10 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
     password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { toast } = useToast();
-  const { login, isAuthenticated } = useAuth();
-  const { isUserAdmin } = useAdmin();
+  const { login } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({
@@ -71,19 +67,14 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
       const success = await login(formData.email, formData.password);
       
       if (success) {
-        setIsSuccess(true);
-        
         toast({
           title: "Accesso Riuscito!",
           description: "Benvenuto nel sistema",
         });
 
-        // Redirect after a short delay to show success message
-        setTimeout(() => {
-          const from = location.state?.from?.pathname || (isUserAdmin() ? "/admin" : "/quiz");
-          navigate(from, { replace: true });
-          handleClose();
-        }, 1500);
+        // Redirect to home immediately after successful login
+        navigate("/", { replace: true });
+        handleClose();
 
       } else {
         toast({
@@ -108,49 +99,10 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
 
   const handleClose = () => {
     setFormData({ email: "", password: "" });
-    setIsSuccess(false);
     setShowPassword(false);
     onClose();
   };
 
-  if (isSuccess) {
-    return (
-      <Dialog open={isOpen} onOpenChange={handleClose}>
-        <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-green-600">
-              <CheckCircle className="h-6 w-6" />
-              Accesso Riuscito!
-            </DialogTitle>
-            <DialogDescription>
-              Il tuo accesso è stato completato con successo.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="py-6 text-center">
-            <div className="mb-4">
-              <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                <CheckCircle className="h-8 w-8 text-green-600" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Benvenuto!</h3>
-              <p className="text-muted-foreground">
-                Stai per essere reindirizzato alla tua dashboard
-              </p>
-            </div>
-            <div className="bg-muted p-4 rounded-lg mb-4">
-              <p className="text-sm text-muted-foreground">
-                Puoi ora accedere a tutti i servizi disponibili per il tuo account.
-              </p>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button onClick={handleClose} className="w-full">
-              Chiudi
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    );
-  }
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -245,10 +197,7 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
                 Accesso in corso...
               </>
             ) : (
-              <>
-                <CheckCircle className="h-4 w-4" />
-                Accedi
-              </>
+              "Accedi"
             )}
           </Button>
         </DialogFooter>

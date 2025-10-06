@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, ArrowLeft } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAdmin } from "@/hooks/useAdmin";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { LoginSection } from "@/components/LoginSection";
 
 const Login = () => {
@@ -12,15 +12,8 @@ const Login = () => {
   const { isAuthenticated } = useAuth();
   const { isUserAdmin } = useAdmin();
   const navigate = useNavigate();
-  const location = useLocation();
 
-  // Redirect if already authenticated
-  useEffect(() => {
-    if (isAuthenticated) {
-      const from = location.state?.from?.pathname || (isUserAdmin() ? "/admin" : "/quiz");
-      navigate(from, { replace: true });
-    }
-  }, [isAuthenticated, navigate, location, isUserAdmin]);
+  // No automatic redirect - let LoginSection handle it after successful login
 
   const handleClose = () => {
     setIsLoginOpen(false);
