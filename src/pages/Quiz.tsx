@@ -270,6 +270,17 @@ const Quiz = () => {
     }
   }, [currentSectionIndex]);
 
+  // Auto-initialize slider values for closed-numeric questions
+  useEffect(() => {
+    if (currentQuestion && currentQuestion.type === "closed-numeric") {
+      // Only initialize if no answer exists yet
+      if (!selectedAnswers[currentQuestion.id]) {
+        const defaultValue = currentQuestion.options?.min || 0;
+        handleSliderChange(currentQuestion.id, [defaultValue]);
+      }
+    }
+  }, [currentQuestion]);
+
   return (
     
     <div className="min-h-screen bg-gradient-hero p-6">
@@ -483,7 +494,7 @@ const Quiz = () => {
                               <div className="flex-1">
                                 <input
                                   type="number"
-                                  value={selectedAnswers[currentQuestion.id]?.[option.text] || ''}
+                                  value={selectedAnswers[currentQuestion.id]?.[option.text] ?? ''}
                                   onChange={(e) => {
                                     const value = e.target.value;
                                     const errorKey = `${currentQuestion.id}-${option.text}`;
@@ -495,17 +506,38 @@ const Quiz = () => {
                                       [errorKey]: error || ''
                                     }));
                                     
-                                    setSelectedAnswers(prev => ({
-                                      ...prev,
-                                      [currentQuestion.id]: {
-                                        ...(typeof prev[currentQuestion.id] === 'object' ? prev[currentQuestion.id] : {}),
-                                        [option.text]: Number(value),
-                                        question: currentQuestion.text,
-                                        dom: currentQuestion.dom,
-                                        subdom: currentQuestion.subdom,
-                                        score: value ? parseFloat(value) : 0
-                                      }
-                                    }));
+                                    // Only save if value is not empty, otherwise remove the field
+                                    if (value === '') {
+                                      setSelectedAnswers(prev => {
+                                        const newAnswers = { ...prev };
+                                        if (newAnswers[currentQuestion.id]) {
+                                          const { [option.text]: removed, ...rest } = newAnswers[currentQuestion.id];
+                                          newAnswers[currentQuestion.id] = {
+                                            ...rest,
+                                            question: currentQuestion.text,
+                                            dom: currentQuestion.dom,
+                                            subdom: currentQuestion.subdom
+                                          };
+                                        }
+                                        return newAnswers;
+                                      });
+                                    } else {
+                                      setSelectedAnswers(prev => ({
+                                        ...prev,
+                                        [currentQuestion.id]: {
+                                          ...(typeof prev[currentQuestion.id] === 'object' ? prev[currentQuestion.id] : {}),
+                                          [option.text]: Number(value),
+                                          question: currentQuestion.text,
+                                          dom: currentQuestion.dom,
+                                          subdom: currentQuestion.subdom,
+                                          score: parseFloat(value)
+                                        }
+                                      }));
+                                    }
+                                  }}
+                                  onFocus={(e) => {
+                                    // Select all text when focused for easier editing
+                                    e.target.select();
                                   }}
                                   className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${
                                     inputErrors[`${currentQuestion.id}-${option.text}`] 
