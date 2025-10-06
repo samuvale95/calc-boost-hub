@@ -649,7 +649,7 @@ const Quiz = () => {
                   </Button>
                   <Button onClick={resetQuiz} className="flex items-center gap-2">
                     <Play className="h-4 w-4" />
-                    Rifai il Quiz
+                    Rifai il Test
                   </Button>
                   {isUserAdmin() && (
                     <Button 
