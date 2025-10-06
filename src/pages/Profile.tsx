@@ -23,9 +23,6 @@ import {
   Calculator,
   Loader2,
   X,
-  Filter,
-  Search,
-  Euro,
   ChevronLeft,
   ChevronRight
 } from "lucide-react";
@@ -36,8 +33,6 @@ import { PayPalCheckout } from "@/components/PayPalCheckout";
 import { PAYMENT_AMOUNTS, PAYMENT_DESCRIPTIONS } from "@/config/paypal";
 import { buildApiUrl, API_CONFIG } from "@/config/api";
 import { CreatePaymentRequest, Payment } from "@/services/paymentService";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { format } from "date-fns";
 import { it } from "date-fns/locale";
 
@@ -59,9 +54,7 @@ const Profile = () => {
   
   // Payment history states
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
-  const [statusFilter, setStatusFilter] = useState<string>('');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [pageSize] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
   const [totalPayments, setTotalPayments] = useState(0);
   const [showPaymentHistory, setShowPaymentHistory] = useState(false);
@@ -77,7 +70,7 @@ const Profile = () => {
     if (showPaymentHistory) {
       loadPayments();
     }
-  }, [showPaymentHistory, currentPage, pageSize, statusFilter]);
+  }, [showPaymentHistory, currentPage]);
 
   const loadPaymentSummary = async () => {
     try {
@@ -89,7 +82,7 @@ const Profile = () => {
 
   const loadPayments = async () => {
     try {
-      const response = await getMyPayments(currentPage, pageSize, statusFilter || undefined);
+      const response = await getMyPayments(currentPage, pageSize);
       setTotalPages(response.pages);
       setTotalPayments(response.total);
     } catch (error) {
@@ -100,11 +93,6 @@ const Profile = () => {
   const handleRefresh = () => {
     loadPayments();
     loadPaymentSummary();
-  };
-
-  const handleStatusFilter = (status: string) => {
-    setStatusFilter(status === 'all' ? '' : status);
-    setCurrentPage(1);
   };
 
   const handlePageChange = (page: number) => {
@@ -176,16 +164,6 @@ const Profile = () => {
     }
     return payment.subscription_type === 'annuale' ? 'Abbonamento Annuale' : 'Abbonamento';
   };
-
-  const filteredPayments = payments.filter(payment => {
-    if (!searchTerm) return true;
-    const searchLower = searchTerm.toLowerCase();
-    return (
-      payment.description.toLowerCase().includes(searchLower) ||
-      payment.id.toString().includes(searchLower) ||
-      (payment.paypal_order_id && payment.paypal_order_id.toLowerCase().includes(searchLower))
-    );
-  });
 
   const fetchSubscriptionStatus = async () => {
     if (!user) return;
@@ -499,7 +477,7 @@ const Profile = () => {
                   Cronologia Pagamenti
                 </CardTitle>
                 <CardDescription>
-                  Visualizza e gestisci tutti i tuoi pagamenti
+                  Visualizza i tuoi pagamenti
                 </CardDescription>
               </div>
               <Button 
@@ -544,43 +522,9 @@ const Profile = () => {
                 {showPaymentHistory && (
                   <div className="space-y-4">
                     <Separator />
-                    
-                    {/* Filters */}
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <div className="flex-1">
-                        <div className="relative">
-                          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                          <Input
-                            placeholder="Cerca per descrizione, ID o PayPal Order ID..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="pl-10"
-                          />
-                        </div>
-                      </div>
-                      <Select value={statusFilter || 'all'} onValueChange={handleStatusFilter}>
-                        <SelectTrigger className="w-full sm:w-48">
-                          <SelectValue placeholder="Filtra per stato" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="all">Tutti gli stati</SelectItem>
-                          <SelectItem value="completed">Completato</SelectItem>
-                          <SelectItem value="pending">In Attesa</SelectItem>
-                          <SelectItem value="failed">Fallito</SelectItem>
-                          <SelectItem value="cancelled">Cancellato</SelectItem>
-                          <SelectItem value="refunded">Rimborsato</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <Select value={pageSize.toString()} onValueChange={(value) => setPageSize(Number(value))}>
-                        <SelectTrigger className="w-full sm:w-32">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="10">10</SelectItem>
-                          <SelectItem value="20">20</SelectItem>
-                          <SelectItem value="50">50</SelectItem>
-                        </SelectContent>
-                      </Select>
+
+                    {/* Actions */}
+                    <div className="flex justify-end">
                       <Button onClick={handleRefresh} disabled={paymentsLoading} variant="outline">
                         <RefreshCw className={`h-4 w-4 mr-2 ${paymentsLoading ? 'animate-spin' : ''}`} />
                         Aggiorna
@@ -598,14 +542,14 @@ const Profile = () => {
                           <Loader2 className="h-6 w-6 animate-spin mr-2" />
                           <span>Caricamento pagamenti...</span>
                         </div>
-                      ) : filteredPayments.length === 0 ? (
+                      ) : payments.length === 0 ? (
                         <div className="text-center py-8 text-muted-foreground">
                           <CreditCard className="h-8 w-8 mx-auto mb-2" />
                           <p>Nessun pagamento trovato</p>
                         </div>
                       ) : (
                         <div className="space-y-2">
-                          {filteredPayments.map((payment) => (
+                          {payments.map((payment) => (
                             <div
                               key={payment.id}
                               className="border rounded-lg p-4 hover:bg-muted/50 transition-colors"

@@ -15,8 +15,7 @@ import {
   Calculator,
   FileText,
   Menu,
-  X,
-  BarChart3
+  X
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -45,12 +44,6 @@ export const Header = () => {
 
   const handleQuizClick = () => {
     navigate("/quiz");
-    setIsMobileMenuOpen(false);
-  };
-
-
-  const handleAdminPaymentsClick = () => {
-    navigate("/admin/payments");
     setIsMobileMenuOpen(false);
   };
 
@@ -114,7 +107,6 @@ export const Header = () => {
                   </Button>
                 )}
 
-                
                 {isAdmin && (
                   <Button
                     variant={isActivePage("/admin") ? "default" : "ghost"}
@@ -141,15 +133,6 @@ export const Header = () => {
                       <User className="h-4 w-4 mr-2" />
                       Il Mio Profilo
                     </DropdownMenuItem>
-                    {isAdmin && (
-                      <>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={handleAdminPaymentsClick}>
-                          <BarChart3 className="h-4 w-4 mr-2" />
-                          Gestione Pagamenti
-                        </DropdownMenuItem>
-                      </>
-                    )}
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={handleLogout}>
                       <LogOut className="h-4 w-4 mr-2" />
@@ -200,26 +183,15 @@ export const Header = () => {
                     </Button>
                   )}
 
-                  
                   {isAdmin && (
-                    <>
-                      <Button
-                        variant={isActivePage("/admin") ? "default" : "ghost"}
-                        onClick={handleAdminClick}
-                        className="w-full justify-start"
-                      >
-                        <Settings className="h-4 w-4 mr-2" />
-                        Pannello Admin
-                      </Button>
-                      <Button
-                        variant={isActivePage("/admin/payments") ? "default" : "ghost"}
-                        onClick={handleAdminPaymentsClick}
-                        className="w-full justify-start"
-                      >
-                        <BarChart3 className="h-4 w-4 mr-2" />
-                        Gestione Pagamenti
-                      </Button>
-                    </>
+                    <Button
+                      variant={isActivePage("/admin") ? "default" : "ghost"}
+                      onClick={handleAdminClick}
+                      className="w-full justify-start"
+                    >
+                      <Settings className="h-4 w-4 mr-2" />
+                      Pannello Admin
+                    </Button>
                   )}
 
                   <Button
