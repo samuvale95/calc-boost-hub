@@ -562,9 +562,6 @@ const AdminDashboard = () => {
                 className="flex items-center gap-2"
                 onClick={() => navigate("/quiz")}
               >
-                <Brain className="h-5 w-5" />
-                Quiz Formazione
-              </Button>
             </div>
           </div>
 
