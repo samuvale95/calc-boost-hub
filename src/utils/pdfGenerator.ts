@@ -27,7 +27,7 @@ export const generateQuizPDF = async (quizData: QuizData, scoresPDF: ScoresPDF, 
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `quiz-risultati-${new Date().toISOString().split('T')[0]}.pdf`;
+    link.download = `D-DAND-risultati-${new Date().toISOString().split('T')[0]}.pdf`;
     
     // Trigger download
     document.body.appendChild(link);

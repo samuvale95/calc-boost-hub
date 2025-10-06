@@ -291,7 +291,7 @@ const Profile = () => {
     } else if (subscriptionType === 'annuale') {
       return {
         title: 'Abbonamento Annuale',
-        description: 'Accesso completo al tool interattivo',
+        description: 'Accesso completo al test interattivo',
         icon: <Calculator className="h-5 w-5" />,
         status: isActive ? 'Attivo' : 'Scaduto',
         statusColor: isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800',
@@ -447,10 +447,10 @@ const Profile = () => {
                         <Calculator className="h-5 w-5 text-blue-600 mt-0.5" />
                         <div className="flex-1">
                           <h4 className="font-medium text-blue-900 mb-1">
-                            Vuoi accedere al tool interattivo?
+                            Vuoi accedere al test interattivo?
                           </h4>
                           <p className="text-sm text-blue-700 mb-3">
-                            Con l'abbonamento annuale potrai utilizzare il quiz interattivo e tutti gli strumenti avanzati.
+                            Con l'abbonamento annuale potrai utilizzare il test interattivo e tutti gli strumenti avanzati.
                           </p>
                           <Button 
                             onClick={() => setShowRenewal(true)}
@@ -703,7 +703,7 @@ const Profile = () => {
             </DialogTitle>
             <DialogDescription>
               {subscriptionInfo?.isPdf 
-                ? "Completa il pagamento per attivare l'abbonamento annuale e accedere al tool interattivo"
+                ? "Completa il pagamento per attivare l'abbonamento annuale e accedere al test interattivo"
                 : "Completa il pagamento per rinnovare il tuo abbonamento"
               }
             </DialogDescription>

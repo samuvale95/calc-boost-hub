@@ -110,7 +110,7 @@ export const Header = () => {
                     className="flex items-center gap-2"
                   >
                     <Calculator className="h-4 w-4" />
-                    Tool
+                    Test
                   </Button>
                 )}
 
@@ -196,7 +196,7 @@ export const Header = () => {
                       className="w-full justify-start"
                     >
                       <Calculator className="h-4 w-4 mr-2" />
-                      Tool Interattivo
+                      Test
                     </Button>
                   )}
 

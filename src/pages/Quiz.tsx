@@ -180,7 +180,7 @@ const Quiz = () => {
   const handleSubmitQuiz = () => {
     setShowResults(true);
     toast({
-      title: "Quiz Completato!",
+      title: "Test Completato!",
       description: "Hai completato con successo il test di formazione medica.",
     });
 
@@ -610,7 +610,7 @@ const Quiz = () => {
                   
                   <div className="flex gap-2">
                     <Button variant="outline" onClick={resetQuiz}>
-                      Reset Quiz
+                      Reset Test
                     </Button>
                     <Button 
                       onClick={handleNextQuestion}
@@ -620,7 +620,7 @@ const Quiz = () => {
                       {isLastQuestion ? (
                         <>
                           <Play className="h-4 w-4" />
-                          Completa Quiz
+                          Completa Test
                         </>
                       ) : (
                         <>
@@ -636,7 +636,7 @@ const Quiz = () => {
               <div className="space-y-6">
                 <div className="text-center py-8">
                   <CheckCircle className="h-16 w-16 text-primary mx-auto mb-4" />
-                  <h2 className="text-2xl font-bold mb-2">Quiz Completato!</h2>
+                  <h2 className="text-2xl font-bold mb-2">Test Completato!</h2>
                   <p className="text-muted-foreground text-lg">
                     Hai completato con successo il test di formazione medica.
                   </p>

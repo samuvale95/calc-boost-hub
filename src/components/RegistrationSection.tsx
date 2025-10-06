@@ -180,7 +180,7 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
       case 'annuale':
         return {
           title: 'Abbonamento Annuale',
-          description: 'Registrazione per l\'accesso al tool interattivo',
+          description: 'Registrazione per l\'accesso al test interattivo',
           icon: <Calculator className="h-6 w-6" />,
           price: `€${PAYMENT_AMOUNTS.SUBSCRIPTION}`,
           period: 'all\'anno'
@@ -316,7 +316,7 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
                 <div className="flex items-center gap-2">
                   {subscriptionInfo.icon}
                   <span className="font-medium text-sm">
-                    {subscriptionType === 'annuale' ? 'Tool Interattivo' : 'Guida PDF'}
+                    {subscriptionType === 'annuale' ? 'Test Interattivo' : 'Guida PDF'}
                   </span>
                 </div>
                 <Badge variant={subscriptionType === 'annuale' ? 'default' : 'outline'} className="text-xs">

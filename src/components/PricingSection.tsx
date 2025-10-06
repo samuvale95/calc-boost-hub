@@ -96,9 +96,9 @@ export const PricingSection = () => {
                   <Calculator className="h-8 w-8 text-accent-foreground" />
                 </div>
               </div>
-              <CardTitle className="text-2xl mb-2">Tool Interattivo</CardTitle>
+              <CardTitle className="text-2xl mb-2">Test Interattivo</CardTitle>
               <CardDescription className="text-base">
-                Accesso completo al tool di calcolo avanzato
+                Accedi al test e calcola automaticamente i punteggi
               </CardDescription>
               <div className="flex items-center justify-center mt-4">
                 <span className="text-3xl font-bold">€{PAYMENT_AMOUNTS.SUBSCRIPTION}</span>
@@ -109,7 +109,7 @@ export const PricingSection = () => {
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                  <span>Test digitale online</span>
+                  <span>Test online accessibile ovunque</span>
                 </li>
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
