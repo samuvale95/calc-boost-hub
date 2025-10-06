@@ -68,8 +68,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireSubscr
                   </div>
                   <p className="text-sm text-muted-foreground">
                     {user.subscription === 'annuale' 
-                      ? 'Il tuo abbonamento annuale è scaduto. Rinnova per continuare ad accedere al tool interattivo.'
-                      : 'Hai un abbonamento PDF. Per accedere al tool interattivo, scegli il piano annuale.'
+                      ? 'Il tuo abbonamento annuale è scaduto. Rinnova per continuare ad accedere al test interattivo.'
+                      : 'Hai un abbonamento PDF. Per accedere al test interattivo, scegli il piano annuale.'
                     }
                   </p>
                 </div>

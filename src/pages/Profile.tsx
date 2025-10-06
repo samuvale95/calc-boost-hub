@@ -209,8 +209,8 @@ const Profile = () => {
         subscription_type: paymentData.subscriptionType,
         subscription_duration_days: paymentData.subscriptionType === 'annuale' ? 365 : 0,
         description: paymentData.subscriptionType === 'annuale' 
-          ? 'Abbonamento annuale Calc Boost Hub' 
-          : 'Guida PDF Calc Boost Hub',
+          ? 'Abbonamento annuale D-DAND' 
+          : 'Guida PDF D-DAND',
         is_renewal: paymentData.subscriptionType === 'annuale',
         auto_renewal_enabled: paymentData.subscriptionType === 'annuale',
         paypal_order_id: paymentData.orderId,

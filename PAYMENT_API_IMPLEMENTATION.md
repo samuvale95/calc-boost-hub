@@ -2,7 +2,7 @@
 
 ## 📋 Panoramica
 
-È stata implementata una soluzione completa per la gestione dei pagamenti PayPal nell'applicazione Calc Boost Hub, includendo:
+È stata implementata una soluzione completa per la gestione dei pagamenti PayPal nell'applicazione D-DAND, includendo:
 
 - **Servizio API per pagamenti** con integrazione completa
 - **Hook personalizzati** per la gestione dei pagamenti
@@ -92,7 +92,7 @@ const paymentRequest: CreatePaymentRequest = {
   currency: 'EUR',
   subscription_type: 'annuale',
   subscription_duration_days: 365,
-  description: 'Abbonamento annuale Calc Boost Hub',
+  description: 'Abbonamento annuale D-DAND Hub',
   is_renewal: false,
   auto_renewal_enabled: true,
   paypal_order_id: 'PAYPAL_ORDER_ID',
