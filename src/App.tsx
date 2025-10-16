@@ -13,7 +13,6 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Login from "./pages/Login";
 import Quiz from "./pages/Quiz";
 import Profile from "./pages/Profile";
-import AdminPayments from "./pages/AdminPayments";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,7 +29,6 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
-            <Route path="/admin/payments" element={<AdminRoute><AdminPayments /></AdminRoute>} />
             <Route path="/login" element={<Login />} />
             <Route path="/quiz" element={<ProtectedRoute requireSubscription={true}><Quiz /></ProtectedRoute>} />
             <Route path="/profile" element={<Profile />} />
