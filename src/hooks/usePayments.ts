@@ -135,7 +135,7 @@ export const usePayments = () => {
       link.href = url;
       
       // Set filename
-      const defaultFilename = filename || 'calc-boost-hub-guida.pdf';
+      const defaultFilename = filename || 'D-DAND-guida.pdf';
       link.download = defaultFilename;
       
       // Trigger download
