@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
-import Icon from "public./icon.png";
+import Icon from "@/assets/icon.png";
 
 export const Header = () => {
   const { user, isAuthenticated, logout, isAdmin } = useAuth();
@@ -88,7 +88,7 @@ export const Header = () => {
               className="text-lg font-bold p-0 h-auto hover:bg-transparent hover:text-inherit" // tolto effetto hover
               onClick={() => navigate("/")}
             >
-              <img src={Icon} alt="icon" className="h-4 w-4" />
+              <img src={Icon} alt="icon" className="h-4 w-4 mr-2" />
               D-DAND
             </Button>
             {isAuthenticated && getSubscriptionBadge()}
