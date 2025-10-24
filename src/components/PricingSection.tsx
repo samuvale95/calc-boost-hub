@@ -100,7 +100,7 @@ export const PricingSection = () => {
                   <Calculator className="h-8 w-8 text-accent-foreground" />
                 </div>
               </div>
-              <CardTitle className="text-2xl mb-2">Tool di Scoring Online</CardTitle>
+              <CardTitle className="text-2xl mb-2">Test Interattivo</CardTitle>
               <CardDescription className="text-base">
                 Accedi al test e calcola automaticamente i punteggi
               </CardDescription>
@@ -113,7 +113,7 @@ export const PricingSection = () => {
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                  <span>Test accessibile da qualsiasi dispositivo</span>
+                  <span>Test online accessibile da qualsiasi dispositivo</span>
                 </li>
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />

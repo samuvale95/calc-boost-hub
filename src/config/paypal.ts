@@ -14,6 +14,6 @@ export const PAYMENT_AMOUNTS = {
 
 
 export const PAYMENT_DESCRIPTIONS = {
-  PDF: 'Guida PDF - D-DAND',
+  PDF: 'Kit D-DAND PDF - D-DAND',
   SUBSCRIPTION: 'Abbonamento Annuale - D-DAND',
 } as const;

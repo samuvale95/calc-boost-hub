@@ -189,7 +189,7 @@ const AdminPayments = () => {
 
   const getPaymentTypeLabel = (payment: Payment) => {
     if (payment.payment_type === 'pdf') {
-      return 'Guida PDF';
+      return 'Kit D-DAND PDF';
     }
     return payment.subscription_type === 'annuale' ? 'Abbonamento Annuale' : 'Abbonamento';
   };

@@ -160,7 +160,7 @@ const Profile = () => {
 
   const getPaymentTypeLabel = (payment: Payment) => {
     if (payment.payment_type === 'pdf') {
-      return 'Guida PDF';
+      return 'Kit D-DAND PDF';
     }
     return payment.subscription_type === 'annuale' ? 'Abbonamento Annuale' : 'Abbonamento';
   };
@@ -210,7 +210,7 @@ const Profile = () => {
         subscription_duration_days: paymentData.subscriptionType === 'annuale' ? 365 : 0,
         description: paymentData.subscriptionType === 'annuale' 
           ? 'Abbonamento annuale D-DAND' 
-          : 'Guida PDF D-DAND',
+          : 'Kit D-DAND PDF',
         is_renewal: paymentData.subscriptionType === 'annuale',
         auto_renewal_enabled: paymentData.subscriptionType === 'annuale',
         paypal_order_id: paymentData.orderId,
@@ -258,7 +258,7 @@ const Profile = () => {
     if (subscriptionType === 'pdf') {
       return {
         title: 'PDF',
-        description: 'Accesso alla guida PDF completa',
+        description: 'Accesso al Kit D-DAND PDF completo',
         icon: <Download className="h-5 w-5" />,
         status: 'PDF',
         statusColor: 'bg-blue-100 text-blue-800',

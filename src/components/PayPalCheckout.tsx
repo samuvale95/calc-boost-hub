@@ -147,7 +147,7 @@ export const PayPalCheckout = (props: PayPalCheckoutProps) => {
             </div>
           </div>
           <h3 className="text-xl font-semibold">
-            {subscriptionType === 'pdf' ? 'Acquisto Guida PDF' : 'Abbonamento Annuale'}
+            {subscriptionType === 'pdf' ? 'Acquisto Kit D-DAND PDF' : 'Abbonamento Annuale'}
           </h3>
           <p className="text-sm text-muted-foreground">
             {description}

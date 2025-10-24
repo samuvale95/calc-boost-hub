@@ -171,8 +171,8 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
     switch (subscriptionType) {
       case 'pdf':
         return {
-          title: 'Acquisto Guida PDF',
-          description: 'Registrazione per il download della guida PDF',
+          title: 'Acquisto Kit D-DAND PDF',
+          description: 'Registrazione per il download della Kit D-DAND PDF',
           icon: <FileText className="h-6 w-6" />,
           price: `€${PAYMENT_AMOUNTS.PDF}`,
           period: 'una tantum'
@@ -238,7 +238,7 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
             <div className="bg-muted p-4 rounded-lg mb-4">
               <p className="text-sm text-muted-foreground">
                 Puoi ora accedere al sistema utilizzando le credenziali che hai inserito.
-                {subscriptionType === 'pdf' ? ' La guida PDF sarà disponibile per il download.' : ' Il tuo abbonamento annuale è attivo.'}
+                {subscriptionType === 'pdf' ? ' Il Kit D-DAND PDF sarà disponibile per il download.' : ' Il tuo abbonamento annuale è attivo.'}
               </p>
             </div>
           </div>
@@ -316,7 +316,7 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
                 <div className="flex items-center gap-2">
                   {subscriptionInfo.icon}
                   <span className="font-medium text-sm">
-                    {subscriptionType === 'annuale' ? 'Test Interattivo' : 'Guida PDF'}
+                    {subscriptionType === 'annuale' ? 'Test Interattivo' : 'Kit D-DAND PDF'}
                   </span>
                 </div>
                 <Badge variant={subscriptionType === 'annuale' ? 'default' : 'outline'} className="text-xs">
