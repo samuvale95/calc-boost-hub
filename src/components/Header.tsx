@@ -104,7 +104,7 @@ export const Header = () => {
                     onClick={handleQuizClick}
                     className="flex items-center gap-2"
                   >
-                    <Calculator className="h-4 w-4" />
+                    <Calculator className="h-5 w-5" />
                     Test
                   </Button>
                 )}
