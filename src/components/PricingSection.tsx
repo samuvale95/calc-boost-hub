@@ -63,11 +63,11 @@ export const PricingSection = () => {
                 </li>
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
-                  <span>Manuale d'uso stampabile</span>
+                  <span>Manuale d'uso</span>
                 </li>
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
-                  <span>Formule e tabelle per calcolare manualmente i 25 outcome</span>
+                  <span>Formule e tabelle per il calcolo manuale dei 25 outcome</span>
                 </li>
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
@@ -100,7 +100,7 @@ export const PricingSection = () => {
                   <Calculator className="h-8 w-8 text-accent-foreground" />
                 </div>
               </div>
-              <CardTitle className="text-2xl mb-2">Scoring Online</CardTitle>
+              <CardTitle className="text-2xl mb-2">Tool di Scoring Online</CardTitle>
               <CardDescription className="text-base">
                 Accedi al test e calcola automaticamente i punteggi
               </CardDescription>
