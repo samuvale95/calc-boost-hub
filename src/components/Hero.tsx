@@ -31,8 +31,8 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* gradiente di transizione verso il verdino */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#81FF11] pointer-events-none" />
+      {/* gradiente di transizione verso l’azzurro */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#e6f4ff] pointer-events-none" />
     </section>
   );
 };
