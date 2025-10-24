@@ -135,7 +135,7 @@ export const usePayments = () => {
       link.href = url;
       
       // Set filename
-      const defaultFilename = filename || 'D-DAND-guida.pdf';
+      const defaultFilename = filename || 'D-DAND-Manuale.pdf';
       link.download = defaultFilename;
       
       // Trigger download
