@@ -46,9 +46,9 @@ export const PricingSection = () => {
                   <FileText className="h-8 w-8 text-primary-foreground" />
                 </div>
               </div>
-              <CardTitle className="text-2xl mb-2">Guida PDF</CardTitle>
+              <CardTitle className="text-2xl mb-2">Kit D-DAND PDF</CardTitle>
               <CardDescription className="text-base">
-                Scarica la guida completa e le tabelle per la correzione dei punteggi
+                Scarica il manuale e le tabelle per la correzione dei punteggi
               </CardDescription>
               <div className="flex items-center justify-center mt-4">
                 <span className="text-3xl font-bold">€{PAYMENT_AMOUNTS.PDF}</span>
@@ -59,11 +59,15 @@ export const PricingSection = () => {
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
-                  <span>Test completo in formato PDF</span>
+                  <span>Scala D-DAND in formato PDF</span>
                 </li>
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
-                  <span>Formule e tabelle per calcolare i 25 outcome</span>
+                  <span>Manuale d'uso stampabile</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckIcon className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
+                  <span>Formule e tabelle per calcolare manualmente i 25 outcome</span>
                 </li>
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
@@ -77,7 +81,7 @@ export const PricingSection = () => {
               <Button 
                 onClick={handlePdfPurchase}
                 className="w-full" 
-                variant="outline2"
+                variant="primary"
                 size="lg"
               >
                 Acquista PDF
@@ -88,7 +92,7 @@ export const PricingSection = () => {
           {/* Subscription Option */}
           <Card className="relative border-2 border-accent hover:border-accent/80 transition-all duration-300 hover:shadow-accent-glow">
             <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-accent">
-              Più Popolare
+              Extra
             </Badge>
             <CardHeader className="text-center pb-8">
               <div className="flex justify-center mb-4">
@@ -96,7 +100,7 @@ export const PricingSection = () => {
                   <Calculator className="h-8 w-8 text-accent-foreground" />
                 </div>
               </div>
-              <CardTitle className="text-2xl mb-2">Test Interattivo</CardTitle>
+              <CardTitle className="text-2xl mb-2">Scoring Online</CardTitle>
               <CardDescription className="text-base">
                 Accedi al test e calcola automaticamente i punteggi
               </CardDescription>
@@ -109,7 +113,7 @@ export const PricingSection = () => {
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                  <span>Test online accessibile ovunque</span>
+                  <span>Test accessibile da qualsiasi dispositivo</span>
                 </li>
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
@@ -122,10 +126,6 @@ export const PricingSection = () => {
                 <li className="flex items-center">
                   <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
                   <span>Report completo in PDF</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                  <span>Accesso da qualsiasi dispositivo</span>
                 </li>
               </ul>
               <Button 
