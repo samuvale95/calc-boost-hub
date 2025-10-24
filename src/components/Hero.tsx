@@ -5,9 +5,9 @@ export const Hero = () => {
   return (
     <section className="relative bg-[#ffffff] min-h-[80vh] flex items-center justify-center overflow-hidden">
       <div className="relative z-10 container mx-auto px-4 text-center">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <img src="/logo.png" alt="logo D-DAND" className="mx-auto" />
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-foreground to-primary-glow bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-foreground to-primary-glow bg-clip-text text-transparent">
             D-DAND
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-2xl mx-auto">
