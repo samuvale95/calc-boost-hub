@@ -88,7 +88,7 @@ export const Header = () => {
               className="text-lg font-bold p-0 h-auto hover:bg-transparent hover:text-inherit" // tolto effetto hover
               onClick={() => navigate("/")}
             >
-              <img src={Icon} alt="icon" className="h-4 w-4" />
+              <img src={Icon} alt="icon" className="h-6 w-6" />
               D-DAND
             </Button>
             {isAuthenticated && getSubscriptionBadge()}
@@ -104,7 +104,7 @@ export const Header = () => {
                     onClick={handleQuizClick}
                     className="flex items-center gap-2"
                   >
-                    <Calculator className="h-5 w-5" />
+                    <Calculator className="h-4 w-4" />
                     Test
                   </Button>
                 )}
