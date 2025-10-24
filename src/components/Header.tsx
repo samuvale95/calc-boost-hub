@@ -88,7 +88,7 @@ export const Header = () => {
               className="text-lg font-bold p-0 h-auto hover:bg-transparent hover:text-inherit" // tolto effetto hover
               onClick={() => navigate("/")}
             >
-              <img src={Icon} alt="icon" className="h-6 w-6" />
+              <img src={Icon} alt="icon" className="h-8 w-8" />
               D-DAND
             </Button>
             {isAuthenticated && getSubscriptionBadge()}
