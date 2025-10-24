@@ -25,7 +25,7 @@ export const PaperSection = () => {
                 <div className="md:col-span-2 space-y-6">
                   <div>
                     <h3 className="text-2xl md:text-3xl font-bold mb-4">
-                      VALIDAZIONE
+                      {/* VALIDAZIONE */}
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">
                       The D-DAND (Dravet Disease–Associated Neurodevelopmental and Neuropsychiatric Disorders) Scale is a new caregiver-administered interview designed to assess the wide range of developmental and behavioral comorbidities in Dravet Syndrome (DS) beyond seizures, and examines its preliminary psychometric properties in a large patient sample.
