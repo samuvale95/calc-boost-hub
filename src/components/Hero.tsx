@@ -32,7 +32,7 @@ export const Hero = () => {
       </div>
 
       {/* gradiente di transizione verso il bianco*/}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[gradient-hero] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#F5F8FB] pointer-events-none" />
     </section>
   );
 };
