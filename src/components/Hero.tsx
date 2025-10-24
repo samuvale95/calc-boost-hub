@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export const Hero = () => {
   return (
-    <section className="relative bg-[hsl(210, 40%, 96%) 100%)] min-h-[80vh] flex items-center justify-center overflow-hidden">
+    <section className="relative bg-[#ffffff] min-h-[80vh] flex items-center justify-center overflow-hidden">
       <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <img src="/logo.png" alt="logo D-DAND" className="mx-auto" />
@@ -32,7 +32,7 @@ export const Hero = () => {
       </div>
 
       {/* gradiente di transizione verso il bianco*/}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#ffffff] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[gradient-hero] pointer-events-none" />
     </section>
   );
 };
