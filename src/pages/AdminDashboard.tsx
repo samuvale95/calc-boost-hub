@@ -291,6 +291,11 @@ const AdminDashboard = () => {
 
 
   const getStatusBadge = (user: User) => {
+    // For PDF subscription, don't show any status badge
+    if (user.subscription === "pdf") {
+      return null;
+    }
+    
     const now = new Date();
     const expiryDate = user.subscriptionExpiry ? new Date(user.subscriptionExpiry) : null;
     const isSubscriptionActive = expiryDate ? expiryDate > now : false;
