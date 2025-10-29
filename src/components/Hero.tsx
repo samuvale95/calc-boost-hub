@@ -11,7 +11,7 @@ export const Hero = () => {
             DAND
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-2xl mx-auto">
-            <strong>D</strong>esease <strong>A</strong>ssociated <strong>N</strong>eurodevelopmental and <strong>N</strong>europsychiatric <strong>D</strong>isorders scale
+            <strong className="text-primary">D</strong>esease <strongclassName="text-primary">A</strong>ssociated <strong className="text-primary">N</strong>eurodevelopmental and <strong className="text-primary">N</strong>europsychiatric <strong className="text-primary">D</strong>isorders
           </p>
           <div className="flex justify-center">
             <Button 
