@@ -89,7 +89,7 @@ export const Header = () => {
               onClick={() => navigate("/")}
             >
               <img src={Icon} alt="icon" className="h-8 w-8" />
-              D-DAND
+              DAND
             </Button>
             {isAuthenticated && getSubscriptionBadge()}
           </div>
