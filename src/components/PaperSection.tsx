@@ -34,7 +34,7 @@ export const PaperSection = () => {
                   
                   <div>
                     <p className="text-sm text-muted-foreground mb-2">
-                      <strong>Autori:</strong> D. A. Cambiare, S. Valente, A. Peluzzi
+                      <strong>Autori:</strong> Nabbout R, Offredi F, Toraldo A, Ouss-Ryngaert E, Breuillard D, Cozzo M, Lo Barco T, Dalla Bernardina B, Brambilla I, Darra F.
                     </p>
                   </div>
                 </div>
