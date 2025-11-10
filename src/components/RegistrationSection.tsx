@@ -79,10 +79,10 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
       return;
     }
 
-    if (formData.password.length < 6) {
+    if (formData.password.length < 8) {
       toast({
         title: "Errore",
-        description: "La password deve essere di almeno 6 caratteri",
+        description: "La password deve essere di almeno 8 caratteri",
         variant: "destructive",
       });
       return;
@@ -432,7 +432,7 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
 
             <div className="bg-muted p-3 rounded-lg">
               <p className="text-xs text-muted-foreground">
-                <strong>Requisiti password:</strong> Almeno 6 caratteri. Scegli una password sicura che non hai mai usato prima.
+                <strong>Requisiti password:</strong> Almeno 8 caratteri. Scegli una password sicura che non hai mai usato prima.
               </p>
             </div>
           </form>

@@ -701,20 +701,24 @@ const AdminDashboard = () => {
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center gap-2">
-                            <span className="text-sm">
-                              {user.subscriptionExpiry 
-                                ? new Date(user.subscriptionExpiry).toLocaleDateString('it-IT')
-                                : 'N/A'
-                              }
-                            </span>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="h-6 w-6 p-0"
-                              onClick={() => handleEditExpiryDate(user.id, user.name, user.subscriptionExpiry)}
-                            >
-                              <Edit className="h-3 w-3" />
-                            </Button>
+                            {!(user.subscription === "pdf" && !user.subscriptionExpiry) && (
+                              <span className="text-sm">
+                                {user.subscriptionExpiry 
+                                  ? new Date(user.subscriptionExpiry).toLocaleDateString('it-IT')
+                                  : 'N/A'
+                                }
+                              </span>
+                            )}
+                            {user.subscription !== "pdf" && (
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="h-6 w-6 p-0"
+                                onClick={() => handleEditExpiryDate(user.id, user.name, user.subscriptionExpiry)}
+                              >
+                                <Edit className="h-3 w-3" />
+                              </Button>
+                            )}
                           </div>
                         </TableCell>
                         <TableCell>
