@@ -9,10 +9,10 @@ export const PaperSection = () => {
         <div className="max-w-6xl mx-auto">
           <Card className="border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
             <CardContent className="p-8">
-              <div className="grid md:grid-cols-3 gap-8 items-start">
+              <div className="grid md:grid-cols-3 gap-8 items-center">
                 {/* Image Column */}
-                <div className="md:col-span-1">
-                  <div className="aspect-[3/4] bg-muted rounded-lg overflow-hidden">
+                <div className="md:col-span-1 flex justify-center">
+                  <div className="aspect-[3/4] bg-muted rounded-lg overflow-hidden max-w-xs w-full">
                     <img 
                       src={paperImage} 
                       alt="Research Paper" 
