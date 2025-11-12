@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 
 const DDandSection = () => {
   return (
-    <section className="py-16 bg-[#F5F8FB] text-center">
+    <section className="py-16 bg-[#ffe7f8] text-center">
       <div className="container mx-auto px-6 lg:px-8">
         <h3 className="text-4xl md:text-5xl font-bold mb-6">
           D-DAND
@@ -14,9 +14,9 @@ const DDandSection = () => {
           <li>Indicazioni operative per personalizzare gli interventi educativi mirati.</li>
         </ul>
         <Button 
-          variant="outline" 
+          variant="outline"
           size="lg" 
-          className="text-lg px-8"
+          className="text-lg px-8 mt-10"
           onClick={() => {
             const pricingSection = document.getElementById('pricing');
             if (pricingSection) {
