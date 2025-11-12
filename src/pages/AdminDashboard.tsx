@@ -39,7 +39,8 @@ import {
   RefreshCw,
   UserX,
   UserCheck,
-  Edit
+  Edit,
+  ArrowUpDown
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -97,6 +98,10 @@ const AdminDashboard = () => {
     currentExpiry: "",
     isUpdating: false
   });
+  const [sortConfig, setSortConfig] = useState<{
+    column: "registrationDate";
+    direction: "asc" | "desc";
+  } | null>(null);
   const { toast } = useToast();
   const navigate = useNavigate();
   const api = useApi();
@@ -158,6 +163,29 @@ const AdminDashboard = () => {
     user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const sortedUsers = sortConfig
+    ? [...filteredUsers].sort((a, b) => {
+        if (sortConfig.column === "registrationDate") {
+          const dateA = a.registrationDate ? new Date(a.registrationDate).getTime() : 0;
+          const dateB = b.registrationDate ? new Date(b.registrationDate).getTime() : 0;
+          return sortConfig.direction === "asc" ? dateA - dateB : dateB - dateA;
+        }
+        return 0;
+      })
+    : filteredUsers;
+
+  const handleSort = (column: "registrationDate") => {
+    setSortConfig(prev => {
+      if (prev && prev.column === column) {
+        return {
+          column,
+          direction: prev.direction === "asc" ? "desc" : "asc",
+        };
+      }
+      return { column, direction: "asc" };
+    });
+  };
 
   const handleGeneratePassword = async (userId: string, userName: string) => {
     // Show confirmation toast first
@@ -672,7 +700,25 @@ const AdminDashboard = () => {
                     <TableHead>Abbonamento</TableHead>
                     <TableHead>Stato</TableHead>
                     <TableHead>Scadenza</TableHead>
-                    <TableHead>Registrazione</TableHead>
+                    <TableHead>
+                      <button
+                        type="button"
+                        onClick={() => handleSort("registrationDate")}
+                        className="flex items-center gap-1 text-left font-medium text-foreground hover:text-primary transition-colors"
+                      >
+                        Registrazione
+                        <ArrowUpDown
+                          className={`h-3 w-3 transition-transform ${
+                            sortConfig?.column === "registrationDate"
+                              ? sortConfig.direction === "desc"
+                                ? "rotate-180 text-primary"
+                                : "text-primary"
+                              : "text-muted-foreground"
+                          }`}
+                        />
+                        <span className="sr-only">Ordina per data di registrazione</span>
+                      </button>
+                    </TableHead>
                     <TableHead>Ultimo Accesso</TableHead>
                     <TableHead>Azioni</TableHead>
                   </TableRow>
@@ -687,7 +733,7 @@ const AdminDashboard = () => {
                       </TableCell>
                     </TableRow>
                   ) : (
-                    filteredUsers.map((user) => (
+                    sortedUsers.map((user) => (
                       <TableRow key={user.id}>
                         <TableCell className="font-medium">{user.name}</TableCell>
                         <TableCell className="text-muted-foreground">
