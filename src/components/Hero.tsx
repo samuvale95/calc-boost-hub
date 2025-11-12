@@ -2,7 +2,7 @@
 
 export const Hero = () => {
   return (
-    <section className="relative bg-[#ffffff] min-h-[80vh] flex items-center justify-center overflow-hidden">
+    <section className="relative bg-[#f3f7fa] min-h-[80vh] flex items-center justify-center overflow-hidden">
       <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <img src="/logo.png" alt="logo DAND" className="w-48 md:w-64 mb:4 mx-auto" />
