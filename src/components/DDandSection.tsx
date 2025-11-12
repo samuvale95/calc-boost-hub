@@ -4,7 +4,7 @@ const DDandSection = () => {
   return (
     <section className="py-16 bg-[#fff4fc] text-center">
       <div className="container mx-auto px-6 lg:px-8">
-        <h3 className="text-4xl md:text-5xl font-bold mb-6">
+        <h3 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-accent-glow bg-clip-text text-transparent">
           D-DAND
         </h3>
         <h2 className="text-3xl font-semibold tracking-tight bg-gradient-to-r from-foreground to-accent-glow bg-clip-text text-transparent">Scala DAND per la sindrome di Dravet</h2>
