@@ -4,7 +4,7 @@ const DDandSection = () => {
   return (
     <section className="py-16 bg-[#F5F8FB]">
       <div className="container mx-auto px-6 lg:px-8">
-        <h3 className="text-4xl md:text-5xl font-bold mb-6">
+        <h3 className="text-4xl md:text-5xl font-bold mb-6 text-center">
           D-DAND
         </h3>
         <h2 className="text-3xl font-semibold tracking-tight text-center">Scala DAND per la sindrome di Dravet</h2>
@@ -16,7 +16,7 @@ const DDandSection = () => {
         <Button 
           variant="outline" 
           size="lg" 
-          className="text-lg px-8"
+          className="text-lg px-8 mx-auto"
           onClick={() => {
             const pricingSection = document.getElementById('pricing');
             if (pricingSection) {
