@@ -1,8 +1,8 @@
 const DDandSection = () => {
   return (
-    <section className="py-16 bg-muted/30">
+    <section className="py-16">
       <div className="container mx-auto px-6 lg:px-8">
-        <h3 className="text-2xl md:text-3xl font-bold mb-4">
+        <h3 className="text-4xl md:text-5xl font-bold mb-6">
           D-DAND
         </h3>
         <ul className="mt-8 space-y-4 text-base text-muted-foreground max-w-2xl mx-auto list-disc list-inside">
