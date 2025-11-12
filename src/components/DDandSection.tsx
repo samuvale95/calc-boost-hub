@@ -7,9 +7,11 @@ const DDandSection = () => {
         <h3 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-accent-glow bg-clip-text text-transparent">D-DAND</h3>
         <h2 className="text-3xl font-semibold tracking-tight bg-gradient-to-r from-foreground to-accent-glow bg-clip-text text-transparent">Scala DAND per la sindrome di Dravet</h2>
         <ul className="mt-8 space-y-4 text-base text-muted-foreground max-w-2xl mx-auto list-disc list-inside">
-          <li>Misurazione strutturata delle competenze numeriche fondata su letteratura clinica.</li>
-          <li>Identificazione rapida di profili di apprendimento e di potenziali fragilità.</li>
-          <li>Indicazioni operative per personalizzare gli interventi educativi mirati.</li>
+          <li>Facile e veloce da somministrare</li>
+          <li>Affidabile e standardizzato</li>
+          <li>Follow-up longitudinali</li>
+          <li>Valutazione globale del paziente</li>
+          <li>Su misura per la sindrome di Dravet</li>
         </ul>
         <Button 
           variant="outline"
