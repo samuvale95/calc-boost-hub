@@ -14,19 +14,6 @@ export const Hero = () => {
             <strong className="text-primary">D</strong>esease <strong className="text-primary">A</strong>ssociated <strong className="text-primary">N</strong>eurodevelopmental and <strong className="text-primary">N</strong>europsychiatric <strong className="text-primary">D</strong>isorders
           </p>
           <div className="flex justify-center">
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="text-lg px-8"
-              onClick={() => {
-                const pricingSection = document.getElementById('pricing');
-                if (pricingSection) {
-                  pricingSection.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-            >
-              Scegli il Tuo Piano
-            </Button>
           </div>
         </div>
       </div>
