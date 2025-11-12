@@ -97,8 +97,39 @@ export const RegistrationSection = ({ isOpen, onClose, subscriptionType }: Regis
       return;
     }
 
-    // Proceed to payment step
-    setShowPayment(true);
+    try {
+      setIsLoading(true);
+
+      const response = await fetch(
+        `${buildApiUrl(API_CONFIG.ENDPOINTS.CHECK_EMAIL)}?email=${encodeURIComponent(formData.email)}`
+      );
+
+      if (!response.ok) {
+        throw new Error(`Errore HTTP: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.exists) {
+        toast({
+          title: "Email già registrata",
+          description: "Esiste già un account associato a questa email. Accedi oppure usa un altro indirizzo.",
+          variant: "destructive",
+        });
+        return;
+      }
+    } catch (error) {
+      console.error("Errore nella verifica email:", error);
+      toast({
+        title: "Errore",
+        description: "Impossibile verificare l'email. Riprova più tardi.",
+        variant: "destructive",
+      });
+      return;
+      setShowPayment(true);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handlePaymentSuccess = async (paymentData: any) => {
