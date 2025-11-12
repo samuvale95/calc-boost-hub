@@ -4,7 +4,7 @@ import paperImage from "@/assets/paper.jpeg";
 
 export const PaperSection = () => {
   return (
-    <section className="py-16 bg-[#ffe7f8]">
+    <section className="py-16 bg-[#fff4fc]">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <Card className="border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg">

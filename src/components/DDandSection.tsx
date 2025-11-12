@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 
 const DDandSection = () => {
   return (
-    <section className="py-16 bg-[#ffe7f8] text-center">
+    <section className="py-16 bg-[#fff4fc] text-center">
       <div className="container mx-auto px-6 lg:px-8">
         <h3 className="text-4xl md:text-5xl font-bold mb-6">
           D-DAND
