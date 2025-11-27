@@ -10,7 +10,7 @@ export const Hero = () => {
             DAND
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-6 max-w-2xl mx-auto">
-            <strong className="text-primary">D</strong>esease <strong className="text-primary">A</strong>ssociated <strong className="text-primary">N</strong>eurodevelopmental and <strong className="text-primary">N</strong>europsychiatric <strong className="text-primary">D</strong>isorders
+            <strong className="text-primary">D</strong>esease <strong className="text-primary">A</strong>ssociated <strong className="text-primary">N</strong>europsychiatric <strong className="text-primary">D</strong>isorders
           </p>
           <div className="flex justify-center">
           </div>
