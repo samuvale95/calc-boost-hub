@@ -587,7 +587,7 @@ const Quiz = () => {
                       <div className="space-y-4">
                         <textarea
                           className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none h-auto"
-                          placeholder="Risposta aperta..."
+                          placeholder=""
                           value={selectedAnswers[currentQuestion.id]?.response || ""}
                           onChange={(e) => {
                             const value = e.target.value;
