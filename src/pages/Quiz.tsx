@@ -294,7 +294,7 @@ const Quiz = () => {
     currentQuestionIndex === currentSection.questions.length - 1;
 
   return (
-    
+
     <div className="min-h-screen bg-gradient-hero p-6">
       <div className="container mx-auto max-w-4xl">
         {/* Header */}
@@ -586,24 +586,23 @@ const Quiz = () => {
                     ) : currentQuestion.type === "open" ? (
                       <div className="space-y-4">
                         <textarea
-                          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none h-auto"
                           placeholder="Risposta aperta..."
                           value={selectedAnswers[currentQuestion.id]?.response || ""}
                           onChange={(e) => {
                             const value = e.target.value;
-
                             setSelectedAnswers(prev => ({
                               ...prev,
                               [currentQuestion.id]: {
                                 question: currentQuestion.text,
                                 response: value,
-                                score: 0,                     // tipicamente 0 o calcolo personalizzato
+                                score: 0,
                                 dom: currentQuestion.dom,
                                 subdom: currentQuestion.subdom
                               }
                             }));
                           }}
-                          rows={4}
+                          rows={1}
                         />
                       </div>
                     ) : (

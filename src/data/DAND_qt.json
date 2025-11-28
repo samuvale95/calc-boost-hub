@@ -1,7 +1,7 @@
 {
     "questions": [
         {
-            "text": "Data",
+            "text": "DATA",
             "type": "open",
             "response": [],
             "section": "DATI PERSONALI",
@@ -9,7 +9,7 @@
             "dom": "Pers"
         }, 
         {
-            "text": "Identificativo Paziente",
+            "text": "ID PAZIENTE",
             "type": "open",
             "response": [],
             "section": "DATI PERSONALI",
