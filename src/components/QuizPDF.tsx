@@ -200,9 +200,10 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
           <Text style={styles.subtitle}>Report dei Risultati</Text>
         </View>
 
-        {/* Patient Name Section */}
+        {/* Date and Name Section */}
         <View style={styles.resultsSection}>
-          <Text style={styles.resultsTitle}>Identificativo Paziente: ________________________________</Text>
+          <Text style={styles.resultsTitle}>Data valutazione: {scoresPDF.find(s => s.question === "DATA")?.response || "___________________________________"}</Text>
+          <Text style={styles.resultsTitle}>Identificativo Paziente: {scoresPDF.find(s => s.question === "ID PAZIENTE")?.response || "___________________________________"}</Text>
         </View>
 
         {/* Results Sections */}
@@ -296,7 +297,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
             <View style={styles.resultsSection}>
               <Text style={styles.resultsTitle}>Punteggio per Item</Text>
               <View style={styles.table}>
-                {scoresPDF.map(({question, response = null, score}) => {
+                {scoresPDF.slice(2).map(({question, response = null, score}) => { // remove first 2 items: date and name
                   return (
                     <View key={question} style={styles.tableRow} wrap={false}>
                       <View style={[styles.tableCell, { flex: 1, justifyContent: 'center'}]}>
