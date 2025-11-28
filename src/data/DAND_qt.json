@@ -1,5 +1,21 @@
 {
-    "questions": [     
+    "questions": [
+        {
+            "text": "Data",
+            "type": "open",
+            "response": [],
+            "section": "DATI PERSONALI",
+            "subdom": 0,
+            "dom": "Pers"
+        }, 
+        {
+            "text": "Identificativo Paziente",
+            "type": "open",
+            "response": [],
+            "section": "DATI PERSONALI",
+            "subdom": 0,
+            "dom": "Pers"
+        }, 
         {
             "text": "ETÀ in anni e mesi, es. se il paziente ha 3 anni e 4 mesi scrivere 3 nella casella 'Anni' e 4 in quella 'Mesi'",
             "type": "open-numeric",

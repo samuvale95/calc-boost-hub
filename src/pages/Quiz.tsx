@@ -119,6 +119,9 @@ const Quiz = () => {
       );
       return hasValidInput && !hasErrors;
     }
+    if (question?.type === "open") {
+      return selectedAnswers[key]?.response?.trim().length > 0;
+}
     
     return true;
   }).length;
@@ -243,21 +246,22 @@ const Quiz = () => {
     }
   };
 
-  const isCurrentQuestionAnswered = currentQuestion ? 
-    (currentQuestion.type === "closed-numeric" ? 
+  const isCurrentQuestionAnswered = currentQuestion ?
+    (currentQuestion.type === "closed-numeric" ?
       selectedAnswers[currentQuestion.id] !== undefined :
-      currentQuestion.type === "open-numeric" ?
-      selectedAnswers[currentQuestion.id] !== undefined && 
-      currentQuestion.response.some(option => 
-        selectedAnswers[currentQuestion.id]?.[option.text] !== undefined && 
+    currentQuestion.type === "open-numeric" ?
+      selectedAnswers[currentQuestion.id] !== undefined &&
+      currentQuestion.response.some(option =>
+        selectedAnswers[currentQuestion.id]?.[option.text] !== undefined &&
         selectedAnswers[currentQuestion.id]?.[option.text] !== ""
       ) &&
-      !currentQuestion.response.some(option => 
+      !currentQuestion.response.some(option =>
         inputErrors[`${currentQuestion.id}-${option.text}`]
       ) :
-      selectedAnswers[currentQuestion.id] !== undefined) : false;
-  const isLastQuestion = currentSectionIndex === sections.length - 1 && 
-                        currentQuestionIndex === currentSection.questions.length - 1;
+    currentQuestion.type === "open" ?
+      selectedAnswers[currentQuestion.id]?.response?.trim().length > 0 :
+    selectedAnswers[currentQuestion.id] !== undefined
+    ) : false;
 
   // Auto-scroll to current section
   useEffect(() => {
@@ -574,6 +578,29 @@ const Quiz = () => {
                           ))}
                         </div>
                       </div>
+                    ) : currentQuestion.type === "open" ? (
+                      <div className="space-y-4">
+                        <textarea
+                          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                          placeholder="Risposta aperta..."
+                          value={selectedAnswers[currentQuestion.id]?.response || ""}
+                          onChange={(e) => {
+                            const value = e.target.value;
+
+                            setSelectedAnswers(prev => ({
+                              ...prev,
+                              [currentQuestion.id]: {
+                                question: currentQuestion.text,
+                                response: value,
+                                score: 0,                     // tipicamente 0 o calcolo personalizzato
+                                dom: currentQuestion.dom,
+                                subdom: currentQuestion.subdom
+                              }
+                            }));
+                          }}
+                          rows={4}
+                        />
+                      </div>
                     ) : (
                       <div className="space-y-3">
                         {currentQuestion.response.map((option) => (
@@ -594,6 +621,10 @@ const Quiz = () => {
                         ))}
                       </div>
                     )}
+
+
+
+
                   </Card>
                 )}
                 
