@@ -103,11 +103,11 @@
                     "score": 1
                 },
                 {
-                    "text": "Si sposta ad orologio/striscia/gattona con difficoltà o con movimenti non coordinati",
+                    "text": "Si sposta a orologio/striscia/gattona con difficoltà o con movimenti non coordinati",
                     "score": 2
                 },
                 {
-                    "text": "Si sposta ad orologio/striscia/gattona in modo adeguato per la sua età",
+                    "text": "Si sposta a orologio/striscia/gattona in modo adeguato per la sua età",
                     "score": 3
                 },
                 {
@@ -177,7 +177,7 @@
                     "score": 2
                 },
                 {
-                    "text": "Sale e scende le scale senza sostegno ed alternando i piedi",
+                    "text": "Sale e scende le scale senza sostegno e alternando i piedi",
                     "score": 3
                 }
             ],
@@ -248,11 +248,11 @@
                     "score": 1
                 },
                 {
-                    "text": "Riesce a lanciare ed afferrare una palla grande",
+                    "text": "Riesce a lanciare e afferrare una palla grande",
                     "score": 2
                 },
                 {
-                    "text": "Riesce a lanciare ed afferrare una palla piccola",
+                    "text": "Riesce a lanciare e afferrare una palla piccola",
                     "score": 3
                 }
             ],
@@ -281,7 +281,7 @@
                     "score": 3
                 },
                 {
-                    "text": "Cammina per il tempo necessario (gita in montagna, giro nei negozi...)",
+                    "text": "Cammina per il tempo necessario (es. gita in montagna, giro nei negozi...)",
                     "score": 4
                 }
             ],
@@ -352,23 +352,23 @@
             "dom": "Mot"
         },
         {
-            "text": "PUZZLES",
+            "text": "PUZZLE",
             "type": "single-choice",
             "response": [
                 {
-                    "text": "Non fa incastri né puzzles",
+                    "text": "Non fa incastri né puzzle",
                     "score": 0
                 },
                 {
-                    "text": "Esegue incastri semplici (posiziona un cerchio nel foro circolare, un quadrato nel foro quadrato...)",
+                    "text": "Esegue incastri semplici (es. posiziona un cerchio nel foro circolare, un quadrato nel foro quadrato...)",
                     "score": 1
                 },
                 {
-                    "text": "Esegue senza aiuto puzzles nuovi di più di 5 pezzi",
+                    "text": "Esegue senza aiuto puzzle nuovi di più di 5 pezzi",
                     "score": 2
                 },
                 {
-                    "text": "Esegue senza aiuto puzzles nuovi di più di 15/20 pezzi",
+                    "text": "Esegue senza aiuto puzzle nuovi di più di 15/20 pezzi",
                     "score": 3
                 }
             ],
@@ -455,7 +455,7 @@
                     "score": 3
                 },
                 {
-                    "text": "Taglia delle forme con le forbici (cerchio, quadrato, triangolo, ecc)",
+                    "text": "Taglia delle forme con le forbici (cerchio, quadrato, triangolo, ecc.)",
                     "score": 4
                 }
             ],
@@ -489,7 +489,7 @@
             "dom": "Lan"
         },
         {
-            "text": "ATTENZIONE CONGIUNTA, RISPOSTA ED INIZIATIVA",
+            "text": "ATTENZIONE CONGIUNTA, RISPOSTA E INIZIATIVA",
             "type": "single-choice",
             "response": [
                 {
@@ -575,7 +575,7 @@
                     "score": 3
                 },
                 {
-                    "text": "Tiene conto degli stati mentali degli altri (pensieri, emozioni, credenze), per agire",
+                    "text": "Tiene conto degli stati mentali degli altri (pensieri, emozioni, credenze) per agire",
                     "score": 4
                 }
             ],
@@ -592,7 +592,7 @@
                     "score": 0
                 },
                 {
-                    "text": "Mostra una certa comprensione delle battute e degli scherzi ma limitate ad alcune forme",
+                    "text": "Mostra una certa comprensione delle battute e degli scherzi, ma limitata ad alcune forme",
                     "score": 1
                 },
                 {
@@ -642,7 +642,7 @@
                     "score": 0
                 },
                 {
-                    "text": "Gioco d'imitazione funzionale: utilizza un oggetto secondo la sua funzione (ad es, un telefono per fingere di telefonare, una macchinina per fare un percorso, gioca con la cucinetta)",
+                    "text": "Gioco d'imitazione funzionale: utilizza un oggetto secondo la sua funzione (es. un telefono per fingere di telefonare, una macchinina per fare un percorso, gioca con la cucinetta)",
                     "score": 1
                 },
                 {
@@ -704,7 +704,7 @@
                     "score": 3
                 },
                 {
-                    "text": "Comprende i modi di dire e le espressioni figurate ('avere la luna', 'ce l'ho sulla punta delle lingua')",
+                    "text": "Comprende i modi di dire e le espressioni figurate ('avere la luna', 'ce l'ho sulla punta della lingua')",
                     "score": 4
                 }
             ],
@@ -758,7 +758,7 @@
                     "score": 2
                 },
                 {
-                    "text": "Utilizza una vasta gamma di gesti comunicativi, oltre all'indicazione (fare si con la testa, applaudire, fare il gesto del silenzio portando il dito alla bocca...)",
+                    "text": "Utilizza una vasta gamma di gesti comunicativi, oltre all'indicazione (es. fare sì con la testa, applaudire, fare il gesto del silenzio portando il dito alla bocca...)",
                     "score": 3
                 }
             ],
@@ -775,7 +775,7 @@
                     "score": 0
                 },
                 {
-                    "text": "Il linguaggio (lallazione, parole) è presente ma finalizzato solo ad esprimere i suoi bisogni, non per gli scambi comunicativi",
+                    "text": "Il linguaggio (lallazione, parole) è presente ma finalizzato solo a esprimere i suoi bisogni, non per gli scambi comunicativi",
                     "score": 1
                 },
                 {
@@ -787,7 +787,7 @@
                     "score": 3
                 },
                 {
-                    "text": "Può partecipare ad una conversazione con vari scambi con l'altro, senza interrompere o sovrapporsi o saltare di palo in frasca",
+                    "text": "Può partecipare a una conversazione con vari scambi con l'altro, senza interrompere o sovrapporsi o saltare di palo in frasca",
                     "score": 4
                 }
             ],
@@ -808,7 +808,7 @@
                     "score": 1
                 },
                 {
-                    "text": "Parla ad una velocità normale",
+                    "text": "Parla a una velocità normale",
                     "score": 2
                 }
             ],
@@ -821,7 +821,7 @@
             "type": "single-choice",
             "response": [
                 {
-                    "text": "linguaggio inintellegibile",
+                    "text": "Linguaggio inintelligibile",
                     "score": 0
                 },
                 {
@@ -858,7 +858,7 @@
                     "score": 2
                 },
                 {
-                    "text": "Mangia autonomamemente con cucchiaio, forchetta e coltello",
+                    "text": "Mangia autonomamente con cucchiaio, forchetta e coltello",
                     "score": 3
                 }
             ],
@@ -871,7 +871,7 @@
             "type": "single-choice",
             "response": [
                 {
-                    "text": "Nutrizione enterale (SNG, PEG...)",
+                    "text": "Nutrizione enterale (es. SNG, PEG...)",
                     "score": 0
                 },
                 {
@@ -971,11 +971,11 @@
             "type": "single-choice",
             "response": [
                 {
-                    "text": "Non si veste senza l'aiuto di altri, e non collabora quando viene vestito",
+                    "text": "Non si veste senza l'aiuto di altri e non collabora quando viene vestito",
                     "score": 0
                 },
                 {
-                    "text": "Collabora quando viene vestito (infila le braccia, le mani...)",
+                    "text": "Collabora quando viene vestito (es. infila le braccia, le mani...)",
                     "score": 1
                 },
                 {
@@ -1004,7 +1004,7 @@
                     "score": 1
                 },
                 {
-                    "text": "Si tiene pulito di giorno con qualche incidento",
+                    "text": "Si tiene pulito di giorno con qualche incidente",
                     "score": 2
                 },
                 {
@@ -1033,11 +1033,11 @@
                     "score": 1
                 },
                 {
-                    "text": "Ha consapevolezza del pericolo all'esterno, negli ambienti più complessi (attende prima di attraversare, cammina sul marciapiede, da' la mano all'adulto...)",
+                    "text": "Ha consapevolezza del pericolo all'esterno, negli ambienti più complessi (es. attende prima di attraversare, cammina sul marciapiede, dà la mano all'adulto...)",
                     "score": 2
                 },
                 {
-                    "text": "Evita le situazioni sociali pericolose (s'allontana da persone pericolose, non ricerca attività/giochi pericolosi)",
+                    "text": "Evita le situazioni sociali pericolose (si allontana da persone pericolose, non ricerca attività/giochi pericolosi)",
                     "score": 3
                 }
             ],
@@ -1054,15 +1054,15 @@
                     "score": 0
                 },
                 {
-                    "text": "Aiuta su richiesta per faccende semplici: sparecchiare oggetti infrangibili, passare la scopa...)",
+                    "text": "Aiuta su richiesta per faccende semplici (es. sparecchiare oggetti infrangibili, passare la scopa...)",
                     "score": 1
                 },
                 {
-                    "text": "Ajuta in faccende più complesse con supervisione (mescolare l'impasto di una torta, riempire la lavastoviglie...)",
+                    "text": "Aiuta in faccende più complesse con supervisione (es. mescolare l'impasto di una torta, riempire la lavastoviglie...)",
                     "score": 2
                 },
                 {
-                    "text": "Aiuta svolgendo in autonomia alcune faccende (fare ordine, sparecchiare la tavola, passare la scopa, scaldare il cibo...)",
+                    "text": "Aiuta svolgendo in autonomia alcune faccende (es. fare ordine, sparecchiare la tavola, passare la scopa, scaldare il cibo...)",
                     "score": 3
                 }
             ],
@@ -1125,11 +1125,11 @@
             "type": "single-choice",
             "response": [
                 {
-                    "text": "Non si interessa a tablet, cellulare O COMPUTER",
+                    "text": "Non si interessa a tablet, cellulare o computer",
                     "score": 0
                 },
                 {
-                    "text": "È in grado di usare tablet o cellulari ma solo per ripetere una singola operazione",
+                    "text": "È in grado di usare tablet o cellulari, ma solo per ripetere una singola operazione",
                     "score": 1
                 },
                 {
@@ -1137,11 +1137,11 @@
                     "score": 2
                 },
                 {
-                    "text": "Può svolgere compiti complessi CON TABLET/SMARTPHONES",
+                    "text": "Può svolgere compiti complessi con tablet/smartphone",
                     "score": 3
                 },
                 {
-                    "text": "Può SVOLGERE compiti complessi con il computer",
+                    "text": "Può svolgere compiti complessi con il computer",
                     "score": 4
                 }
             ],
@@ -1170,7 +1170,7 @@
                     "score": 3
                 },
                 {
-                    "text": "Utilizza in autonomia tutti i tipi di orologia",
+                    "text": "Utilizza in autonomia tutti i tipi di orologi",
                     "score": 4
                 },
                 {
@@ -1245,7 +1245,7 @@
                     "score": 1
                 },
                 {
-                    "text": "Sa leggere la gran parte delle parole anche con gruppi consonantici ed II",
+                    "text": "Sa leggere la gran parte delle parole anche con gruppi consonantici ed H",
                     "score": 2
                 },
                 {
@@ -1337,11 +1337,11 @@
             "type": "single-choice",
             "response": [
                 {
-                    "text": "Non gestisce affatto le proprie emozioni, con conseguenze importanti per le relazioni (emozioni eccessive o sproporzionate al contesto: es. scoppi di risate,..)",
+                    "text": "Non gestisce affatto le proprie emozioni, con conseguenze importanti per le relazioni (emozioni eccessive o sproporzionate al contesto: es. scoppi di risate..)",
                     "score": 0
                 },
                 {
-                    "text": "Ha difficoltà a gestire le sue emozioni: passa rapidamente da un'emozione ad un'altra oppure le emozioni sono molto intense",
+                    "text": "Ha difficoltà a gestire le sue emozioni: passa rapidamente da un'emozione a un'altra oppure le emozioni sono molto intense",
                     "score": 1
                 },
                 {
@@ -1378,11 +1378,11 @@
                     "score": 2
                 },
                 {
-                    "text": "Può avere accessi di tristezza",
+                    "text": "Può avere eccessi di tristezza",
                     "score": 3
                 },
                 {
-                    "text": "È triste solo raramente, quando il contesto lo giustifica (in relazione ad eventi di vita)",
+                    "text": "È triste solo raramente, quando il contesto lo giustifica (in relazione a eventi di vita)",
                     "score": 4
                 }
             ],
@@ -1436,7 +1436,7 @@
                     "score": 2
                 },
                 {
-                    "text": "Ha qualche momento di ritiro legati a specifiche circostanze",
+                    "text": "Ha qualche momento di ritiro legato a specifiche circostanze",
                     "score": 3
                 },
                 {
@@ -1449,7 +1449,7 @@
             "dom": "Emo"
         },
         {
-            "text": "PASSAGGIO RAPIDO DA UN'ATTIVITÀ AD UN'ALTRA",
+            "text": "PASSAGGIO RAPIDO DA UN'ATTIVITÀ A UN'ALTRA",
             "type": "single-choice",
             "response": [
                 {
@@ -1469,7 +1469,7 @@
                     "score": 3
                 },
                 {
-                    "text": "Mantiene a lungo ed in modo autonomo l'attenzione su un'attività o un gioco",
+                    "text": "Mantiene a lungo e in modo autonomo l'attenzione su un'attività o un gioco",
                     "score": 4
                 }
             ],
@@ -1478,7 +1478,7 @@
             "dom": "Emo"
         },
         {
-            "text": "DIFFICOLTÀ DI ASCOLTO ED ATTENZIONE",
+            "text": "DIFFICOLTÀ DI ASCOLTO E ATTENZIONE",
             "type": "single-choice",
             "response": [
                 {
@@ -1490,7 +1490,7 @@
                     "score": 1
                 },
                 {
-                    "text": "Sembra altrove quando gli si parla, chiede spesso di ripetergli le consegne a quello che è stato appena detto",
+                    "text": "Sembra altrove quando gli si parla, chiede spesso di ripetergli le consegne o quello che è stato appena detto",
                     "score": 2
                 },
                 {
@@ -1519,7 +1519,7 @@
                     "score": 1
                 },
                 {
-                    "text": "Si muove molto sulla sedia, riesce difficilmente a stare seduto, è spesso in movimento ma può stare fermo per certe attività che lo interessano ed avere momenti di calma",
+                    "text": "Si muove molto sulla sedia, riesce difficilmente a stare seduto, è spesso in movimento ma può stare fermo per certe attività che lo interessano e avere momenti di calma",
                     "score": 2
                 },
                 {
@@ -1571,11 +1571,11 @@
             "type": "single-choice",
             "response": [
                 {
-                    "text": "Stereotipie verbali (usa frasi bizzarre o ripete in continuazione le stesse cose) oppure motorie (saltellare, girare su se stesso, saltellare in modo ripetuto, agitare le braccia, movimenti bizzarri con mani e dita) molto frequenti ed invasive e che gli impediscono di fare altre attività la maggior parte del tempo",
+                    "text": "Stereotipie verbali (usa frasi bizzarre o ripete in continuazione le stesse cose) oppure motorie (saltellare, girare su se stesso, saltellare in modo ripetuto, agitare le braccia, movimenti bizzarri con mani e dita) molto frequenti e invasive e che gli impediscono di fare altre attività la maggior parte del tempo",
                     "score": 0
                 },
                 {
-                    "text": "Stereotípie verbali o motorie presenti ma interferenti solo con alcune attività",
+                    "text": "Stereotipie verbali o motorie presenti ma interferenti solo con alcune attività",
                     "score": 1
                 },
                 {
@@ -1604,7 +1604,7 @@
                     "score": 0
                 },
                 {
-                    "text": "Interessi ristretti presenti ed interferenti con alcune attività",
+                    "text": "Interessi ristretti presenti e interferenti con alcune attività",
                     "score": 1
                 },
                 {
@@ -1654,11 +1654,11 @@
             "type": "single-choice",
             "response": [
                 {
-                    "text": "Rifiuta sistematicamente le novità (luoghi, oggetti, o cibi nuovi...), cose che gli provocano paura ed ansia",
+                    "text": "Rifiuta sistematicamente le novità (es. luoghi, oggetti, o cibi nuovi...), cose che gli provocano paura e ansia",
                     "score": 0
                 },
                 {
-                    "text": "Tollera difficilmente le novità (i cibi nuovi...), cose che provocano paura ed ansia, ma solo in alcune situazioni",
+                    "text": "Tollera difficilmente le novità (es. i cibi nuovi...), cose che provocano paura e ansia, ma solo in alcune situazioni",
                     "score": 1
                 },
                 {
@@ -1683,11 +1683,11 @@
                     "score": 0
                 },
                 {
-                    "text": "Si mostra irritabile in relazione a specifiche situazioni, tollera difficilmente la frustrazione (reazione al \"no\"), vuole fare cio che desidera per alcune cose (es. l'uso del tablet), grida, pianti, collera che possono essere comunque gestiti",
+                    "text": "Si mostra irritabile in relazione a specifiche situazioni, tollera difficilmente la frustrazione (reazione al \"no\"), vuole fare ciò che desidera per alcune cose (es. l'uso del tablet), grida, pianti, collera che possono essere comunque gestiti",
                     "score": 1
                 },
                 {
-                    "text": "Si mostra moderatamente irritabile, tende ad opporsi ma finisce per accettare",
+                    "text": "Si mostra moderatamente irritabile, tende a opporsi ma finisce per accettare",
                     "score": 2
                 },
                 {
@@ -1717,7 +1717,7 @@
             "dom": "Sleep"
         },
         {
-            "text": "Quante ore dorme durante il giorno e il pomeriggio",
+            "text": "Quante ore dorme durante il giorno e il pomeriggio?",
             "type": "closed-numeric",
             "options": {
                 "min": 0,
