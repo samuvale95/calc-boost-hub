@@ -288,6 +288,11 @@ const Quiz = () => {
     }
   }, [currentQuestion]);
 
+  // Determina se siamo all'ultima domanda dell'ultima sezione
+  const isLastQuestion =
+    currentSectionIndex === sections.length - 1 &&
+    currentQuestionIndex === currentSection.questions.length - 1;
+
   return (
     
     <div className="min-h-screen bg-gradient-hero p-6">
