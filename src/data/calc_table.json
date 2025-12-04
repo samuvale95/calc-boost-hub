@@ -1,11 +1,12 @@
-[	{"dom":  "sub1"	, "var": 124.63	, "df": 121	, "sd": 1.014889157	, "prop": 100	, "int": 0.822	, "s_age": 0.169	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	},
+[	
+	{"dom":  "sub1"	, "var": 124.63	, "df": 121	, "sd": 1.014889157	, "prop": 100	, "int": 0.822	, "s_age": 0.169	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	},
 	{"dom":  "sub2"	, "var": 578.7	, "df": 120	, "sd": 2.196019126	, "prop": 100	, "int": 1.655	, "s_age": -0.813	, "s_sex": 0	, "s_nat": 1.499	, "s_sexnat": 0	},
 	{"dom":  "sub3"	, "var": 296.4	, "df": 121	, "sd": 1.565115579	, "prop": 100	, "int": 1.355	, "s_age": 0.513	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	},
 	{"dom":  "sub4"	, "var": 205.68	, "df": 121	, "sd": 1.303777094	, "prop": 100	, "int": 0.527	, "s_age": -0.143	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	},
 	{"dom":  "sub5"	, "var": 558.4326	, "df": 118	, "sd": 2.175426317	, "prop": 100	, "int": 0.153	, "s_age": -0.0206	, "s_sex": 0.4959	, "s_nat": 0.7576	, "s_sexnat": 1.944	},
 	{"dom":  "sub6"	, "var": 331.1493	, "df": 120	, "sd": 1.66119761	, "prop": 100	, "int": 1.1467	, "s_age": 0.0284	, "s_sex": 0	, "s_nat": -0.926	, "s_sexnat": 0	},
 	{"dom":  "sub7"	, "var": 243.202	, "df": 118	, "sd": 1.43563014	, "prop": 100	, "int": 1.0896	, "s_age": 0.0958	, "s_sex": 0.1713	, "s_nat": -0.129	, "s_sexnat": 1.2468	},
-  {"dom":  "sub8"	, "var": 239.215	, "df": 121	, "sd": 1.406052443	, "prop": 100	, "int": 1.6668	, "s_age": 0.0485	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	},
+    {"dom":  "sub8"	, "var": 239.215	, "df": 121	, "sd": 1.406052443	, "prop": 100	, "int": 1.6668	, "s_age": 0.0485	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	},
 	{"dom":  "sub9"	, "var": 495.4	, "df": 121	, "sd": 2.023416634	, "prop": 100	, "int": 0.774	, "s_age": 0.888	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	},
 	{"dom":  "sub10"	, "var": 348.622	, "df": 118	, "sd": 1.718843719	, "prop": 100	, "int": -0.704	, "s_age": 0.37	, "s_sex": 0.144	, "s_nat": 0.43	, "s_sexnat": 1.628	},
 	{"dom":  "sub11"	, "var": 246.5	, "df": 121	, "sd": 1.427301679	, "prop": 100	, "int": -0.957	, "s_age": 0.753	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	},
@@ -21,4 +22,5 @@
 	{"dom":  "Aut"	, "var": 82.57	, "df": 121	, "sd": 0.826073056	, "prop": 100	, "int": 0.14	, "s_age": 0.302	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	},
 	{"dom":  "Mem"	, "var": 737.9	, "df": 121	, "sd": 2.469483166	, "prop": 100	, "int": -0.706	, "s_age": 1.003	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	},
 	{"dom":  "Emo"	, "var": 42.532	, "df": 119	, "sd": 0.597839247	, "prop": 100	, "int": 0.7026	, "s_age": -0.0866	, "s_sex": 0.2933	, "s_nat": -0.2415	, "s_sexnat": 0	},
-	{"dom":  "Overall"	, "var": 59.17	, "df": 121	, "sd": 0.699291259	, "prop": 100	, "int": 0.471	, "s_age": 0.16	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	}]
+	{"dom":  "Overall"	, "var": 59.17	, "df": 121	, "sd": 0.699291259	, "prop": 100	, "int": 0.471	, "s_age": 0.16	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	}
+]

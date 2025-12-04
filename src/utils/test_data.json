@@ -1,11 +1,11 @@
 {
     "a43d8d59-6e4f-4941-8ce6-d1aef148d7ad": {
-        "Anni": 4,
+        "Anni": 9,
         "question": "ETÀ in anni e mesi, es. se il paziente ha 3 anni e 4 mesi scrivere 3 nella casella 'Anni' e 4 in quella 'Mesi'",
         "dom": "Pers",
         "subdom": 0,
         "score": 6,
-        "Mesi": 6
+        "Mesi": 2
     },
     "0ee2e8a7-3d21-452c-8606-33ad327675eb": {
         "question": "GENERE",
@@ -443,7 +443,7 @@
     },
     "67555e21-e74f-44c7-a492-67824ea8b137": {
         "question": "Quante ore dorme di notte complessivamente?",
-        "score": 10,
+        "score": 2,
         "dom": "Sleep",
         "subdom": 18
     },

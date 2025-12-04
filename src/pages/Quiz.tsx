@@ -136,7 +136,7 @@ const Quiz = () => {
         [questionId]: {
           question: question.text,
           response: option.text,
-          score: option.score * 1 / (question.response.length - 1),
+          score: option.score * 1 / (question.response.length - 1), // funziona anche per sex e nat perchè diventa / 1
           dom: question.dom,
           subdom: question.subdom,
         } as AnswerData
@@ -183,8 +183,8 @@ const Quiz = () => {
   const handleSubmitQuiz = () => {
     setShowResults(true);
     toast({
-      title: "Test Completato!",
-      description: "Hai completato con successo il test di formazione medica.",
+      title: "D-DAND Completata!",
+      description: "Hai completato con successo la D-DAND",
     });
 
     // calcolo i risultati con la funzione importata da calc.ts
@@ -587,7 +587,7 @@ const Quiz = () => {
                       <div className="space-y-4">
                         <textarea
                           className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none h-auto"
-                          placeholder=""
+                          placeholder="Compila campo"
                           value={selectedAnswers[currentQuestion.id]?.response || ""}
                           onChange={(e) => {
                             const value = e.target.value;
