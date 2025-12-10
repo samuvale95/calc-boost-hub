@@ -315,7 +315,7 @@ const Quiz = () => {
                     )}
                   </p>
                   <p className="text-xs">Abbonamento: <span className="font-medium text-primary">{user.subscription}</span></p>
-                  <br>
+                  <br />
                   <p className="text-sm text-red-800 mt-1"><b>ATTENZIONE: se ricarichi o abbandoni la pagina, i dati non salvati andranno persi</b></p>
                 </div>
               )}
