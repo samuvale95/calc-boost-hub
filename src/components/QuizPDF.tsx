@@ -234,7 +234,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                   {dom: "sub18", label:"Ore di sonno totali"},
                   {dom: "sub19", label:"Risvegli settimanali"}
                 ].map(({dom, label}) => (
-                  <View key={dom} style={styles.tableRow}>
+                  <View key={dom} style={styles.tableRow} wrap={false}>
                     <View style={styles.tableCell}>
                       <Text style={styles.tableCellLabel}>{label}</Text>
                     </View>
@@ -260,7 +260,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                   {dom: "Mem", label:"Memoria e abilità scolastiche"},
                   {dom: "Emo", label:"Regolazione comportamentale ed emotiva"}
                 ].map(({dom, label}) => (
-                  <View key={dom} style={styles.tableRow}>
+                  <View key={dom} style={styles.tableRow} wrap={false}>
                     <View style={styles.tableCell}>
                       <Text style={styles.tableCellLabel}>{label}</Text>
                     </View>
@@ -279,7 +279,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
             <View style={styles.resultsSection}>
               <Text style={styles.resultsTitle}>Punteggio Overall</Text>
               <View style={styles.table}>
-                <View style={styles.tableRow}>
+                <View style={styles.tableRow} wrap={false}>
                   <View style={styles.tableCell}>
                     <Text style={styles.tableCellLabel}>Overall</Text>
                   </View>
