@@ -209,50 +209,6 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
         {/* Results Sections */}
         {calcResults && (
           <>
-            {/* Overall Results */}
-            <View style={styles.resultsSection}>
-              <Text style={styles.resultsTitle}>Punteggio Overall</Text>
-              <View style={styles.table}>
-                <View style={styles.tableRow}>
-                  <View style={styles.tableCell}>
-                    <Text style={styles.tableCellLabel}>Overall</Text>
-                  </View>
-                     <View style={[styles.tableCell, { alignItems: 'center'}]}>
-                    <Text style={styles.tableCellValue}>z {calcResults.Overall.z || 'N/A'} </Text>
-                  </View>
-                    <View style={[styles.tableCell, { alignItems: 'center'}]}>
-                    <Text style={styles.tableCellValue}>percentile {calcResults.Overall.p || 'N/A'} </Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-
-            {/* Domain Results */}
-            <View style={styles.resultsSection}>
-              <Text style={styles.resultsTitle}>Punteggio per Domini</Text>
-              <View style={styles.table}>
-                {[
-                  {dom: 'Mot', label:"Abilità motorie"},
-                  {dom: "Lan", label:"Linguaggio e interazione sociale"},
-                  {dom: "Aut", label:"Autonomie"},
-                  {dom: "Mem", label:"Memoria e abilità scolastiche"},
-                  {dom: "Emo", label:"Regolazione comportamentale ed emotiva"}
-                ].map(({dom, label}) => (
-                  <View key={dom} style={styles.tableRow}>
-                    <View style={styles.tableCell}>
-                      <Text style={styles.tableCellLabel}>{label}</Text>
-                    </View>
-                    <View style={[styles.tableCell, { alignItems: 'center'}]}>
-                      <Text style={styles.tableCellValue}>z {calcResults[dom].z || 'N/A'}</Text>
-                    </View>
-                    <View style={[styles.tableCell, { alignItems: 'center'}]}>
-                      <Text style={styles.tableCellValue}>percentile {calcResults[dom].p || 'N/A'}</Text>
-                    </View>
-                  </View>
-                ))}
-              </View>
-            </View>
-
             {/* Subdomain Results */}
             <View style={styles.resultsSection}>
               <Text style={styles.resultsTitle}>Punteggio per Sottodomini</Text>
@@ -290,6 +246,50 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
                     </View>
                   </View>
                 ))}
+              </View>
+            </View>
+            
+            {/* Domain Results */}
+            <View style={styles.resultsSection}>
+              <Text style={styles.resultsTitle}>Punteggio per Domini</Text>
+              <View style={styles.table}>
+                {[
+                  {dom: 'Mot', label:"Abilità motorie"},
+                  {dom: "Lan", label:"Linguaggio e interazione sociale"},
+                  {dom: "Aut", label:"Autonomie"},
+                  {dom: "Mem", label:"Memoria e abilità scolastiche"},
+                  {dom: "Emo", label:"Regolazione comportamentale ed emotiva"}
+                ].map(({dom, label}) => (
+                  <View key={dom} style={styles.tableRow}>
+                    <View style={styles.tableCell}>
+                      <Text style={styles.tableCellLabel}>{label}</Text>
+                    </View>
+                    <View style={[styles.tableCell, { alignItems: 'center'}]}>
+                      <Text style={styles.tableCellValue}>z {calcResults[dom].z || 'N/A'}</Text>
+                    </View>
+                    <View style={[styles.tableCell, { alignItems: 'center'}]}>
+                      <Text style={styles.tableCellValue}>percentile {calcResults[dom].p || 'N/A'}</Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
+            </View>
+
+            {/* Overall Results */}
+            <View style={styles.resultsSection}>
+              <Text style={styles.resultsTitle}>Punteggio Overall</Text>
+              <View style={styles.table}>
+                <View style={styles.tableRow}>
+                  <View style={styles.tableCell}>
+                    <Text style={styles.tableCellLabel}>Overall</Text>
+                  </View>
+                     <View style={[styles.tableCell, { alignItems: 'center'}]}>
+                    <Text style={styles.tableCellValue}>z {calcResults.Overall.z || 'N/A'} </Text>
+                  </View>
+                    <View style={[styles.tableCell, { alignItems: 'center'}]}>
+                    <Text style={styles.tableCellValue}>percentile {calcResults.Overall.p || 'N/A'} </Text>
+                  </View>
+                </View>
               </View>
             </View>
 
