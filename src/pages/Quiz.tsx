@@ -63,6 +63,7 @@ const Quiz = () => {
   const { user, logout } = useAuth();
   const { isUserAdmin } = useAdmin();
   const stepperRef = useRef<HTMLDivElement>(null);
+  const [autoPdfGenerated, setAutoPdfGenerated] = useState(false);
 
   // Validate numeric input
   const validateNumericInput = (value: string, min?: string, max?: string): string | null => {
@@ -199,14 +200,16 @@ const Quiz = () => {
 
   };
 
-  const resetQuiz = () => {
-    setSelectedAnswers({});
-    setInputErrors({});
-    setShowResults(false);
-    setCurrentSectionIndex(0);
-    setCurrentQuestionIndex(0);
-    setCalcResults({});
-  };
+const resetQuiz = () => {
+  setSelectedAnswers({});
+  setInputErrors({});
+  setShowResults(false);
+  setCurrentSectionIndex(0);
+  setCurrentQuestionIndex(0);
+  setCalcResults({});
+  setPrepScoresPDF([]);
+  setAutoPdfGenerated(false);
+};
 
   const handleLogout = () => {
     logout();
@@ -276,6 +279,24 @@ const Quiz = () => {
       }
     }
   }, [currentSectionIndex]);
+
+  // auto-download pdf
+  useEffect(() => {
+    if (
+      showResults &&
+      !autoPdfGenerated &&
+      Object.keys(calcResults).length > 0 &&
+      prepScoresPDF.length > 0
+    ) {
+      // small delay for secure UX/render
+      const timer = setTimeout(async () => {
+        await handleGeneratePDF();
+        setAutoPdfGenerated(true);
+      }, 500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showResults, calcResults, prepScoresPDF, autoPdfGenerated]);
 
   // Auto-initialize slider values for closed-numeric questions
   useEffect(() => {
