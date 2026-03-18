@@ -1,22 +1,36 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckIcon, FileText, Calculator } from "lucide-react";
+import {
+  CheckIcon,
+  FileText,
+  Calculator,
+  Download,
+  Infinity,
+  Zap,
+  BarChart3,
+  RefreshCw,
+  Globe,
+} from "lucide-react";
 import { RegistrationSection } from "./RegistrationSection";
 import { PAYMENT_AMOUNTS } from "@/config/paypal";
 
+const GREEN = "hsl(95,87%,34%)";
+const MAGENTA = "hsl(316,91%,40%)";
+
 export const PricingSection = () => {
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
-  const [selectedSubscriptionType, setSelectedSubscriptionType] = useState<'pdf' | 'annuale' | null>(null);
+  const [selectedSubscriptionType, setSelectedSubscriptionType] = useState<
+    "pdf" | "annuale" | null
+  >(null);
 
   const handlePdfPurchase = () => {
-    setSelectedSubscriptionType('pdf');
+    setSelectedSubscriptionType("pdf");
     setIsRegistrationOpen(true);
   };
 
   const handleSubscription = () => {
-    setSelectedSubscriptionType('annuale');
+    setSelectedSubscriptionType("annuale");
     setIsRegistrationOpen(true);
   };
 
@@ -26,122 +40,160 @@ export const PricingSection = () => {
   };
 
   return (
-    <section id="pricing" className="pt-6 pb-20 bg-[#fff4fc]">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            I nostri Piani
+    <section id="pricing" className="py-20 bg-[#fff4fc] relative overflow-hidden">
+      {/* Sfondo decorativo */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-[hsl(95,87%,34%,0.06)] blur-3xl" />
+        <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-[hsl(316,91%,40%,0.06)] blur-3xl" />
+      </div>
+
+      <div className="container mx-auto px-4 relative">
+
+        {/* Header */}
+        <div className="text-center mb-14">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[hsl(316,91%,40%)] mb-3">
+            Accesso alla scala
+          </p>
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-foreground">
+            Scegli il tuo piano
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Accedi alla scala D-DAND in formato cartaceo o online
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+            Usa la D-DAND in formato cartaceo o accedi al test interattivo con calcolo automatico dei punteggi.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {/* PDF Option */}
-          <Card className="relative border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-glow">
-            <CardHeader className="text-center pb-8">
-              <div className="flex justify-center mb-4">
-                <div className="p-3 bg-gradient-primary rounded-full">
-                  <FileText className="h-8 w-8 text-primary-foreground" />
+        {/* Cards */}
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto items-start">
+
+          {/* ── CARD PDF ── */}
+          <div className="relative rounded-2xl border-2 border-border bg-white shadow-sm hover:shadow-md hover:border-[hsl(95,87%,34%,0.5)] transition-all duration-300 flex flex-col overflow-hidden">
+            {/* Striscia colore top */}
+            <div className="h-1.5 w-full bg-gradient-to-r from-[hsl(95,87%,34%)] to-[hsl(95,87%,50%)]" />
+
+            <div className="p-8 flex flex-col gap-6 flex-1">
+              {/* Icon + titolo */}
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[hsl(95,87%,34%,0.1)] flex items-center justify-center">
+                  <FileText className="w-6 h-6 text-[hsl(95,87%,34%)]" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-foreground">Kit D-DAND PDF</h3>
+                  <p className="text-sm text-muted-foreground">Scala in formato stampabile</p>
                 </div>
               </div>
-              <CardTitle className="text-2xl mb-2">Kit D-DAND PDF</CardTitle>
-              <CardDescription className="text-base">
-                Scarica il manuale e le tabelle per la correzione dei punteggi
-              </CardDescription>
-              <div className="flex items-center justify-center mt-4">
-                <span className="text-3xl font-bold">€{PAYMENT_AMOUNTS.PDF}</span>
-                <span className="text-muted-foreground ml-2">una tantum</span>
+
+              {/* Prezzo */}
+              <div className="flex items-end gap-2">
+                <span className="text-5xl font-extrabold text-foreground">
+                  €{PAYMENT_AMOUNTS.PDF}
+                </span>
+                <span className="text-muted-foreground mb-1.5 text-sm">una tantum</span>
               </div>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <CheckIcon className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
-                  <span>Scala D-DAND in formato PDF</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckIcon className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
-                  <span>Manuale d'uso</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckIcon className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
-                  <span>Formule e tabelle per il calcolo manuale dei 25 outcome</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckIcon className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
-                  <span>Download immediato</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckIcon className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
-                  <span>Accesso illimitato</span>
-                </li>
+
+              {/* Divider */}
+              <div className="h-px bg-border" />
+
+              {/* Features */}
+              <ul className="space-y-3 flex-1">
+                {[
+                  { icon: FileText, label: "Scala D-DAND in formato PDF" },
+                  { icon: Download, label: "Manuale d'uso incluso" },
+                  { icon: BarChart3, label: "Formule e tabelle per il calcolo manuale dei 25 outcome" },
+                  { icon: Zap, label: "Download immediato" },
+                  { icon: Infinity, label: "Accesso illimitato" },
+                ].map(({ icon: Icon, label }) => (
+                  <li key={label} className="flex items-start gap-3">
+                    <span className="w-5 h-5 rounded-full bg-[hsl(95,87%,34%,0.1)] flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <CheckIcon className="w-3 h-3 text-[hsl(95,87%,34%)]" />
+                    </span>
+                    <span className="text-sm text-foreground leading-snug">{label}</span>
+                  </li>
+                ))}
               </ul>
-              <Button 
+
+              {/* CTA */}
+              <Button
                 onClick={handlePdfPurchase}
-                className="w-full" 
-                variant="primary"
                 size="lg"
+                className="w-full bg-[hsl(95,87%,34%)] hover:bg-[hsl(95,87%,28%)] text-white font-semibold rounded-xl"
               >
                 Acquista PDF
               </Button>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
-          {/* Subscription Option */}
-          <Card className="relative border-2 border-accent hover:border-accent/80 transition-all duration-300 hover:shadow-accent-glow">
-            <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-accent">
-              Extra
-            </Badge>
-            <CardHeader className="text-center pb-8">
-              <div className="flex justify-center mb-4">
-                <div className="p-3 bg-gradient-accent rounded-full">
-                  <Calculator className="h-8 w-8 text-accent-foreground" />
+          {/* ── CARD TEST INTERATTIVO ── */}
+          <div className="relative rounded-2xl border-2 border-[hsl(316,91%,40%)] bg-white shadow-lg flex flex-col overflow-hidden">
+            {/* Striscia colore top */}
+            <div className="h-1.5 w-full bg-gradient-to-r from-[hsl(316,91%,40%)] to-[hsl(316,91%,55%)]" />
+
+            {/* Badge */}
+            <div className="absolute top-5 right-5">
+              <Badge className="bg-[hsl(316,91%,40%)] text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
+                Consigliato
+              </Badge>
+            </div>
+
+            <div className="p-8 flex flex-col gap-6 flex-1">
+              {/* Icon + titolo */}
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[hsl(316,91%,40%,0.1)] flex items-center justify-center">
+                  <Calculator className="w-6 h-6 text-[hsl(316,91%,40%)]" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-foreground">Test Interattivo</h3>
+                  <p className="text-sm text-muted-foreground">Calcolo automatico dei punteggi</p>
                 </div>
               </div>
-              <CardTitle className="text-2xl mb-2">Test Interattivo</CardTitle>
-              <CardDescription className="text-base">
-                Accedi al test e calcola automaticamente i punteggi
-              </CardDescription>
-              <div className="flex items-center justify-center mt-4">
-                <span className="text-3xl font-bold">€{PAYMENT_AMOUNTS.SUBSCRIPTION}</span>
-                <span className="text-muted-foreground ml-2">all'anno</span>
+
+              {/* Prezzo */}
+              <div className="flex items-end gap-2">
+                <span className="text-5xl font-extrabold text-foreground">
+                  €{PAYMENT_AMOUNTS.SUBSCRIPTION}
+                </span>
+                <span className="text-muted-foreground mb-1.5 text-sm">all'anno</span>
               </div>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                  <span>Test online accessibile da qualsiasi dispositivo</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                  <span>Calcolo automatico dei 25 outcome</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                  <span>Risultati più precisi grazie all'applicazione diretta delle formule</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckIcon className="h-5 w-5 text-accent mr-3 flex-shrink-0" />
-                  <span>Report completo in PDF</span>
-                </li>
+
+              {/* Divider */}
+              <div className="h-px bg-[hsl(316,91%,40%,0.15)]" />
+
+              {/* Features */}
+              <ul className="space-y-3 flex-1">
+                {[
+                  { label: "Tutto il contenuto del Kit PDF" },
+                  { label: "Test online da qualsiasi dispositivo" },
+                  { label: "Calcolo automatico dei 25 outcome" },
+                  { label: "Risultati più precisi tramite formule dirette" },
+                  { label: "Report completo esportabile in PDF" },
+                  { label: "Aggiornamenti inclusi per tutta la durata" },
+                ].map(({ label }) => (
+                  <li key={label} className="flex items-start gap-3">
+                    <span className="w-5 h-5 rounded-full bg-[hsl(316,91%,40%,0.1)] flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <CheckIcon className="w-3 h-3 text-[hsl(316,91%,40%)]" />
+                    </span>
+                    <span className="text-sm text-foreground leading-snug">{label}</span>
+                  </li>
+                ))}
               </ul>
-              <Button 
+
+              {/* CTA */}
+              <Button
                 onClick={handleSubscription}
-                className="w-full" 
-                variant="accent"
                 size="lg"
+                className="w-full bg-[hsl(316,91%,40%)] hover:bg-[hsl(316,91%,34%)] text-white font-semibold rounded-xl"
               >
                 Inizia Abbonamento
               </Button>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
+
+        {/* Nota in fondo */}
+        <p className="text-center text-xs text-muted-foreground mt-8">
+          Pagamento sicuro · Accesso immediato dopo l'acquisto · Supporto incluso
+        </p>
       </div>
 
-      {/* Registration Modal */}
       <RegistrationSection
         isOpen={isRegistrationOpen}
         onClose={handleCloseRegistration}
