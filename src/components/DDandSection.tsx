@@ -18,7 +18,7 @@ const DDandSection = () => {
           size="lg" 
           className="text-lg px-8 mt-10"
           onClick={() => {
-            const pricingSection = document.getElementById('pricing');
+            const pricingSection = document.getElementById('access');
             if (pricingSection) {
               pricingSection.scrollIntoView({ behavior: 'smooth' });
             }

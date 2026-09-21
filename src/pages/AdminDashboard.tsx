@@ -88,8 +88,6 @@ const AdminDashboard = () => {
   const [newUser, setNewUser] = useState({
     name: "",
     email: "",
-    password: "",
-    subscription: ""
   });
   const [editExpiryModal, setEditExpiryModal] = useState({
     isOpen: false,
@@ -407,10 +405,10 @@ const AdminDashboard = () => {
   };
 
   const handleAddUser = async () => {
-    if (!newUser.name || !newUser.email || !newUser.password || !newUser.subscription) {
+    if (!newUser.name || !newUser.email) {
       toast({
         title: "Errore",
-        description: "Tutti i campi sono obbligatori",
+        description: "Nome ed email sono obbligatori",
         variant: "destructive"
       });
       return;
@@ -418,14 +416,14 @@ const AdminDashboard = () => {
 
     try {
       setIsLoading(true);
-      
+
       const registeredUser = await registerUser(newUser);
-      
+
       // Add the new user to the local state
       setUsers(prev => [...prev, registeredUser]);
-      
+
       // Reset form and close modal
-      setNewUser({ name: "", email: "", password: "", subscription: "" });
+      setNewUser({ name: "", email: "" });
       setIsModalOpen(false);
       
       toast({
@@ -493,19 +491,15 @@ const AdminDashboard = () => {
   const registerUser = async (userData: {
     name: string;
     email: string;
-    password: string;
-    subscription: string;
   }) => {
     try {
-      // Register doesn't require authentication, so we use the direct API service
-      const newUserData: ApiUser = await api.apiService.request(API_CONFIG.ENDPOINTS.REGISTER, {
-        method: 'POST',
-        body: JSON.stringify({
-          name: userData.name,
-          email: userData.email,
-          password: userData.password,
-          subscription: userData.subscription,
-        }),
+      // Creates a placeholder row with no password (admin-only endpoint,
+      // POST /users/): the person signs in with Firebase themselves the
+      // first time, which links this row automatically. See
+      // FIREBASE_SETUP.md (backend repo) and UserService.create_user.
+      const newUserData: ApiUser = await api.createUser({
+        name: userData.name,
+        email: userData.email,
       });
       
       // Transform the API response to match our User interface
@@ -856,36 +850,6 @@ const AdminDashboard = () => {
                   className="col-span-3"
                   placeholder="email@esempio.com"
                 />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="password" className="text-right">
-                  Password
-                </Label>
-                <Input
-                  id="password"
-                  type="password"
-                  value={newUser.password}
-                  onChange={(e) => setNewUser(prev => ({ ...prev, password: e.target.value }))}
-                  className="col-span-3"
-                  placeholder="Password temporanea"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="subscription" className="text-right">
-                  Abbonamento
-                </Label>
-                <Select
-                  value={newUser.subscription}
-                  onValueChange={(value) => setNewUser(prev => ({ ...prev, subscription: value }))}
-                >
-                  <SelectTrigger className="col-span-3">
-                    <SelectValue placeholder="Seleziona tipo" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="annuale">Abbonamento Annuale</SelectItem>
-                    <SelectItem value="pdf">Acquisto PDF</SelectItem>
-                  </SelectContent>
-                </Select>
               </div>
             </div>
             <DialogFooter>

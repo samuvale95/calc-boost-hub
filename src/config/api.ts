@@ -6,7 +6,7 @@ validateEnv();
 export const API_CONFIG = {
   ENDPOINTS: {
     USERS: '/users',
-    LOGIN: '/auth/login',
+    CURRENT_USER: '/users/me',
     REGISTER: '/users/register',
     CHECK_EMAIL: '/users/check-email',
     VERIFY_TOKEN: '/auth/verify',
@@ -14,16 +14,12 @@ export const API_CONFIG = {
     DEACTIVATE_USER: '/users/{id}/deactivate',
     ACTIVATE_USER: '/users/{id}/activate',
     UPDATE_USER: '/users/{id}',
-    // Payment endpoints
-    PAYMENTS: '/payments',
-    MY_PAYMENTS: '/payments/my-payments',
-    MY_PAYMENT_SUMMARY: '/payments/my-summary',
-    PAYMENT_BY_ID: '/payments/{id}',
-    // Admin payment endpoints
-    ALL_PAYMENTS: '/payments/all',
-    PAYMENT_STATS: '/payments/stats',
-    // PDF download endpoint
+    APPROVE_USER: '/users/admin/{id}/approve',
+    REJECT_USER: '/users/admin/{id}/reject',
+    // PDF / scale + manual download endpoint (DAND Scale plan, point 5:
+    // registration-gated, no payment involved)
     DOWNLOAD_PDF: '/pdf/download',
+    PDF_INFO: '/pdf/info',
   }
 };
 

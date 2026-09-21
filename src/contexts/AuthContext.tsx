@@ -1,30 +1,43 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { authService, LoginResponse } from '@/services/authService';
-import { tokenService } from '@/services/tokenService';
+import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
+import type { User as FirebaseUser } from 'firebase/auth';
+import { firebaseAuthService } from '@/services/firebaseAuthService';
+import { authService, ProfileData } from '@/services/authService';
 
-interface User {
+export interface User {
   id: number;
   email: string;
   name: string;
-  subscription: string;
   role: string;
-  registration_date: string;
-  last_access: string;
+  status: 'pending' | 'approved' | 'rejected';
+  center: string | null;
+  professional_role: string | null;
+  phone: string | null;
+  country: string | null;
   is_active: boolean;
-  subscription_expiry_date: string | null;
+  registration_date: string;
+  last_access: string | null;
   created_at: string;
   updated_at: string;
 }
 
 interface AuthContextType {
   user: User | null;
+  firebaseUser: FirebaseUser | null;
   isAuthenticated: boolean;
   isAdmin: boolean;
-  login: (email: string, password: string) => Promise<boolean>;
-  logout: () => void;
+  /** True once the user has filled in center/professional_role/phone (see completeProfile). */
+  profileComplete: boolean;
   loading: boolean;
   tokenExpired: boolean;
+  /** Sends the user a passwordless sign-in link (DAND Scale plan, point 5). */
+  sendSignInLink: (email: string) => Promise<void>;
+  /** Completes sign-in from a clicked email link. */
+  completeSignIn: (email: string, url: string) => Promise<void>;
+  /** Fills in the registration form fields for the signed-in user. */
+  completeProfile: (data: ProfileData) => Promise<User>;
+  logout: () => Promise<void>;
   refreshToken: () => Promise<boolean>;
+  refreshProfile: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -42,126 +55,107 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const [firebaseUser, setFirebaseUser] = useState<FirebaseUser | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [tokenExpired, setTokenExpired] = useState(false);
 
-  useEffect(() => {
-    // Check if user is logged in on app start
-    const savedUser = localStorage.getItem('user');
-    const savedToken = authService.getAuthToken();
-    
-    if (savedUser && savedToken) {
-      try {
-        // Check if token is expired locally first
-        if (tokenService.isTokenExpired(savedToken)) {
-          console.log('Token expired locally');
-          setTokenExpired(true);
-          localStorage.removeItem('user');
-          authService.removeAuthToken();
-        } else {
-          setUser(JSON.parse(savedUser));
-          // Start token validation
-          tokenService.startTokenValidation((isValid) => {
-            if (!isValid) {
-              setTokenExpired(true);
-              setUser(null);
-              localStorage.removeItem('user');
-              authService.removeAuthToken();
-            }
-          });
-        }
-      } catch (error) {
-        console.error('Error parsing saved user:', error);
-        localStorage.removeItem('user');
-        authService.removeAuthToken();
-      }
-    }
-    setLoading(false);
-  }, []);
-
-  // Cleanup token validation on unmount
-  useEffect(() => {
-    return () => {
-      tokenService.stopTokenValidation();
-    };
-  }, []);
-
-  const login = async (email: string, password: string): Promise<boolean> => {
-    setLoading(true);
-    
+  // Pulls the backend's copy of the profile for the currently signed-in
+  // Firebase user. This is also what creates the local `users` row on a
+  // person's very first sign-in (see get_current_user on the backend).
+  const syncProfile = useCallback(async (): Promise<User | null> => {
     try {
-      const response: LoginResponse = await authService.login(email, password);
-      
-      if (response.access_token && response.user) {
-        // Save user data and token
-        setUser(response.user);
-        localStorage.setItem('user', JSON.stringify(response.user));
-        
-        // Save the access token
-        authService.setAuthToken(response.access_token);
-        
-        setLoading(false);
-        return true;
-      }
-      
-      setLoading(false);
-      return false;
+      const profile = await authService.getCurrentUser();
+      setUser(profile);
+      setTokenExpired(false);
+      return profile;
     } catch (error) {
-      console.error('Login error:', error);
-      setLoading(false);
-      return false;
+      console.error('Profile sync failed:', error);
+      setUser(null);
+      setTokenExpired(true);
+      return null;
     }
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = firebaseAuthService.onAuthStateChanged(async (fbUser) => {
+      setFirebaseUser(fbUser);
+      if (fbUser) {
+        await syncProfile();
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [syncProfile]);
+
+  const sendSignInLink = async (email: string): Promise<void> => {
+    await firebaseAuthService.sendSignInLink(email);
+  };
+
+  const completeSignIn = async (email: string, url: string): Promise<void> => {
+    setLoading(true);
+    try {
+      const fbUser = await firebaseAuthService.completeSignInWithLink(email, url);
+      setFirebaseUser(fbUser);
+      await syncProfile();
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const completeProfile = async (data: ProfileData): Promise<User> => {
+    const profile = await authService.completeProfile(data);
+    setUser(profile);
+    return profile;
   };
 
   const refreshToken = async (): Promise<boolean> => {
-    const token = authService.getAuthToken();
-    if (!token) return false;
-
     try {
-      const isValid = await tokenService.validateTokenWithAPI(token);
-      if (isValid) {
-        setTokenExpired(false);
-        return true;
-      } else {
-        setTokenExpired(true);
-        setUser(null);
-        localStorage.removeItem('user');
-        authService.removeAuthToken();
-        return false;
-      }
+      await firebaseAuthService.getIdToken(true);
+      const profile = await syncProfile();
+      return profile !== null;
     } catch (error) {
       console.error('Token refresh failed:', error);
       setTokenExpired(true);
-      setUser(null);
-      localStorage.removeItem('user');
-      authService.removeAuthToken();
       return false;
     }
   };
 
-  const logout = async () => {
+  const refreshProfile = async (): Promise<void> => {
+    await syncProfile();
+  };
+
+  const logout = async (): Promise<void> => {
     try {
-      await authService.logout();
+      await firebaseAuthService.signOut();
     } catch (error) {
       console.error('Logout error:', error);
     } finally {
       setUser(null);
+      setFirebaseUser(null);
       setTokenExpired(false);
-      localStorage.removeItem('user');
-      tokenService.stopTokenValidation();
     }
   };
 
+  const profileComplete = Boolean(user?.center && user?.professional_role);
+
   const value: AuthContextType = {
     user,
-    isAuthenticated: !!user && !tokenExpired,
+    firebaseUser,
+    isAuthenticated: !!user && user.is_active && !tokenExpired,
     isAdmin: !!user && user.role === 'admin' && !tokenExpired,
-    login,
-    logout,
+    profileComplete,
     loading,
     tokenExpired,
-    refreshToken
+    sendSignInLink,
+    completeSignIn,
+    completeProfile,
+    logout,
+    refreshToken,
+    refreshProfile,
   };
 
   return (

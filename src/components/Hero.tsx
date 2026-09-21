@@ -157,7 +157,7 @@ export const Hero = () => {
   };
 
   const scrollToPricing = () => {
-    document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("access")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (

@@ -48,13 +48,11 @@ export const Header = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const getSubscriptionBadge = () => {
+  const getStatusBadge = () => {
     if (!user) return null;
-    
-    if (user.subscription === 'pdf') {
-      return <Badge variant="outline" className="text-xs">PDF</Badge>;
-    } else if (user.subscription === 'annuale') {
-      return <Badge variant="default" className="text-xs">Annual</Badge>;
+
+    if (user.status === 'pending') {
+      return <Badge variant="outline" className="text-xs">In verifica</Badge>;
     }
     return null;
   };
@@ -65,16 +63,11 @@ export const Header = () => {
 
   const canAccessQuiz = () => {
     if (!user) return false;
-    
+
     // Admin can always access
     if (isAdmin) return true;
-    
-    // Check if user has annual subscription and it's active
-    const now = new Date();
-    const expiryDate = user.subscription_expiry_date ? new Date(user.subscription_expiry_date) : null;
-    const isSubscriptionActive = expiryDate ? expiryDate > now : false;
-    
-    return user.subscription === 'annuale' && isSubscriptionActive;
+
+    return user.status === 'approved';
   };
 
   return (
@@ -91,7 +84,7 @@ export const Header = () => {
               <img src={Icon} alt="icon" className="h-8 w-8" />
               DAND
             </Button>
-            {isAuthenticated && getSubscriptionBadge()}
+            {isAuthenticated && getStatusBadge()}
           </div>
 
           {/* Desktop Navigation */}

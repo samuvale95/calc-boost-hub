@@ -1,6 +1,5 @@
-import { API_CONFIG, buildApiUrl } from '@/config/api';
-import { authService } from './authService';
-import { tokenService } from './tokenService';
+import { API_CONFIG } from '@/config/api';
+import { apiRequest } from './apiClient';
 
 export interface ApiError {
   message: string;
@@ -9,121 +8,78 @@ export interface ApiError {
 }
 
 class ApiService {
-  private async makeRequest<T>(
-    endpoint: string,
-    options: RequestInit = {}
-  ): Promise<T> {
-    const url = buildApiUrl(endpoint);
-    
-    const defaultHeaders: Record<string, string> = {
-      'Content-Type': 'application/json',
-    };
-
-    // Add authorization header if token exists (except for auth endpoints)
-    const token = authService.getAuthToken();
-    if (token && !endpoint.startsWith('/auth/')) {
-      // Check if token is expired locally first
-      if (tokenService.isTokenExpired(token)) {
-        throw new Error('Token expired');
-      }
-      
-      defaultHeaders['Authorization'] = `Bearer ${token}`;
-    }
-
-    const config: RequestInit = {
-      ...options,
-      headers: {
-        ...defaultHeaders,
-        ...options.headers,
-      },
-    };
-
-    try {
-      const response = await fetch(url, config);
-      
-      if (!response.ok) {
-        // Handle 401 Unauthorized specifically
-        if (response.status === 401) {
-          // Token might be invalid, try to verify it
-          if (token) {
-            const isValid = await tokenService.validateTokenWithAPI(token);
-            if (!isValid) {
-              throw new Error('Token invalid or expired');
-            }
-          }
-          throw new Error('Unauthorized - please login again');
-        }
-        
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || errorData.detail || `HTTP error! status: ${response.status}`);
-      }
-
-      return await response.json();
-    } catch (error) {
-      if (error instanceof Error) {
-        throw error;
-      }
-      throw new Error('Network error occurred');
-    }
-  }
-
-  // User management endpoints
+  // User management endpoints (admin)
   async getUsers(): Promise<any> {
-    return this.makeRequest(API_CONFIG.ENDPOINTS.USERS);
+    return apiRequest(API_CONFIG.ENDPOINTS.USERS);
   }
 
   async getUserById(id: number): Promise<any> {
-    return this.makeRequest(`${API_CONFIG.ENDPOINTS.USERS}/${id}`);
+    return apiRequest(`${API_CONFIG.ENDPOINTS.USERS}/${id}`);
   }
 
   async createUser(userData: any): Promise<any> {
-    return this.makeRequest(API_CONFIG.ENDPOINTS.USERS, {
+    return apiRequest(API_CONFIG.ENDPOINTS.USERS, {
       method: 'POST',
       body: JSON.stringify(userData),
     });
   }
 
   async updateUser(id: number, userData: any): Promise<any> {
-    return this.makeRequest(`${API_CONFIG.ENDPOINTS.USERS}/${id}`, {
+    return apiRequest(`${API_CONFIG.ENDPOINTS.USERS}/${id}`, {
       method: 'PUT',
       body: JSON.stringify(userData),
     });
   }
 
   async deleteUser(id: number): Promise<any> {
-    return this.makeRequest(`${API_CONFIG.ENDPOINTS.USERS}/${id}`, {
+    return apiRequest(`${API_CONFIG.ENDPOINTS.USERS}/${id}`, {
       method: 'DELETE',
     });
   }
 
   // User activation/deactivation
   async activateUser(id: number): Promise<any> {
-    return this.makeRequest(API_CONFIG.ENDPOINTS.ACTIVATE_USER.replace('{id}', id.toString()), {
+    return apiRequest(API_CONFIG.ENDPOINTS.ACTIVATE_USER.replace('{id}', id.toString()), {
       method: 'PATCH',
     });
   }
 
   async deactivateUser(id: number): Promise<any> {
-    return this.makeRequest(API_CONFIG.ENDPOINTS.DEACTIVATE_USER.replace('{id}', id.toString()), {
+    return apiRequest(API_CONFIG.ENDPOINTS.DEACTIVATE_USER.replace('{id}', id.toString()), {
       method: 'PATCH',
     });
   }
 
-  // Password management
+  // Registration approval (DAND Scale plan, point 4 — only relevant when
+  // the backend's REQUIRE_MANUAL_APPROVAL is enabled)
+  async approveUser(id: number): Promise<any> {
+    return apiRequest(API_CONFIG.ENDPOINTS.APPROVE_USER.replace('{id}', id.toString()), {
+      method: 'PATCH',
+    });
+  }
+
+  async rejectUser(id: number): Promise<any> {
+    return apiRequest(API_CONFIG.ENDPOINTS.REJECT_USER.replace('{id}', id.toString()), {
+      method: 'PATCH',
+    });
+  }
+
+  // Legacy: only works for pre-Firebase accounts that still have a local
+  // password (see users.py's guard on this endpoint).
   async regeneratePassword(id: number): Promise<any> {
-    return this.makeRequest(API_CONFIG.ENDPOINTS.REGENERATE_PASSWORD.replace('{id}', id.toString()), {
+    return apiRequest(API_CONFIG.ENDPOINTS.REGENERATE_PASSWORD.replace('{id}', id.toString()), {
       method: 'PATCH',
     });
   }
 
-  // Token verification
+  // Token verification / sync
   async verifyToken(): Promise<any> {
-    return this.makeRequest(API_CONFIG.ENDPOINTS.VERIFY_TOKEN);
+    return apiRequest(API_CONFIG.ENDPOINTS.VERIFY_TOKEN);
   }
 
   // Generic method for custom endpoints
   async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
-    return this.makeRequest<T>(endpoint, options);
+    return apiRequest<T>(endpoint, options);
   }
 }
 

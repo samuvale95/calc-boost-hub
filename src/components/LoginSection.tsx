@@ -2,9 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { 
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -12,50 +10,36 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { 
-  Mail, 
-  Lock, 
-  Loader2, 
-  ArrowLeft,
-  Eye,
-  EyeOff,
-  User
-} from "lucide-react";
+import { Mail, Loader2, ArrowLeft, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
-import { useAdmin } from "@/hooks/useAdmin";
-import { useNavigate } from "react-router-dom";
 
 interface LoginSectionProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+/**
+ * Passwordless sign-in (DAND Scale plan, point 5): the same flow serves
+ * both a first-time registration and a returning sign-in — a link is sent
+ * either way, and the backend creates the local profile row on first use
+ * (see get_current_user). What's asked afterward (see
+ * CompleteProfileForm) only happens once, for a genuinely new profile.
+ */
 export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const [linkSent, setLinkSent] = useState(false);
   const { toast } = useToast();
-  const { login } = useAuth();
-  const navigate = useNavigate();
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
+  const { sendSignInLink } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!formData.email || !formData.password) {
+
+    if (!email) {
       toast({
         title: "Errore",
-        description: "Inserisci email e password",
+        description: "Inserisci la tua email",
         variant: "destructive",
       });
       return;
@@ -63,33 +47,13 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
 
     try {
       setIsLoading(true);
-      
-      const success = await login(formData.email, formData.password);
-      
-      if (success) {
-        toast({
-          title: "Accesso Riuscito!",
-          description: "Benvenuto nel sistema",
-        });
-
-        // Redirect to home immediately after successful login
-        navigate("/", { replace: true });
-        handleClose();
-
-      } else {
-        toast({
-          title: "Errore di Accesso",
-          description: "Email o password non corretti",
-          variant: "destructive",
-        });
-      }
-
+      await sendSignInLink(email);
+      setLinkSent(true);
     } catch (error) {
-      console.error('Login error:', error);
-      
+      console.error("Errore nell'invio del link:", error);
       toast({
-        title: "Errore di Connessione",
-        description: "Impossibile connettersi al server. Riprova più tardi.",
+        title: "Errore",
+        description: "Impossibile inviare il link di accesso. Riprova più tardi.",
         variant: "destructive",
       });
     } finally {
@@ -98,87 +62,75 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
   };
 
   const handleClose = () => {
-    setFormData({ email: "", password: "" });
-    setShowPassword(false);
+    setEmail("");
+    setLinkSent(false);
     onClose();
   };
 
+  if (linkSent) {
+    return (
+      <Dialog open={isOpen} onOpenChange={handleClose}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-green-600">
+              <CheckCircle className="h-6 w-6" />
+              Controlla la tua email
+            </DialogTitle>
+            <DialogDescription>
+              Ti abbiamo inviato un link di accesso a <strong>{email}</strong>. Aprilo per accedere — nessuna password necessaria.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button onClick={handleClose} className="w-full">
+              Chiudi
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <User className="h-6 w-6" />
-            Accedi al Tuo Account
+            <Mail className="h-6 w-6" />
+            Accedi alla DAND Scale
           </DialogTitle>
           <DialogDescription>
-            Inserisci le tue credenziali per accedere al sistema
+            Inserisci la tua email: ti invieremo un link per accedere, senza bisogno di una password.
           </DialogDescription>
         </DialogHeader>
-        
-        <div className="py-2 space-y-4">
-          {/* Login Form */}
-          <form onSubmit={handleSubmit} className="space-y-3">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="nome@esempio.com"
-                  className="pl-10"
-                  value={formData.email}
-                  onChange={(e) => handleInputChange('email', e.target.value)}
-                  disabled={isLoading}
-                  required
-                />
-              </div>
-            </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="••••••••"
-                  className="pl-10 pr-10"
-                  value={formData.password}
-                  onChange={(e) => handleInputChange('password', e.target.value)}
-                  disabled={isLoading}
-                  required
-                />
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                  onClick={() => setShowPassword(!showPassword)}
-                  disabled={isLoading}
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4 text-muted-foreground" />
-                  ) : (
-                    <Eye className="h-4 w-4 text-muted-foreground" />
-                  )}
-                </Button>
-              </div>
+        <form onSubmit={handleSubmit} className="space-y-4 py-2">
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <div className="relative">
+              <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+              <Input
+                id="email"
+                type="email"
+                placeholder="nome@esempio.com"
+                className="pl-10"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isLoading}
+                required
+              />
             </div>
+          </div>
 
-            <div className="bg-muted p-3 rounded-lg">
-              <p className="text-xs text-muted-foreground">
-                <strong>Non hai un account?</strong> Vai alla <a href="/#pricing" className="text-primary hover:underline">sezione prezzi</a> per scegliere un piano e registrarti.
-              </p>
-            </div>
-          </form>
-        </div>
+          <div className="bg-muted p-3 rounded-lg">
+            <p className="text-xs text-muted-foreground">
+              Se non hai ancora un account, verrà creato automaticamente e ti verrà chiesto di completare la registrazione.
+            </p>
+          </div>
+        </form>
 
         <DialogFooter className="flex flex-col sm:flex-row gap-2 pt-4 border-t">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             onClick={handleClose}
             disabled={isLoading}
             className="flex items-center gap-2 w-full sm:w-auto"
@@ -186,18 +138,14 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
             <ArrowLeft className="h-4 w-4" />
             Indietro
           </Button>
-          <Button 
-            onClick={handleSubmit}
-            disabled={isLoading}
-            className="flex items-center gap-2 w-full sm:w-auto"
-          >
+          <Button onClick={handleSubmit} disabled={isLoading} className="flex items-center gap-2 w-full sm:w-auto">
             {isLoading ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Accesso in corso...
+                Invio in corso...
               </>
             ) : (
-              "Accedi"
+              "Invia link di accesso"
             )}
           </Button>
         </DialogFooter>

@@ -5,7 +5,7 @@ import { useAuth } from '@/contexts/AuthContext';
  * @returns {Object} Oggetto con funzioni e stati per la gestione admin
  */
 export const useAdmin = () => {
-  const { user, isAdmin, isAuthenticated } = useAuth();
+  const { user, isAdmin, isAuthenticated, loading } = useAuth();
 
   /**
    * Verifica se l'utente è un amministratore
@@ -30,7 +30,7 @@ export const useAdmin = () => {
     // basati su subscription, status, etc.
     switch (permission) {
       case 'view_quiz':
-        return user?.status === 'active';
+        return user?.status === 'approved';
       case 'access_admin':
         return user?.role === 'admin' || isAdmin;
       default:
@@ -49,7 +49,7 @@ export const useAdmin = () => {
       case 'dashboard':
         return user?.role === 'admin' || isUserAdmin();
       case 'quiz':
-        return isAuthenticated && user?.status === 'active';
+        return isAuthenticated && user?.status === 'approved';
       default:
         return isAuthenticated;
     }
@@ -62,7 +62,7 @@ export const useAdmin = () => {
   const getAccessLevel = (): string => {
     if (!isAuthenticated) return 'guest';
     if (user?.role === 'admin' || isAdmin) return 'admin';
-    if (user?.status === 'active') return 'user';
+    if (user?.status === 'approved') return 'user';
     return 'inactive';
   };
 

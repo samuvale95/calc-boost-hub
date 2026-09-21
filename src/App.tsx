@@ -11,6 +11,7 @@ import { Header } from "@/components/Header";
 import Index from "./pages/Index";
 import AdminDashboard from "./pages/AdminDashboard";
 import Login from "./pages/Login";
+import FinishSignIn from "./pages/FinishSignIn";
 import Quiz from "./pages/Quiz";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
@@ -30,8 +31,9 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
             <Route path="/login" element={<Login />} />
-            <Route path="/quiz" element={<ProtectedRoute requireSubscription={true}><Quiz /></ProtectedRoute>} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/finish-signin" element={<FinishSignIn />} />
+            <Route path="/quiz" element={<ProtectedRoute requireApproval={true}><Quiz /></ProtectedRoute>} />
+            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
