@@ -1,4 +1,8 @@
 {
+  "_meta": {
+    "label": "French",
+    "nativeLabel": "Français"
+  },
   "header": {
     "logoAlt": "icône",
     "statusPending": "En vérification",

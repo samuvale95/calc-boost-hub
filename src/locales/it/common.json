@@ -1,4 +1,8 @@
 {
+  "_meta": {
+    "label": "Italian",
+    "nativeLabel": "Italiano"
+  },
   "header": {
     "logoAlt": "icona",
     "statusPending": "In verifica",
