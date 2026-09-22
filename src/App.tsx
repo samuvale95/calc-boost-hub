@@ -14,6 +14,8 @@ import Login from "./pages/Login";
 import FinishSignIn from "./pages/FinishSignIn";
 import Quiz from "./pages/Quiz";
 import Profile from "./pages/Profile";
+import Donate from "./pages/Donate";
+import Publications from "./pages/Publications";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +36,8 @@ const App = () => (
             <Route path="/finish-signin" element={<FinishSignIn />} />
             <Route path="/quiz" element={<ProtectedRoute requireApproval={true}><Quiz /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+            <Route path="/donate" element={<Donate />} />
+            <Route path="/publications" element={<Publications />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

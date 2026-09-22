@@ -7,7 +7,9 @@
     "myProfile": "Mon Profil",
     "logout": "Déconnexion",
     "login": "Connexion",
-    "adminPanel": "Panneau Admin"
+    "adminPanel": "Panneau Admin",
+    "publications": "Publications",
+    "donate": "Faire un don"
   },
   "common": {
     "loading": "Chargement...",

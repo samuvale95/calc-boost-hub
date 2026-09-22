@@ -92,6 +92,12 @@ export const Header = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-4">
+            <Button variant={isActivePage("/publications") ? "default" : "ghost"} asChild>
+              <a href="/publications">{t('header.publications')}</a>
+            </Button>
+            <Button variant={isActivePage("/donate") ? "default" : "ghost"} asChild>
+              <a href="/donate">{t('header.donate')}</a>
+            </Button>
             {isAuthenticated ? (
               <>
                 {canAccessQuiz() && (
@@ -170,6 +176,12 @@ export const Header = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden border-t py-4">
             <div className="space-y-2">
+              <Button variant={isActivePage("/publications") ? "default" : "ghost"} asChild className="w-full justify-start">
+                <a href="/publications">{t('header.publications')}</a>
+              </Button>
+              <Button variant={isActivePage("/donate") ? "default" : "ghost"} asChild className="w-full justify-start">
+                <a href="/donate">{t('header.donate')}</a>
+              </Button>
               {isAuthenticated ? (
                 <>
                   {canAccessQuiz() && (
