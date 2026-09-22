@@ -1,5 +1,6 @@
 import React from 'react';
-import { Document, Page, Text, View, StyleSheet, Font } from '@react-pdf/renderer';
+import { Document, Page, Text, View, StyleSheet, Font, Image } from '@react-pdf/renderer';
+import { SUBDOMAIN_LABELS, DOMAIN_LABELS } from '@/config/domainLabels';
 
 // Register fonts for better support
 Font.register({
@@ -89,6 +90,20 @@ const styles = StyleSheet.create({
     borderTop: '1 solid #e5e7eb',
     paddingTop: 10,
   },
+  metaRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 6,
+    gap: 4,
+  },
+  qrCodeCorner: {
+    position: 'absolute',
+    top: 30,
+    right: 30,
+    width: 48,
+    height: 48,
+  },
   table: {
     marginBottom: 15,
     border: '1 solid #e5e7eb',
@@ -144,6 +159,11 @@ interface QuizPDFProps {
     score: number | string;
   }[];
   calcResults?: { [key: string]: { z: string; p: string } };
+  /** Data URL (PNG) of a QR code linking to the official site — DAND Scale plan, point 8. */
+  qrCodeDataUrl?: string;
+  scaleVersion?: string;
+  scaleLanguage?: string;
+  copyright?: string;
 }
 
 const renderAnswer = (question: any, answer: any) => {
@@ -189,15 +209,31 @@ const renderAnswer = (question: any, answer: any) => {
   }
 };
 
-const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResults }) => {
+const QuizPDFDocument: React.FC<QuizPDFProps> = ({
+  quizData,
+  scoresPDF,
+  calcResults,
+  qrCodeDataUrl,
+  scaleVersion,
+  scaleLanguage,
+  copyright,
+}) => {
 
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>
+          {qrCodeDataUrl && <Image src={qrCodeDataUrl} style={styles.qrCodeCorner} />}
           <Text style={styles.title}>D-DAND</Text>
           <Text style={styles.subtitle}>Report dei Risultati</Text>
+          {(scaleVersion || scaleLanguage) && (
+            <View style={styles.metaRow}>
+              {scaleVersion && <Text style={styles.subtitle}>Versione {scaleVersion}</Text>}
+              {scaleVersion && scaleLanguage && <Text style={styles.subtitle}>·</Text>}
+              {scaleLanguage && <Text style={styles.subtitle}>Lingua: {scaleLanguage.toUpperCase()}</Text>}
+            </View>
+          )}
         </View>
 
         {/* Date and Name Section */}
@@ -213,27 +249,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
             <View style={styles.resultsSection}>
               <Text style={styles.resultsTitle}>Punteggio per Sottodomini</Text>
               <View style={styles.table}>
-                {[
-                  {dom: 'sub1', label:"Grossomotorio"},
-                  {dom: "sub2", label:"Energia e sport"},
-                  {dom: "sub3", label:"Finemotorio"},
-                  {dom: "sub4", label:"Interazione sociale"},
-                  {dom: "sub5", label:"Gioco"},
-                  {dom: 'sub6', label:"Comprensione linguistica"},
-                  {dom: "sub7", label:"Produzione linguistica"},
-                  {dom: "sub8", label:"Alimentazione"},
-                  {dom: "sub9", label:"Autonomie personali"},
-                  {dom: "sub10", label:"Autonomie domestiche"},
-                  {dom: 'sub11', label:"Autonomie sociali"},
-                  {dom: "sub12", label:"Memoria e apprendimento"},
-                  {dom: "sub13", label:"Regolazione emotiva"},
-                  {dom: "sub14", label:"Comportamento internalizzante"},
-                  {dom: "sub15", label:"Attenzione e controllo motorio"},
-                  {dom: 'sub16', label:"Problemi sociali e comunicativi"},
-                  {dom: "sub17", label:"Comportamento esternalizzante"},
-                  {dom: "sub18", label:"Ore di sonno totali"},
-                  {dom: "sub19", label:"Risvegli settimanali"}
-                ].map(({dom, label}) => (
+                {SUBDOMAIN_LABELS.map(({key: dom, label}) => (
                   <View key={dom} style={styles.tableRow} wrap={false}>
                     <View style={styles.tableCell}>
                       <Text style={styles.tableCellLabel}>{label}</Text>
@@ -253,13 +269,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
             <View style={styles.resultsSection}>
               <Text style={styles.resultsTitle}>Punteggio per Domini</Text>
               <View style={styles.table}>
-                {[
-                  {dom: 'Mot', label:"Abilità motorie"},
-                  {dom: "Lan", label:"Linguaggio e interazione sociale"},
-                  {dom: "Aut", label:"Autonomie"},
-                  {dom: "Mem", label:"Memoria e abilità scolastiche"},
-                  {dom: "Emo", label:"Regolazione comportamentale ed emotiva"}
-                ].map(({dom, label}) => (
+                {DOMAIN_LABELS.map(({key: dom, label}) => (
                   <View key={dom} style={styles.tableRow} wrap={false}>
                     <View style={styles.tableCell}>
                       <Text style={styles.tableCellLabel}>{label}</Text>
@@ -320,6 +330,7 @@ const QuizPDFDocument: React.FC<QuizPDFProps> = ({ quizData, scoresPDF, calcResu
         {/* Footer */}
         <Text style={styles.footer}>
           Risultati calcolati automaticamente - {new Date().toLocaleDateString('it-IT')}
+          {copyright ? `\n${copyright}` : ''}
         </Text>
       </Page>
     </Document>

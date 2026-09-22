@@ -2,14 +2,15 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent} from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
-import { Brain, CheckCircle, Play, Home, ChevronLeft, ChevronRight, Download } from "lucide-react";
+import { Brain, CheckCircle, Play, Home, ChevronLeft, ChevronRight, Download, FileSpreadsheet } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAdmin } from "@/hooks/useAdmin";
 import quizJson from "../data/DAND_qt.json";
 import { v4 as uuidv4 } from "uuid";
-import { generateQuizPDF, QuizData } from "@/utils/pdfGenerator";
+import { generateQuizPDF, QuizData, ScoresPDF } from "@/utils/pdfGenerator";
+import { generateQuizExcel } from "@/utils/excelGenerator";
 import * as calc from "@/utils/calc";
 import * as prepPDF from "@/utils/prepPDF";
 
@@ -57,7 +58,7 @@ const Quiz = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [inputErrors, setInputErrors] = useState<{[key: string]: string}>({});
   const [calcResults, setCalcResults] = useState<{ [key: string]: { z: string; p: string } }>({});
-  const [prepScoresPDF, setPrepScoresPDF] = useState<{}[]>([]);
+  const [prepScoresPDF, setPrepScoresPDF] = useState<ScoresPDF>([]);
   const { toast } = useToast();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
@@ -220,20 +221,20 @@ const resetQuiz = () => {
     navigate("/login");
   };
 
+  const buildQuizData = (): QuizData => ({
+    user: {
+      name: user?.name || 'Utente',
+      email: user?.email || '',
+      completedAt: new Date().toISOString()
+    },
+    questions: quiz,
+    sections: sections
+  });
+
   const handleGeneratePDF = async () => {
     try {
-      const quizData: QuizData = {
-        user: {
-          name: user?.name || 'Utente',
-          email: user?.email || '',
-          completedAt: new Date().toISOString()
-        },
-        questions: quiz,
-        sections: sections
-      };
+      await generateQuizPDF(buildQuizData(), prepScoresPDF, calcResults); // genera il pdf
 
-      await generateQuizPDF(quizData, prepScoresPDF, calcResults); // genera il pdf
-      
       toast({
         title: "PDF Generato!",
         description: "Il file PDF è stato scaricato con successo.",
@@ -244,6 +245,24 @@ const resetQuiz = () => {
       toast({
         title: "Errore",
         description: "Impossibile generare il PDF. Riprova più tardi.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleGenerateExcel = async () => {
+    try {
+      await generateQuizExcel(buildQuizData(), prepScoresPDF, calcResults);
+
+      toast({
+        title: "Excel Generato!",
+        description: "Il file Excel è stato scaricato con successo.",
+      });
+    } catch (error) {
+      console.error('Error generating Excel:', error);
+      toast({
+        title: "Errore",
+        description: "Impossibile generare il file Excel. Riprova più tardi.",
         variant: "destructive",
       });
     }
@@ -704,6 +723,10 @@ const resetQuiz = () => {
                   <Button onClick={handleGeneratePDF} className="flex items-center gap-2">
                     <Download className="h-4 w-4" />
                     Scarica PDF
+                  </Button>
+                  <Button onClick={handleGenerateExcel} variant="outline" className="flex items-center gap-2">
+                    <FileSpreadsheet className="h-4 w-4" />
+                    Scarica Excel
                   </Button>
                   <Button onClick={resetQuiz} className="flex items-center gap-2">
                     <Play className="h-4 w-4" />
