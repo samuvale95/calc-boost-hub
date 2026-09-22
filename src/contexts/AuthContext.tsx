@@ -34,6 +34,10 @@ interface AuthContextType {
   sendSignInLink: (email: string) => Promise<void>;
   /** Completes sign-in from a clicked email link. */
   completeSignIn: (email: string, url: string) => Promise<void>;
+  /** Password fallback — sign in to an existing account. */
+  signInWithPassword: (email: string, password: string) => Promise<void>;
+  /** Password fallback — create a brand new account. */
+  registerWithPassword: (email: string, password: string) => Promise<void>;
   /** Fills in the registration form fields for the signed-in user. */
   completeProfile: (data: ProfileData) => Promise<User>;
   logout: () => Promise<void>;
@@ -107,6 +111,28 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const signInWithPassword = async (email: string, password: string): Promise<void> => {
+    setLoading(true);
+    try {
+      const fbUser = await firebaseAuthService.signInWithPassword(email, password);
+      setFirebaseUser(fbUser);
+      await syncProfile();
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const registerWithPassword = async (email: string, password: string): Promise<void> => {
+    setLoading(true);
+    try {
+      const fbUser = await firebaseAuthService.registerWithPassword(email, password);
+      setFirebaseUser(fbUser);
+      await syncProfile();
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const completeProfile = async (data: ProfileData): Promise<User> => {
     const profile = await authService.completeProfile(data);
     setUser(profile);
@@ -153,6 +179,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     tokenExpired,
     sendSignInLink,
     completeSignIn,
+    signInWithPassword,
+    registerWithPassword,
     completeProfile,
     logout,
     refreshToken,

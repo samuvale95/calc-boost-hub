@@ -1,13 +1,18 @@
 // Thin wrapper around the Firebase Auth SDK.
 //
-// The app signs users in with a passwordless "email link" (matches the
-// DAND Scale plan, point 5: "evitare password condivisa; account
-// personale, link personale"): the user types their email, gets a link,
-// clicking it signs them in — no password to create, remember or leak.
+// The app signs users in primarily with a passwordless "email link"
+// (matches the DAND Scale plan, point 5: "evitare password condivisa;
+// account personale, link personale"): the user types their email, gets a
+// link, clicking it signs them in — no password to create, remember or
+// leak. Email+password is offered as a fallback (e.g. corporate mail
+// filters that strip/delay magic links) — see signInWithPassword /
+// registerWithPassword below.
 import {
+  createUserWithEmailAndPassword,
   isSignInWithEmailLink,
   onIdTokenChanged,
   sendSignInLinkToEmail,
+  signInWithEmailAndPassword,
   signInWithEmailLink,
   signOut as firebaseSignOut,
   type User as FirebaseUser,
@@ -55,6 +60,30 @@ export const firebaseAuthService = {
     const auth = requireAuth();
     const credential = await signInWithEmailLink(auth, email, url);
     window.localStorage.removeItem(PENDING_EMAIL_KEY);
+    return credential.user;
+  },
+
+  /**
+   * Password fallback — sign-in. Deliberately separate from
+   * registerWithPassword rather than "try sign-in, fall back to
+   * register on user-not-found": recent Firebase projects have email
+   * enumeration protection on by default, which collapses
+   * auth/user-not-found and auth/wrong-password into the same
+   * auth/invalid-credential error, so that distinction can no longer be
+   * made reliably from the error code alone. An explicit
+   * sign-in-or-register toggle in the UI (see LoginSection.tsx) is the
+   * pattern Firebase itself recommends here.
+   */
+  async signInWithPassword(email: string, password: string): Promise<FirebaseUser> {
+    const auth = requireAuth();
+    const credential = await signInWithEmailAndPassword(auth, email, password);
+    return credential.user;
+  },
+
+  /** Password fallback — registration of a brand new account. */
+  async registerWithPassword(email: string, password: string): Promise<FirebaseUser> {
+    const auth = requireAuth();
+    const credential = await createUserWithEmailAndPassword(auth, email, password);
     return credential.user;
   },
 
