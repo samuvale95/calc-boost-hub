@@ -11,6 +11,8 @@ import quizJson from "../data/DAND_qt.json";
 import { v4 as uuidv4 } from "uuid";
 import { generateQuizPDF, QuizData, ScoresPDF } from "@/utils/pdfGenerator";
 import { generateQuizExcel } from "@/utils/excelGenerator";
+import { eventService } from "@/services/eventService";
+import { SCALE_LANGUAGE } from "@/config/scale";
 import * as calc from "@/utils/calc";
 import * as prepPDF from "@/utils/prepPDF";
 
@@ -65,6 +67,12 @@ const Quiz = () => {
   const { isUserAdmin } = useAdmin();
   const stepperRef = useRef<HTMLDivElement>(null);
   const [autoPdfGenerated, setAutoPdfGenerated] = useState(false);
+
+  // Counts a calculator use (DAND Scale plan, point 6) once per visit to
+  // this page — never the answers themselves, just that a session happened.
+  useEffect(() => {
+    eventService.trackEvent('calculator_started', undefined, SCALE_LANGUAGE);
+  }, []);
 
   // Validate numeric input
   const validateNumericInput = (value: string, min?: string, max?: string): string | null => {
@@ -199,6 +207,7 @@ const Quiz = () => {
     setCalcResults(calcResults_data);
     setPrepScoresPDF(prepScoresPDF_data)
 
+    eventService.trackEvent('calculator_completed', undefined, SCALE_LANGUAGE);
   };
 
 const resetQuiz = () => {
@@ -234,6 +243,7 @@ const resetQuiz = () => {
   const handleGeneratePDF = async () => {
     try {
       await generateQuizPDF(buildQuizData(), prepScoresPDF, calcResults); // genera il pdf
+      eventService.trackEvent('result_pdf_download', undefined, SCALE_LANGUAGE);
 
       toast({
         title: "PDF Generato!",
@@ -253,6 +263,7 @@ const resetQuiz = () => {
   const handleGenerateExcel = async () => {
     try {
       await generateQuizExcel(buildQuizData(), prepScoresPDF, calcResults);
+      eventService.trackEvent('result_excel_download', undefined, SCALE_LANGUAGE);
 
       toast({
         title: "Excel Generato!",

@@ -20,6 +20,9 @@ export const API_CONFIG = {
     // registration-gated, no payment involved)
     DOWNLOAD_PDF: '/pdf/download',
     PDF_INFO: '/pdf/info',
+    // Usage counters (DAND Scale plan, point 6)
+    EVENTS: '/events/',
+    PUBLIC_STATS: '/events/stats/public',
   }
 };
 
