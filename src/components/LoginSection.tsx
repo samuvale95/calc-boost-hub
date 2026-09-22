@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -27,6 +28,7 @@ interface LoginSectionProps {
  * CompleteProfileForm) only happens once, for a genuinely new profile.
  */
 export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [linkSent, setLinkSent] = useState(false);
@@ -38,8 +40,8 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
 
     if (!email) {
       toast({
-        title: "Errore",
-        description: "Inserisci la tua email",
+        title: t('login.errorTitle'),
+        description: t('login.errorEmailRequired'),
         variant: "destructive",
       });
       return;
@@ -52,8 +54,8 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
     } catch (error) {
       console.error("Errore nell'invio del link:", error);
       toast({
-        title: "Errore",
-        description: "Impossibile inviare il link di accesso. Riprova più tardi.",
+        title: t('login.errorTitle'),
+        description: t('login.errorSendFailed'),
         variant: "destructive",
       });
     } finally {
@@ -74,15 +76,15 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-green-600">
               <CheckCircle className="h-6 w-6" />
-              Controlla la tua email
+              {t('login.linkSentTitle')}
             </DialogTitle>
             <DialogDescription>
-              Ti abbiamo inviato un link di accesso a <strong>{email}</strong>. Aprilo per accedere — nessuna password necessaria.
+              {t('login.linkSentDescription', { email })}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button onClick={handleClose} className="w-full">
-              Chiudi
+              {t('common.close')}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -96,22 +98,22 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Mail className="h-6 w-6" />
-            Accedi alla DAND Scale
+            {t('login.title')}
           </DialogTitle>
           <DialogDescription>
-            Inserisci la tua email: ti invieremo un link per accedere, senza bisogno di una password.
+            {t('login.description')}
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4 py-2">
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">{t('login.emailLabel')}</Label>
             <div className="relative">
               <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
                 id="email"
                 type="email"
-                placeholder="nome@esempio.com"
+                placeholder={t('login.emailPlaceholder')}
                 className="pl-10"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -123,7 +125,7 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
 
           <div className="bg-muted p-3 rounded-lg">
             <p className="text-xs text-muted-foreground">
-              Se non hai ancora un account, verrà creato automaticamente e ti verrà chiesto di completare la registrazione.
+              {t('login.note')}
             </p>
           </div>
         </form>
@@ -136,16 +138,16 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
             className="flex items-center gap-2 w-full sm:w-auto"
           >
             <ArrowLeft className="h-4 w-4" />
-            Indietro
+            {t('common.back')}
           </Button>
           <Button onClick={handleSubmit} disabled={isLoading} className="flex items-center gap-2 w-full sm:w-auto">
             {isLoading ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Invio in corso...
+                {t('login.sending')}
               </>
             ) : (
-              "Invia link di accesso"
+              t('login.submit')
             )}
           </Button>
         </DialogFooter>

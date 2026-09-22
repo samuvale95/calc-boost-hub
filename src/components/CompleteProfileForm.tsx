@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,6 +21,7 @@ interface CompleteProfileFormProps {
  * fields the Fondazione needs to track who uses the scale.
  */
 export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) => {
+  const { t, i18n } = useTranslation();
   const { completeProfile, user, firebaseUser } = useAuth();
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -41,8 +43,8 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
 
     if (!formData.center || !formData.professionalRole || !formData.phone) {
       toast({
-        title: "Errore",
-        description: "Centro, ruolo e telefono sono obbligatori",
+        title: t('completeProfile.errorTitle'),
+        description: t('completeProfile.errorRequiredFields'),
         variant: "destructive",
       });
       return;
@@ -50,8 +52,8 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
 
     if (!acceptedTerms || !acceptedPrivacy) {
       toast({
-        title: "Errore",
-        description: "Devi accettare le Conditions of Use e prendere visione della Privacy Policy",
+        title: t('completeProfile.errorTitle'),
+        description: t('completeProfile.errorConsent'),
         variant: "destructive",
       });
       return;
@@ -62,6 +64,7 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
       professional_role: formData.professionalRole,
       phone: formData.phone,
       country: formData.country || undefined,
+      preferred_language: i18n.language,
       accepted_terms: acceptedTerms,
       accepted_privacy: acceptedPrivacy,
     };
@@ -70,15 +73,15 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
       setIsLoading(true);
       await completeProfile(payload);
       toast({
-        title: "Registrazione completata!",
-        description: "Il tuo profilo è stato salvato con successo.",
+        title: t('completeProfile.successTitle'),
+        description: t('completeProfile.successDescription'),
       });
       onComplete();
     } catch (error) {
       console.error("Errore nel completamento del profilo:", error);
       toast({
-        title: "Errore",
-        description: error instanceof Error ? error.message : "Impossibile completare la registrazione",
+        title: t('completeProfile.errorTitle'),
+        description: error instanceof Error ? error.message : t('completeProfile.errorGeneric'),
         variant: "destructive",
       });
     } finally {
@@ -91,19 +94,19 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <CheckCircle className="h-6 w-6 text-primary" />
-          Completa la registrazione
+          {t('completeProfile.title')}
         </CardTitle>
         <CardDescription>
           {(user?.name || firebaseUser?.email) && (
-            <>Accesso confermato per <strong>{user?.email || firebaseUser?.email}</strong>. </>
+            <>{t('completeProfile.descriptionConfirmed', { email: user?.email || firebaseUser?.email })} </>
           )}
-          Alcune informazioni per usare la DAND Scale.
+          {t('completeProfile.descriptionBody')}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="center">Centro di appartenenza</Label>
+            <Label htmlFor="center">{t('completeProfile.centerLabel')}</Label>
             <div className="relative">
               <Building2 className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
@@ -118,13 +121,13 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="professionalRole">Ruolo nel centro</Label>
+            <Label htmlFor="professionalRole">{t('completeProfile.professionalRoleLabel')}</Label>
             <div className="relative">
               <Briefcase className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
                 id="professionalRole"
                 className="pl-10"
-                placeholder="es. Neuropsichiatra Infantile"
+                placeholder={t('completeProfile.professionalRolePlaceholder')}
                 value={formData.professionalRole}
                 onChange={(e) => handleChange("professionalRole", e.target.value)}
                 disabled={isLoading}
@@ -134,7 +137,7 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="phone">Numero telefonico</Label>
+            <Label htmlFor="phone">{t('completeProfile.phoneLabel')}</Label>
             <div className="relative">
               <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
@@ -150,7 +153,7 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="country">Paese (opzionale)</Label>
+            <Label htmlFor="country">{t('completeProfile.countryLabel')}</Label>
             <div className="relative">
               <Globe className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
@@ -172,7 +175,19 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
                 disabled={isLoading}
               />
               <Label htmlFor="terms" className="text-sm font-normal leading-snug">
-                Accetto le <a href="/conditions-of-use" className="text-primary hover:underline" target="_blank" rel="noreferrer">Conditions of Use</a> della DAND Scale
+                {t('completeProfile.termsLabel', {
+                  link: t('completeProfile.termsLink'),
+                  interpolation: { escapeValue: false },
+                }).split(t('completeProfile.termsLink')).map((part, i, arr) => (
+                  <span key={i}>
+                    {part}
+                    {i < arr.length - 1 && (
+                      <a href="/conditions-of-use" className="text-primary hover:underline" target="_blank" rel="noreferrer">
+                        {t('completeProfile.termsLink')}
+                      </a>
+                    )}
+                  </span>
+                ))}
               </Label>
             </div>
             <div className="flex items-start gap-2">
@@ -183,7 +198,19 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
                 disabled={isLoading}
               />
               <Label htmlFor="privacy" className="text-sm font-normal leading-snug">
-                Ho preso visione della <a href="/privacy-policy" className="text-primary hover:underline" target="_blank" rel="noreferrer">Privacy Policy</a>
+                {t('completeProfile.privacyLabel', {
+                  link: t('completeProfile.privacyLink'),
+                  interpolation: { escapeValue: false },
+                }).split(t('completeProfile.privacyLink')).map((part, i, arr) => (
+                  <span key={i}>
+                    {part}
+                    {i < arr.length - 1 && (
+                      <a href="/privacy-policy" className="text-primary hover:underline" target="_blank" rel="noreferrer">
+                        {t('completeProfile.privacyLink')}
+                      </a>
+                    )}
+                  </span>
+                ))}
               </Label>
             </div>
           </div>
@@ -192,10 +219,10 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
             {isLoading ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                Invio in corso...
+                {t('completeProfile.submitting')}
               </>
             ) : (
-              "Completa la registrazione"
+              t('completeProfile.submit')
             )}
           </Button>
         </form>

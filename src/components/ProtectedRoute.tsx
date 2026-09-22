@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -13,6 +14,7 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireApproval = false }) => {
+  const { t } = useTranslation();
   const { isAuthenticated, loading, user, isAdmin, profileComplete } = useAuth();
   const location = useLocation();
 
@@ -22,7 +24,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireApprov
         <Card className="w-96">
           <CardContent className="flex flex-col items-center justify-center p-8">
             <Loader2 className="h-8 w-8 animate-spin text-primary mb-4" />
-            <p className="text-muted-foreground">Caricamento...</p>
+            <p className="text-muted-foreground">{t('common.loading')}</p>
           </CardContent>
         </Card>
       </div>
@@ -55,31 +57,27 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireApprov
                 )}
               </div>
               <CardTitle className="text-xl">
-                {user?.status === 'rejected' ? 'Accesso non disponibile' : 'Registrazione in verifica'}
+                {user?.status === 'rejected' ? t('protectedRoute.rejectedTitle') : t('protectedRoute.pendingTitle')}
               </CardTitle>
               <CardDescription>
-                {user?.status === 'rejected'
-                  ? 'La tua richiesta di accesso non è stata approvata.'
-                  : 'La tua registrazione è in attesa di approvazione da parte di Fondazione Dravet ETS.'}
+                {user?.status === 'rejected' ? t('protectedRoute.rejectedDescription') : t('protectedRoute.pendingDescription')}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="bg-muted p-4 rounded-lg">
                 <div className="flex items-center gap-2 mb-2">
                   <Badge variant="outline">
-                    {user?.status === 'rejected' ? 'Rifiutata' : 'In attesa'}
+                    {user?.status === 'rejected' ? t('protectedRoute.rejectedBadge') : t('protectedRoute.pendingBadge')}
                   </Badge>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  {user?.status === 'rejected'
-                    ? 'Per maggiori informazioni contatta Fondazione Dravet ETS.'
-                    : 'Ti invieremo un\'email non appena l\'accesso sarà attivato.'}
+                  {user?.status === 'rejected' ? t('protectedRoute.rejectedNote') : t('protectedRoute.pendingNote')}
                 </p>
               </div>
               <Button asChild className="w-full">
                 <a href="/profile">
                   <ClipboardEdit className="h-4 w-4 mr-2" />
-                  Vai al Profilo
+                  {t('protectedRoute.goToProfile')}
                 </a>
               </Button>
             </CardContent>

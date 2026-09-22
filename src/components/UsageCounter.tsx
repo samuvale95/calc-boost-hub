@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Trans } from "react-i18next";
 import { Calculator, Download } from "lucide-react";
 import { eventService, PublicStats } from "@/services/eventService";
 
@@ -27,13 +28,21 @@ export const UsageCounter = () => {
       {stats.calculator_uses > 0 && (
         <div className="flex items-center gap-2">
           <Calculator className="h-4 w-4" />
-          Il calcolatore è stato usato <strong className="text-foreground">{stats.calculator_uses}</strong> volte
+          <Trans
+            i18nKey="usageCounter.calculatorUses"
+            values={{ count: stats.calculator_uses }}
+            components={{ strong: <strong className="text-foreground" /> }}
+          />
         </div>
       )}
       {stats.scale_downloads > 0 && (
         <div className="flex items-center gap-2">
           <Download className="h-4 w-4" />
-          Scala scaricata <strong className="text-foreground">{stats.scale_downloads}</strong> volte
+          <Trans
+            i18nKey="usageCounter.scaleDownloads"
+            values={{ count: stats.scale_downloads }}
+            components={{ strong: <strong className="text-foreground" /> }}
+          />
         </div>
       )}
     </div>

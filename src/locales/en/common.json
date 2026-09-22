@@ -1,0 +1,142 @@
+{
+  "header": {
+    "logoAlt": "icon",
+    "statusPending": "Under review",
+    "test": "Test",
+    "admin": "Admin",
+    "myProfile": "My Profile",
+    "logout": "Log out",
+    "login": "Log in",
+    "adminPanel": "Admin Panel"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "close": "Close",
+    "back": "Back",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "hero": {
+    "eyebrow": "Discover the tool",
+    "title": "Everything you need to know about the D-DAND Scale",
+    "subtitle": "Click a question to see the answer.",
+    "acronym": "Disease Associated Neuropsychiatric Disorders",
+    "foundation": "Fondazione Dravet ETS",
+    "ctaPlans": "See access options",
+    "faq": {
+      "q1": "What is the D-DAND Scale?",
+      "q2": "Why is a scale like the D-DAND needed?",
+      "q3": "How is the D-DAND structured?",
+      "q4": "What does the D-DAND assess?",
+      "q5": "How is it used in practice?",
+      "q6": "What are the strengths of the D-DAND?",
+      "q7": "Who developed the D-DAND and where is it published?"
+    }
+  },
+  "access": {
+    "eyebrow": "Access to the scale",
+    "title": "Register to access",
+    "subtitle": "Clinical, academic and non-commercial research use of the DAND Scale is free. Just register to download the scale, the manual, and use the automatic calculator.",
+    "features": {
+      "pdf": "D-DAND Scale in PDF format",
+      "manual": "User manual included",
+      "calculator": "Automatic calculator for the 25 outcomes",
+      "privacy": "No patient data stored on the server",
+      "individual": "Individual registration, no shared password"
+    },
+    "cta": "Register / Log in",
+    "footnote": "Free access · No password to remember · Fast approval"
+  },
+  "industryNotice": {
+    "title": "Industry / Pharma / CRO / Sponsored Clinical Trials.",
+    "body": "Use of the DAND Scale by pharmaceutical companies, CROs, in the context of sponsored clinical trials or for other commercial purposes is subject to a specific request to Fondazione Dravet ETS. Contact:",
+    "afterContact": "Fondazione Dravet ETS will evaluate the request and contact the applicant to agree on the terms of use and any collaboration."
+  },
+  "login": {
+    "title": "Log in to the DAND Scale",
+    "description": "Enter your email: we'll send you a link to log in, no password needed.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "name@example.com",
+    "note": "If you don't have an account yet, one will be created automatically and you'll be asked to complete your registration.",
+    "submit": "Send login link",
+    "sending": "Sending...",
+    "linkSentTitle": "Check your email",
+    "linkSentDescription": "We've sent a login link to {{email}}. Open it to log in — no password needed.",
+    "errorTitle": "Error",
+    "errorEmailRequired": "Enter your email",
+    "errorSendFailed": "Could not send the login link. Please try again later.",
+    "alreadyAuthenticatedTitle": "Already logged in",
+    "alreadyAuthenticatedDescription": "You're already signed in",
+    "goToProfile": "Go to Profile",
+    "backHome": "Back to Home"
+  },
+  "finishSignIn": {
+    "completing": "Completing sign-in...",
+    "confirmEmailTitle": "Confirm your email",
+    "confirmEmailDescription": "You opened the login link on a different device: confirm the email address it was sent to.",
+    "confirm": "Confirm",
+    "invalidLinkTitle": "Invalid link",
+    "invalidLinkDescription": "This login link is invalid or has expired.",
+    "linkExpiredError": "This link is no longer valid. Request a new one from the login page.",
+    "wrongEmailError": "Incorrect email or the link is no longer valid.",
+    "backToLogin": "Back to login"
+  },
+  "completeProfile": {
+    "title": "Complete your registration",
+    "descriptionConfirmed": "Access confirmed for {{email}}.",
+    "descriptionBody": "A few details to use the DAND Scale.",
+    "centerLabel": "Affiliated center",
+    "professionalRoleLabel": "Role at the center",
+    "professionalRolePlaceholder": "e.g. Child Neuropsychiatrist",
+    "phoneLabel": "Phone number",
+    "countryLabel": "Country (optional)",
+    "termsLabel": "I accept the DAND Scale {{link}}",
+    "termsLink": "Conditions of Use",
+    "privacyLabel": "I have read the {{link}}",
+    "privacyLink": "Privacy Policy",
+    "submit": "Complete registration",
+    "submitting": "Submitting...",
+    "errorRequiredFields": "Center, role and phone are required",
+    "errorConsent": "You must accept the Conditions of Use and acknowledge the Privacy Policy",
+    "successTitle": "Registration complete!",
+    "successDescription": "Your profile has been saved successfully.",
+    "errorTitle": "Error",
+    "errorGeneric": "Could not complete registration"
+  },
+  "protectedRoute": {
+    "pendingTitle": "Registration under review",
+    "pendingDescription": "Your registration is awaiting approval from Fondazione Dravet ETS.",
+    "pendingBadge": "Pending",
+    "pendingNote": "We'll email you as soon as access is activated.",
+    "rejectedTitle": "Access not available",
+    "rejectedDescription": "Your access request was not approved.",
+    "rejectedBadge": "Rejected",
+    "rejectedNote": "For more information contact Fondazione Dravet ETS.",
+    "goToProfile": "Go to Profile"
+  },
+  "usageCounter": {
+    "calculatorUses": "The calculator has been used <strong>{{count}}</strong> times",
+    "scaleDownloads": "Scale downloaded <strong>{{count}}</strong> times"
+  },
+  "profile": {
+    "title": "Your DAND Scale profile",
+    "statusApproved": "Access active",
+    "statusPending": "Awaiting approval",
+    "statusRejected": "Request not approved",
+    "registeredOn": "Registered on {{date}}",
+    "lastAccess": "Last access: {{date}}",
+    "pendingNotice": "Your registration is being reviewed by Fondazione Dravet ETS. We'll email you as soon as access is activated.",
+    "downloadsTitle": "Scale and manual",
+    "downloadsDescription": "Download the DAND Scale and its user manual",
+    "loadingFiles": "Loading available files...",
+    "noFiles": "No files available at the moment.",
+    "downloadError": "Could not download the file. Please try again later."
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Page not found",
+    "backHome": "Back to Home"
+  }
+}

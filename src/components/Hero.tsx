@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   ChevronDown,
   Brain,
@@ -12,47 +13,50 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+// The slide images themselves are Italian (screenshots of the
+// Fondazione's presentation) — only the question labels are translated
+// via i18n (hero.faq.*) until the Fondazione provides translated slides.
 const faqs = [
   {
     id: 1,
     icon: Brain,
-    question: "Cos'è la Scala D-DAND?",
+    key: "q1",
     images: ["/slides/slide-03.png"],
   },
   {
     id: 2,
     icon: Activity,
-    question: "Perché serve una scala come la D-DAND?",
+    key: "q2",
     images: ["/slides/slide-04.png"],
   },
   {
     id: 3,
     icon: BookOpen,
-    question: "Come è strutturata la D-DAND?",
+    key: "q3",
     images: ["/slides/slide-05.png", "/slides/slide-09.png"],
   },
   {
     id: 4,
     icon: Home,
-    question: "Cosa valuta la D-DAND?",
+    key: "q4",
     images: ["/slides/slide-07.png", "/slides/slide-08.png"],
   },
   {
     id: 5,
     icon: Smile,
-    question: "Come si usa nella pratica?",
+    key: "q5",
     images: ["/slides/slide-06.png"],
   },
   {
     id: 6,
     icon: Moon,
-    question: "Quali sono i punti di forza della D-DAND?",
+    key: "q6",
     images: ["/slides/slide-10.png"],
   },
   {
     id: 7,
     icon: FileText,
-    question: "Chi ha sviluppato la D-DAND e dove è pubblicata?",
+    key: "q7",
     images: ["/slides/slide-02.png", "/slides/slide-11.png"],
   },
 ];
@@ -60,10 +64,12 @@ const faqs = [
 // Accordion item con animazione grid fluida e scroll-into-view
 const AccordionItem = ({
   faq,
+  question,
   isOpen,
   onToggle,
 }: {
   faq: (typeof faqs)[0];
+  question: string;
   isOpen: boolean;
   onToggle: () => void;
 }) => {
@@ -109,7 +115,7 @@ const AccordionItem = ({
               isOpen ? "text-[hsl(95,87%,34%)]" : "text-foreground"
             }`}
           >
-            {faq.question}
+            {question}
           </span>
         </div>
         <ChevronDown
@@ -135,7 +141,7 @@ const AccordionItem = ({
                 <img
                   key={i}
                   src={src}
-                  alt={`${faq.question} — slide ${i + 1}`}
+                  alt={`${question} — slide ${i + 1}`}
                   loading="lazy"
                   className="w-full rounded-lg border border-border/50 shadow-sm object-contain"
                 />
@@ -149,6 +155,7 @@ const AccordionItem = ({
 };
 
 export const Hero = () => {
+  const { t } = useTranslation();
   // Prima domanda aperta di default per mostrare l'interazione
   const [openId, setOpenId] = useState<number | null>(1);
 
@@ -191,7 +198,7 @@ export const Hero = () => {
             <div className="w-12 h-px bg-gradient-to-r from-[hsl(95,87%,34%)] to-[hsl(316,91%,40%)]" />
 
             <p className="text-xs text-muted-foreground/60 italic">
-              Fondazione Dravet ETS
+              {t('hero.foundation')}
             </p>
 
             {/* CTA verso la sezione piani */}
@@ -200,7 +207,7 @@ export const Hero = () => {
               size="lg"
               className="mt-6 w-full max-w-[200px] bg-[hsl(316,91%,40%)] hover:bg-[hsl(316,91%,34%)] text-white rounded-xl gap-2 shadow-md font-semibold text-base"
             >
-              Vedi i piani
+              {t('hero.ctaPlans')}
               <ArrowDown className="w-4 h-4" />
             </Button>
           </div>
@@ -223,22 +230,23 @@ export const Hero = () => {
           {/* Intestazione sezione */}
           <div className="mb-3">
             <p className="text-[11px] font-semibold uppercase tracking-widest text-[hsl(316,91%,40%)] mb-1.5">
-              Scopri lo strumento
+              {t('hero.eyebrow')}
             </p>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground leading-snug whitespace-nowrap">
-              Tutto quello che devi sapere sulla Scala D-DAND
+              {t('hero.title')}
             </h2>
             <p className="text-sm text-muted-foreground mt-2">
-              Clicca su una domanda per vedere la risposta.
+              {t('hero.subtitle')}
             </p>
           </div>
 
           {/* Accordion */}
           <div className="flex flex-col gap-2.5">
-            {faqs.map((faq, idx) => (
+            {faqs.map((faq) => (
               <AccordionItem
                 key={faq.id}
                 faq={faq}
+                question={t(`hero.faq.${faq.key}`)}
                 isOpen={openId === faq.id}
                 onToggle={() => toggle(faq.id)}
               />
@@ -251,7 +259,7 @@ export const Hero = () => {
               onClick={scrollToPricing}
               className="w-full bg-[hsl(95,87%,34%)] hover:bg-[hsl(95,87%,28%)] text-white rounded-xl gap-2"
             >
-              Vedi i piani
+              {t('hero.ctaPlans')}
               <ArrowDown className="w-4 h-4" />
             </Button>
           </div>

@@ -13,6 +13,7 @@ export interface User {
   professional_role: string | null;
   phone: string | null;
   country: string | null;
+  preferred_language: string | null;
   is_active: boolean;
   registration_date: string;
   last_access: string | null;

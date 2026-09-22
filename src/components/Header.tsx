@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import { 
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -8,10 +9,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import { 
-  User, 
-  LogOut, 
-  Settings, 
+import {
+  User,
+  LogOut,
+  Settings,
   Calculator,
   FileText,
   Menu,
@@ -20,8 +21,10 @@ import {
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import Icon from "@/assets/icon.png";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export const Header = () => {
+  const { t } = useTranslation();
   const { user, isAuthenticated, logout, isAdmin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -52,7 +55,7 @@ export const Header = () => {
     if (!user) return null;
 
     if (user.status === 'pending') {
-      return <Badge variant="outline" className="text-xs">In verifica</Badge>;
+      return <Badge variant="outline" className="text-xs">{t('header.statusPending')}</Badge>;
     }
     return null;
   };
@@ -76,12 +79,12 @@ export const Header = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               className="text-lg font-bold p-0 h-auto hover:bg-transparent hover:text-inherit" // tolto effetto hover
               onClick={() => navigate("/")}
             >
-              <img src={Icon} alt="icon" className="h-8 w-8" />
+              <img src={Icon} alt={t('header.logoAlt')} className="h-8 w-8" />
               DAND
             </Button>
             {isAuthenticated && getStatusBadge()}
@@ -98,7 +101,7 @@ export const Header = () => {
                     className="flex items-center gap-2"
                   >
                     <Calculator className="h-4 w-4" />
-                    Test
+                    {t('header.test')}
                   </Button>
                 )}
 
@@ -109,7 +112,7 @@ export const Header = () => {
                     className="flex items-center gap-2"
                   >
                     <Settings className="h-4 w-4" />
-                    Admin
+                    {t('header.admin')}
                   </Button>
                 )}
 
@@ -126,12 +129,12 @@ export const Header = () => {
                   <DropdownMenuContent align="end" className="w-56">
                     <DropdownMenuItem onClick={handleProfileClick}>
                       <User className="h-4 w-4 mr-2" />
-                      Il Mio Profilo
+                      {t('header.myProfile')}
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={handleLogout}>
                       <LogOut className="h-4 w-4 mr-2" />
-                      Esci
+                      {t('header.logout')}
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -139,14 +142,16 @@ export const Header = () => {
             ) : (
               <div className="flex items-center gap-2">
                 <Button variant="ghost" asChild>
-                  <a href="/login">Accedi</a>
+                  <a href="/login">{t('header.login')}</a>
                 </Button>
               </div>
             )}
+            <LanguageSwitcher />
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-1">
+            <LanguageSwitcher />
             <Button
               variant="ghost"
               size="sm"
@@ -174,7 +179,7 @@ export const Header = () => {
                       className="w-full justify-start"
                     >
                       <Calculator className="h-4 w-4 mr-2" />
-                      Test
+                      {t('header.test')}
                     </Button>
                   )}
 
@@ -185,7 +190,7 @@ export const Header = () => {
                       className="w-full justify-start"
                     >
                       <Settings className="h-4 w-4 mr-2" />
-                      Pannello Admin
+                      {t('header.adminPanel')}
                     </Button>
                   )}
 
@@ -195,7 +200,7 @@ export const Header = () => {
                     className="w-full justify-start"
                   >
                     <User className="h-4 w-4 mr-2" />
-                    Il Mio Profilo
+                    {t('header.myProfile')}
                   </Button>
 
                   <Button
@@ -204,13 +209,13 @@ export const Header = () => {
                     className="w-full justify-start text-red-600"
                   >
                     <LogOut className="h-4 w-4 mr-2" />
-                    Esci
+                    {t('header.logout')}
                   </Button>
                 </>
               ) : (
                 <>
                   <Button variant="ghost" asChild className="w-full justify-start">
-                    <a href="/login">Accedi</a>
+                    <a href="/login">{t('header.login')}</a>
                   </Button>
                 </>
               )}

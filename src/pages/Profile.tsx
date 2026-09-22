@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import {
   User as UserIcon,
   Mail,
@@ -20,16 +20,13 @@ import {
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { pdfService, PdfFileInfo } from "@/services/pdfService";
-import { format } from "date-fns";
-import { it } from "date-fns/locale";
+import { format, type Locale } from "date-fns";
+import { it, enUS, fr } from "date-fns/locale";
 
-const statusLabel: Record<string, { label: string; variant: "default" | "outline" | "destructive" }> = {
-  approved: { label: "Accesso attivo", variant: "default" },
-  pending: { label: "In attesa di approvazione", variant: "outline" },
-  rejected: { label: "Richiesta non approvata", variant: "destructive" },
-};
+const dateLocales: Record<string, Locale> = { it, en: enUS, fr };
 
 const Profile = () => {
+  const { t, i18n } = useTranslation();
   const { user } = useAuth();
   const { toast } = useToast();
   const [availableFiles, setAvailableFiles] = useState<PdfFileInfo[]>([]);
@@ -37,6 +34,13 @@ const Profile = () => {
   const [downloadingFile, setDownloadingFile] = useState<string | null>(null);
 
   const hasAccess = user?.status === "approved";
+  const dateLocale = dateLocales[i18n.language] ?? it;
+
+  const statusLabel: Record<string, { label: string; variant: "default" | "outline" | "destructive" }> = {
+    approved: { label: t('profile.statusApproved'), variant: "default" },
+    pending: { label: t('profile.statusPending'), variant: "outline" },
+    rejected: { label: t('profile.statusRejected'), variant: "destructive" },
+  };
 
   useEffect(() => {
     if (!hasAccess) return;
@@ -56,8 +60,8 @@ const Profile = () => {
     } catch (error) {
       console.error("Errore nel download:", error);
       toast({
-        title: "Errore",
-        description: "Impossibile scaricare il file. Riprova più tardi.",
+        title: t('common.error'),
+        description: t('profile.downloadError'),
         variant: "destructive",
       });
     } finally {
@@ -82,7 +86,7 @@ const Profile = () => {
                   <UserIcon className="h-6 w-6" />
                   {user.name}
                 </CardTitle>
-                <CardDescription>Il tuo profilo DAND Scale</CardDescription>
+                <CardDescription>{t('profile.title')}</CardDescription>
               </div>
               <Badge variant={status.variant}>{status.label}</Badge>
             </div>
@@ -119,12 +123,12 @@ const Profile = () => {
               )}
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Calendar className="h-4 w-4" />
-                Registrato il {format(new Date(user.registration_date), "d MMMM yyyy", { locale: it })}
+                {t('profile.registeredOn', { date: format(new Date(user.registration_date), "d MMMM yyyy", { locale: dateLocale }) })}
               </div>
               {user.last_access && (
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <Clock className="h-4 w-4" />
-                  Ultimo accesso: {format(new Date(user.last_access), "d MMMM yyyy, HH:mm", { locale: it })}
+                  {t('profile.lastAccess', { date: format(new Date(user.last_access), "d MMMM yyyy, HH:mm", { locale: dateLocale }) })}
                 </div>
               )}
             </div>
@@ -133,8 +137,7 @@ const Profile = () => {
               <div className="bg-muted p-4 rounded-lg flex items-start gap-3">
                 <AlertCircle className="h-5 w-5 text-orange-500 flex-shrink-0 mt-0.5" />
                 <p className="text-sm text-muted-foreground">
-                  La tua registrazione è in fase di verifica da parte di Fondazione Dravet ETS.
-                  Ti invieremo un'email non appena l'accesso sarà attivato.
+                  {t('profile.pendingNotice')}
                 </p>
               </div>
             )}
@@ -146,18 +149,18 @@ const Profile = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Download className="h-5 w-5" />
-                Scala e manuale
+                {t('profile.downloadsTitle')}
               </CardTitle>
-              <CardDescription>Scarica la DAND Scale e il manuale d'uso</CardDescription>
+              <CardDescription>{t('profile.downloadsDescription')}</CardDescription>
             </CardHeader>
             <CardContent>
               {loadingFiles ? (
                 <div className="flex items-center gap-2 text-muted-foreground text-sm">
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Caricamento file disponibili...
+                  {t('profile.loadingFiles')}
                 </div>
               ) : availableFiles.length === 0 ? (
-                <p className="text-sm text-muted-foreground">Nessun file disponibile al momento.</p>
+                <p className="text-sm text-muted-foreground">{t('profile.noFiles')}</p>
               ) : (
                 <div className="space-y-2">
                   {availableFiles.map((file) => (

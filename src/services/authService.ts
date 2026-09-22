@@ -8,6 +8,7 @@ export interface ProfileData {
   professional_role: string;
   phone: string;
   country?: string;
+  preferred_language?: string;
   accepted_terms: boolean;
   accepted_privacy: boolean;
 }

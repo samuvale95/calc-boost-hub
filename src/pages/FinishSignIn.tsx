@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -19,6 +20,7 @@ type Step = "completing" | "needs-email" | "error" | "done";
  * profile (see ProtectedRoute).
  */
 const FinishSignIn = () => {
+  const { t } = useTranslation();
   const { completeSignIn, isAuthenticated, profileComplete, loading } = useAuth();
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>("completing");
@@ -42,7 +44,7 @@ const FinishSignIn = () => {
         .then(() => setStep("done"))
         .catch((err) => {
           console.error("Errore nel completamento dell'accesso:", err);
-          setError("Il link non è più valido. Richiedine uno nuovo dalla pagina di accesso.");
+          setError(t('finishSignIn.linkExpiredError'));
           setStep("error");
         });
     } else {
@@ -63,7 +65,7 @@ const FinishSignIn = () => {
       setStep("done");
     } catch (err) {
       console.error("Errore nel completamento dell'accesso:", err);
-      setError("Email non corretta o link non più valido.");
+      setError(t('finishSignIn.wrongEmailError'));
       setStep("error");
     }
   };
@@ -87,16 +89,16 @@ const FinishSignIn = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Mail className="h-6 w-6" />
-              Conferma la tua email
+              {t('finishSignIn.confirmEmailTitle')}
             </CardTitle>
             <CardDescription>
-              Hai aperto il link di accesso su un dispositivo diverso: conferma l'indirizzo email a cui l'abbiamo inviato.
+              {t('finishSignIn.confirmEmailDescription')}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleManualSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t('login.emailLabel')}</Label>
                 <Input
                   id="email"
                   type="email"
@@ -106,7 +108,7 @@ const FinishSignIn = () => {
                 />
               </div>
               <Button type="submit" className="w-full">
-                Conferma
+                {t('finishSignIn.confirm')}
               </Button>
             </form>
           </CardContent>
@@ -121,12 +123,12 @@ const FinishSignIn = () => {
         <Card className="w-full max-w-md">
           <CardContent className="pt-6 text-center">
             <AlertCircle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <h2 className="text-xl font-semibold mb-2">Link non valido</h2>
+            <h2 className="text-xl font-semibold mb-2">{t('finishSignIn.invalidLinkTitle')}</h2>
             <p className="text-muted-foreground mb-4">
-              {error || "Questo link di accesso non è valido o è scaduto."}
+              {error || t('finishSignIn.invalidLinkDescription')}
             </p>
             <Button asChild className="w-full">
-              <a href="/login">Torna alla pagina di accesso</a>
+              <a href="/login">{t('finishSignIn.backToLogin')}</a>
             </Button>
           </CardContent>
         </Card>
@@ -138,7 +140,7 @@ const FinishSignIn = () => {
     <div className="min-h-screen bg-background flex items-center justify-center">
       <div className="flex flex-col items-center gap-4">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        <p className="text-muted-foreground">Completamento dell'accesso...</p>
+        <p className="text-muted-foreground">{t('finishSignIn.completing')}</p>
       </div>
     </div>
   );

@@ -1,16 +1,16 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, ArrowLeft } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useAdmin } from "@/hooks/useAdmin";
 import { useNavigate } from "react-router-dom";
 import { LoginSection } from "@/components/LoginSection";
 
 const Login = () => {
+  const { t } = useTranslation();
   const [isLoginOpen, setIsLoginOpen] = useState(true);
   const { isAuthenticated } = useAuth();
-  const { isUserAdmin } = useAdmin();
   const navigate = useNavigate();
 
   // No automatic redirect - let LoginSection handle it after successful login
@@ -30,12 +30,12 @@ const Login = () => {
           <Card>
             <CardContent className="pt-6 text-center">
               <AlertCircle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-              <h2 className="text-xl font-semibold mb-2">Già Autenticato</h2>
+              <h2 className="text-xl font-semibold mb-2">{t('login.alreadyAuthenticatedTitle')}</h2>
               <p className="text-muted-foreground mb-4">
-                Sei già loggato nel sistema
+                {t('login.alreadyAuthenticatedDescription')}
               </p>
               <Button asChild className="w-full">
-                <a href="/profile">Vai al Profilo</a>
+                <a href="/profile">{t('login.goToProfile')}</a>
               </Button>
             </CardContent>
           </Card>
@@ -51,11 +51,11 @@ const Login = () => {
           <Button variant="ghost" asChild className="mb-4">
             <a href="/" className="flex items-center gap-2">
               <ArrowLeft className="h-4 w-4" />
-              Torna alla Home
+              {t('login.backHome')}
             </a>
           </Button>
         </div>
-        
+
         <LoginSection
           isOpen={isLoginOpen}
           onClose={handleClose}

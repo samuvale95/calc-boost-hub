@@ -1,0 +1,142 @@
+{
+  "header": {
+    "logoAlt": "icône",
+    "statusPending": "En vérification",
+    "test": "Test",
+    "admin": "Admin",
+    "myProfile": "Mon Profil",
+    "logout": "Déconnexion",
+    "login": "Connexion",
+    "adminPanel": "Panneau Admin"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "retry": "Réessayer",
+    "close": "Fermer",
+    "back": "Retour",
+    "cancel": "Annuler",
+    "save": "Enregistrer"
+  },
+  "hero": {
+    "eyebrow": "Découvrez l'outil",
+    "title": "Tout ce qu'il faut savoir sur l'échelle D-DAND",
+    "subtitle": "Cliquez sur une question pour voir la réponse.",
+    "acronym": "Disease Associated Neuropsychiatric Disorders",
+    "foundation": "Fondazione Dravet ETS",
+    "ctaPlans": "Voir les modalités d'accès",
+    "faq": {
+      "q1": "Qu'est-ce que l'échelle D-DAND ?",
+      "q2": "Pourquoi une échelle comme la D-DAND est-elle nécessaire ?",
+      "q3": "Comment la D-DAND est-elle structurée ?",
+      "q4": "Qu'évalue la D-DAND ?",
+      "q5": "Comment l'utiliser en pratique ?",
+      "q6": "Quels sont les points forts de la D-DAND ?",
+      "q7": "Qui a développé la D-DAND et où est-elle publiée ?"
+    }
+  },
+  "access": {
+    "eyebrow": "Accès à l'échelle",
+    "title": "Inscrivez-vous pour accéder",
+    "subtitle": "L'utilisation clinique, académique et de recherche non commerciale de la DAND Scale est gratuite. Une simple inscription suffit pour télécharger l'échelle, le manuel et utiliser le calculateur automatique.",
+    "features": {
+      "pdf": "Échelle D-DAND au format PDF",
+      "manual": "Manuel d'utilisation inclus",
+      "calculator": "Calculateur automatique des 25 résultats",
+      "privacy": "Aucune donnée patient conservée sur le serveur",
+      "individual": "Inscription individuelle, sans mot de passe partagé"
+    },
+    "cta": "S'inscrire / Se connecter",
+    "footnote": "Accès gratuit · Aucun mot de passe à retenir · Approbation rapide"
+  },
+  "industryNotice": {
+    "title": "Industrie / Pharma / CRO / Essais cliniques sponsorisés.",
+    "body": "L'utilisation de la DAND Scale par des entreprises pharmaceutiques, des CRO, dans le cadre d'essais cliniques sponsorisés ou à d'autres fins commerciales, est soumise à une demande spécifique auprès de la Fondazione Dravet ETS. Contact :",
+    "afterContact": "La Fondazione Dravet ETS évaluera la demande et contactera le demandeur pour convenir des modalités d'utilisation et d'une éventuelle collaboration."
+  },
+  "login": {
+    "title": "Connexion à la DAND Scale",
+    "description": "Entrez votre email : nous vous enverrons un lien de connexion, sans besoin de mot de passe.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "nom@exemple.com",
+    "note": "Si vous n'avez pas encore de compte, il sera créé automatiquement et il vous sera demandé de compléter votre inscription.",
+    "submit": "Envoyer le lien de connexion",
+    "sending": "Envoi en cours...",
+    "linkSentTitle": "Vérifiez votre email",
+    "linkSentDescription": "Nous avons envoyé un lien de connexion à {{email}}. Ouvrez-le pour vous connecter — aucun mot de passe nécessaire.",
+    "errorTitle": "Erreur",
+    "errorEmailRequired": "Entrez votre email",
+    "errorSendFailed": "Impossible d'envoyer le lien de connexion. Réessayez plus tard.",
+    "alreadyAuthenticatedTitle": "Déjà connecté",
+    "alreadyAuthenticatedDescription": "Vous êtes déjà connecté au système",
+    "goToProfile": "Aller au Profil",
+    "backHome": "Retour à l'accueil"
+  },
+  "finishSignIn": {
+    "completing": "Finalisation de la connexion...",
+    "confirmEmailTitle": "Confirmez votre email",
+    "confirmEmailDescription": "Vous avez ouvert le lien de connexion sur un autre appareil : confirmez l'adresse email à laquelle il a été envoyé.",
+    "confirm": "Confirmer",
+    "invalidLinkTitle": "Lien non valide",
+    "invalidLinkDescription": "Ce lien de connexion n'est pas valide ou a expiré.",
+    "linkExpiredError": "Ce lien n'est plus valide. Demandez-en un nouveau depuis la page de connexion.",
+    "wrongEmailError": "Email incorrect ou lien non valide.",
+    "backToLogin": "Retour à la page de connexion"
+  },
+  "completeProfile": {
+    "title": "Complétez votre inscription",
+    "descriptionConfirmed": "Accès confirmé pour {{email}}.",
+    "descriptionBody": "Quelques informations pour utiliser la DAND Scale.",
+    "centerLabel": "Centre d'appartenance",
+    "professionalRoleLabel": "Rôle au sein du centre",
+    "professionalRolePlaceholder": "ex. Neuropsychiatre infantile",
+    "phoneLabel": "Numéro de téléphone",
+    "countryLabel": "Pays (facultatif)",
+    "termsLabel": "J'accepte les {{link}} de la DAND Scale",
+    "termsLink": "Conditions d'utilisation",
+    "privacyLabel": "J'ai pris connaissance de la {{link}}",
+    "privacyLink": "Politique de confidentialité",
+    "submit": "Terminer l'inscription",
+    "submitting": "Envoi en cours...",
+    "errorRequiredFields": "Le centre, le rôle et le téléphone sont obligatoires",
+    "errorConsent": "Vous devez accepter les Conditions d'utilisation et prendre connaissance de la Politique de confidentialité",
+    "successTitle": "Inscription terminée !",
+    "successDescription": "Votre profil a été enregistré avec succès.",
+    "errorTitle": "Erreur",
+    "errorGeneric": "Impossible de terminer l'inscription"
+  },
+  "protectedRoute": {
+    "pendingTitle": "Inscription en cours de vérification",
+    "pendingDescription": "Votre inscription est en attente d'approbation par la Fondazione Dravet ETS.",
+    "pendingBadge": "En attente",
+    "pendingNote": "Nous vous enverrons un email dès que l'accès sera activé.",
+    "rejectedTitle": "Accès non disponible",
+    "rejectedDescription": "Votre demande d'accès n'a pas été approuvée.",
+    "rejectedBadge": "Refusée",
+    "rejectedNote": "Pour plus d'informations, contactez la Fondazione Dravet ETS.",
+    "goToProfile": "Aller au Profil"
+  },
+  "usageCounter": {
+    "calculatorUses": "Le calculateur a été utilisé <strong>{{count}}</strong> fois",
+    "scaleDownloads": "Échelle téléchargée <strong>{{count}}</strong> fois"
+  },
+  "profile": {
+    "title": "Votre profil DAND Scale",
+    "statusApproved": "Accès actif",
+    "statusPending": "En attente d'approbation",
+    "statusRejected": "Demande non approuvée",
+    "registeredOn": "Inscrit le {{date}}",
+    "lastAccess": "Dernier accès : {{date}}",
+    "pendingNotice": "Votre inscription est en cours de vérification par la Fondazione Dravet ETS. Nous vous enverrons un email dès que l'accès sera activé.",
+    "downloadsTitle": "Échelle et manuel",
+    "downloadsDescription": "Téléchargez la DAND Scale et son manuel d'utilisation",
+    "loadingFiles": "Chargement des fichiers disponibles...",
+    "noFiles": "Aucun fichier disponible pour le moment.",
+    "downloadError": "Impossible de télécharger le fichier. Réessayez plus tard."
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Page non trouvée",
+    "backHome": "Retour à l'accueil"
+  }
+}
