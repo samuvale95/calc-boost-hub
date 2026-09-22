@@ -46,6 +46,9 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useApi } from "@/hooks/useApi";
 import { API_CONFIG } from "@/config/api";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AdminOverview } from "@/components/admin/AdminOverview";
+import { BarChart3 } from "lucide-react";
 
 // User interface
 interface User {
@@ -638,6 +641,23 @@ const AdminDashboard = () => {
           </div>
         </div>
 
+        <Tabs defaultValue="overview" className="space-y-6">
+          <TabsList>
+            <TabsTrigger value="overview" className="flex items-center gap-2">
+              <BarChart3 className="h-4 w-4" />
+              Panoramica
+            </TabsTrigger>
+            <TabsTrigger value="users" className="flex items-center gap-2">
+              <Users className="h-4 w-4" />
+              Utenti
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="overview">
+            <AdminOverview />
+          </TabsContent>
+
+          <TabsContent value="users" className="space-y-6">
         {/* Search and Filters */}
         <Card className="mb-6">
           <CardHeader>
@@ -917,6 +937,8 @@ const AdminDashboard = () => {
             </DialogFooter>
           </DialogContent>
         </Dialog>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
