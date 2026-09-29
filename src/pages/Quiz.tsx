@@ -619,7 +619,6 @@ const resetQuiz = () => {
                                   placeholder={`Inserisci ${option.text.toLowerCase()}`}
                                   min={option.min || "0"}
                                   max={option.max || undefined}
-                                  step="1"
                                 />
                                 {(option.min || option.max) && (
                                   <div className="text-xs text-muted-foreground mt-1">
