@@ -30,6 +30,9 @@ interface AuthContextType {
   profileComplete: boolean;
   loading: boolean;
   tokenExpired: boolean;
+  authError: string | null;
+  clearAuthError: () => void;
+  resendVerificationEmail: (email?: string) => Promise<void>;
   /** Sends the user a passwordless sign-in link (DAND Scale plan, point 5). */
   sendSignInLink: (email: string) => Promise<void>;
   /** Completes sign-in from a clicked email link. */
@@ -65,6 +68,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [tokenExpired, setTokenExpired] = useState(false);
 
+  const [authError, setAuthError] = useState<string | null>(null);
+
+  const clearAuthError = useCallback(() => {
+    setAuthError(null);
+  }, []);
+
   // Pulls the backend's copy of the profile for the currently signed-in
   // Firebase user. This is also what creates the local `users` row on a
   // person's very first sign-in (see get_current_user on the backend).
@@ -73,12 +82,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const profile = await authService.getCurrentUser();
       setUser(profile);
       setTokenExpired(false);
+      setAuthError(null);
       return profile;
     } catch (error) {
       console.error('Profile sync failed:', error);
+      const msg = error instanceof Error ? error.message : "Errore di sincronizzazione con il server";
       setUser(null);
       setTokenExpired(true);
-      return null;
+      setAuthError(msg);
+      throw error;
     }
   }, []);
 
@@ -86,9 +98,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const unsubscribe = firebaseAuthService.onAuthStateChanged(async (fbUser) => {
       setFirebaseUser(fbUser);
       if (fbUser) {
-        await syncProfile();
+        try {
+          await syncProfile();
+        } catch {
+          // Handled and stored in authError by syncProfile
+        }
       } else {
         setUser(null);
+        setAuthError(null);
       }
       setLoading(false);
     });
@@ -127,10 +144,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const fbUser = await firebaseAuthService.registerWithPassword(email, password);
       setFirebaseUser(fbUser);
-      await syncProfile();
+      try {
+        await syncProfile();
+      } catch {
+        // Expected when email verification is required first
+      }
     } finally {
       setLoading(false);
     }
+  };
+
+  const resendVerificationEmail = async (email?: string): Promise<void> => {
+    await firebaseAuthService.resendVerificationEmail(email || firebaseUser?.email || undefined);
   };
 
   const completeProfile = async (data: ProfileData): Promise<User> => {
@@ -164,6 +189,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setUser(null);
       setFirebaseUser(null);
       setTokenExpired(false);
+      setAuthError(null);
     }
   };
 
@@ -173,10 +199,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     user,
     firebaseUser,
     isAuthenticated: !!user && user.is_active && !tokenExpired,
-    isAdmin: !!user && user.role === 'admin' && !tokenExpired,
+    isAdmin: !!user && user.role?.toLowerCase() === 'admin' && !tokenExpired,
     profileComplete,
     loading,
     tokenExpired,
+    authError,
+    clearAuthError,
+    resendVerificationEmail,
     sendSignInLink,
     completeSignIn,
     signInWithPassword,

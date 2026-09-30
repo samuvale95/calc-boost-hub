@@ -12,7 +12,7 @@ export const useAdmin = () => {
    * @returns {boolean} True se l'utente è admin
    */
   const isUserAdmin = (): boolean => {
-    return isAuthenticated && (user?.role === 'admin' || isAdmin);
+    return isAuthenticated && (user?.role?.toLowerCase() === 'admin' || isAdmin);
   };
 
   /**
@@ -24,15 +24,15 @@ export const useAdmin = () => {
     if (!isAuthenticated) return false;
     
     // Gli admin hanno tutti i permessi
-    if (user?.role === 'admin' || isAdmin) return true;
+    if (user?.role?.toLowerCase() === 'admin' || isAdmin) return true;
     
     // Qui puoi aggiungere logica per altri tipi di permessi
     // basati su subscription, status, etc.
     switch (permission) {
       case 'view_quiz':
-        return user?.status === 'approved';
+        return user?.status?.toLowerCase() === 'approved';
       case 'access_admin':
-        return user?.role === 'admin' || isAdmin;
+        return user?.role?.toLowerCase() === 'admin' || isAdmin;
       default:
         return false;
     }
@@ -47,9 +47,9 @@ export const useAdmin = () => {
     switch (section) {
       case 'admin':
       case 'dashboard':
-        return user?.role === 'admin' || isUserAdmin();
+        return user?.role?.toLowerCase() === 'admin' || isUserAdmin();
       case 'quiz':
-        return isAuthenticated && user?.status === 'approved';
+        return isAuthenticated && user?.status?.toLowerCase() === 'approved';
       default:
         return isAuthenticated;
     }
@@ -61,8 +61,8 @@ export const useAdmin = () => {
    */
   const getAccessLevel = (): string => {
     if (!isAuthenticated) return 'guest';
-    if (user?.role === 'admin' || isAdmin) return 'admin';
-    if (user?.status === 'approved') return 'user';
+    if (user?.role?.toLowerCase() === 'admin' || isAdmin) return 'admin';
+    if (user?.status?.toLowerCase() === 'approved') return 'user';
     return 'inactive';
   };
 

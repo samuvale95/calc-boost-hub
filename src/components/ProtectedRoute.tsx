@@ -43,35 +43,37 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireApprov
     return <Navigate to="/finish-signin" state={{ from: location }} replace />;
   }
 
-  if (requireApproval && user?.status !== 'approved') {
+  const normalizedStatus = user?.status?.toLowerCase();
+
+  if (requireApproval && normalizedStatus !== 'approved') {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center py-8">
         <div className="container mx-auto px-4 max-w-md">
           <Card>
             <CardHeader className="text-center">
               <div className="mx-auto w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                {user?.status === 'rejected' ? (
+                {normalizedStatus === 'rejected' ? (
                   <Lock className="h-8 w-8 text-orange-600" />
                 ) : (
                   <Clock className="h-8 w-8 text-orange-600" />
                 )}
               </div>
               <CardTitle className="text-xl">
-                {user?.status === 'rejected' ? t('protectedRoute.rejectedTitle') : t('protectedRoute.pendingTitle')}
+                {normalizedStatus === 'rejected' ? t('protectedRoute.rejectedTitle') : t('protectedRoute.pendingTitle')}
               </CardTitle>
               <CardDescription>
-                {user?.status === 'rejected' ? t('protectedRoute.rejectedDescription') : t('protectedRoute.pendingDescription')}
+                {normalizedStatus === 'rejected' ? t('protectedRoute.rejectedDescription') : t('protectedRoute.pendingDescription')}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="bg-muted p-4 rounded-lg">
                 <div className="flex items-center gap-2 mb-2">
                   <Badge variant="outline">
-                    {user?.status === 'rejected' ? t('protectedRoute.rejectedBadge') : t('protectedRoute.pendingBadge')}
+                    {normalizedStatus === 'rejected' ? t('protectedRoute.rejectedBadge') : t('protectedRoute.pendingBadge')}
                   </Badge>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  {user?.status === 'rejected' ? t('protectedRoute.rejectedNote') : t('protectedRoute.pendingNote')}
+                  {normalizedStatus === 'rejected' ? t('protectedRoute.rejectedNote') : t('protectedRoute.pendingNote')}
                 </p>
               </div>
               <Button asChild className="w-full">

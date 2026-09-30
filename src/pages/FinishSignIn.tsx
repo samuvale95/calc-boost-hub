@@ -5,12 +5,12 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Loader2, AlertCircle, Mail } from "lucide-react";
+import { Loader2, AlertCircle, Mail, CheckCircle } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { firebaseAuthService } from "@/services/firebaseAuthService";
 import { CompleteProfileForm } from "@/components/CompleteProfileForm";
 
-type Step = "completing" | "needs-email" | "error" | "done";
+type Step = "completing" | "needs-email" | "error" | "done" | "verified-needs-login";
 
 /**
  * Where a Firebase sign-in email link brings the user back to
@@ -21,7 +21,7 @@ type Step = "completing" | "needs-email" | "error" | "done";
  */
 const FinishSignIn = () => {
   const { t } = useTranslation();
-  const { completeSignIn, isAuthenticated, profileComplete, loading } = useAuth();
+  const { completeSignIn, refreshProfile, isAuthenticated, profileComplete, loading } = useAuth();
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>("completing");
   const [emailInput, setEmailInput] = useState("");
@@ -29,31 +29,69 @@ const FinishSignIn = () => {
 
   useEffect(() => {
     const url = window.location.href;
+    const urlParams = new URLSearchParams(window.location.search);
+    const mode = urlParams.get("mode");
+    const oobCode = urlParams.get("oobCode");
+    const emailFromUrl = urlParams.get("email");
+    const email = emailFromUrl || firebaseAuthService.getPendingEmail();
 
-    if (!firebaseAuthService.isSignInLink(url)) {
-      // Not arriving from a link — either already signed in with an
-      // incomplete profile (ProtectedRoute sent us here), or a direct
-      // visit with nothing to do.
-      setStep(isAuthenticated ? "done" : "error");
+    // 1. Passwordless Magic Sign-In Link
+    if (firebaseAuthService.isSignInLink(url)) {
+      if (email) {
+        completeSignIn(email, url)
+          .then(() => setStep("done"))
+          .catch((err) => {
+            console.error("Errore nel completamento dell'accesso:", err);
+            const msg = err instanceof Error ? err.message : t('finishSignIn.linkExpiredError');
+            setError(msg);
+            setStep("error");
+          });
+      } else {
+        // Fallback only if email is absent from both URL and localStorage
+        setStep("needs-email");
+      }
       return;
     }
 
-    const email = firebaseAuthService.getPendingEmail();
-    if (email) {
-      completeSignIn(email, url)
-        .then(() => setStep("done"))
+    // 2. Email verification link from Firebase Auth (mode === 'verifyEmail')
+    if (mode === "verifyEmail" && oobCode) {
+      firebaseAuthService.verifyEmailWithCode(oobCode)
+        .then(async () => {
+          if (firebaseAuthService.currentUser) {
+            await firebaseAuthService.getIdToken(true);
+            try {
+              await refreshProfile();
+              setStep("done");
+              return;
+            } catch (syncErr) {
+              console.warn("Could not sync profile immediately after verification:", syncErr);
+            }
+          }
+          setStep("verified-needs-login");
+        })
         .catch((err) => {
-          console.error("Errore nel completamento dell'accesso:", err);
-          setError(t('finishSignIn.linkExpiredError'));
+          console.error("Errore nella verifica dell'email:", err);
+          const msg = err instanceof Error ? err.message : "Link di verifica non valido o scaduto.";
+          setError(msg);
           setStep("error");
         });
-    } else {
-      // Opened on a different device/browser than the one that requested
-      // the link — Firebase needs the email typed again to verify it matches.
-      setStep("needs-email");
+      return;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+    // 3. User is already authenticated
+    if (isAuthenticated) {
+      setStep("done");
+      return;
+    }
+
+    // 4. Still loading auth state
+    if (loading) {
+      setStep("completing");
+      return;
+    }
+
+    setStep("error");
+  }, [isAuthenticated, loading, completeSignIn, refreshProfile, t]);
 
   const handleManualSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,7 +103,8 @@ const FinishSignIn = () => {
       setStep("done");
     } catch (err) {
       console.error("Errore nel completamento dell'accesso:", err);
-      setError(t('finishSignIn.wrongEmailError'));
+      const msg = err instanceof Error ? err.message : t('finishSignIn.wrongEmailError');
+      setError(msg);
       setStep("error");
     }
   };
@@ -78,6 +117,25 @@ const FinishSignIn = () => {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center py-12 px-4">
         <CompleteProfileForm onComplete={() => navigate("/quiz", { replace: true })} />
+      </div>
+    );
+  }
+
+  if (step === "verified-needs-login") {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center py-12 px-4">
+        <Card className="w-full max-w-md">
+          <CardContent className="pt-6 text-center">
+            <CheckCircle className="h-12 w-12 text-green-600 mx-auto mb-4" />
+            <h2 className="text-xl font-semibold mb-2">Email verificata con successo!</h2>
+            <p className="text-muted-foreground mb-4">
+              Il tuo indirizzo email è stato confermato. Ora puoi accedere con le tue credenziali.
+            </p>
+            <Button asChild className="w-full">
+              <a href="/login">Accedi al tuo account</a>
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -122,8 +180,10 @@ const FinishSignIn = () => {
       <div className="min-h-screen bg-background flex items-center justify-center py-12 px-4">
         <Card className="w-full max-w-md">
           <CardContent className="pt-6 text-center">
-            <AlertCircle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <h2 className="text-xl font-semibold mb-2">{t('finishSignIn.invalidLinkTitle')}</h2>
+            <AlertCircle className="h-12 w-12 text-destructive mx-auto mb-4" />
+            <h2 className="text-xl font-semibold mb-2">
+              {error ? "Errore di accesso" : t('finishSignIn.invalidLinkTitle')}
+            </h2>
             <p className="text-muted-foreground mb-4">
               {error || t('finishSignIn.invalidLinkDescription')}
             </p>

@@ -13,7 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Mail, Lock, Loader2, ArrowLeft, CheckCircle, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, Loader2, ArrowLeft, CheckCircle, Eye, EyeOff, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -62,6 +62,8 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [linkSent, setLinkSent] = useState(false);
+  const [verificationSent, setVerificationSent] = useState(false);
+  const [authErrorMessage, setAuthErrorMessage] = useState<string | null>(null);
 
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -77,11 +79,14 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
 
     try {
       setIsLoading(true);
+      setAuthErrorMessage(null);
       await sendSignInLink(email);
       setLinkSent(true);
     } catch (error) {
       console.error("Errore nell'invio del link:", error);
-      toast({ title: t('login.errorTitle'), description: t('login.errorSendFailed'), variant: "destructive" });
+      const msg = error instanceof Error ? error.message : t('login.errorSendFailed');
+      setAuthErrorMessage(msg);
+      toast({ title: t('login.errorTitle'), description: msg, variant: "destructive" });
     } finally {
       setIsLoading(false);
     }
@@ -97,21 +102,28 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
 
     try {
       setIsLoading(true);
+      setAuthErrorMessage(null);
       if (passwordMode === "signin") {
         await signInWithPassword(email, password);
+        setEmail("");
+        setPassword("");
+        setPasswordMode("signin");
+        navigate("/finish-signin", { replace: true });
       } else {
         await registerWithPassword(email, password);
+        setVerificationSent(true);
       }
-      // Reset local state directly rather than calling handleClose()
-      // (which also fires the parent's onClose — Login.tsx's onClose
-      // redirects to "/" on a delay, which would clobber this navigate).
-      setEmail("");
-      setPassword("");
-      setPasswordMode("signin");
-      navigate("/finish-signin", { replace: true });
     } catch (error) {
       console.error("Errore di autenticazione:", error);
-      toast({ title: t('login.errorTitle'), description: t(mapAuthError(error)), variant: "destructive" });
+      let msg = t('login.errorSendFailed');
+      const code = (error as { code?: string })?.code;
+      if (code) {
+        msg = t(mapAuthError(error));
+      } else if (error instanceof Error && error.message) {
+        msg = error.message;
+      }
+      setAuthErrorMessage(msg);
+      toast({ title: t('login.errorTitle'), description: msg, variant: "destructive" });
     } finally {
       setIsLoading(false);
     }
@@ -121,9 +133,42 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
     setEmail("");
     setPassword("");
     setLinkSent(false);
+    setVerificationSent(false);
+    setAuthErrorMessage(null);
     setPasswordMode("signin");
     onClose();
   };
+
+  if (verificationSent) {
+    return (
+      <Dialog open={isOpen} onOpenChange={handleClose}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-green-600">
+              <CheckCircle className="h-6 w-6" />
+              Account creato con successo!
+            </DialogTitle>
+            <DialogDescription className="pt-2 text-sm text-foreground space-y-2">
+              <p>
+                Abbiamo inviato un'email di conferma a <strong>{email}</strong>.
+              </p>
+              <p>
+                <strong>Basta cliccare sul link ricevuto via email</strong> per confermare il tuo account ed effettuare l'accesso.
+              </p>
+            </DialogDescription>
+          </DialogHeader>
+          <div className="bg-muted p-3 rounded-lg text-xs text-muted-foreground">
+            Non trovi l'email? Controlla anche nella cartella <strong>Spam</strong> o Posta indesiderata.
+          </div>
+          <DialogFooter>
+            <Button onClick={handleClose} className="w-full">
+              {t('common.close')}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
   if (linkSent) {
     return (
@@ -160,6 +205,39 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
             {t('login.description')}
           </DialogDescription>
         </DialogHeader>
+
+        {authErrorMessage && (
+          <div className="bg-destructive/15 text-destructive text-sm p-3 rounded-md flex items-start gap-2">
+            <AlertCircle className="h-4 w-4 mt-0.5 shrink-0" />
+            <div className="flex-1 space-y-1">
+              <p>{authErrorMessage}</p>
+              {authErrorMessage.toLowerCase().includes("verificata") && (
+                <button
+                  type="button"
+                  onClick={async () => {
+                    if (!email) {
+                      toast({ title: t('login.errorTitle'), description: t('login.errorEmailRequired'), variant: "destructive" });
+                      return;
+                    }
+                    try {
+                      setIsLoading(true);
+                      await sendSignInLink(email);
+                      setLinkSent(true);
+                      setAuthErrorMessage(null);
+                    } catch {
+                      toast({ title: t('login.errorTitle'), description: "Impossibile inviare il link.", variant: "destructive" });
+                    } finally {
+                      setIsLoading(false);
+                    }
+                  }}
+                  className="text-xs underline font-semibold block hover:opacity-80 cursor-pointer"
+                >
+                  Clicca qui per inviare un link di conferma alla tua email
+                </button>
+              )}
+            </div>
+          </div>
+        )}
 
         <Tabs defaultValue="link" className="py-2">
           <TabsList className="grid w-full grid-cols-2">

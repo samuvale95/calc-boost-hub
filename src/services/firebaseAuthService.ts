@@ -15,14 +15,16 @@ import {
   signInWithEmailAndPassword,
   signInWithEmailLink,
   signOut as firebaseSignOut,
+  sendEmailVerification,
+  applyActionCode,
   type User as FirebaseUser,
 } from "firebase/auth";
 import { firebaseAuth, isFirebaseConfigured, SIGN_IN_REDIRECT_URL } from "@/config/firebase";
 
 // The email is needed again when the link is opened (Firebase can't read
-// it back from the link alone, for security). If the link is opened on
-// the same device/browser this is transparent; if not, we fall back to
-// asking for it again on the /finish-signin page.
+// it back from the link alone, for security). We embed it into the query
+// param (?email=...) so clicking the link from any device or client works
+// seamlessly without re-typing. We also keep localStorage as a fallback.
 const PENDING_EMAIL_KEY = "dand_pending_signin_email";
 
 function requireAuth() {
@@ -35,11 +37,12 @@ function requireAuth() {
 }
 
 export const firebaseAuthService = {
-  /** Sends a sign-in link to the given email. */
+  /** Sends a sign-in link to the given email with the email embedded in the redirect URL. */
   async sendSignInLink(email: string): Promise<void> {
     const auth = requireAuth();
+    const url = `${SIGN_IN_REDIRECT_URL}?email=${encodeURIComponent(email)}`;
     await sendSignInLinkToEmail(auth, email, {
-      url: SIGN_IN_REDIRECT_URL,
+      url,
       handleCodeInApp: true,
     });
     window.localStorage.setItem(PENDING_EMAIL_KEY, email);
@@ -63,16 +66,30 @@ export const firebaseAuthService = {
     return credential.user;
   },
 
+  /** Verifies an email using an out-of-band verification action code. */
+  async verifyEmailWithCode(oobCode: string): Promise<void> {
+    const auth = requireAuth();
+    await applyActionCode(auth, oobCode);
+  },
+
+  /** Sends or resends an email verification link to the current user. */
+  async resendVerificationEmail(email?: string): Promise<void> {
+    const auth = requireAuth();
+    const user = auth.currentUser;
+    const targetEmail = email || user?.email;
+    if (user && targetEmail) {
+      const url = `${SIGN_IN_REDIRECT_URL}?email=${encodeURIComponent(targetEmail)}`;
+      await sendEmailVerification(user, {
+        url,
+        handleCodeInApp: true,
+      });
+    } else if (targetEmail) {
+      await this.sendSignInLink(targetEmail);
+    }
+  },
+
   /**
-   * Password fallback — sign-in. Deliberately separate from
-   * registerWithPassword rather than "try sign-in, fall back to
-   * register on user-not-found": recent Firebase projects have email
-   * enumeration protection on by default, which collapses
-   * auth/user-not-found and auth/wrong-password into the same
-   * auth/invalid-credential error, so that distinction can no longer be
-   * made reliably from the error code alone. An explicit
-   * sign-in-or-register toggle in the UI (see LoginSection.tsx) is the
-   * pattern Firebase itself recommends here.
+   * Password fallback — sign-in.
    */
   async signInWithPassword(email: string, password: string): Promise<FirebaseUser> {
     const auth = requireAuth();
@@ -84,6 +101,15 @@ export const firebaseAuthService = {
   async registerWithPassword(email: string, password: string): Promise<FirebaseUser> {
     const auth = requireAuth();
     const credential = await createUserWithEmailAndPassword(auth, email, password);
+    try {
+      const url = `${SIGN_IN_REDIRECT_URL}?email=${encodeURIComponent(email)}`;
+      await sendEmailVerification(credential.user, {
+        url,
+        handleCodeInApp: true,
+      });
+    } catch (e) {
+      console.warn("Could not automatically send verification email:", e);
+    }
     return credential.user;
   },
 

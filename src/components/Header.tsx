@@ -54,7 +54,7 @@ export const Header = () => {
   const getStatusBadge = () => {
     if (!user) return null;
 
-    if (user.status === 'pending') {
+    if (user.status?.toLowerCase() === 'pending') {
       return <Badge variant="outline" className="text-xs">{t('header.statusPending')}</Badge>;
     }
     return null;
@@ -70,7 +70,7 @@ export const Header = () => {
     // Admin can always access
     if (isAdmin) return true;
 
-    return user.status === 'approved';
+    return user.status?.toLowerCase() === 'approved';
   };
 
   return (

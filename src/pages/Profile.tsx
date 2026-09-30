@@ -33,7 +33,8 @@ const Profile = () => {
   const [loadingFiles, setLoadingFiles] = useState(false);
   const [downloadingFile, setDownloadingFile] = useState<string | null>(null);
 
-  const hasAccess = user?.status === "approved";
+  const normalizedStatus = user?.status?.toLowerCase();
+  const hasAccess = normalizedStatus === "approved";
   const dateLocale = dateLocales[i18n.language] ?? it;
 
   const statusLabel: Record<string, { label: string; variant: "default" | "outline" | "destructive" }> = {
@@ -73,7 +74,7 @@ const Profile = () => {
     return null; // ProtectedRoute handles the redirect
   }
 
-  const status = statusLabel[user.status] ?? statusLabel.pending;
+  const status = (normalizedStatus && statusLabel[normalizedStatus]) ?? statusLabel.pending;
 
   return (
     <div className="min-h-screen bg-background py-12">
