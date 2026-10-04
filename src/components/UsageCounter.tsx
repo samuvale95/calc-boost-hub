@@ -24,27 +24,29 @@ export const UsageCounter = () => {
   }
 
   return (
-    <div className="flex flex-wrap items-center justify-center gap-6 py-6 text-sm text-muted-foreground">
+    <section className="bg-[#fff4fc] pt-4 pb-2">
+      <div className="container mx-auto px-4 flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-base md:text-lg text-foreground">
       {stats.calculator_uses > 0 && (
-        <div className="flex items-center gap-2">
-          <Calculator className="h-4 w-4" />
+        <div className="flex items-center gap-3">
+          <Calculator className="h-6 w-6 text-[hsl(316,91%,40%)]" />
           <Trans
             i18nKey="usageCounter.calculatorUses"
             values={{ count: stats.calculator_uses }}
-            components={{ strong: <strong className="text-foreground" /> }}
+            components={{ strong: <strong className="mx-1 text-3xl md:text-4xl font-extrabold text-[hsl(316,91%,40%)]" /> }}
           />
         </div>
       )}
       {stats.scale_downloads > 0 && (
-        <div className="flex items-center gap-2">
-          <Download className="h-4 w-4" />
+        <div className="flex items-center gap-3">
+          <Download className="h-6 w-6 text-[hsl(95,87%,34%)]" />
           <Trans
             i18nKey="usageCounter.scaleDownloads"
             values={{ count: stats.scale_downloads }}
-            components={{ strong: <strong className="text-foreground" /> }}
+            components={{ strong: <strong className="mx-1 text-3xl md:text-4xl font-extrabold text-[hsl(95,87%,34%)]" /> }}
           />
         </div>
       )}
-    </div>
+      </div>
+    </section>
   );
 };
