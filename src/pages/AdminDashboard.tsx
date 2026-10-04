@@ -55,9 +55,7 @@ interface User {
   id: string;
   name: string;
   email: string;
-  subscription: string;
   isActive: boolean;
-  subscriptionExpiry: string | null;
   registrationDate: string;
   lastLogin: string;
 }
@@ -67,12 +65,10 @@ interface ApiUser {
   id: number;
   name: string;
   email: string;
-  subscription: string;
   role: string;
   registration_date: string;
   last_access: string | null;
   is_active: boolean;
-  subscription_expiry_date: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -91,13 +87,6 @@ const AdminDashboard = () => {
   const [newUser, setNewUser] = useState({
     name: "",
     email: "",
-  });
-  const [editExpiryModal, setEditExpiryModal] = useState({
-    isOpen: false,
-    userId: "",
-    userName: "",
-    currentExpiry: "",
-    isUpdating: false
   });
   const [sortConfig, setSortConfig] = useState<{
     column: "registrationDate";
@@ -124,9 +113,7 @@ const AdminDashboard = () => {
           id: String(user.id),
           name: user.name,
           email: user.email,
-          subscription: user.subscription,
           isActive: user.is_active,
-          subscriptionExpiry: user.subscription_expiry_date,
           registrationDate: user.registration_date.split('T')[0], // Extract date part
           lastLogin: user.last_access ? user.last_access.split('T')[0] : new Date().toISOString().split('T')[0]
         }));
@@ -319,93 +306,12 @@ const AdminDashboard = () => {
 
 
 
-  const getStatusBadge = (user: User) => {
-    // For PDF subscription, don't show any status badge
-    if (user.subscription === "pdf") {
-      return null;
-    }
-    
-    const now = new Date();
-    const expiryDate = user.subscriptionExpiry ? new Date(user.subscriptionExpiry) : null;
-    const isSubscriptionActive = expiryDate ? expiryDate > now : false;
-    
-    if (!user.isActive || !isSubscriptionActive) {
-      return <Badge variant="destructive">Scaduto</Badge>;
-    } else {
-      return <Badge className="bg-green-100 text-green-800">Attivo</Badge>;
-    }
-  };
-
-  const getSubscriptionBadge = (subscription: string) => {
-    switch (subscription) {
-      case "annuale":
-        return <Badge className="bg-primary text-primary-foreground">Annuale</Badge>;
-      case "pdf":
-        return <Badge variant="outline">PDF</Badge>;
-      default:
-        return <Badge variant="secondary">Altro</Badge>;
-    }
-  };
-
-  const handleEditExpiryDate = (userId: string, userName: string, currentExpiry: string | null) => {
-    setEditExpiryModal({
-      isOpen: true,
-      userId,
-      userName,
-      currentExpiry: currentExpiry || ""
-    });
-  };
-
-  const handleUpdateExpiryDate = async () => {
-    try {
-      const newExpiryDate = editExpiryModal.currentExpiry;
-      
-      if (!newExpiryDate) {
-        toast({
-          title: "Errore",
-          description: "Inserisci una data di scadenza valida",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      setEditExpiryModal(prev => ({ ...prev, isUpdating: true }));
-
-      // Format the date to ISO string with timezone
-      const formattedDate = new Date(newExpiryDate + 'T23:59:59Z').toISOString();
-      
-      // Call API to update user
-      const endpoint = API_CONFIG.ENDPOINTS.UPDATE_USER.replace('{id}', editExpiryModal.userId);
-      const response = await api.apiService.request(endpoint, {
-        method: 'PUT',
-        body: JSON.stringify({
-          subscription_expiry_date: formattedDate
-        }),
-      });
-      
-      // Update local state
-      setUsers(prev => prev.map(user => 
-        user.id === editExpiryModal.userId 
-          ? { ...user, subscriptionExpiry: newExpiryDate }
-          : user
-      ));
-      
-      toast({
-        title: "Data di Scadenza Aggiornata",
-        description: `La data di scadenza per ${editExpiryModal.userName} è stata aggiornata`,
-      });
-      
-      setEditExpiryModal({ isOpen: false, userId: "", userName: "", currentExpiry: "", isUpdating: false });
-    } catch (error) {
-      console.error('Error updating expiry date:', error);
-      toast({
-        title: "Errore",
-        description: "Impossibile aggiornare la data di scadenza",
-        variant: "destructive",
-      });
-      setEditExpiryModal(prev => ({ ...prev, isUpdating: false }));
-    }
-  };
+  const getStatusBadge = (user: User) =>
+    user.isActive ? (
+      <Badge className="bg-green-100 text-green-800">Attivo</Badge>
+    ) : (
+      <Badge variant="destructive">Disattivato</Badge>
+    );
 
   const handleAddUser = async () => {
     if (!newUser.name || !newUser.email) {
@@ -459,8 +365,7 @@ const AdminDashboard = () => {
         id: String(user.id),
         name: user.name,
         email: user.email,
-        subscription: user.subscription,
-        status: user.is_active ? 'attivo' : 'scaduto',
+        isActive: user.is_active,
         registrationDate: user.registration_date.split('T')[0], // Extract date part
         lastLogin: user.last_access ? user.last_access.split('T')[0] : new Date().toISOString().split('T')[0]
       }));
@@ -510,9 +415,7 @@ const AdminDashboard = () => {
         id: String(newUserData.id),
         name: newUserData.name,
         email: newUserData.email,
-        subscription: newUserData.subscription,
         isActive: newUserData.is_active,
-        subscriptionExpiry: newUserData.subscription_expiry_date,
         registrationDate: newUserData.registration_date ? newUserData.registration_date.split('T')[0] : new Date().toISOString().split('T')[0],
         lastLogin: newUserData.last_access ? newUserData.last_access.split('T')[0] : new Date().toISOString().split('T')[0]
       };
@@ -661,9 +564,7 @@ const AdminDashboard = () => {
                   <TableRow>
                     <TableHead>Nome</TableHead>
                     <TableHead>Email</TableHead>
-                    <TableHead>Abbonamento</TableHead>
                     <TableHead>Stato</TableHead>
-                    <TableHead>Scadenza</TableHead>
                     <TableHead>
                       <button
                         type="button"
@@ -690,7 +591,7 @@ const AdminDashboard = () => {
                 <TableBody>
                   {filteredUsers.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
+                      <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
                         {error ? 'Errore nel caricamento degli utenti' : 
                          searchTerm ? 'Nessun utente trovato per la ricerca' : 
                          'Nessun utente disponibile'}
@@ -704,32 +605,7 @@ const AdminDashboard = () => {
                           {user.email}
                         </TableCell>
                         <TableCell>
-                          {getSubscriptionBadge(user.subscription)}
-                        </TableCell>
-                        <TableCell>
                           {getStatusBadge(user)}
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-2">
-                            {!(user.subscription === "pdf" && !user.subscriptionExpiry) && (
-                              <span className="text-sm">
-                                {user.subscriptionExpiry 
-                                  ? new Date(user.subscriptionExpiry).toLocaleDateString('it-IT')
-                                  : 'N/A'
-                                }
-                              </span>
-                            )}
-                            {user.subscription !== "pdf" && (
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                className="h-6 w-6 p-0"
-                                onClick={() => handleEditExpiryDate(user.id, user.name, user.subscriptionExpiry)}
-                              >
-                                <Edit className="h-3 w-3" />
-                              </Button>
-                            )}
-                          </div>
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center gap-1 text-sm text-muted-foreground">
@@ -840,53 +716,6 @@ const AdminDashboard = () => {
           </DialogContent>
         </Dialog>
 
-        {/* Edit Expiry Date Modal */}
-        <Dialog open={editExpiryModal.isOpen} onOpenChange={(open) => setEditExpiryModal(prev => ({ ...prev, isOpen: open }))}>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>Modifica Data di Scadenza</DialogTitle>
-              <DialogDescription>
-                Aggiorna la data di scadenza per {editExpiryModal.userName}
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="expiry-date" className="text-right">
-                  Data Scadenza
-                </Label>
-                <Input
-                  id="expiry-date"
-                  type="date"
-                  value={editExpiryModal.currentExpiry}
-                  onChange={(e) => setEditExpiryModal(prev => ({ ...prev, currentExpiry: e.target.value }))}
-                  className="col-span-3"
-                />
-              </div>
-            </div>
-            <DialogFooter>
-              <Button 
-                variant="outline" 
-                onClick={() => setEditExpiryModal({ isOpen: false, userId: "", userName: "", currentExpiry: "", isUpdating: false })}
-                disabled={editExpiryModal.isUpdating}
-              >
-                Annulla
-              </Button>
-              <Button 
-                onClick={handleUpdateExpiryDate}
-                disabled={editExpiryModal.isUpdating}
-              >
-                {editExpiryModal.isUpdating ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                    Aggiornamento...
-                  </>
-                ) : (
-                  "Salva"
-                )}
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
           </TabsContent>
         </Tabs>
       </div>

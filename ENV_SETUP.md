@@ -7,14 +7,6 @@ Per far funzionare correttamente l'applicazione, devi creare un file `.env.local
 ### **File: `.env.local`**
 
 ```bash
-# PayPal Configuration
-VITE_PAYPAL_CLIENT_ID=clientId
-VITE_PAYPAL_ENVIRONMENT=sandbox
-
-# Payment Amounts Configuration
-VITE_PAYMENT_AMOUNT_PDF=10.00
-VITE_PAYMENT_AMOUNT_SUBSCRIPTION=29.99
-
 # API Configuration
 VITE_API_BASE_URL=http://localhost:8000
 ```
@@ -65,10 +57,7 @@ In modalità sviluppo, apri la console del browser (F12) per vedere i valori del
 
 ## 📝 Note
 
-- **PayPal Client ID**: Configurato per l'ambiente di sandbox (test)
-- **Payment Amounts**: Importi configurabili per PDF (€10.00) e Abbonamento (€29.99)
 - **API Base URL**: Configurato per localhost:8000 (modifica se necessario)
-- **Environment**: PayPal in modalità sandbox per i test
 
 ## 🔄 Aggiornamento
 
@@ -87,22 +76,8 @@ Controlla che:
 - Tutte le variabili richieste siano presenti
 - Non ci siano spazi extra o caratteri speciali
 
-### **PayPal non funziona**
-
-Verifica che:
-- `VITE_PAYPAL_CLIENT_ID` sia corretto
-- `VITE_PAYPAL_ENVIRONMENT` sia impostato su `sandbox` per i test
-- Il Client ID sia valido per l'ambiente sandbox
-
-### **Importi pagamenti non corretti**
-
-Verifica che:
-- `VITE_PAYMENT_AMOUNT_PDF` sia un numero valido (es. 10.00)
-- `VITE_PAYMENT_AMOUNT_SUBSCRIPTION` sia un numero valido (es. 29.99)
-- I valori siano in formato decimale con punto (non virgola)
-
 ---
 
 **Configurazione completata!** 🎉
 
-L'applicazione ora utilizzerà il Client ID PayPal configurato per l'ambiente di sandbox (test).
+

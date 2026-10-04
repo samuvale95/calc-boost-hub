@@ -365,7 +365,6 @@ const resetQuiz = () => {
                       </span>
                     )}
                   </p>
-                  <p className="text-xs">Abbonamento: <span className="font-medium text-primary">{user.subscription}</span></p>
                   <br />
                   <p className="text-sm text-red-800 mt-1 font-medium">ATTENZIONE: se ricarichi o abbandoni la pagina, i dati non salvati andranno persi</p>
                 </div>
