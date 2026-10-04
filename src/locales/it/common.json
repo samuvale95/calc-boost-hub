@@ -127,7 +127,7 @@
     "errorGeneric": "Impossibile completare la registrazione"
   },
   "usageCounter": {
-    "calculatorUses": "Il calcolatore è stato usato <strong>{{count}}</strong> volte",
+    "calculatorUses": "Calcolatore usato <strong>{{count}}</strong> volte",
     "scaleDownloads": "Scala scaricata <strong>{{count}}</strong> volte"
   },
   "profile": {
