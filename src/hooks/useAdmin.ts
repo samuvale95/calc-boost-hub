@@ -27,10 +27,10 @@ export const useAdmin = () => {
     if (user?.role?.toLowerCase() === 'admin' || isAdmin) return true;
     
     // Qui puoi aggiungere logica per altri tipi di permessi
-    // basati su subscription, status, etc.
+    // basati su subscription, is_active, etc.
     switch (permission) {
       case 'view_quiz':
-        return user?.status?.toLowerCase() === 'approved';
+        return !!user?.is_active;
       case 'access_admin':
         return user?.role?.toLowerCase() === 'admin' || isAdmin;
       default:
@@ -49,7 +49,7 @@ export const useAdmin = () => {
       case 'dashboard':
         return user?.role?.toLowerCase() === 'admin' || isUserAdmin();
       case 'quiz':
-        return isAuthenticated && user?.status?.toLowerCase() === 'approved';
+        return isAuthenticated && !!user?.is_active;
       default:
         return isAuthenticated;
     }
@@ -62,7 +62,7 @@ export const useAdmin = () => {
   const getAccessLevel = (): string => {
     if (!isAuthenticated) return 'guest';
     if (user?.role?.toLowerCase() === 'admin' || isAdmin) return 'admin';
-    if (user?.status?.toLowerCase() === 'approved') return 'user';
+    if (user?.is_active) return 'user';
     return 'inactive';
   };
 

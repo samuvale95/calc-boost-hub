@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartConfig } from "@/components/ui/chart";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Legend, LineChart, Line } from "recharts";
-import { Loader2, Users, Calculator, Download, FileSpreadsheet, FileText, Clock, AlertCircle } from "lucide-react";
+import { Loader2, Users, Calculator, Download, FileSpreadsheet, FileText, UserX, AlertCircle } from "lucide-react";
 import { adminStatsService, AdminStats } from "@/services/adminStatsService";
 import { useToast } from "@/hooks/use-toast";
 
@@ -185,14 +185,13 @@ export const AdminOverview = () => {
 
       {/* KPI cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <KpiCard icon={Users} label="Utenti registrati" value={stats.users_total} hint={`${stats.users_approved} approvati · ${stats.users_pending} in attesa`} />
+        <KpiCard icon={Users} label="Utenti registrati" value={stats.users_total} hint={`${stats.users_active} attivi · ${stats.users_deactivated} disattivati`} />
         <KpiCard icon={Calculator} label="Utilizzi calcolatore" value={stats.calculator_completions} hint={`${stats.calculator_starts} avviati`} />
         <KpiCard icon={Download} label="Download scala" value={stats.scale_downloads} />
         <KpiCard icon={Download} label="Download manuale" value={stats.manual_downloads} />
         <KpiCard icon={FileText} label="Download PDF risultati" value={stats.result_pdf_downloads} />
         <KpiCard icon={FileSpreadsheet} label="Download Excel risultati" value={stats.result_excel_downloads} />
-        <KpiCard icon={Clock} label="In attesa di approvazione" value={stats.users_pending} />
-        <KpiCard icon={Users} label="Registrazioni rifiutate" value={stats.users_rejected} />
+        <KpiCard icon={UserX} label="Utenti disattivati" value={stats.users_deactivated} />
       </div>
 
       {/* Monthly trend */}

@@ -14,9 +14,8 @@ export interface TimeseriesPoint {
 
 export interface AdminStats {
   users_total: number;
-  users_pending: number;
-  users_approved: number;
-  users_rejected: number;
+  users_active: number;
+  users_deactivated: number;
   calculator_starts: number;
   calculator_completions: number;
   scale_downloads: number;

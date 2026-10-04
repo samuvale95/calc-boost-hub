@@ -15,7 +15,6 @@ import {
   Download,
   Loader2,
   CheckCircle,
-  AlertCircle,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
@@ -33,15 +32,8 @@ const Profile = () => {
   const [loadingFiles, setLoadingFiles] = useState(false);
   const [downloadingFile, setDownloadingFile] = useState<string | null>(null);
 
-  const normalizedStatus = user?.status?.toLowerCase();
-  const hasAccess = normalizedStatus === "approved";
+  const hasAccess = !!user?.is_active;
   const dateLocale = dateLocales[i18n.language] ?? it;
-
-  const statusLabel: Record<string, { label: string; variant: "default" | "outline" | "destructive" }> = {
-    approved: { label: t('profile.statusApproved'), variant: "default" },
-    pending: { label: t('profile.statusPending'), variant: "outline" },
-    rejected: { label: t('profile.statusRejected'), variant: "destructive" },
-  };
 
   useEffect(() => {
     if (!hasAccess) return;
@@ -74,8 +66,6 @@ const Profile = () => {
     return null; // ProtectedRoute handles the redirect
   }
 
-  const status = (normalizedStatus && statusLabel[normalizedStatus]) ?? statusLabel.pending;
-
   return (
     <div className="min-h-screen bg-background py-12">
       <div className="container mx-auto px-4 max-w-3xl space-y-6">
@@ -89,7 +79,7 @@ const Profile = () => {
                 </CardTitle>
                 <CardDescription>{t('profile.title')}</CardDescription>
               </div>
-              <Badge variant={status.variant}>{status.label}</Badge>
+              <Badge variant="default">{t('profile.statusActive')}</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -133,15 +123,6 @@ const Profile = () => {
                 </div>
               )}
             </div>
-
-            {user.status === "pending" && (
-              <div className="bg-muted p-4 rounded-lg flex items-start gap-3">
-                <AlertCircle className="h-5 w-5 text-orange-500 flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-muted-foreground">
-                  {t('profile.pendingNotice')}
-                </p>
-              </div>
-            )}
           </CardContent>
         </Card>
 

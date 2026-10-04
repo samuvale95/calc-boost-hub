@@ -5,7 +5,6 @@
   },
   "header": {
     "logoAlt": "icon",
-    "statusPending": "Under review",
     "test": "Test",
     "admin": "Admin",
     "myProfile": "My Profile",
@@ -52,7 +51,7 @@
       "individual": "Individual registration, no shared password"
     },
     "cta": "Register / Log in",
-    "footnote": "Free access · No password to remember · Fast approval"
+    "footnote": "Free access · No password to remember"
   },
   "industryNotice": {
     "title": "Industry / Pharma / CRO / Sponsored Clinical Trials.",
@@ -121,34 +120,20 @@
     "errorTitle": "Error",
     "errorGeneric": "Could not complete registration"
   },
-  "protectedRoute": {
-    "pendingTitle": "Registration under review",
-    "pendingDescription": "Your registration is awaiting approval from Fondazione Dravet ETS.",
-    "pendingBadge": "Pending",
-    "pendingNote": "We'll email you as soon as access is activated.",
-    "rejectedTitle": "Access not available",
-    "rejectedDescription": "Your access request was not approved.",
-    "rejectedBadge": "Rejected",
-    "rejectedNote": "For more information contact Fondazione Dravet ETS.",
-    "goToProfile": "Go to Profile"
-  },
   "usageCounter": {
     "calculatorUses": "The calculator has been used <strong>{{count}}</strong> times",
     "scaleDownloads": "Scale downloaded <strong>{{count}}</strong> times"
   },
   "profile": {
     "title": "Your DAND Scale profile",
-    "statusApproved": "Access active",
-    "statusPending": "Awaiting approval",
-    "statusRejected": "Request not approved",
     "registeredOn": "Registered on {{date}}",
     "lastAccess": "Last access: {{date}}",
-    "pendingNotice": "Your registration is being reviewed by Fondazione Dravet ETS. We'll email you as soon as access is activated.",
     "downloadsTitle": "Scale and manual",
     "downloadsDescription": "Download the DAND Scale and its user manual",
     "loadingFiles": "Loading available files...",
     "noFiles": "No files available at the moment.",
-    "downloadError": "Could not download the file. Please try again later."
+    "downloadError": "Could not download the file. Please try again later.",
+    "statusActive": "Access active"
   },
   "notFound": {
     "title": "404",

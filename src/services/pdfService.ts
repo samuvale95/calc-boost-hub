@@ -13,7 +13,6 @@ export interface PdfFileInfo {
 export interface PdfInfoResponse {
   available_pdfs: PdfFileInfo[];
   total_files: number;
-  user_status: string;
   has_access: boolean;
 }
 

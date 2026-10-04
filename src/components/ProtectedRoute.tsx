@@ -2,20 +2,16 @@ import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/contexts/AuthContext';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Loader2, Lock, ClipboardEdit, Clock } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Loader2 } from 'lucide-react';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
-  /** Requires an approved (registered) account — DAND Scale plan, point 5: calculator/downloads are registration-gated, not subscription-gated. */
-  requireApproval?: boolean;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireApproval = false }) => {
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { t } = useTranslation();
-  const { isAuthenticated, loading, user, isAdmin, profileComplete } = useAuth();
+  const { isAuthenticated, loading, isAdmin, profileComplete } = useAuth();
   const location = useLocation();
 
   if (loading) {
@@ -41,52 +37,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireApprov
 
   if (!profileComplete) {
     return <Navigate to="/finish-signin" state={{ from: location }} replace />;
-  }
-
-  const normalizedStatus = user?.status?.toLowerCase();
-
-  if (requireApproval && normalizedStatus !== 'approved') {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center py-8">
-        <div className="container mx-auto px-4 max-w-md">
-          <Card>
-            <CardHeader className="text-center">
-              <div className="mx-auto w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                {normalizedStatus === 'rejected' ? (
-                  <Lock className="h-8 w-8 text-orange-600" />
-                ) : (
-                  <Clock className="h-8 w-8 text-orange-600" />
-                )}
-              </div>
-              <CardTitle className="text-xl">
-                {normalizedStatus === 'rejected' ? t('protectedRoute.rejectedTitle') : t('protectedRoute.pendingTitle')}
-              </CardTitle>
-              <CardDescription>
-                {normalizedStatus === 'rejected' ? t('protectedRoute.rejectedDescription') : t('protectedRoute.pendingDescription')}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="bg-muted p-4 rounded-lg">
-                <div className="flex items-center gap-2 mb-2">
-                  <Badge variant="outline">
-                    {normalizedStatus === 'rejected' ? t('protectedRoute.rejectedBadge') : t('protectedRoute.pendingBadge')}
-                  </Badge>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  {normalizedStatus === 'rejected' ? t('protectedRoute.rejectedNote') : t('protectedRoute.pendingNote')}
-                </p>
-              </div>
-              <Button asChild className="w-full">
-                <a href="/profile">
-                  <ClipboardEdit className="h-4 w-4 mr-2" />
-                  {t('protectedRoute.goToProfile')}
-                </a>
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    );
   }
 
   return <>{children}</>;

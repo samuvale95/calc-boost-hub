@@ -5,7 +5,6 @@
   },
   "header": {
     "logoAlt": "icona",
-    "statusPending": "In verifica",
     "test": "Test",
     "admin": "Admin",
     "myProfile": "Il Mio Profilo",
@@ -52,7 +51,7 @@
       "individual": "Registrazione individuale, senza password condivisa"
     },
     "cta": "Registrati / Accedi",
-    "footnote": "Accesso gratuito · Nessuna password da ricordare · Approvazione rapida"
+    "footnote": "Accesso gratuito · Nessuna password da ricordare"
   },
   "industryNotice": {
     "title": "Industria / Pharma / CRO / Clinical Trial sponsorizzati.",
@@ -121,34 +120,20 @@
     "errorTitle": "Errore",
     "errorGeneric": "Impossibile completare la registrazione"
   },
-  "protectedRoute": {
-    "pendingTitle": "Registrazione in verifica",
-    "pendingDescription": "La tua registrazione è in attesa di approvazione da parte di Fondazione Dravet ETS.",
-    "pendingBadge": "In attesa",
-    "pendingNote": "Ti invieremo un'email non appena l'accesso sarà attivato.",
-    "rejectedTitle": "Accesso non disponibile",
-    "rejectedDescription": "La tua richiesta di accesso non è stata approvata.",
-    "rejectedBadge": "Rifiutata",
-    "rejectedNote": "Per maggiori informazioni contatta Fondazione Dravet ETS.",
-    "goToProfile": "Vai al Profilo"
-  },
   "usageCounter": {
     "calculatorUses": "Il calcolatore è stato usato <strong>{{count}}</strong> volte",
     "scaleDownloads": "Scala scaricata <strong>{{count}}</strong> volte"
   },
   "profile": {
     "title": "Il tuo profilo DAND Scale",
-    "statusApproved": "Accesso attivo",
-    "statusPending": "In attesa di approvazione",
-    "statusRejected": "Richiesta non approvata",
     "registeredOn": "Registrato il {{date}}",
     "lastAccess": "Ultimo accesso: {{date}}",
-    "pendingNotice": "La tua registrazione è in fase di verifica da parte di Fondazione Dravet ETS. Ti invieremo un'email non appena l'accesso sarà attivato.",
     "downloadsTitle": "Scala e manuale",
     "downloadsDescription": "Scarica la DAND Scale e il manuale d'uso",
     "loadingFiles": "Caricamento file disponibili...",
     "noFiles": "Nessun file disponibile al momento.",
-    "downloadError": "Impossibile scaricare il file. Riprova più tardi."
+    "downloadError": "Impossibile scaricare il file. Riprova più tardi.",
+    "statusActive": "Accesso attivo"
   },
   "notFound": {
     "title": "404",

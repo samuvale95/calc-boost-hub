@@ -51,27 +51,12 @@ export const Header = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const getStatusBadge = () => {
-    if (!user) return null;
-
-    if (user.status?.toLowerCase() === 'pending') {
-      return <Badge variant="outline" className="text-xs">{t('header.statusPending')}</Badge>;
-    }
-    return null;
-  };
-
   const isActivePage = (path: string) => {
     return location.pathname === path;
   };
 
-  const canAccessQuiz = () => {
-    if (!user) return false;
-
-    // Admin can always access
-    if (isAdmin) return true;
-
-    return user.status?.toLowerCase() === 'approved';
-  };
+  // Registered users (and admins) can use the calculator.
+  const canAccessQuiz = () => !!user;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -87,7 +72,6 @@ export const Header = () => {
               <img src={Icon} alt={t('header.logoAlt')} className="h-8 w-8" />
               DAND
             </Button>
-            {isAuthenticated && getStatusBadge()}
           </div>
 
           {/* Desktop Navigation */}

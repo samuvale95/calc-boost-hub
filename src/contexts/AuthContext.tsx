@@ -8,7 +8,6 @@ export interface User {
   email: string;
   name: string;
   role: string;
-  status: 'pending' | 'approved' | 'rejected';
   center: string | null;
   professional_role: string | null;
   phone: string | null;

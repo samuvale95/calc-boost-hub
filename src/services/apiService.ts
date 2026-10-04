@@ -50,20 +50,6 @@ class ApiService {
     });
   }
 
-  // Registration approval (DAND Scale plan, point 4 — only relevant when
-  // the backend's REQUIRE_MANUAL_APPROVAL is enabled)
-  async approveUser(id: number): Promise<any> {
-    return apiRequest(API_CONFIG.ENDPOINTS.APPROVE_USER.replace('{id}', id.toString()), {
-      method: 'PATCH',
-    });
-  }
-
-  async rejectUser(id: number): Promise<any> {
-    return apiRequest(API_CONFIG.ENDPOINTS.REJECT_USER.replace('{id}', id.toString()), {
-      method: 'PATCH',
-    });
-  }
-
   // Legacy: only works for pre-Firebase accounts that still have a local
   // password (see users.py's guard on this endpoint).
   async regeneratePassword(id: number): Promise<any> {

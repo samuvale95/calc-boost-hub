@@ -14,8 +14,6 @@ export const API_CONFIG = {
     DEACTIVATE_USER: '/users/{id}/deactivate',
     ACTIVATE_USER: '/users/{id}/activate',
     UPDATE_USER: '/users/{id}',
-    APPROVE_USER: '/users/admin/{id}/approve',
-    REJECT_USER: '/users/admin/{id}/reject',
     // PDF / scale + manual download endpoint (DAND Scale plan, point 5:
     // registration-gated, no payment involved)
     DOWNLOAD_PDF: '/pdf/download',
