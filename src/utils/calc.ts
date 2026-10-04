@@ -44,7 +44,7 @@ export function calcResults(answers: { [key: string]: any }): { [key: string]: {
   allLogit["Overall"] = calcLogit(overallMean) // calcolo logit e aggiungo a allLogit
 
   // calcolo logit doms
-  const domNames = ["Mot", "Aut", "Lan", "Mem", "Emo"]; // escludo Pers e Sleep
+  const domNames = ["Mot", "Aut", "Lan", "App", "Emo"]; // escludo Pers e Sleep
 
   for (const domName of domNames) {
     const items = responseArray.filter((resp: any) => resp.dom === domName); // filtro per dom

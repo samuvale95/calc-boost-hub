@@ -20,7 +20,7 @@
 	{"dom":  "Mot"	, "var": 126.78	, "df": 121	, "sd": 1.023605683	, "prop": 100	, "int": 0.941	, "s_age": 0.204	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	},
 	{"dom":  "Lan"	, "var": 136.6294	, "df": 118	, "sd": 1.076046593	, "prop": 100	, "int": 0.6102	, "s_age": -0.0255	, "s_sex": 0.2018	, "s_nat": 0.1358	, "s_sexnat": 0.8206	},
 	{"dom":  "Aut"	, "var": 82.57	, "df": 121	, "sd": 0.826073056	, "prop": 100	, "int": 0.14	, "s_age": 0.302	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	},
-	{"dom":  "Mem"	, "var": 737.9	, "df": 121	, "sd": 2.469483166	, "prop": 100	, "int": -0.706	, "s_age": 1.003	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	},
+	{"dom":  "App"	, "var": 737.9	, "df": 121	, "sd": 2.469483166	, "prop": 100	, "int": -0.706	, "s_age": 1.003	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	},
 	{"dom":  "Emo"	, "var": 42.532	, "df": 119	, "sd": 0.597839247	, "prop": 100	, "int": 0.7026	, "s_age": -0.0866	, "s_sex": 0.2933	, "s_nat": -0.2415	, "s_sexnat": 0	},
 	{"dom":  "Overall"	, "var": 59.17	, "df": 121	, "sd": 0.699291259	, "prop": 100	, "int": 0.471	, "s_age": 0.16	, "s_sex": 0	, "s_nat": 0	, "s_sexnat": 0	}
 ]

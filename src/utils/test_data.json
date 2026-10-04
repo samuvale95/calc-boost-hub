@@ -319,35 +319,35 @@
         "question": "ALFABETO",
         "response": "Non conosce le lettere",
         "score": 0,
-        "dom": "Mem",
+        "dom": "App",
         "subdom": 12
     },
     "ce028805-843b-47f6-a949-63f5ae6dc700": {
         "question": "LETTURA",
         "response": "Non sa leggere",
         "score": 0,
-        "dom": "Mem",
+        "dom": "App",
         "subdom": 12
     },
     "ff30e556-1615-4fb5-a8cf-ef5a412f2261": {
         "question": "SCRITTURA (NON SU MODELLO)",
         "response": "Non sa scrivere",
         "score": 0,
-        "dom": "Mem",
+        "dom": "App",
         "subdom": 12
     },
     "fe7fdaa0-6342-4373-9fc5-04ec75b2df57": {
         "question": "NUMERI ED ENUMERAZIONE",
         "response": "Non conosce la conta numerica",
         "score": 0,
-        "dom": "Mem",
+        "dom": "App",
         "subdom": 12
     },
     "766926c4-b084-48ec-b031-2c5ec70ad649": {
         "question": "CALCOLO",
         "response": "Non svolge alcun calcolo",
         "score": 0,
-        "dom": "Mem",
+        "dom": "App",
         "subdom": 12
     },
     "6ea1641c-628d-4090-bf78-900a84f08f63": {

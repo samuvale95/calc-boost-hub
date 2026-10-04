@@ -1244,9 +1244,9 @@
                     "score": 3
                 }
             ],
-            "section": "MEMORIA E APPRENDIMENTO SCOLARE",
+            "section": "APPRENDIMENTO SCOLARE",
             "subdom": 12,
-            "dom": "Mem"
+            "dom": "App"
         },
         {
             "text": "LETTURA",
@@ -1269,9 +1269,9 @@
                     "score": 3
                 }
             ],
-            "section": "MEMORIA E APPRENDIMENTO SCOLARE",
+            "section": "APPRENDIMENTO SCOLARE",
             "subdom": 12,
-            "dom": "Mem"
+            "dom": "App"
         },
         {
             "text": "SCRITTURA (NON SU MODELLO)",
@@ -1294,9 +1294,9 @@
                     "score": 3
                 }
             ],
-            "section": "MEMORIA E APPRENDIMENTO SCOLARE",
+            "section": "APPRENDIMENTO SCOLARE",
             "subdom": 12,
-            "dom": "Mem"
+            "dom": "App"
         },
         {
             "text": "NUMERI ED ENUMERAZIONE",
@@ -1319,9 +1319,9 @@
                     "score": 3
                 }
             ],
-            "section": "MEMORIA E APPRENDIMENTO SCOLARE",
+            "section": "APPRENDIMENTO SCOLARE",
             "subdom": 12,
-            "dom": "Mem"
+            "dom": "App"
         },
         {
             "text": "CALCOLO",
@@ -1344,9 +1344,9 @@
                     "score": 3
                 }
             ],
-            "section": "MEMORIA E APPRENDIMENTO SCOLARE",
+            "section": "APPRENDIMENTO SCOLARE",
             "subdom": 12,
-            "dom": "Mem"
+            "dom": "App"
         },
         {
             "text": "GESTIONE E COMPRENSIONE DELLE EMOZIONI",
