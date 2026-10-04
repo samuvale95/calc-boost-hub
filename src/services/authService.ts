@@ -19,6 +19,19 @@ class AuthService {
     return apiRequest<User>(API_CONFIG.ENDPOINTS.CURRENT_USER);
   }
 
+  /**
+   * Starts password recovery: the backend emails a link to /reset-password.
+   * Public (no token) and always succeeds the same way whether or not the
+   * email has an account.
+   */
+  async requestPasswordReset(email: string, lang: string): Promise<void> {
+    await apiRequest(API_CONFIG.ENDPOINTS.PASSWORD_RESET, {
+      method: 'POST',
+      authenticated: false,
+      body: JSON.stringify({ email, lang: lang.slice(0, 2) }),
+    });
+  }
+
   /** Completes the registration form (DAND Scale plan, point 4). */
   async completeProfile(data: ProfileData): Promise<User> {
     return apiRequest<User>(API_CONFIG.ENDPOINTS.REGISTER, {

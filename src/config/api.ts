@@ -10,6 +10,7 @@ export const API_CONFIG = {
     REGISTER: '/users/register',
     CHECK_EMAIL: '/users/check-email',
     VERIFY_TOKEN: '/auth/verify',
+    PASSWORD_RESET: '/auth/password-reset',
     DEACTIVATE_USER: '/users/{id}/deactivate',
     ACTIVATE_USER: '/users/{id}/activate',
     UPDATE_USER: '/users/{id}',

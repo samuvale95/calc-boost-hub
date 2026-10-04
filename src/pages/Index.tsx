@@ -1,6 +1,5 @@
 import { Hero } from "@/components/Hero";
 import { AccessSection } from "@/components/AccessSection";
-import { IndustryNotice } from "@/components/IndustryNotice";
 import { UsageCounter } from "@/components/UsageCounter";
 
 const Index = () => {
@@ -9,7 +8,6 @@ const Index = () => {
       <Hero />
       <AccessSection />
       <UsageCounter />
-      <IndustryNotice />
     </div>
   );
 };

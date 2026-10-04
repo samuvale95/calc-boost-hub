@@ -56,7 +56,8 @@
   "industryNotice": {
     "title": "Industry / Pharma / CRO / Sponsored Clinical Trials.",
     "body": "Use of the DAND Scale by pharmaceutical companies, CROs, in the context of sponsored clinical trials or for other commercial purposes is subject to a specific request to Fondazione Dravet ETS. Contact:",
-    "afterContact": "Fondazione Dravet ETS will evaluate the request and contact the applicant to agree on the terms of use and any collaboration."
+    "afterContact": "Fondazione Dravet ETS will evaluate the request and contact the applicant to agree on the terms of use and any collaboration.",
+    "acknowledge": "I understand"
   },
   "login": {
     "title": "Log in to the DAND Scale",
@@ -90,7 +91,7 @@
     "resetSentTitle": "Check your email",
     "resetSentDescription": "If an account exists for {{email}}, we've sent a link to set a new password. Check your Spam folder too.",
     "errorResetFailed": "Could not send the password reset email. Please try again later.",
-    "errorInvalidEmail": "Invalid email address"
+    "errorResetTooMany": "Too many requests. Please try again in a few minutes."
   },
   "finishSignIn": {
     "completing": "Completing sign-in...",

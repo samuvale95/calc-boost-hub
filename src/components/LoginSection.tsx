@@ -16,6 +16,7 @@ import {
 import { Mail, Lock, Loader2, ArrowLeft, CheckCircle, Eye, EyeOff, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
+import { IndustryNoticeModal } from "@/components/IndustryNotice";
 
 interface LoginSectionProps {
   isOpen: boolean;
@@ -54,7 +55,7 @@ const mapAuthError = (error: unknown): string => {
  *   firebaseAuthService.ts.
  */
 export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
   const { sendSignInLink, signInWithPassword, registerWithPassword, resetPassword } = useAuth();
@@ -139,20 +140,15 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
     try {
       setIsLoading(true);
       setAuthErrorMessage(null);
-      await resetPassword(email);
+      await resetPassword(email, i18n.language);
       setResetSent(true);
     } catch (error) {
-      // Firebase hides whether the email has an account (enumeration
-      // protection); a missing account is shown as success too, so the
-      // reset form can't be used to probe which emails are registered.
-      const code = (error as { code?: string })?.code;
-      if (code === "auth/user-not-found") {
-        setResetSent(true);
-      } else {
-        const msg = code === "auth/invalid-email" ? t('login.errorInvalidEmail') : t('login.errorResetFailed');
-        setAuthErrorMessage(msg);
-        toast({ title: t('login.errorTitle'), description: msg, variant: "destructive" });
-      }
+      // The backend answers the same for known and unknown emails, so only
+      // a rate limit or a real failure ends up here.
+      const status = (error as { status?: number })?.status;
+      const msg = status === 429 ? t('login.errorResetTooMany') : t('login.errorResetFailed');
+      setAuthErrorMessage(msg);
+      toast({ title: t('login.errorTitle'), description: msg, variant: "destructive" });
     } finally {
       setIsLoading(false);
     }
@@ -247,6 +243,8 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
   }
 
   return (
+    <>
+    <IndustryNoticeModal active={isOpen} />
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -428,5 +426,6 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
         </DialogFooter>
       </DialogContent>
     </Dialog>
+    </>
   );
 };
