@@ -15,6 +15,7 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import { SUPPORTED_LANGUAGES, DEFAULT_LANGUAGE } from './languages';
+import { firebaseAuth } from '@/config/firebase';
 
 const localeModules = import.meta.glob<{ default: Record<string, unknown> }>(
   '/src/locales/*/common.json',
@@ -48,5 +49,15 @@ i18n
       lookupLocalStorage: 'dand_language',
     },
   });
+
+// Firebase picks the language of the emails it sends (sign-in link, email
+// verification, password reset) from auth.languageCode, so keep it in step
+// with the interface language — see the per-language templates in the
+// Firebase console (Authentication -> Templates).
+const syncFirebaseLanguage = (lng?: string) => {
+  if (firebaseAuth && lng) firebaseAuth.languageCode = lng.split('-')[0];
+};
+syncFirebaseLanguage(i18n.language);
+i18n.on('languageChanged', syncFirebaseLanguage);
 
 export default i18n;

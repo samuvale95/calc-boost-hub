@@ -156,7 +156,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const resetPassword = async (email: string, lang: string): Promise<void> => {
-    await authService.requestPasswordReset(email, lang);
+    const delivery = await authService.requestPasswordReset(email, lang);
+    // The backend has no SMTP configured yet: use Firebase's standard email.
+    if (delivery === 'firebase') {
+      await firebaseAuthService.sendPasswordReset(email);
+    }
   };
 
   const resendVerificationEmail = async (email?: string): Promise<void> => {

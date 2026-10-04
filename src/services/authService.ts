@@ -13,6 +13,9 @@ export interface ProfileData {
   accepted_privacy: boolean;
 }
 
+/** Who sends the reset email: our backend (SMTP) or Firebase's standard email (fallback). */
+export type PasswordResetDelivery = 'backend' | 'firebase';
+
 class AuthService {
   /** Current user's profile — also what creates the local row on first sign-in. */
   async getCurrentUser(): Promise<User> {
@@ -24,12 +27,12 @@ class AuthService {
    * Public (no token) and always succeeds the same way whether or not the
    * email has an account.
    */
-  async requestPasswordReset(email: string, lang: string): Promise<void> {
-    await apiRequest(API_CONFIG.ENDPOINTS.PASSWORD_RESET, {
+  async requestPasswordReset(email: string, lang: string): Promise<PasswordResetDelivery> {
+    return apiRequest<{ delivery: PasswordResetDelivery }>(API_CONFIG.ENDPOINTS.PASSWORD_RESET, {
       method: 'POST',
       authenticated: false,
       body: JSON.stringify({ email, lang: lang.slice(0, 2) }),
-    });
+    }).then((response) => response.delivery);
   }
 
   /** Completes the registration form (DAND Scale plan, point 4). */
