@@ -3,6 +3,7 @@ import React from 'react';
 import QRCode from 'qrcode';
 import QuizPDFDocument from '@/components/QuizPDF';
 import { SCALE_VERSION, SCALE_LANGUAGE, SCALE_COPYRIGHT, SITE_URL } from '@/config/scale';
+import { downloadBlob, todayStamp } from './downloadBlob';
 
 export interface QuizData {
   user: {
@@ -22,11 +23,17 @@ export interface ScoreRow {
 
 export type ScoresPDF = ScoreRow[];
 
-export const generateQuizPDF = async (
+export interface GeneratedFile {
+  blob: Blob;
+  filename: string;
+}
+
+/** Renders the results PDF in memory, without downloading it. */
+export const buildQuizPDF = async (
   quizData: QuizData,
   scoresPDF: ScoresPDF,
   calcResults?: { [key: string]: { z: string; p: string } }
-) => {
+): Promise<GeneratedFile> => {
   try {
     // QR code linking back to the official site (DAND Scale plan, point 8).
     // Generated up front, as a data URL, because react-pdf's <Image> needs
@@ -45,20 +52,20 @@ export const generateQuizPDF = async (
       })
     ).toBlob();
 
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `D-DAND-risultati-${new Date().toISOString().split('T')[0]}.pdf`;
-
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    URL.revokeObjectURL(url);
-
-    return true;
+    return { blob, filename: `D-DAND-risultati-${todayStamp()}.pdf` };
   } catch (error) {
     console.error('Error generating PDF:', error);
     throw new Error('Errore durante la generazione del PDF');
   }
+};
+
+/** Renders the results PDF and downloads it. */
+export const generateQuizPDF = async (
+  quizData: QuizData,
+  scoresPDF: ScoresPDF,
+  calcResults?: { [key: string]: { z: string; p: string } }
+) => {
+  const { blob, filename } = await buildQuizPDF(quizData, scoresPDF, calcResults);
+  downloadBlob(blob, filename);
+  return true;
 };

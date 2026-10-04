@@ -11,6 +11,7 @@ import quizJson from "../data/DAND_qt.json";
 import { v4 as uuidv4 } from "uuid";
 import { generateQuizPDF, QuizData, ScoresPDF } from "@/utils/pdfGenerator";
 import { generateQuizExcel } from "@/utils/excelGenerator";
+import { generateResultsZip } from "@/utils/resultsZip";
 import { eventService } from "@/services/eventService";
 import { SCALE_LANGUAGE } from "@/config/scale";
 import * as calc from "@/utils/calc";
@@ -260,6 +261,28 @@ const resetQuiz = () => {
     }
   };
 
+  // PDF + Excel together in a single .zip (used for the automatic download).
+  const handleGenerateZip = async () => {
+    try {
+      await generateResultsZip(buildQuizData(), prepScoresPDF, calcResults);
+      // The zip holds both reports, so both counters go up.
+      eventService.trackEvent('result_pdf_download', undefined, SCALE_LANGUAGE);
+      eventService.trackEvent('result_excel_download', undefined, SCALE_LANGUAGE);
+
+      toast({
+        title: "Risultati scaricati!",
+        description: "PDF ed Excel sono stati scaricati in un unico file ZIP.",
+      });
+    } catch (error) {
+      console.error('Error generating results ZIP:', error);
+      toast({
+        title: "Errore",
+        description: "Impossibile generare lo ZIP dei risultati. Usa i pulsanti per scaricare PDF ed Excel.",
+        variant: "destructive",
+      });
+    }
+  };
+
   const handleGenerateExcel = async () => {
     try {
       await generateQuizExcel(buildQuizData(), prepScoresPDF, calcResults);
@@ -310,7 +333,7 @@ const resetQuiz = () => {
     }
   }, [currentSectionIndex]);
 
-  // Auto-download of the results (PDF and Excel) as soon as the test ends.
+  // Auto-download of the results (PDF + Excel, zipped) as soon as the test ends.
   useEffect(() => {
     if (
       showResults &&
@@ -321,11 +344,7 @@ const resetQuiz = () => {
       // small delay for secure UX/render
       const timer = setTimeout(async () => {
         setAutoDownloadDone(true);
-        await handleGeneratePDF();
-        // Short pause so the browser treats the second file as a separate
-        // download instead of dropping it as a burst of automatic downloads.
-        await new Promise((resolve) => setTimeout(resolve, 800));
-        await handleGenerateExcel();
+        await handleGenerateZip();
       }, 500);
 
       return () => clearTimeout(timer);
