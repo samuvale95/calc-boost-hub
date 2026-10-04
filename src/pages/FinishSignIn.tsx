@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -26,6 +26,12 @@ const FinishSignIn = () => {
   const [step, setStep] = useState<Step>("completing");
   const [emailInput, setEmailInput] = useState("");
   const [error, setError] = useState<string | null>(null);
+  // A Firebase email link (sign-in or verification) is single-use. This
+  // effect re-runs whenever `loading`/`completeSignIn` change — and
+  // completeSignIn itself flips `loading` — so without this guard the same
+  // link would be consumed a second time, failing with "invalid action
+  // code" right after a successful sign-in.
+  const linkHandled = useRef(false);
 
   useEffect(() => {
     const url = window.location.href;
@@ -37,6 +43,8 @@ const FinishSignIn = () => {
 
     // 1. Passwordless Magic Sign-In Link
     if (firebaseAuthService.isSignInLink(url)) {
+      if (linkHandled.current) return;
+      linkHandled.current = true;
       if (email) {
         completeSignIn(email, url)
           .then(() => setStep("done"))
@@ -55,6 +63,8 @@ const FinishSignIn = () => {
 
     // 2. Email verification link from Firebase Auth (mode === 'verifyEmail')
     if (mode === "verifyEmail" && oobCode) {
+      if (linkHandled.current) return;
+      linkHandled.current = true;
       firebaseAuthService.verifyEmailWithCode(oobCode)
         .then(async () => {
           if (firebaseAuthService.currentUser) {

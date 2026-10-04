@@ -32,9 +32,6 @@ export const useApi = () => {
     activateUser: (id: number) => authenticatedRequest(() => apiService.activateUser(id)),
     deactivateUser: (id: number) => authenticatedRequest(() => apiService.deactivateUser(id)),
     
-    // Password management
-    regeneratePassword: (id: number) => authenticatedRequest(() => apiService.regeneratePassword(id)),
-    
     // Generic request method
     request: <T>(endpoint: string, options?: RequestInit) => 
       authenticatedRequest(() => apiService.request<T>(endpoint, options)),

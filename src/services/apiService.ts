@@ -50,14 +50,6 @@ class ApiService {
     });
   }
 
-  // Legacy: only works for pre-Firebase accounts that still have a local
-  // password (see users.py's guard on this endpoint).
-  async regeneratePassword(id: number): Promise<any> {
-    return apiRequest(API_CONFIG.ENDPOINTS.REGENERATE_PASSWORD.replace('{id}', id.toString()), {
-      method: 'PATCH',
-    });
-  }
-
   // Token verification / sync
   async verifyToken(): Promise<any> {
     return apiRequest(API_CONFIG.ENDPOINTS.VERIFY_TOKEN);

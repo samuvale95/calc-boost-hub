@@ -30,7 +30,6 @@ import { Label } from "@/components/ui/label";
 import { 
   Users, 
   Search, 
-  Key, 
   Calendar,
   UserPlus,
   Settings,
@@ -172,37 +171,6 @@ const AdminDashboard = () => {
         };
       }
       return { column, direction: "asc" };
-    });
-  };
-
-  const handleGeneratePassword = async (userId: string, userName: string) => {
-    // Show confirmation toast first
-    toast({
-      title: "Conferma Rigenerazione Password",
-      description: `Sei sicuro di voler rigenerare la password per ${userName}?`,
-      action: (
-        <Button
-          variant="destructive"
-          size="sm"
-          onClick={async () => {
-            try {
-              await regeneratePassword(userId);
-              toast({
-                title: "Password Rigenerata",
-                description: `Nuova password generata e inviata per ${userName}`
-              });
-            } catch (err) {
-              toast({
-                title: "Errore",
-                description: err instanceof Error ? err.message : "Impossibile rigenerare la password",
-                variant: "destructive"
-              });
-            }
-          }}
-        >
-          Conferma
-        </Button>
-      ),
     });
   };
 
@@ -427,16 +395,6 @@ const AdminDashboard = () => {
     }
   };
 
-  const regeneratePassword = async (userId: string) => {
-    try {
-      const result = await api.regeneratePassword(parseInt(userId));
-      return result;
-    } catch (err) {
-      console.error('Errore nella rigenerazione password:', err);
-      throw err;
-    }
-  };
-
   const deactivateUser = async (userId: string) => {
     try {
       const result = await api.deactivateUser(parseInt(userId));
@@ -618,15 +576,6 @@ const AdminDashboard = () => {
                         </TableCell>
                         <TableCell>
                           <div className="flex gap-2">
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => handleGeneratePassword(user.id, user.name)}
-                              className="flex items-center gap-1"
-                            >
-                              <Key className="h-4 w-4" />
-                              Password
-                            </Button>
                             {user.isActive ? (
                               <Button
                                 variant="outline"
