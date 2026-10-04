@@ -1,6 +1,7 @@
 import ExcelJS from 'exceljs';
 import { QuizData, ScoresPDF } from './pdfGenerator';
-import { SCALE_VERSION, SCALE_LANGUAGE, SCALE_COPYRIGHT } from '@/config/scale';
+// Aggiunta l'importazione di SITE_URL
+import { SCALE_VERSION, SCALE_LANGUAGE, SCALE_COPYRIGHT, SITE_URL } from '@/config/scale';
 import { SUBDOMAIN_LABELS, DOMAIN_LABELS, OVERALL_LABEL } from '@/config/domainLabels';
 
 /** Pulls the leading "= "/"< "/"> " prefix calc.ts adds to z/p off, returning a plain number (or null if unparseable). */
@@ -29,14 +30,19 @@ export const generateQuizExcel = async (
   const patientIdRow = scoresPDF.find((s) => s.question === 'ID PAZIENTE');
 
   const writeMetaHeader = (sheet: ExcelJS.Worksheet) => {
+    // Aggiunti i campi dell'utente (nome, email) e il SITE_URL per uniformità con il PDF
     const meta: [string, string][] = [
       ['Versione DAND Scale', SCALE_VERSION],
       ['Lingua', SCALE_LANGUAGE.toUpperCase()],
       ['Data valutazione', String(dataRow?.response ?? '')],
       ['Identificativo paziente', String(patientIdRow?.response ?? '')],
+      ['Operatore (Nome)', quizData.user.name],
+      ['Operatore (Email)', quizData.user.email],
       ['Report generato il', new Date(quizData.user.completedAt).toLocaleString('it-IT')],
+      ['Sito Ufficiale', SITE_URL || ''], 
       [SCALE_COPYRIGHT, ''],
     ];
+    
     meta.forEach(([label, value]) => {
       const row = sheet.addRow([label, value]);
       row.font = { italic: true, color: { argb: 'FF6B7280' } };
