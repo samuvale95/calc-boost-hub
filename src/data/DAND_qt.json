@@ -102,7 +102,7 @@
                     "score": 6
                 }
             ],
-            "section": "MOTRICITÀ GROSSOLANA",
+            "section": "GROSSOMOTORIO",
             "subdom": 1,
             "dom": "Mot"
         },
@@ -143,7 +143,7 @@
                     "score": 7
                 }
             ],
-            "section": "MOTRICITÀ GROSSOLANA",
+            "section": "GROSSOMOTORIO",
             "subdom": 1,
             "dom": "Mot"
         },
@@ -172,7 +172,7 @@
                     "score": 4
                 }
             ],
-            "section": "MOTRICITÀ GROSSOLANA",
+            "section": "GROSSOMOTORIO",
             "subdom": 1,
             "dom": "Mot"
         },
@@ -197,7 +197,7 @@
                     "score": 3
                 }
             ],
-            "section": "MOTRICITÀ GROSSOLANA",
+            "section": "GROSSOMOTORIO",
             "subdom": 1,
             "dom": "Mot"
         },
@@ -222,7 +222,7 @@
                     "score": 3
                 }
             ],
-            "section": "MOTRICITÀ GROSSOLANA",
+            "section": "GROSSOMOTORIO",
             "subdom": 1,
             "dom": "Mot"
         },
@@ -247,7 +247,7 @@
                     "score": 3
                 }
             ],
-            "section": "MOTRICITÀ GROSSOLANA",
+            "section": "GROSSOMOTORIO",
             "subdom": 1,
             "dom": "Mot"
         },
@@ -272,7 +272,7 @@
                     "score": 3
                 }
             ],
-            "section": "MOTRICITÀ GROSSOLANA",
+            "section": "GROSSOMOTORIO",
             "subdom": 1,
             "dom": "Mot"
         },
@@ -301,7 +301,7 @@
                     "score": 4
                 }
             ],
-            "section": "MOTRICITÀ GROSSOLANA",
+            "section": "GROSSOMOTORIO",
             "subdom": 1,
             "dom": "Mot"
         },
@@ -330,7 +330,7 @@
                     "score": 4
                 }
             ],
-            "section": "MOTRICITÀ GROSSOLANA",
+            "section": "GROSSOMOTORIO",
             "subdom": 2,
             "dom": "Mot"
         },
@@ -363,7 +363,7 @@
                     "score": 5
                 }
             ],
-            "section": "MOTRICITÀ FINE",
+            "section": "FINEMOTORIO",
             "subdom": 3,
             "dom": "Mot"
         },
@@ -388,7 +388,7 @@
                     "score": 3
                 }
             ],
-            "section": "MOTRICITÀ FINE",
+            "section": "FINEMOTORIO",
             "subdom": 3,
             "dom": "Mot"
         },
@@ -421,7 +421,7 @@
                     "score": 5
                 }
             ],
-            "section": "MOTRICITÀ FINE",
+            "section": "FINEMOTORIO",
             "subdom": 3,
             "dom": "Mot"
         },
@@ -446,7 +446,7 @@
                     "score": 3
                 }
             ],
-            "section": "MOTRICITÀ FINE",
+            "section": "FINEMOTORIO",
             "subdom": 3,
             "dom": "Mot"
         },
@@ -475,7 +475,7 @@
                     "score": 4
                 }
             ],
-            "section": "MOTRICITÀ FINE",
+            "section": "FINEMOTORIO",
             "subdom": 3,
             "dom": "Mot"
         },
@@ -724,7 +724,7 @@
                     "score": 4
                 }
             ],
-            "section": "COMUNICAZIONE E LINGUAGGIO",
+            "section": "LINGUAGGIO E INTERAZIONE SOCIALE",
             "subdom": 6,
             "dom": "Lan"
         },
@@ -753,7 +753,7 @@
                     "score": 4
                 }
             ],
-            "section": "COMUNICAZIONE E LINGUAGGIO",
+            "section": "LINGUAGGIO E INTERAZIONE SOCIALE",
             "subdom": 7,
             "dom": "Lan"
         },
@@ -778,7 +778,7 @@
                     "score": 3
                 }
             ],
-            "section": "COMUNICAZIONE E LINGUAGGIO",
+            "section": "LINGUAGGIO E INTERAZIONE SOCIALE",
             "subdom": 7,
             "dom": "Lan"
         },
@@ -807,7 +807,7 @@
                     "score": 4
                 }
             ],
-            "section": "COMUNICAZIONE E LINGUAGGIO",
+            "section": "LINGUAGGIO E INTERAZIONE SOCIALE",
             "subdom": 7,
             "dom": "Lan"
         },
@@ -828,7 +828,7 @@
                     "score": 2
                 }
             ],
-            "section": "COMUNICAZIONE E LINGUAGGIO",
+            "section": "LINGUAGGIO E INTERAZIONE SOCIALE",
             "subdom": 7,
             "dom": "Lan"
         },
@@ -853,7 +853,7 @@
                     "score": 3
                 }
             ],
-            "section": "COMUNICAZIONE E LINGUAGGIO",
+            "section": "LINGUAGGIO E INTERAZIONE SOCIALE",
             "subdom": 7,
             "dom": "Lan"
         },
@@ -1373,7 +1373,7 @@
                     "score": 4
                 }
             ],
-            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
             "subdom": 13,
             "dom": "Emo"
         },
@@ -1402,7 +1402,7 @@
                     "score": 4
                 }
             ],
-            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
             "subdom": 14,
             "dom": "Emo"
         },
@@ -1431,7 +1431,7 @@
                     "score": 4
                 }
             ],
-            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
             "subdom": 14,
             "dom": "Emo"
         },
@@ -1460,7 +1460,7 @@
                     "score": 4
                 }
             ],
-            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
             "subdom": 14,
             "dom": "Emo"
         },
@@ -1489,7 +1489,7 @@
                     "score": 4
                 }
             ],
-            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
             "subdom": 15,
             "dom": "Emo"
         },
@@ -1518,7 +1518,7 @@
                     "score": 4
                 }
             ],
-            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
             "subdom": 15,
             "dom": "Emo"
         },
@@ -1548,7 +1548,7 @@
                 }
 
             ],
-            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
             "subdom": 15,
             "dom": "Emo"
 
@@ -1578,7 +1578,7 @@
                     "score": 4
                 }
             ],
-            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
             "subdom": 15,
             "dom": "Emo"
         },
@@ -1607,7 +1607,7 @@
                     "score": 4
                 }
             ],
-            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
             "subdom": 16,
             "dom": "Emo"
         },
@@ -1632,7 +1632,7 @@
                     "score": 3
                 }
             ],
-            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
             "subdom": 16,
             "dom": "Emo"
         },
@@ -1661,7 +1661,7 @@
                     "score": 4
                 }
             ],
-            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
             "subdom": 16,
             "dom": "Emo"
         },
@@ -1686,7 +1686,7 @@
                     "score": 3
                 }
             ],
-            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
             "subdom": 16,
             "dom": "Emo"
         },
@@ -1715,7 +1715,7 @@
                     "score": 4
                 }
             ],
-            "section": "PROBLEMI COMPORTAMENTALI ED EMOTIVI",
+            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
             "subdom": 17,
             "dom": "Emo"
         },
