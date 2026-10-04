@@ -66,7 +66,7 @@ const Quiz = () => {
   const { user, logout } = useAuth();
   const { isUserAdmin } = useAdmin();
   const stepperRef = useRef<HTMLDivElement>(null);
-  const [autoPdfGenerated, setAutoPdfGenerated] = useState(false);
+  const [autoDownloadDone, setAutoDownloadDone] = useState(false);
 
   // Counts a calculator use (DAND Scale plan, point 6) once per visit to
   // this page — never the answers themselves, just that a session happened.
@@ -218,7 +218,7 @@ const resetQuiz = () => {
   setCurrentQuestionIndex(0);
   setCalcResults({});
   setPrepScoresPDF([]);
-  setAutoPdfGenerated(false);
+  setAutoDownloadDone(false);
 };
 
   const handleLogout = () => {
@@ -310,23 +310,27 @@ const resetQuiz = () => {
     }
   }, [currentSectionIndex]);
 
-  // auto-download pdf
+  // Auto-download of the results (PDF and Excel) as soon as the test ends.
   useEffect(() => {
     if (
       showResults &&
-      !autoPdfGenerated &&
+      !autoDownloadDone &&
       Object.keys(calcResults).length > 0 &&
       prepScoresPDF.length > 0
     ) {
       // small delay for secure UX/render
       const timer = setTimeout(async () => {
+        setAutoDownloadDone(true);
         await handleGeneratePDF();
-        setAutoPdfGenerated(true);
+        // Short pause so the browser treats the second file as a separate
+        // download instead of dropping it as a burst of automatic downloads.
+        await new Promise((resolve) => setTimeout(resolve, 800));
+        await handleGenerateExcel();
       }, 500);
 
       return () => clearTimeout(timer);
     }
-  }, [showResults, calcResults, prepScoresPDF, autoPdfGenerated]);
+  }, [showResults, calcResults, prepScoresPDF, autoDownloadDone]);
 
   // Auto-initialize slider values for closed-numeric questions
   useEffect(() => {
