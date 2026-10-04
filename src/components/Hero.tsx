@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import {
   ChevronDown,
   Brain,
@@ -9,7 +10,7 @@ import {
   Smile,
   Moon,
   FileText,
-  ArrowDown,
+  LogIn,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -163,9 +164,8 @@ export const Hero = () => {
     setOpenId((prev) => (prev === id ? null : id));
   };
 
-  const scrollToPricing = () => {
-    document.getElementById("access")?.scrollIntoView({ behavior: "smooth" });
-  };
+  const navigate = useNavigate();
+  const goToLogin = () => navigate("/login");
 
   return (
     <section className="relative bg-[#f3f7fa]">
@@ -201,14 +201,14 @@ export const Hero = () => {
               {t('hero.foundation')}
             </p>
 
-            {/* CTA verso la sezione piani */}
+            {/* CTA registrati / accedi */}
             <Button
-              onClick={scrollToPricing}
+              onClick={goToLogin}
               size="lg"
               className="mt-6 w-full max-w-[200px] bg-[hsl(316,91%,40%)] hover:bg-[hsl(316,91%,34%)] text-white rounded-xl gap-2 shadow-md font-semibold text-base"
             >
-              {t('hero.ctaPlans')}
-              <ArrowDown className="w-4 h-4" />
+              {t('access.cta')}
+              <LogIn className="w-4 h-4" />
             </Button>
           </div>
         </aside>
@@ -253,14 +253,14 @@ export const Hero = () => {
             ))}
           </div>
 
-          {/* CTA mobile verso pricing */}
+          {/* CTA mobile registrati / accedi */}
           <div className="md:hidden mt-6">
             <Button
-              onClick={scrollToPricing}
+              onClick={goToLogin}
               className="w-full bg-[hsl(95,87%,34%)] hover:bg-[hsl(95,87%,28%)] text-white rounded-xl gap-2"
             >
-              {t('hero.ctaPlans')}
-              <ArrowDown className="w-4 h-4" />
+              {t('access.cta')}
+              <LogIn className="w-4 h-4" />
             </Button>
           </div>
 
