@@ -61,10 +61,19 @@
   },
   "login": {
     "title": "Log in to the DAND Scale",
-    "description": "Enter your email: we'll send you a link to log in, no password needed.",
+    "description": {
+      "signin": {
+        "link": "Enter your email: we'll send you a link to log in, no password needed.",
+        "password": "Enter your email and password to log in."
+      },
+      "register": {
+        "link": "Enter your email: we'll send you a link to create your account, no password needed.",
+        "password": "Choose an email and password to create your account."
+      }
+    },
     "emailLabel": "Email",
     "emailPlaceholder": "name@example.com",
-    "note": "If you don't have an account yet, one will be created automatically and you'll be asked to complete your registration.",
+    "note": "Open the link you receive by email to log in.",
     "submit": "Send login link",
     "sending": "Sending...",
     "linkTab": "Email link",
@@ -91,7 +100,10 @@
     "resetSentTitle": "Check your email",
     "resetSentDescription": "If an account exists for {{email}}, we've sent a link to set a new password. Check your Spam folder too.",
     "errorResetFailed": "Could not send the password reset email. Please try again later.",
-    "errorResetTooMany": "Too many requests. Please try again in a few minutes."
+    "errorResetTooMany": "Too many requests. Please try again in a few minutes.",
+    "titleRegister": "Register for the DAND Scale",
+    "noteRegister": "After opening the link you'll be asked to complete your registration.",
+    "submitRegister": "Send registration link"
   },
   "finishSignIn": {
     "completing": "Completing sign-in...",

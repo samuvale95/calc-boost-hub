@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,7 @@ import {
 import { Mail, Lock, Loader2, ArrowLeft, CheckCircle, Eye, EyeOff, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
-import { IndustryNoticeModal, hasAcknowledgedIndustryNotice } from "@/components/IndustryNotice";
+import { IndustryNoticeModal } from "@/components/IndustryNotice";
 
 interface LoginSectionProps {
   isOpen: boolean;
@@ -65,13 +65,18 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
   const [linkSent, setLinkSent] = useState(false);
   const [verificationSent, setVerificationSent] = useState(false);
   const [resetSent, setResetSent] = useState(false);
-  // The industry/pharma notice comes first; the form only shows once it has been acknowledged.
-  const [noticeAcknowledged, setNoticeAcknowledged] = useState(hasAcknowledgedIndustryNotice);
+  // The industry/pharma notice opens on top of the form every time the form opens.
+  const [noticeOpen, setNoticeOpen] = useState(false);
+  useEffect(() => {
+    if (isOpen) setNoticeOpen(true);
+  }, [isOpen]);
   const [authErrorMessage, setAuthErrorMessage] = useState<string | null>(null);
 
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [passwordMode, setPasswordMode] = useState<"signin" | "register">("signin");
+  // Sign in vs register, shared by both tabs so every text follows it.
+  const [mode, setMode] = useState<"signin" | "register">("signin");
+  const [tab, setTab] = useState<"link" | "password">("link");
 
   const handleSendLink = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -107,11 +112,11 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
     try {
       setIsLoading(true);
       setAuthErrorMessage(null);
-      if (passwordMode === "signin") {
+      if (mode === "signin") {
         await signInWithPassword(email, password);
         setEmail("");
         setPassword("");
-        setPasswordMode("signin");
+        setMode("signin");
         navigate("/finish-signin", { replace: true });
       } else {
         await registerWithPassword(email, password);
@@ -163,7 +168,8 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
     setVerificationSent(false);
     setResetSent(false);
     setAuthErrorMessage(null);
-    setPasswordMode("signin");
+    setMode("signin");
+    setTab("link");
     onClose();
   };
 
@@ -246,16 +252,15 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
 
   return (
     <>
-    <IndustryNoticeModal open={isOpen && !noticeAcknowledged} onAcknowledge={() => setNoticeAcknowledged(true)} />
-    <Dialog open={isOpen && noticeAcknowledged} onOpenChange={handleClose}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Mail className="h-6 w-6" />
-            {t('login.title')}
+            {mode === "signin" ? t('login.title') : t('login.titleRegister')}
           </DialogTitle>
           <DialogDescription>
-            {t('login.description')}
+            {t(`login.description.${mode}.${tab}`)}
           </DialogDescription>
         </DialogHeader>
 
@@ -292,7 +297,7 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
           </div>
         )}
 
-        <Tabs defaultValue="link" className="py-2">
+        <Tabs value={tab} onValueChange={(value) => setTab(value as "link" | "password")} className="py-2">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="link">{t('login.linkTab')}</TabsTrigger>
             <TabsTrigger value="password">{t('login.passwordTab')}</TabsTrigger>
@@ -317,8 +322,17 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
                 </div>
               </div>
               <div className="bg-muted p-3 rounded-lg">
-                <p className="text-xs text-muted-foreground">{t('login.note')}</p>
+                <p className="text-xs text-muted-foreground">{mode === "signin" ? t('login.note') : t('login.noteRegister')}</p>
               </div>
+              <button
+                type="button"
+                className="text-xs text-primary hover:underline"
+                onClick={() => setMode(mode === "signin" ? "register" : "signin")}
+                disabled={isLoading}
+              >
+                {mode === "signin" ? t('login.switchToRegister') : t('login.switchToSignIn')}
+              </button>
+
               <Button type="submit" disabled={isLoading} className="w-full flex items-center gap-2">
                 {isLoading ? (
                   <>
@@ -326,7 +340,7 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
                     {t('login.sending')}
                   </>
                 ) : (
-                  t('login.submit')
+                  mode === "signin" ? t('login.submit') : t('login.submitRegister')
                 )}
               </Button>
             </form>
@@ -363,7 +377,7 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={isLoading}
-                    minLength={passwordMode === "register" ? 8 : undefined}
+                    minLength={mode === "register" ? 8 : undefined}
                     required
                   />
                   <Button
@@ -382,13 +396,13 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
               <button
                 type="button"
                 className="text-xs text-primary hover:underline"
-                onClick={() => setPasswordMode(passwordMode === "signin" ? "register" : "signin")}
+                onClick={() => setMode(mode === "signin" ? "register" : "signin")}
                 disabled={isLoading}
               >
-                {passwordMode === "signin" ? t('login.switchToRegister') : t('login.switchToSignIn')}
+                {mode === "signin" ? t('login.switchToRegister') : t('login.switchToSignIn')}
               </button>
 
-              {passwordMode === "signin" && (
+              {mode === "signin" && (
                 <button
                   type="button"
                   className="block text-xs text-primary hover:underline"
@@ -405,7 +419,7 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
                     <Loader2 className="h-4 w-4 animate-spin" />
                     {t('login.sending')}
                   </>
-                ) : passwordMode === "signin" ? (
+                ) : mode === "signin" ? (
                   t('login.signInSubmit')
                 ) : (
                   t('login.registerSubmit')
@@ -428,6 +442,7 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
         </DialogFooter>
       </DialogContent>
     </Dialog>
+    <IndustryNoticeModal open={isOpen && noticeOpen} onClose={() => setNoticeOpen(false)} />
     </>
   );
 };

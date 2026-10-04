@@ -61,10 +61,19 @@
   },
   "login": {
     "title": "Connexion à la DAND Scale",
-    "description": "Entrez votre email : nous vous enverrons un lien de connexion, sans besoin de mot de passe.",
+    "description": {
+      "signin": {
+        "link": "Entrez votre email : nous vous enverrons un lien de connexion, sans besoin de mot de passe.",
+        "password": "Entrez votre email et votre mot de passe pour vous connecter."
+      },
+      "register": {
+        "link": "Entrez votre email : nous vous enverrons un lien pour créer votre compte, sans besoin de mot de passe.",
+        "password": "Choisissez un email et un mot de passe pour créer votre compte."
+      }
+    },
     "emailLabel": "Email",
     "emailPlaceholder": "nom@exemple.com",
-    "note": "Si vous n'avez pas encore de compte, il sera créé automatiquement et il vous sera demandé de compléter votre inscription.",
+    "note": "Ouvrez le lien reçu par email pour vous connecter.",
     "submit": "Envoyer le lien de connexion",
     "sending": "Envoi en cours...",
     "linkTab": "Lien email",
@@ -91,7 +100,10 @@
     "resetSentTitle": "Vérifiez votre email",
     "resetSentDescription": "Si un compte existe pour {{email}}, nous avons envoyé un lien pour définir un nouveau mot de passe. Vérifiez aussi votre dossier Spam.",
     "errorResetFailed": "Impossible d'envoyer l'email de réinitialisation. Veuillez réessayer plus tard.",
-    "errorResetTooMany": "Trop de demandes. Veuillez réessayer dans quelques minutes."
+    "errorResetTooMany": "Trop de demandes. Veuillez réessayer dans quelques minutes.",
+    "titleRegister": "Inscription à la DAND Scale",
+    "noteRegister": "Après avoir ouvert le lien, il vous sera demandé de compléter votre inscription.",
+    "submitRegister": "Envoyer le lien d'inscription"
   },
   "finishSignIn": {
     "completing": "Finalisation de la connexion...",

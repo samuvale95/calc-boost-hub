@@ -11,54 +11,29 @@ import {
 } from "@/components/ui/alert-dialog";
 
 const CONTACT_EMAIL = import.meta.env.VITE_DAND_CONTACT_EMAIL || "fondazionedravet@gmail.com";
-const ACK_KEY = "dand_industry_notice_ack";
-
-// localStorage can throw (private mode, blocked site data): in that case the
-// notice simply shows again next time instead of breaking the form.
-export const hasAcknowledgedIndustryNotice = (): boolean => {
-  try {
-    return window.localStorage.getItem(ACK_KEY) === "1";
-  } catch {
-    return false;
-  }
-};
-
-const saveAcknowledged = () => {
-  try {
-    window.localStorage.setItem(ACK_KEY, "1");
-  } catch {
-    // ignore
-  }
-};
-
 interface IndustryNoticeModalProps {
   /** Whether the notice should be on screen right now. */
   open: boolean;
-  /** Called once the user closes it with the button (already remembered). */
-  onAcknowledge: () => void;
+  /** Called when the user closes it with the button. */
+  onClose: () => void;
 }
 
 /**
- * Notice for pharmaceutical companies / CROs / sponsored clinical trials,
- * shown as a modal the first time someone opens the sign-in/registration
- * form, before the form itself appears. It can only be closed with the button (no click-outside / Esc) and
- * is not shown again once acknowledged. Text as agreed with Fondazione
- * Dravet ETS (email "Sito e preventivo", 17/09/2026) — the IT/EN/FR
- * translations under src/locales (each common.json's "industryNotice" key)
- * must stay a faithful rendering of the Italian original; do not paraphrase
- * without their sign-off.
+ * Notice for pharmaceutical companies / CROs / sponsored clinical trials.
+ * Shown on top of the sign-in/registration form every time it opens, before
+ * anyone can sign in or register. It can only be closed with the button (no
+ * click-outside / Esc). Text as agreed with Fondazione Dravet ETS (email
+ * "Sito e preventivo", 17/09/2026) — the IT/EN/FR translations under
+ * src/locales (each common.json's "industryNotice" key) must stay a
+ * faithful rendering of the Italian original; do not paraphrase without
+ * their sign-off.
  */
-export const IndustryNoticeModal = ({ open, onAcknowledge }: IndustryNoticeModalProps) => {
+export const IndustryNoticeModal = ({ open, onClose }: IndustryNoticeModalProps) => {
   const { t } = useTranslation();
-
-  const handleAcknowledge = () => {
-    saveAcknowledged();
-    onAcknowledge();
-  };
 
   return (
     <AlertDialog open={open}>
-      <AlertDialogContent className="sm:max-w-[520px]">
+      <AlertDialogContent className="sm:max-w-[520px]" onEscapeKeyDown={(e) => e.preventDefault()}>
         <AlertDialogHeader>
           <AlertDialogTitle className="flex items-center gap-2">
             <Building2 className="h-5 w-5 flex-shrink-0" />
@@ -76,7 +51,7 @@ export const IndustryNoticeModal = ({ open, onAcknowledge }: IndustryNoticeModal
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction onClick={handleAcknowledge}>{t("industryNotice.acknowledge")}</AlertDialogAction>
+          <AlertDialogAction onClick={onClose}>{t("industryNotice.acknowledge")}</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
