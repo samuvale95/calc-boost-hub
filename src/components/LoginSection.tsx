@@ -16,7 +16,7 @@ import {
 import { Mail, Lock, Loader2, ArrowLeft, CheckCircle, Eye, EyeOff, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
-import { IndustryNoticeModal } from "@/components/IndustryNotice";
+import { IndustryNoticeModal, hasAcknowledgedIndustryNotice } from "@/components/IndustryNotice";
 
 interface LoginSectionProps {
   isOpen: boolean;
@@ -65,6 +65,8 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
   const [linkSent, setLinkSent] = useState(false);
   const [verificationSent, setVerificationSent] = useState(false);
   const [resetSent, setResetSent] = useState(false);
+  // The industry/pharma notice comes first; the form only shows once it has been acknowledged.
+  const [noticeAcknowledged, setNoticeAcknowledged] = useState(hasAcknowledgedIndustryNotice);
   const [authErrorMessage, setAuthErrorMessage] = useState<string | null>(null);
 
   const [password, setPassword] = useState("");
@@ -244,8 +246,8 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
 
   return (
     <>
-    <IndustryNoticeModal active={isOpen} />
-    <Dialog open={isOpen} onOpenChange={handleClose}>
+    <IndustryNoticeModal open={isOpen && !noticeAcknowledged} onAcknowledge={() => setNoticeAcknowledged(true)} />
+    <Dialog open={isOpen && noticeAcknowledged} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
