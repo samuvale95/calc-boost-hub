@@ -160,5 +160,21 @@
     "doneTitle": "Password aggiornata",
     "doneDescription": "La tua password è stata modificata. Ora puoi accedere con la nuova password.",
     "goToLogin": "Vai all'accesso"
+  },
+  "publicationsPage": {
+    "addButton": "Aggiungi pubblicazione",
+    "addTitle": "Nuova pubblicazione",
+    "addDescription": "Comparirà sotto le pubblicazioni già presenti: il titolo rimanda al link inserito.",
+    "titleLabel": "Titolo del paper",
+    "urlLabel": "Link",
+    "citationLabel": "Citation",
+    "addedTitle": "Pubblicazione aggiunta",
+    "addedDescription": "La pubblicazione è ora visibile nella pagina.",
+    "errorRequired": "Titolo e citation sono obbligatori",
+    "errorInvalidUrl": "Inserisci un link valido che inizi con http:// o https://",
+    "errorSave": "Impossibile salvare la pubblicazione. Riprova.",
+    "errorDelete": "Impossibile eliminare la pubblicazione.",
+    "delete": "Elimina pubblicazione",
+    "confirmDelete": "Eliminare la pubblicazione «{{title}}»?"
   }
 }

@@ -160,5 +160,21 @@
     "doneTitle": "Password updated",
     "doneDescription": "Your password has been changed. You can now log in with the new password.",
     "goToLogin": "Go to login"
+  },
+  "publicationsPage": {
+    "addButton": "Add publication",
+    "addTitle": "New publication",
+    "addDescription": "It will appear below the existing publications: the title links to the URL you enter.",
+    "titleLabel": "Paper title",
+    "urlLabel": "Link",
+    "citationLabel": "Citation",
+    "addedTitle": "Publication added",
+    "addedDescription": "The publication is now visible on the page.",
+    "errorRequired": "Title and citation are required",
+    "errorInvalidUrl": "Enter a valid link starting with http:// or https://",
+    "errorSave": "Could not save the publication. Please try again.",
+    "errorDelete": "Could not delete the publication.",
+    "delete": "Delete publication",
+    "confirmDelete": "Delete the publication “{{title}}”?"
   }
 }

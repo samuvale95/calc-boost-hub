@@ -160,5 +160,21 @@
     "doneTitle": "Mot de passe mis à jour",
     "doneDescription": "Votre mot de passe a été modifié. Vous pouvez maintenant vous connecter avec le nouveau mot de passe.",
     "goToLogin": "Aller à la connexion"
+  },
+  "publicationsPage": {
+    "addButton": "Ajouter une publication",
+    "addTitle": "Nouvelle publication",
+    "addDescription": "Elle apparaîtra sous les publications existantes : le titre renvoie au lien saisi.",
+    "titleLabel": "Titre de l'article",
+    "urlLabel": "Lien",
+    "citationLabel": "Citation",
+    "addedTitle": "Publication ajoutée",
+    "addedDescription": "La publication est maintenant visible sur la page.",
+    "errorRequired": "Le titre et la citation sont obligatoires",
+    "errorInvalidUrl": "Saisissez un lien valide commençant par http:// ou https://",
+    "errorSave": "Impossible d'enregistrer la publication. Veuillez réessayer.",
+    "errorDelete": "Impossible de supprimer la publication.",
+    "delete": "Supprimer la publication",
+    "confirmDelete": "Supprimer la publication « {{title}} » ?"
   }
 }

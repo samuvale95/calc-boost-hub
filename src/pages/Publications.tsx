@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, FileText, Loader2 } from "lucide-react";
+import { Download, ExternalLink, FileText, Loader2, Plus, Trash2 } from "lucide-react";
 import publications from "@/data/publications.json";
 import { eventService } from "@/services/eventService";
+import { publicationService, ExtraPublication } from "@/services/publicationService";
+import { AddPublicationDialog } from "@/components/AddPublicationDialog";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 
 interface Publication {
   id: string;
@@ -24,12 +28,36 @@ interface Publication {
  * scale/manual (see ProtectedRoute) — publications are meant to spread
  * freely. Data-driven: add a publication by adding an entry to
  * src/data/publications.json and its cover image / PDF under
- * public/publications/, no code change needed.
+ * public/publications/, no code change needed. Admins can also add more
+ * (title + link + citation) from this page; those are stored in the
+ * backend and listed below the static ones.
  */
 const Publications = () => {
   const { t } = useTranslation();
+  const { isAdmin } = useAuth();
+  const { toast } = useToast();
   const [downloading, setDownloading] = useState<string | null>(null);
+  const [extraPublications, setExtraPublications] = useState<ExtraPublication[]>([]);
+  const [addOpen, setAddOpen] = useState(false);
   const items = publications as Publication[];
+
+  useEffect(() => {
+    publicationService
+      .list()
+      .then(setExtraPublications)
+      .catch((error) => console.warn("Impossibile caricare le pubblicazioni aggiuntive:", error));
+  }, []);
+
+  const handleDelete = async (pub: ExtraPublication) => {
+    if (!window.confirm(t('publicationsPage.confirmDelete', { title: pub.title }))) return;
+    try {
+      await publicationService.remove(pub.id);
+      setExtraPublications((prev) => prev.filter((p) => p.id !== pub.id));
+    } catch (error) {
+      console.error("Errore nell'eliminazione della pubblicazione:", error);
+      toast({ title: t('login.errorTitle'), description: t('publicationsPage.errorDelete'), variant: "destructive" });
+    }
+  };
 
   const handleDownload = (pub: Publication) => {
     if (!pub.pdfFilename) return;
@@ -110,8 +138,55 @@ const Publications = () => {
               </CardContent>
             </Card>
           ))}
+
+          {extraPublications.map((pub) => (
+            <Card key={pub.id} className="border-2 border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+              <CardContent className="p-6 md:p-8 space-y-3">
+                <div className="flex items-start justify-between gap-4">
+                  <h2 className="text-xl md:text-2xl font-bold">
+                    <a
+                      href={pub.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline inline-flex items-start gap-2"
+                    >
+                      {pub.title}
+                      <ExternalLink className="h-4 w-4 mt-1.5 flex-shrink-0" />
+                    </a>
+                  </h2>
+                  {isAdmin && (
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="text-muted-foreground hover:text-destructive flex-shrink-0"
+                      onClick={() => handleDelete(pub)}
+                      aria-label={t('publicationsPage.delete')}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  )}
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{pub.citation}</p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
+
+        {isAdmin && (
+          <div className="flex justify-center mt-10">
+            <Button onClick={() => setAddOpen(true)} className="gap-2">
+              <Plus className="h-4 w-4" />
+              {t('publicationsPage.addButton')}
+            </Button>
+          </div>
+        )}
       </div>
+
+      <AddPublicationDialog
+        open={addOpen}
+        onOpenChange={setAddOpen}
+        onCreated={(created) => setExtraPublications((prev) => [...prev, created])}
+      />
     </div>
   );
 };
