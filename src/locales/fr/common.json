@@ -175,6 +175,8 @@
     "errorSave": "Impossible d'enregistrer la publication. Veuillez réessayer.",
     "errorDelete": "Impossible de supprimer la publication.",
     "delete": "Supprimer la publication",
-    "confirmDelete": "Supprimer la publication « {{title}} » ?"
+    "confirmDelete": "Supprimer la publication « {{title}} » ?",
+    "authors": "Auteurs :",
+    "downloadPdf": "Télécharger le PDF"
   }
 }

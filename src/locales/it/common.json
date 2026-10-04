@@ -175,6 +175,8 @@
     "errorSave": "Impossibile salvare la pubblicazione. Riprova.",
     "errorDelete": "Impossibile eliminare la pubblicazione.",
     "delete": "Elimina pubblicazione",
-    "confirmDelete": "Eliminare la pubblicazione «{{title}}»?"
+    "confirmDelete": "Eliminare la pubblicazione «{{title}}»?",
+    "authors": "Autori:",
+    "downloadPdf": "Scarica PDF"
   }
 }

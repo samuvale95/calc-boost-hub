@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { CheckIcon, FileText, Calculator, Download, Users, ShieldCheck } from "lucide-react";
 import { LoginSection } from "./LoginSection";
+import { UsageCounter } from "./UsageCounter";
 
 const FEATURE_ICONS = [
   { key: "pdf", icon: FileText },
@@ -40,6 +41,8 @@ export const AccessSection = () => {
             {t('access.subtitle')}
           </p>
         </div>
+
+        <UsageCounter />
 
         <div className="max-w-2xl mx-auto rounded-2xl border-2 border-[hsl(316,91%,40%)] bg-white shadow-lg overflow-hidden">
           <div className="h-1.5 w-full bg-gradient-to-r from-[hsl(316,91%,40%)] to-[hsl(316,91%,55%)]" />

@@ -83,7 +83,7 @@ const Publications = () => {
           <p className="text-xs font-semibold uppercase tracking-widest text-[hsl(316,91%,40%)] mb-3">
             {t('hero.eyebrow')}
           </p>
-          <h1 className="text-4xl font-extrabold text-foreground">Publications</h1>
+          <h1 className="text-4xl font-extrabold text-foreground">{t('header.publications')}</h1>
         </div>
 
         <div className="space-y-8">
@@ -110,7 +110,7 @@ const Publications = () => {
                     <p className="text-muted-foreground leading-relaxed text-sm">{pub.abstract}</p>
 
                     <p className="text-sm text-muted-foreground">
-                      <strong>Autori:</strong> {pub.authors}
+                      <strong>{t('publicationsPage.authors')}</strong> {pub.authors}
                     </p>
 
                     <div className="flex flex-wrap gap-3 pt-2">
@@ -129,7 +129,7 @@ const Publications = () => {
                           ) : (
                             <Download className="h-4 w-4 mr-2" />
                           )}
-                          Scarica PDF
+                          {t('publicationsPage.downloadPdf')}
                         </Button>
                       )}
                     </div>
@@ -148,7 +148,7 @@ const Publications = () => {
                       href={pub.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-primary hover:underline inline-flex items-start gap-2"
+                      className="text-[hsl(95,87%,34%)] visited:text-[hsl(95,87%,34%)] hover:text-[hsl(95,87%,28%)] hover:underline inline-flex items-start gap-2"
                     >
                       {pub.title}
                       <ExternalLink className="h-4 w-4 mt-1.5 flex-shrink-0" />

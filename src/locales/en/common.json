@@ -175,6 +175,8 @@
     "errorSave": "Could not save the publication. Please try again.",
     "errorDelete": "Could not delete the publication.",
     "delete": "Delete publication",
-    "confirmDelete": "Delete the publication “{{title}}”?"
+    "confirmDelete": "Delete the publication “{{title}}”?",
+    "authors": "Authors:",
+    "downloadPdf": "Download PDF"
   }
 }

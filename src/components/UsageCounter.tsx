@@ -24,8 +24,7 @@ export const UsageCounter = () => {
   }
 
   return (
-    <section className="bg-[#fff4fc] pt-4 pb-2">
-      <div className="container mx-auto px-4 flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-base md:text-lg text-foreground">
+    <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 mb-10 text-base md:text-lg text-foreground">
       {stats.calculator_uses > 0 && (
         <div className="flex items-center gap-3">
           <Calculator className="h-6 w-6 text-[hsl(316,91%,40%)]" />
@@ -46,7 +45,6 @@ export const UsageCounter = () => {
           />
         </div>
       )}
-      </div>
-    </section>
+    </div>
   );
 };
