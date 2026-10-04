@@ -17,6 +17,8 @@ import {
   signOut as firebaseSignOut,
   sendEmailVerification,
   sendPasswordResetEmail,
+  verifyPasswordResetCode,
+  confirmPasswordReset,
   applyActionCode,
   type User as FirebaseUser,
 } from "firebase/auth";
@@ -118,6 +120,16 @@ export const firebaseAuthService = {
   async sendPasswordReset(email: string): Promise<void> {
     const auth = requireAuth();
     await sendPasswordResetEmail(auth, email);
+  },
+
+  /** Checks a reset code from the email link; resolves to the account's email. */
+  async verifyPasswordResetCode(oobCode: string): Promise<string> {
+    return verifyPasswordResetCode(requireAuth(), oobCode);
+  },
+
+  /** Sets the new password using the (single-use) code from the email link. */
+  async confirmPasswordReset(oobCode: string, newPassword: string): Promise<void> {
+    await confirmPasswordReset(requireAuth(), oobCode, newPassword);
   },
 
   async signOut(): Promise<void> {

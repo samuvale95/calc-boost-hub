@@ -111,7 +111,7 @@
     "professionalRoleLabel": "Role at the center",
     "professionalRolePlaceholder": "e.g. Child Neuropsychiatrist",
     "phoneLabel": "Phone number",
-    "countryLabel": "Country (optional)",
+    "countryLabel": "Country",
     "termsLabel": "I accept the DAND Scale {{link}}",
     "termsLink": "Conditions of Use",
     "privacyLabel": "I have read the {{link}}",
@@ -144,5 +144,20 @@
     "title": "404",
     "message": "Page not found",
     "backHome": "Back to Home"
+  },
+  "resetPassword": {
+    "title": "Set a new password",
+    "description": "Choose a new password for {{email}}.",
+    "verifying": "Checking the link...",
+    "newPasswordLabel": "New password",
+    "confirmPasswordLabel": "Confirm password",
+    "submit": "Save new password",
+    "errorMismatch": "The two passwords don't match",
+    "errorGeneric": "Could not set the new password. Please try again later.",
+    "invalidTitle": "Invalid link",
+    "invalidDescription": "This password reset link is invalid or has expired. Request a new one from the login page.",
+    "doneTitle": "Password updated",
+    "doneDescription": "Your password has been changed. You can now log in with the new password.",
+    "goToLogin": "Go to login"
   }
 }

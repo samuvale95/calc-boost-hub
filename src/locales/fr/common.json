@@ -111,7 +111,7 @@
     "professionalRoleLabel": "Rôle au sein du centre",
     "professionalRolePlaceholder": "ex. Neuropsychiatre infantile",
     "phoneLabel": "Numéro de téléphone",
-    "countryLabel": "Pays (facultatif)",
+    "countryLabel": "Pays",
     "termsLabel": "J'accepte les {{link}} de la DAND Scale",
     "termsLink": "Conditions d'utilisation",
     "privacyLabel": "J'ai pris connaissance de la {{link}}",
@@ -144,5 +144,20 @@
     "title": "404",
     "message": "Page non trouvée",
     "backHome": "Retour à l'accueil"
+  },
+  "resetPassword": {
+    "title": "Définir un nouveau mot de passe",
+    "description": "Choisissez un nouveau mot de passe pour {{email}}.",
+    "verifying": "Vérification du lien...",
+    "newPasswordLabel": "Nouveau mot de passe",
+    "confirmPasswordLabel": "Confirmer le mot de passe",
+    "submit": "Enregistrer le nouveau mot de passe",
+    "errorMismatch": "Les deux mots de passe ne correspondent pas",
+    "errorGeneric": "Impossible de définir le nouveau mot de passe. Veuillez réessayer plus tard.",
+    "invalidTitle": "Lien invalide",
+    "invalidDescription": "Ce lien de réinitialisation est invalide ou a expiré. Demandez-en un nouveau depuis la page de connexion.",
+    "doneTitle": "Mot de passe mis à jour",
+    "doneDescription": "Votre mot de passe a été modifié. Vous pouvez maintenant vous connecter avec le nouveau mot de passe.",
+    "goToLogin": "Aller à la connexion"
   }
 }
