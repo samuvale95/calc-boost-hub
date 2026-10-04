@@ -10,6 +10,12 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { ProfileData } from "@/services/authService";
 
+const Required = () => (
+  <span className="text-red-600 ml-0.5" aria-hidden="true">
+    *
+  </span>
+);
+
 interface CompleteProfileFormProps {
   onComplete: () => void;
 }
@@ -106,7 +112,7 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="center">{t('completeProfile.centerLabel')}</Label>
+            <Label htmlFor="center">{t('completeProfile.centerLabel')}<Required /></Label>
             <div className="relative">
               <Building2 className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
@@ -121,7 +127,7 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="professionalRole">{t('completeProfile.professionalRoleLabel')}</Label>
+            <Label htmlFor="professionalRole">{t('completeProfile.professionalRoleLabel')}<Required /></Label>
             <div className="relative">
               <Briefcase className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
@@ -137,7 +143,7 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="phone">{t('completeProfile.phoneLabel')}</Label>
+            <Label htmlFor="phone">{t('completeProfile.phoneLabel')}<Required /></Label>
             <div className="relative">
               <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
@@ -188,6 +194,7 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
                     )}
                   </span>
                 ))}
+                <Required />
               </Label>
             </div>
             <div className="flex items-start gap-2">
@@ -211,6 +218,7 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
                     )}
                   </span>
                 ))}
+                <Required />
               </Label>
             </div>
           </div>

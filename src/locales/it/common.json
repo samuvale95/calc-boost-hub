@@ -111,7 +111,7 @@
     "professionalRoleLabel": "Ruolo nel centro",
     "professionalRolePlaceholder": "es. Neuropsichiatra Infantile",
     "phoneLabel": "Numero telefonico",
-    "countryLabel": "Paese (opzionale)",
+    "countryLabel": "Paese",
     "termsLabel": "Accetto le {{link}} della DAND Scale",
     "termsLink": "Conditions of Use",
     "privacyLabel": "Ho preso visione della {{link}}",
@@ -144,5 +144,20 @@
     "title": "404",
     "message": "Pagina non trovata",
     "backHome": "Torna alla Home"
+  },
+  "resetPassword": {
+    "title": "Imposta una nuova password",
+    "description": "Scegli una nuova password per {{email}}.",
+    "verifying": "Verifica del link in corso...",
+    "newPasswordLabel": "Nuova password",
+    "confirmPasswordLabel": "Conferma password",
+    "submit": "Salva nuova password",
+    "errorMismatch": "Le due password non coincidono",
+    "errorGeneric": "Impossibile impostare la nuova password. Riprova più tardi.",
+    "invalidTitle": "Link non valido",
+    "invalidDescription": "Questo link per il recupero password non è valido o è scaduto. Richiedine uno nuovo dalla pagina di accesso.",
+    "doneTitle": "Password aggiornata",
+    "doneDescription": "La tua password è stata modificata. Ora puoi accedere con la nuova password.",
+    "goToLogin": "Vai all'accesso"
   }
 }

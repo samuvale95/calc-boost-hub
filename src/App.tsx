@@ -12,6 +12,7 @@ import Index from "./pages/Index";
 import AdminDashboard from "./pages/AdminDashboard";
 import Login from "./pages/Login";
 import FinishSignIn from "./pages/FinishSignIn";
+import ResetPassword from "@/pages/ResetPassword";
 import Quiz from "./pages/Quiz";
 import Profile from "./pages/Profile";
 import Donate from "./pages/Donate";
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
             <Route path="/login" element={<Login />} />
             <Route path="/finish-signin" element={<FinishSignIn />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/quiz" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="/donate" element={<Donate />} />
