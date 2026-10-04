@@ -85,7 +85,12 @@
     "alreadyAuthenticatedTitle": "Già Autenticato",
     "alreadyAuthenticatedDescription": "Sei già loggato nel sistema",
     "goToProfile": "Vai al Profilo",
-    "backHome": "Torna alla Home"
+    "backHome": "Torna alla Home",
+    "forgotPassword": "Password dimenticata?",
+    "resetSentTitle": "Controlla la tua email",
+    "resetSentDescription": "Se esiste un account con {{email}}, ti abbiamo inviato un link per impostare una nuova password. Controlla anche la cartella Spam.",
+    "errorResetFailed": "Impossibile inviare l'email di recupero password. Riprova più tardi.",
+    "errorInvalidEmail": "Indirizzo email non valido"
   },
   "finishSignIn": {
     "completing": "Completamento dell'accesso...",

@@ -40,6 +40,8 @@ interface AuthContextType {
   signInWithPassword: (email: string, password: string) => Promise<void>;
   /** Password fallback — create a brand new account. */
   registerWithPassword: (email: string, password: string) => Promise<void>;
+  /** Sends a password-reset email (password recovery). */
+  resetPassword: (email: string) => Promise<void>;
   /** Fills in the registration form fields for the signed-in user. */
   completeProfile: (data: ProfileData) => Promise<User>;
   logout: () => Promise<void>;
@@ -153,6 +155,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const resetPassword = async (email: string): Promise<void> => {
+    await firebaseAuthService.sendPasswordReset(email);
+  };
+
   const resendVerificationEmail = async (email?: string): Promise<void> => {
     await firebaseAuthService.resendVerificationEmail(email || firebaseUser?.email || undefined);
   };
@@ -209,6 +215,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     completeSignIn,
     signInWithPassword,
     registerWithPassword,
+    resetPassword,
     completeProfile,
     logout,
     refreshToken,

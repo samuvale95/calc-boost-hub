@@ -16,6 +16,7 @@ import {
   signInWithEmailLink,
   signOut as firebaseSignOut,
   sendEmailVerification,
+  sendPasswordResetEmail,
   applyActionCode,
   type User as FirebaseUser,
 } from "firebase/auth";
@@ -111,6 +112,12 @@ export const firebaseAuthService = {
       console.warn("Could not automatically send verification email:", e);
     }
     return credential.user;
+  },
+
+  /** Sends the standard Firebase password-reset email (the reset page is hosted by Firebase). */
+  async sendPasswordReset(email: string): Promise<void> {
+    const auth = requireAuth();
+    await sendPasswordResetEmail(auth, email);
   },
 
   async signOut(): Promise<void> {

@@ -46,8 +46,8 @@ const KpiCard = ({
 );
 
 /**
- * Admin dashboard overview (DAND Scale plan, point 6): registered users
- * by status, usage counters, breakdowns by professional role/country, a
+ * Admin dashboard overview (DAND Scale plan, point 6): registered and deactivated users,
+ * usage counters, breakdowns by professional role/country, a
  * monthly trend, and a CSV export — everything the Fondazione needs to
  * "dimostrare la diffusione e l'impatto della DAND Scale".
  */

@@ -85,7 +85,12 @@
     "alreadyAuthenticatedTitle": "Already logged in",
     "alreadyAuthenticatedDescription": "You're already signed in",
     "goToProfile": "Go to Profile",
-    "backHome": "Back to Home"
+    "backHome": "Back to Home",
+    "forgotPassword": "Forgot your password?",
+    "resetSentTitle": "Check your email",
+    "resetSentDescription": "If an account exists for {{email}}, we've sent a link to set a new password. Check your Spam folder too.",
+    "errorResetFailed": "Could not send the password reset email. Please try again later.",
+    "errorInvalidEmail": "Invalid email address"
   },
   "finishSignIn": {
     "completing": "Completing sign-in...",

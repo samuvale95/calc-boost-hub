@@ -27,7 +27,7 @@ export const useAdmin = () => {
     if (user?.role?.toLowerCase() === 'admin' || isAdmin) return true;
     
     // Qui puoi aggiungere logica per altri tipi di permessi
-    // basati su subscription, is_active, etc.
+    // basati su is_active, etc.
     switch (permission) {
       case 'view_quiz':
         return !!user?.is_active;

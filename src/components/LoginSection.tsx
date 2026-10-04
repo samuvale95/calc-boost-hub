@@ -57,12 +57,13 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { sendSignInLink, signInWithPassword, registerWithPassword } = useAuth();
+  const { sendSignInLink, signInWithPassword, registerWithPassword, resetPassword } = useAuth();
 
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [linkSent, setLinkSent] = useState(false);
   const [verificationSent, setVerificationSent] = useState(false);
+  const [resetSent, setResetSent] = useState(false);
   const [authErrorMessage, setAuthErrorMessage] = useState<string | null>(null);
 
   const [password, setPassword] = useState("");
@@ -129,11 +130,40 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
     }
   };
 
+  const handleForgotPassword = async () => {
+    if (!email) {
+      toast({ title: t('login.errorTitle'), description: t('login.errorEmailRequired'), variant: "destructive" });
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      setAuthErrorMessage(null);
+      await resetPassword(email);
+      setResetSent(true);
+    } catch (error) {
+      // Firebase hides whether the email has an account (enumeration
+      // protection); a missing account is shown as success too, so the
+      // reset form can't be used to probe which emails are registered.
+      const code = (error as { code?: string })?.code;
+      if (code === "auth/user-not-found") {
+        setResetSent(true);
+      } else {
+        const msg = code === "auth/invalid-email" ? t('login.errorInvalidEmail') : t('login.errorResetFailed');
+        setAuthErrorMessage(msg);
+        toast({ title: t('login.errorTitle'), description: msg, variant: "destructive" });
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleClose = () => {
     setEmail("");
     setPassword("");
     setLinkSent(false);
     setVerificationSent(false);
+    setResetSent(false);
     setAuthErrorMessage(null);
     setPasswordMode("signin");
     onClose();
@@ -160,6 +190,29 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
           <div className="bg-muted p-3 rounded-lg text-xs text-muted-foreground">
             Non trovi l'email? Controlla anche nella cartella <strong>Spam</strong> o Posta indesiderata.
           </div>
+          <DialogFooter>
+            <Button onClick={handleClose} className="w-full">
+              {t('common.close')}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    );
+  }
+
+  if (resetSent) {
+    return (
+      <Dialog open={isOpen} onOpenChange={handleClose}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-green-600">
+              <CheckCircle className="h-6 w-6" />
+              {t('login.resetSentTitle')}
+            </DialogTitle>
+            <DialogDescription>
+              {t('login.resetSentDescription', { email })}
+            </DialogDescription>
+          </DialogHeader>
           <DialogFooter>
             <Button onClick={handleClose} className="w-full">
               {t('common.close')}
@@ -334,6 +387,17 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
               >
                 {passwordMode === "signin" ? t('login.switchToRegister') : t('login.switchToSignIn')}
               </button>
+
+              {passwordMode === "signin" && (
+                <button
+                  type="button"
+                  className="block text-xs text-primary hover:underline"
+                  onClick={handleForgotPassword}
+                  disabled={isLoading}
+                >
+                  {t('login.forgotPassword')}
+                </button>
+              )}
 
               <Button type="submit" disabled={isLoading} className="w-full flex items-center gap-2">
                 {isLoading ? (
