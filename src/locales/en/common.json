@@ -136,7 +136,10 @@
     "successTitle": "Registration complete!",
     "successDescription": "Your profile has been saved successfully.",
     "errorTitle": "Error",
-    "errorGeneric": "Could not complete registration"
+    "errorGeneric": "Could not complete registration",
+    "countryPlaceholder": "Select a country",
+    "countrySearch": "Search for a country...",
+    "countryEmpty": "No country found"
   },
   "usageCounter": {
     "calculatorUses": "The calculator has been used <strong>{{count}}</strong> times",

@@ -136,7 +136,10 @@
     "successTitle": "Inscription terminée !",
     "successDescription": "Votre profil a été enregistré avec succès.",
     "errorTitle": "Erreur",
-    "errorGeneric": "Impossible de terminer l'inscription"
+    "errorGeneric": "Impossible de terminer l'inscription",
+    "countryPlaceholder": "Sélectionnez un pays",
+    "countrySearch": "Rechercher un pays...",
+    "countryEmpty": "Aucun pays trouvé"
   },
   "usageCounter": {
     "calculatorUses": "Le calculateur a été utilisé <strong>{{count}}</strong> fois",

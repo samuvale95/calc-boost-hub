@@ -136,7 +136,10 @@
     "successTitle": "Registrazione completata!",
     "successDescription": "Il tuo profilo è stato salvato con successo.",
     "errorTitle": "Errore",
-    "errorGeneric": "Impossibile completare la registrazione"
+    "errorGeneric": "Impossibile completare la registrazione",
+    "countryPlaceholder": "Seleziona un paese",
+    "countrySearch": "Cerca un paese...",
+    "countryEmpty": "Nessun paese trovato"
   },
   "usageCounter": {
     "calculatorUses": "Calcolatore usato <strong>{{count}}</strong> volte",

@@ -5,10 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Building2, Briefcase, Phone, Globe, Loader2, CheckCircle } from "lucide-react";
+import { Building2, Briefcase, Phone, Loader2, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { ProfileData } from "@/services/authService";
+import { CountrySelect } from "@/components/CountrySelect";
+import { countryStoredName } from "@/data/countries";
 
 const Required = () => (
   <span className="text-red-600 ml-0.5" aria-hidden="true">
@@ -69,7 +71,7 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
       center: formData.center,
       professional_role: formData.professionalRole,
       phone: formData.phone,
-      country: formData.country || undefined,
+      country: formData.country ? countryStoredName(formData.country) : undefined,
       preferred_language: i18n.language,
       accepted_terms: acceptedTerms,
       accepted_privacy: acceptedPrivacy,
@@ -160,16 +162,12 @@ export const CompleteProfileForm = ({ onComplete }: CompleteProfileFormProps) =>
 
           <div className="space-y-2">
             <Label htmlFor="country">{t('completeProfile.countryLabel')}</Label>
-            <div className="relative">
-              <Globe className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-              <Input
-                id="country"
-                className="pl-10"
-                value={formData.country}
-                onChange={(e) => handleChange("country", e.target.value)}
-                disabled={isLoading}
-              />
-            </div>
+            <CountrySelect
+              id="country"
+              value={formData.country}
+              onChange={(code) => handleChange("country", code)}
+              disabled={isLoading}
+            />
           </div>
 
           <div className="space-y-3 pt-2">
