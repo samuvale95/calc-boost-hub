@@ -1,7 +1,5 @@
 import ExcelJS from 'exceljs';
-import { QuizData, ScoresPDF, GeneratedFile } from './pdfGenerator';
-import { downloadBlob, todayStamp } from './downloadBlob';
-// Aggiunta l'importazione di SITE_URL
+import { QuizData, ScoresPDF } from './pdfGenerator';
 import { SCALE_VERSION, SCALE_LANGUAGE, SCALE_COPYRIGHT, SITE_URL } from '@/config/scale';
 import { SUBDOMAIN_LABELS, DOMAIN_LABELS, OVERALL_LABEL } from '@/config/domainLabels';
 
@@ -18,12 +16,11 @@ const HEADER_FILL: ExcelJS.Fill = {
   fgColor: { argb: 'FFE5E7EB' },
 };
 
-/** Builds the results workbook in memory, without downloading it. */
-export const buildQuizExcel = async (
+export const generateQuizExcel = async (
   quizData: QuizData,
   scoresPDF: ScoresPDF,
   calcResults?: { [key: string]: { z: string; p: string } }
-): Promise<GeneratedFile> => {
+) => {
   const workbook = new ExcelJS.Workbook();
   workbook.creator = 'DAND Scale';
   workbook.created = new Date();
@@ -31,85 +28,87 @@ export const buildQuizExcel = async (
   const dataRow = scoresPDF.find((s) => s.question === 'DATA');
   const patientIdRow = scoresPDF.find((s) => s.question === 'ID PAZIENTE');
 
-  const writeMetaHeader = (sheet: ExcelJS.Worksheet) => {
-    // Aggiunti i campi dell'utente (nome, email) e il SITE_URL per uniformità con il PDF
-    const meta: [string, string][] = [
-      ['Versione DAND Scale', SCALE_VERSION],
-      ['Lingua', SCALE_LANGUAGE.toUpperCase()],
-      ['Data valutazione', String(dataRow?.response ?? '')],
-      ['Identificativo paziente', String(patientIdRow?.response ?? '')],
-      ['Operatore (Nome)', quizData.user.name],
-      ['Operatore (Email)', quizData.user.email],
-      ['Report generato il', new Date(quizData.user.completedAt).toLocaleString('it-IT')],
-      ['Sito Ufficiale', SITE_URL || ''], 
-      [SCALE_COPYRIGHT, ''],
-    ];
-    
-    meta.forEach(([label, value]) => {
-      const row = sheet.addRow([label, value]);
-      row.font = { italic: true, color: { argb: 'FF6B7280' } };
-    });
-    sheet.addRow([]);
+  // Creo un unico foglio di lavoro
+  const sheet = workbook.addWorksheet('Report DAND');
+
+  // Intestazione metadati
+  const meta: [string, string][] = [
+    ['Versione DAND Scale', SCALE_VERSION],
+    ['Lingua', SCALE_LANGUAGE.toUpperCase()],
+    ['Data valutazione', String(dataRow?.response ?? '')],
+    ['Identificativo paziente', String(patientIdRow?.response ?? '')],
+    ['Operatore (Nome)', quizData.user.name],
+    ['Operatore (Email)', quizData.user.email],
+    ['Report generato il', new Date(quizData.user.completedAt).toLocaleString('it-IT')],
+    ['Sito Ufficiale', SITE_URL || ''], 
+    [SCALE_COPYRIGHT, ''],
+  ];
+  
+  meta.forEach(([label, value]) => {
+    const row = sheet.addRow([label, value]);
+    row.font = { italic: true, color: { argb: 'FF6B7280' } };
+  });
+  sheet.addRow([]);
+
+  // Funzione helper per aggiungere le intestazioni di sezione con sfondo grigio
+  const addSectionHeader = (title: string, col2Header: string, col3Header: string) => {
+    const headerRow = sheet.addRow([title, col2Header, col3Header]);
+    headerRow.font = { bold: true };
+    headerRow.eachCell((cell) => (cell.fill = HEADER_FILL));
   };
 
-  // --- Sheet "Risposte" ---
-  const answersSheet = workbook.addWorksheet('Risposte');
-  writeMetaHeader(answersSheet);
+  // Funzione helper per inserire solo i valori numerici nei risultati
+  const addResultRow = (label: string, key: string) => {
+    if (!calcResults) return;
+    const entry = calcResults[key];
+    if (!entry) return;
+    sheet.addRow([label, toNumber(entry.z), toNumber(entry.p)]);
+  };
 
-  const answersHeaderRow = answersSheet.addRow(['Domanda', 'Risposta', 'Punteggio']);
-  answersHeaderRow.font = { bold: true };
-  answersHeaderRow.eachCell((cell) => (cell.fill = HEADER_FILL));
+  // 1. Sezione: Punteggio per sottodomini
+  addSectionHeader('Punteggio per sottodomini', 'Punteggio Z', 'Percentile');
+  if (calcResults) {
+    SUBDOMAIN_LABELS.forEach(({ key, label }) => addResultRow(label, key));
+  }
+  sheet.addRow([]);
 
-  // The first two rows (DATA, ID PAZIENTE) are already in the meta header above.
+  // 2. Sezione: Punteggio per domini
+  addSectionHeader('Punteggio per domini', 'Punteggio Z', 'Percentile');
+  if (calcResults) {
+    DOMAIN_LABELS.forEach(({ key, label }) => addResultRow(label, key));
+  }
+  sheet.addRow([]);
+
+  // 3. Sezione: Punteggio overall
+  addSectionHeader('Punteggio overall', 'Punteggio Z', 'Percentile');
+  if (calcResults) {
+    addResultRow(OVERALL_LABEL.label, OVERALL_LABEL.key);
+  }
+  sheet.addRow([]);
+
+  // 4. Sezione: Punteggio per item
+  addSectionHeader('Punteggio per item', 'Risposta', 'Punteggio');
   scoresPDF
     .filter((row) => row.question !== 'DATA' && row.question !== 'ID PAZIENTE')
     .forEach((row) => {
-      answersSheet.addRow([row.question ?? '', row.response != null ? String(row.response) : '', row.score ?? '']);
+      sheet.addRow([row.question ?? '', row.response != null ? String(row.response) : '', row.score ?? '']);
     });
 
-  answersSheet.columns = [{ width: 55 }, { width: 35 }, { width: 12 }];
+  // Impostazione larghezza colonne
+  sheet.columns = [{ width: 55 }, { width: 35 }, { width: 20 }];
 
-  // --- Sheet "Risultati" ---
-  const resultsSheet = workbook.addWorksheet('Risultati');
-  writeMetaHeader(resultsSheet);
-
-  const resultsHeaderRow = resultsSheet.addRow([
-    'Dominio / Sottodominio',
-    'Z (testo)',
-    'Z (numero)',
-    'Percentile (testo)',
-    'Percentile (numero)',
-  ]);
-  resultsHeaderRow.font = { bold: true };
-  resultsHeaderRow.eachCell((cell) => (cell.fill = HEADER_FILL));
-
-  if (calcResults) {
-    const addResultRow = (label: string, key: string) => {
-      const entry = calcResults[key];
-      if (!entry) return;
-      resultsSheet.addRow([label, entry.z, toNumber(entry.z), entry.p, toNumber(entry.p)]);
-    };
-
-    addResultRow(OVERALL_LABEL.label, OVERALL_LABEL.key);
-    DOMAIN_LABELS.forEach(({ key, label }) => addResultRow(label, key));
-    SUBDOMAIN_LABELS.forEach(({ key, label }) => addResultRow(label, key));
-  }
-
-  resultsSheet.columns = [{ width: 40 }, { width: 14 }, { width: 14 }, { width: 16 }, { width: 16 }];
-
+  // Generazione del file Excel e download
   const buffer = await workbook.xlsx.writeBuffer();
   const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
 
-  return { blob, filename: `D-DAND-risultati-${todayStamp()}.xlsx` };
-};
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `D-DAND-risultati-${new Date().toISOString().split('T')[0]}.xlsx`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 
-/** Builds the results workbook and downloads it. */
-export const generateQuizExcel = async (
-  quizData: QuizData,
-  scoresPDF: ScoresPDF,
-  calcResults?: { [key: string]: { z: string; p: string } }
-) => {
-  const { blob, filename } = await buildQuizExcel(quizData, scoresPDF, calcResults);
-  downloadBlob(blob, filename);
   return true;
 };
