@@ -1,5 +1,6 @@
 import ExcelJS from 'exceljs';
-import { QuizData, ScoresPDF } from './pdfGenerator';
+import { QuizData, ScoresPDF, GeneratedFile } from './pdfGenerator';
+import { downloadBlob, todayStamp } from './downloadBlob';
 import { SCALE_VERSION, SCALE_LANGUAGE, SCALE_COPYRIGHT, SITE_URL } from '@/config/scale';
 import { SUBDOMAIN_LABELS, DOMAIN_LABELS, OVERALL_LABEL } from '@/config/domainLabels';
 
@@ -16,11 +17,12 @@ const HEADER_FILL: ExcelJS.Fill = {
   fgColor: { argb: 'FFE5E7EB' },
 };
 
-export const generateQuizExcel = async (
+/** Builds the results workbook in memory, without downloading it. */
+export const buildQuizExcel = async (
   quizData: QuizData,
   scoresPDF: ScoresPDF,
   calcResults?: { [key: string]: { z: string; p: string } }
-) => {
+): Promise<GeneratedFile> => {
   const workbook = new ExcelJS.Workbook();
   workbook.creator = 'DAND Scale';
   workbook.created = new Date();
@@ -97,18 +99,20 @@ export const generateQuizExcel = async (
   // Impostazione larghezza colonne
   sheet.columns = [{ width: 55 }, { width: 35 }, { width: 20 }];
 
-  // Generazione del file Excel e download
+  // Generazione del file Excel
   const buffer = await workbook.xlsx.writeBuffer();
   const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
 
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `D-DAND-risultati-${new Date().toISOString().split('T')[0]}.xlsx`;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
+  return { blob, filename: `D-DAND-risultati-${todayStamp()}.xlsx` };
+};
 
+/** Builds the results workbook and downloads it. */
+export const generateQuizExcel = async (
+  quizData: QuizData,
+  scoresPDF: ScoresPDF,
+  calcResults?: { [key: string]: { z: string; p: string } }
+) => {
+  const { blob, filename } = await buildQuizExcel(quizData, scoresPDF, calcResults);
+  downloadBlob(blob, filename);
   return true;
 };
