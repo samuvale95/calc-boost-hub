@@ -14,51 +14,51 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// The slide images themselves are Italian (screenshots of the
-// Fondazione's presentation) — only the question labels are translated
-// via i18n (hero.faq.*) until the Fondazione provides translated slides.
+// Slides come from the Fondazione's HTML deck (public/slides/deck.html),
+// embedded one at a time via ?slide=N. The deck carries its own IT/EN/FR
+// texts and picks them from ?lang=, so it follows the interface language.
 const faqs = [
   {
     id: 1,
     icon: Brain,
     key: "q1",
-    images: ["/slides/slide-03.png"],
+    slides: [3],
   },
   {
     id: 2,
     icon: Activity,
     key: "q2",
-    images: ["/slides/slide-04.png"],
+    slides: [4],
   },
   {
     id: 3,
     icon: BookOpen,
     key: "q3",
-    images: ["/slides/slide-05.png", "/slides/slide-09.png"],
+    slides: [5, 9],
   },
   {
     id: 4,
     icon: Home,
     key: "q4",
-    images: ["/slides/slide-07.png", "/slides/slide-08.png"],
+    slides: [7, 8],
   },
   {
     id: 5,
     icon: Smile,
     key: "q5",
-    images: ["/slides/slide-06.png"],
+    slides: [6],
   },
   {
     id: 6,
     icon: Moon,
     key: "q6",
-    images: ["/slides/slide-10.png"],
+    slides: [10],
   },
   {
     id: 7,
     icon: FileText,
     key: "q7",
-    images: ["/slides/slide-02.png", "/slides/slide-11.png"],
+    slides: [2, 11],
   },
 ];
 
@@ -66,11 +66,13 @@ const faqs = [
 const AccordionItem = ({
   faq,
   question,
+  lang,
   isOpen,
   onToggle,
 }: {
   faq: (typeof faqs)[0];
   question: string;
+  lang: string;
   isOpen: boolean;
   onToggle: () => void;
 }) => {
@@ -138,14 +140,18 @@ const AccordionItem = ({
           <div className="px-5 pb-5">
             <div className="h-px bg-gradient-to-r from-[hsl(95,87%,34%,0.25)] to-[hsl(316,91%,40%,0.25)] mb-4" />
             <div className="flex flex-col gap-3">
-              {faq.images.map((src, i) => (
-                <img
-                  key={i}
-                  src={src}
-                  alt={`${question} — slide ${i + 1}`}
-                  loading="lazy"
-                  className="w-full rounded-lg border border-border/50 shadow-sm object-contain"
-                />
+              {faq.slides.map((n) => (
+                <div
+                  key={n}
+                  className="w-full aspect-video rounded-lg border border-border/50 shadow-sm overflow-hidden bg-white"
+                >
+                  <iframe
+                    src={`/slides/deck.html?slide=${n}&lang=${lang}`}
+                    title={`${question} — slide ${n}`}
+                    loading="lazy"
+                    className="w-full h-full border-0"
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -156,7 +162,7 @@ const AccordionItem = ({
 };
 
 export const Hero = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   // Prima domanda aperta di default per mostrare l'interazione
   const [openId, setOpenId] = useState<number | null>(1);
 
@@ -247,6 +253,7 @@ export const Hero = () => {
                 key={faq.id}
                 faq={faq}
                 question={t(`hero.faq.${faq.key}`)}
+                lang={i18n.resolvedLanguage ?? i18n.language}
                 isOpen={openId === faq.id}
                 onToggle={() => toggle(faq.id)}
               />
