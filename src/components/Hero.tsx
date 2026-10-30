@@ -11,6 +11,7 @@ import {
   Moon,
   FileText,
   LogIn,
+  Maximize2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -67,12 +68,14 @@ const AccordionItem = ({
   faq,
   question,
   lang,
+  openSlideLabel,
   isOpen,
   onToggle,
 }: {
   faq: (typeof faqs)[0];
   question: string;
   lang: string;
+  openSlideLabel: string;
   isOpen: boolean;
   onToggle: () => void;
 }) => {
@@ -137,13 +140,13 @@ const AccordionItem = ({
         }`}
       >
         <div className="overflow-hidden">
-          <div className="px-5 pb-5">
+          <div className="px-3 pb-3 sm:px-5 sm:pb-5">
             <div className="h-px bg-gradient-to-r from-[hsl(95,87%,34%,0.25)] to-[hsl(316,91%,40%,0.25)] mb-4" />
             <div className="flex flex-col gap-3">
               {faq.slides.map((n) => (
                 <div
                   key={n}
-                  className="w-full aspect-video rounded-lg border border-border/50 shadow-sm overflow-hidden bg-white"
+                  className="relative w-full aspect-video rounded-lg border border-border/50 shadow-sm overflow-hidden bg-white"
                 >
                   <iframe
                     src={`/slides/deck.html?slide=${n}&lang=${lang}`}
@@ -151,6 +154,17 @@ const AccordionItem = ({
                     loading="lazy"
                     className="w-full h-full border-0"
                   />
+                  {/* On small screens the slide text is tiny: let users open it full size */}
+                  <a
+                    href={`/slides/deck.html?slide=${n}&lang=${lang}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={openSlideLabel}
+                    title={openSlideLabel}
+                    className="absolute bottom-1.5 right-1.5 w-7 h-7 rounded-md bg-white/90 border border-border shadow-sm flex items-center justify-center text-[hsl(95,87%,34%)] hover:bg-white"
+                  >
+                    <Maximize2 className="w-3.5 h-3.5" />
+                  </a>
                 </div>
               ))}
             </div>
@@ -223,7 +237,7 @@ export const Hero = () => {
         <div className="hidden md:block w-px bg-gradient-to-b from-transparent via-[hsl(95,87%,34%,0.2)] to-transparent self-stretch shrink-0" />
 
         {/* ── DESTRA (65%): FAQ Accordion ── */}
-        <main className="flex flex-col w-full md:w-[65%] px-6 md:px-10 lg:px-12 py-12 gap-3">
+        <main className="flex flex-col w-full min-w-0 md:flex-1 px-4 sm:px-6 md:px-10 lg:px-12 py-12 gap-3">
 
           {/* Header mobile */}
           <div className="flex md:hidden items-center gap-3 mb-4">
@@ -238,7 +252,7 @@ export const Hero = () => {
             <p className="text-[11px] font-semibold uppercase tracking-widest text-[hsl(316,91%,40%)] mb-1.5">
               {t('hero.eyebrow')}
             </p>
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground leading-snug whitespace-nowrap">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground leading-snug text-balance">
               {t('hero.title')}
             </h2>
             <p className="text-sm text-muted-foreground mt-2">
@@ -254,6 +268,7 @@ export const Hero = () => {
                 faq={faq}
                 question={t(`hero.faq.${faq.key}`)}
                 lang={i18n.resolvedLanguage ?? i18n.language}
+                openSlideLabel={t('hero.openSlide')}
                 isOpen={openId === faq.id}
                 onToggle={() => toggle(faq.id)}
               />
