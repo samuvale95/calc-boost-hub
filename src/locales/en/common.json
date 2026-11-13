@@ -38,13 +38,12 @@
       "q5": "How is it used in practice?",
       "q6": "What are the strengths of the D-DAND?",
       "q7": "Who developed the D-DAND and where is it published?",
+      "administration": "Paper or digital administration",
       "industry": "Industry / Pharma / CRO / Sponsored Clinical Trials"
     },
     "readPaper": "Read the paper in Epilepsia"
   },
   "administration": {
-    "eyebrow": "How to use it",
-    "title": "Paper or digital administration",
     "subtitle": "By registering on the site you can download, free of charge, all the materials needed to administer the test on paper. You also get direct access to the online calculator, with built-in automatic scoring.",
     "cards": {
       "accuracy": {

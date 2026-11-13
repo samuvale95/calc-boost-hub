@@ -38,13 +38,12 @@
       "q5": "Comment l'utiliser en pratique ?",
       "q6": "Quels sont les points forts de la D-DAND ?",
       "q7": "Qui a développé la D-DAND et où est-elle publiée ?",
+      "administration": "Passation papier ou numérique",
       "industry": "Industrie / Pharma / CRO / Essais cliniques sponsorisés"
     },
     "readPaper": "Lire la publication dans Epilepsia"
   },
   "administration": {
-    "eyebrow": "Mode d'emploi",
-    "title": "Passation papier ou numérique",
     "subtitle": "En vous inscrivant sur le site, vous pouvez télécharger gratuitement tout le matériel nécessaire à la passation du test sur papier. Vous accédez en plus directement au calculateur en ligne, avec cotation automatique intégrée.",
     "cards": {
       "accuracy": {

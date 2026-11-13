@@ -38,13 +38,12 @@
       "q5": "Come si usa nella pratica?",
       "q6": "Quali sono i punti di forza della D-DAND?",
       "q7": "Chi ha sviluppato la D-DAND e dove è pubblicata?",
+      "administration": "Somministrazione cartacea o digitale",
       "industry": "Industria / Pharma / CRO / Clinical Trial sponsorizzati"
     },
     "readPaper": "Leggi la pubblicazione su Epilepsia"
   },
   "administration": {
-    "eyebrow": "Come si usa",
-    "title": "Somministrazione cartacea o digitale",
     "subtitle": "Iscrivendoti al sito puoi scaricare gratuitamente tutto il materiale necessario per la somministrazione cartacea del test. In più, ottieni l'accesso diretto al calcolatore online, con scoring automatico integrato.",
     "cards": {
       "accuracy": {

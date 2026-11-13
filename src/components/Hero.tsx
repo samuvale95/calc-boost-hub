@@ -15,7 +15,9 @@ import {
   ExternalLink,
   Building2,
   Mail,
+  ClipboardList,
 } from "lucide-react";
+import { AdministrationContent } from "@/components/AdministrationContent";
 import { Button } from "@/components/ui/button";
 import logoDravet from "@/assets/logo-dravet.png";
 import { CONTACT_EMAIL } from "@/components/IndustryNotice";
@@ -55,6 +57,14 @@ const faqs = [
     icon: Smile,
     key: "q5",
     slides: [6],
+  },
+  {
+    // "Somministrazione cartacea o digitale" (Fondazione Dravet): text cards, not slides.
+    id: 9,
+    icon: ClipboardList,
+    key: "administration",
+    slides: [],
+    administration: true,
   },
   {
     id: 6,
@@ -185,6 +195,7 @@ const AccordionItem = ({
             <div className="h-px bg-gradient-to-r from-[hsl(95,87%,34%,0.25)] to-[hsl(316,91%,40%,0.25)] mb-4" />
             <div className="flex flex-col gap-3">
               {faq.industry && <IndustryContent />}
+              {faq.administration && <AdministrationContent />}
               {faq.slides.map((n) => (
                 <div
                   key={n}
