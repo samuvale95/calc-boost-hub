@@ -81,6 +81,13 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
   // Mandatory "I have read the privacy notice" (Fondazione Dravet feedback, p. 13).
   const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
 
+  // Submit stays disabled until the required fields are filled in too,
+  // not just the privacy checkbox.
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  const passwordValid = mode === "register" ? password.length >= 8 : password.length > 0;
+  const canSubmitLink = acceptedPrivacy && emailValid;
+  const canSubmitPassword = acceptedPrivacy && emailValid && passwordValid;
+
   const privacyConsent = (id: string) => {
     const [before, after] = t('login.privacyConsent', { link: '\u0000' }).split('\u0000');
     return (
@@ -371,7 +378,7 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
 
               {privacyConsent("privacy-link")}
 
-              <Button type="submit" disabled={isLoading || !acceptedPrivacy} className="w-full flex items-center gap-2">
+              <Button type="submit" disabled={isLoading || !canSubmitLink} className="w-full flex items-center gap-2">
                 {isLoading ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
@@ -453,7 +460,7 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
 
               {privacyConsent("privacy-password")}
 
-              <Button type="submit" disabled={isLoading || !acceptedPrivacy} className="w-full flex items-center gap-2">
+              <Button type="submit" disabled={isLoading || !canSubmitPassword} className="w-full flex items-center gap-2">
                 {isLoading ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
