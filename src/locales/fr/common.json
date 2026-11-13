@@ -25,7 +25,7 @@
   },
   "hero": {
     "eyebrow": "Découvrez l'outil",
-    "title": "Tout ce qu'il faut savoir sur l'échelle D-DAND",
+    "title": "D-DAND (Dravet Disease Associated Neuropsychiatric Disorders) : tout ce qu'il faut savoir sur l'échelle",
     "subtitle": "Cliquez sur une question pour voir la réponse.",
     "acronym": "Disease Associated Neuropsychiatric Disorders",
     "foundation": "Fondazione Dravet ETS",
@@ -37,8 +37,10 @@
       "q4": "Qu'évalue la D-DAND ?",
       "q5": "Comment l'utiliser en pratique ?",
       "q6": "Quels sont les points forts de la D-DAND ?",
-      "q7": "Qui a développé la D-DAND et où est-elle publiée ?"
-    }
+      "q7": "Qui a développé la D-DAND et où est-elle publiée ?",
+      "industry": "Industrie / Pharma / CRO / Essais cliniques sponsorisés"
+    },
+    "readPaper": "Lire la publication dans Epilepsia"
   },
   "access": {
     "eyebrow": "Accès à l'échelle",
@@ -46,6 +48,7 @@
     "subtitle": "L'utilisation clinique, académique et de recherche non commerciale de la DAND Scale est gratuite. Une simple inscription suffit pour télécharger l'échelle, le manuel et utiliser le calculateur automatique.",
     "features": {
       "pdf": "Échelle D-DAND au format PDF",
+      "results": "Résultats téléchargeables en PDF ou Excel",
       "manual": "Manuel d'utilisation inclus",
       "calculator": "Calculateur automatique des 25 résultats",
       "privacy": "Aucune donnée patient conservée sur le serveur",
@@ -58,7 +61,15 @@
     "title": "Industrie / Pharma / CRO / Essais cliniques sponsorisés.",
     "body": "L'utilisation de la DAND Scale par des entreprises pharmaceutiques, des CRO, dans le cadre d'essais cliniques sponsorisés ou à d'autres fins commerciales, est soumise à une demande spécifique auprès de la Fondazione Dravet ETS. Contact :",
     "afterContact": "La Fondazione Dravet ETS évaluera la demande et contactera le demandeur pour convenir des modalités d'utilisation et d'une éventuelle collaboration.",
-    "acknowledge": "J'ai compris"
+    "acknowledge": "J'ai compris",
+    "contactCta": "Écrire à la Fondazione Dravet ETS"
+  },
+  "supportedBy": {
+    "eyebrow": "Remerciements",
+    "title": "Supported by",
+    "lollo": "Ce projet a été soutenu par les dons de la famille de Lollo, en sa mémoire.",
+    "alsoBy": "La D-DAND a également été soutenue par",
+    "grants": "La Fondazione Dravet ETS remercie également avec gratitude Jazz Pharmaceuticals, UCB, Lundbeck et Biocodex pour leur soutien sous forme de subventions non restrictives."
   },
   "login": {
     "title": "Connexion à la DAND Scale",
@@ -104,7 +115,10 @@
     "errorResetTooMany": "Trop de demandes. Veuillez réessayer dans quelques minutes.",
     "titleRegister": "Inscription à la DAND Scale",
     "noteRegister": "Après avoir ouvert le lien, il vous sera demandé de compléter votre inscription.",
-    "submitRegister": "Envoyer le lien d'inscription"
+    "submitRegister": "Envoyer le lien d'inscription",
+    "privacyConsent": "J'ai pris connaissance de la {{link}}",
+    "privacyLink": "politique de confidentialité",
+    "errorPrivacy": "Pour continuer, vous devez prendre connaissance de la politique de confidentialité"
   },
   "finishSignIn": {
     "completing": "Finalisation de la connexion...",
@@ -194,5 +208,17 @@
     "confirmDelete": "Supprimer la publication « {{title}} » ?",
     "authors": "Auteurs :",
     "downloadPdf": "Télécharger le PDF"
+  },
+  "footer": {
+    "privacy": "Politique de confidentialité",
+    "cookie": "Politique relative aux cookies",
+    "cookiePreferences": "Préférences cookies",
+    "taxCode": "C.F.",
+    "legalNav": "Mentions légales"
+  },
+  "legal": {
+    "privacyTitle": "Politique de confidentialité",
+    "cookieTitle": "Politique relative aux cookies",
+    "comingSoon": "Le document est en cours de publication. Pour toute information, écrivez à"
   }
 }

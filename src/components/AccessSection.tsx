@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import { CheckIcon, FileText, Calculator, Download, Users, ShieldCheck } from "lucide-react";
+import { CheckIcon, FileText, Calculator, Download, Users, ShieldCheck, FileSpreadsheet } from "lucide-react";
 import { LoginSection } from "./LoginSection";
 import { UsageCounter } from "./UsageCounter";
 
 const FEATURE_ICONS = [
   { key: "pdf", icon: FileText },
+  { key: "results", icon: FileSpreadsheet },
   { key: "manual", icon: Download },
   { key: "calculator", icon: Calculator },
   { key: "privacy", icon: ShieldCheck },
