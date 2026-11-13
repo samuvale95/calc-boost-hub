@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Dialog,
@@ -77,9 +78,39 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
   // Sign in vs register, shared by both tabs so every text follows it.
   const [mode, setMode] = useState<"signin" | "register">("signin");
   const [tab, setTab] = useState<"link" | "password">("link");
+  // Mandatory "I have read the privacy notice" (Fondazione Dravet feedback, p. 13).
+  const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
+
+  const privacyConsent = (id: string) => {
+    const [before, after] = t('login.privacyConsent', { link: '\u0000' }).split('\u0000');
+    return (
+      <div className="flex items-start gap-2">
+        <Checkbox
+          id={id}
+          checked={acceptedPrivacy}
+          onCheckedChange={(checked) => setAcceptedPrivacy(checked === true)}
+          disabled={isLoading}
+          aria-required="true"
+        />
+        <Label htmlFor={id} className="text-xs font-normal leading-snug">
+          {before}
+          <a href="/privacy-policy" target="_blank" rel="noreferrer" className="text-primary hover:underline">
+            {t('login.privacyLink')}
+          </a>
+          {after}
+          <span className="text-destructive"> *</span>
+        </Label>
+      </div>
+    );
+  };
 
   const handleSendLink = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!acceptedPrivacy) {
+      toast({ title: t('login.errorTitle'), description: t('login.errorPrivacy'), variant: "destructive" });
+      return;
+    }
 
     if (!email) {
       toast({ title: t('login.errorTitle'), description: t('login.errorEmailRequired'), variant: "destructive" });
@@ -103,6 +134,11 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
 
   const handlePasswordSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!acceptedPrivacy) {
+      toast({ title: t('login.errorTitle'), description: t('login.errorPrivacy'), variant: "destructive" });
+      return;
+    }
 
     if (!email || !password) {
       toast({ title: t('login.errorTitle'), description: t('login.errorEmailRequired'), variant: "destructive" });
@@ -333,7 +369,9 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
                 {mode === "signin" ? t('login.switchToRegister') : t('login.switchToSignIn')}
               </button>
 
-              <Button type="submit" disabled={isLoading} className="w-full flex items-center gap-2">
+              {privacyConsent("privacy-link")}
+
+              <Button type="submit" disabled={isLoading || !acceptedPrivacy} className="w-full flex items-center gap-2">
                 {isLoading ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
@@ -413,7 +451,9 @@ export const LoginSection = ({ isOpen, onClose }: LoginSectionProps) => {
                 </button>
               )}
 
-              <Button type="submit" disabled={isLoading} className="w-full flex items-center gap-2">
+              {privacyConsent("privacy-password")}
+
+              <Button type="submit" disabled={isLoading || !acceptedPrivacy} className="w-full flex items-center gap-2">
                 {isLoading ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
