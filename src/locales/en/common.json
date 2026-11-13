@@ -42,6 +42,25 @@
     },
     "readPaper": "Read the paper in Epilepsia"
   },
+  "administration": {
+    "eyebrow": "How to use it",
+    "title": "Paper or digital administration",
+    "subtitle": "By registering on the site you can download, free of charge, all the materials needed to administer the test on paper. You also get direct access to the online calculator, with built-in automatic scoring.",
+    "cards": {
+      "accuracy": {
+        "title": "Maximum accuracy",
+        "body": "Removes the approximations typical of traditional conversion tables and eliminates the risk of manual calculation errors."
+      },
+      "privacy": {
+        "title": "Full respect for privacy",
+        "body": "No sensitive data or patient results are stored on our servers."
+      },
+      "practical": {
+        "title": "Instant convenience",
+        "body": "Export and archive result reports in one click, as PDF or Excel."
+      }
+    }
+  },
   "access": {
     "eyebrow": "Access to the scale",
     "title": "Register to access",

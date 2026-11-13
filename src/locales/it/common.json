@@ -42,6 +42,25 @@
     },
     "readPaper": "Leggi la pubblicazione su Epilepsia"
   },
+  "administration": {
+    "eyebrow": "Come si usa",
+    "title": "Somministrazione cartacea o digitale",
+    "subtitle": "Iscrivendoti al sito puoi scaricare gratuitamente tutto il materiale necessario per la somministrazione cartacea del test. In più, ottieni l'accesso diretto al calcolatore online, con scoring automatico integrato.",
+    "cards": {
+      "accuracy": {
+        "title": "Massima accuratezza",
+        "body": "Elimina le approssimazioni tipiche delle tabelle di conversione tradizionali e azzera il rischio di errori di calcolo manuale."
+      },
+      "privacy": {
+        "title": "Totale rispetto della privacy",
+        "body": "Nessun dato sensibile o risultato dei pazienti viene salvato sui nostri server."
+      },
+      "practical": {
+        "title": "Praticità immediata",
+        "body": "Esporta e archivia i report dei risultati in un clic, in formato PDF o Excel."
+      }
+    }
+  },
   "access": {
     "eyebrow": "Accesso alla scala",
     "title": "Registrati per accedere",

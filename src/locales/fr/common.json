@@ -42,6 +42,25 @@
     },
     "readPaper": "Lire la publication dans Epilepsia"
   },
+  "administration": {
+    "eyebrow": "Mode d'emploi",
+    "title": "Passation papier ou numérique",
+    "subtitle": "En vous inscrivant sur le site, vous pouvez télécharger gratuitement tout le matériel nécessaire à la passation du test sur papier. Vous accédez en plus directement au calculateur en ligne, avec cotation automatique intégrée.",
+    "cards": {
+      "accuracy": {
+        "title": "Précision maximale",
+        "body": "Supprime les approximations propres aux tables de conversion traditionnelles et élimine le risque d'erreurs de calcul manuel."
+      },
+      "privacy": {
+        "title": "Respect total de la vie privée",
+        "body": "Aucune donnée sensible ni aucun résultat des patients n'est enregistré sur nos serveurs."
+      },
+      "practical": {
+        "title": "Simplicité immédiate",
+        "body": "Exportez et archivez les rapports de résultats en un clic, au format PDF ou Excel."
+      }
+    }
+  },
   "access": {
     "eyebrow": "Accès à l'échelle",
     "title": "Inscrivez-vous pour accéder",
