@@ -402,8 +402,22 @@ const resetQuiz = () => {
                       </span>
                     )}
                   </p>
-                  <br />
-                  <p className="text-sm text-red-800 mt-1 font-medium">ATTENZIONE: se ricarichi o abbandoni la pagina, i dati non salvati andranno persi</p>
+                  <div
+                    role="note"
+                    className="mt-4 flex items-start gap-3 rounded-xl border border-[hsl(316,91%,40%,0.25)] border-l-4 border-l-[hsl(316,91%,40%)] bg-[#fff4fc] px-4 py-3 shadow-sm"
+                  >
+                    <span className="flex-shrink-0 w-9 h-9 rounded-lg bg-[hsl(316,91%,40%)] text-white flex items-center justify-center">
+                      <AlertTriangle className="h-4 w-4" />
+                    </span>
+                    <div className="text-sm leading-snug">
+                      <p className="font-bold text-[hsl(316,91%,32%)]">Attenzione</p>
+                      <p className="text-foreground/80">
+                        {showResults
+                          ? "I risultati non vengono salvati sul sito: scarica il PDF o l'Excel prima di lasciare la pagina."
+                          : "Se ricarichi o abbandoni la pagina, i dati non salvati andranno persi."}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
@@ -798,8 +812,10 @@ const resetQuiz = () => {
       <AlertDialog open={leaveGuard.pending} onOpenChange={(open) => !open && leaveGuard.cancel()}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle className="flex items-center gap-2 text-destructive">
-              <AlertTriangle className="h-5 w-5" />
+            <AlertDialogTitle className="flex items-center gap-3 text-[hsl(316,91%,32%)]">
+              <span className="w-9 h-9 rounded-lg bg-[hsl(316,91%,40%)] text-white flex items-center justify-center">
+                <AlertTriangle className="h-4 w-4" />
+              </span>
               ATTENZIONE!
             </AlertDialogTitle>
             <AlertDialogDescription className="text-base text-foreground">
@@ -818,7 +834,7 @@ const resetQuiz = () => {
           </div>
           <AlertDialogFooter>
             <AlertDialogCancel>Resta sulla pagina</AlertDialogCancel>
-            <Button variant="destructive" onClick={leaveGuard.confirm}>
+            <Button onClick={leaveGuard.confirm} className="bg-[hsl(316,91%,40%)] hover:bg-[hsl(316,91%,34%)] text-white">
               Esci comunque
             </Button>
           </AlertDialogFooter>
