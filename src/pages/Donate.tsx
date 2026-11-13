@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Heart, Copy, Check } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { FOUNDATION } from "@/config/legal";
 import logoDravet from "@/assets/logo-dravet.png";
 
 // PayPal hosted donate button, provided by Fondazione Dravet ETS (email
@@ -10,13 +11,6 @@ import logoDravet from "@/assets/logo-dravet.png";
 // Fondazione's own PayPal account confirming a new one.
 const PAYPAL_DONATE_URL = "https://www.paypal.com/donate/?hosted_button_id=YCRB5B4Q9FFEL";
 
-// From Fondazione Dravet ETS's own letterhead (email 05/08/2026).
-const FOUNDATION = {
-  name: "Fondazione Dravet ETS",
-  address: "Via Don Enrico Tazzoli 12, 37121 Verona",
-  taxCode: "90018630237",
-  email: "fondazionedravet@gmail.com",
-};
 
 /**
  * Donations page (DAND Scale plan, point 12: site structure). The PayPal

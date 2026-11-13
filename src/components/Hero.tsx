@@ -18,6 +18,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logoDravet from "@/assets/logo-dravet.png";
+import logoUnipv from "@/assets/logo-unipv.svg";
+import logoNecker from "@/assets/logo-necker.png";
 import { CONTACT_EMAIL } from "@/components/IndustryNotice";
 
 const PAPER_URL = "https://doi.org/10.1002/epi.70399";
@@ -67,6 +69,11 @@ const faqs = [
     icon: FileText,
     key: "q7",
     slides: [2],
+    logos: [
+      { src: logoDravet, alt: "Fondazione Dravet ETS" },
+      { src: logoUnipv, alt: "Università di Pavia" },
+      { src: logoNecker, alt: "Hôpital Necker-Enfants malades" },
+    ],
     link: { href: PAPER_URL, labelKey: "hero.readPaper" },
   },
   {
@@ -185,6 +192,15 @@ const AccordionItem = ({
             <div className="h-px bg-gradient-to-r from-[hsl(95,87%,34%,0.25)] to-[hsl(316,91%,40%,0.25)] mb-4" />
             <div className="flex flex-col gap-3">
               {faq.industry && <IndustryContent />}
+              {faq.logos && (
+                <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 py-2">
+                  {faq.logos.map(({ src, alt }) => (
+                    <li key={alt}>
+                      <img src={src} alt={alt} title={alt} className="h-12 md:h-14 w-auto select-none" draggable={false} />
+                    </li>
+                  ))}
+                </ul>
+              )}
               {faq.slides.map((n) => (
                 <div
                   key={n}

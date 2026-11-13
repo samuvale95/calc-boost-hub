@@ -115,7 +115,10 @@
     "errorResetTooMany": "Too many requests. Please try again in a few minutes.",
     "titleRegister": "Register for the DAND Scale",
     "noteRegister": "After opening the link you'll be asked to complete your registration.",
-    "submitRegister": "Send registration link"
+    "submitRegister": "Send registration link",
+    "privacyConsent": "I have read the {{link}}",
+    "privacyLink": "privacy notice",
+    "errorPrivacy": "To continue you must read the privacy notice"
   },
   "finishSignIn": {
     "completing": "Completing sign-in...",
@@ -205,5 +208,17 @@
     "confirmDelete": "Delete the publication “{{title}}”?",
     "authors": "Authors:",
     "downloadPdf": "Download PDF"
+  },
+  "footer": {
+    "privacy": "Privacy Policy",
+    "cookie": "Cookie Policy",
+    "cookiePreferences": "Cookie preferences",
+    "taxCode": "Tax code",
+    "legalNav": "Legal"
+  },
+  "legal": {
+    "privacyTitle": "Privacy Policy",
+    "cookieTitle": "Cookie Policy",
+    "comingSoon": "This document is being published. For information write to"
   }
 }

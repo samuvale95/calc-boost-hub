@@ -115,7 +115,10 @@
     "errorResetTooMany": "Trop de demandes. Veuillez réessayer dans quelques minutes.",
     "titleRegister": "Inscription à la DAND Scale",
     "noteRegister": "Après avoir ouvert le lien, il vous sera demandé de compléter votre inscription.",
-    "submitRegister": "Envoyer le lien d'inscription"
+    "submitRegister": "Envoyer le lien d'inscription",
+    "privacyConsent": "J'ai pris connaissance de la {{link}}",
+    "privacyLink": "politique de confidentialité",
+    "errorPrivacy": "Pour continuer, vous devez prendre connaissance de la politique de confidentialité"
   },
   "finishSignIn": {
     "completing": "Finalisation de la connexion...",
@@ -205,5 +208,17 @@
     "confirmDelete": "Supprimer la publication « {{title}} » ?",
     "authors": "Auteurs :",
     "downloadPdf": "Télécharger le PDF"
+  },
+  "footer": {
+    "privacy": "Politique de confidentialité",
+    "cookie": "Politique relative aux cookies",
+    "cookiePreferences": "Préférences cookies",
+    "taxCode": "C.F.",
+    "legalNav": "Mentions légales"
+  },
+  "legal": {
+    "privacyTitle": "Politique de confidentialité",
+    "cookieTitle": "Politique relative aux cookies",
+    "comingSoon": "Le document est en cours de publication. Pour toute information, écrivez à"
   }
 }
