@@ -12,8 +12,15 @@ import {
   FileText,
   LogIn,
   Maximize2,
+  ExternalLink,
+  Building2,
+  Mail,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logoDravet from "@/assets/logo-dravet.png";
+import { CONTACT_EMAIL } from "@/components/IndustryNotice";
+
+const PAPER_URL = "https://doi.org/10.1002/epi.70399";
 
 // Slides come from the Fondazione's HTML deck (public/slides/deck.html),
 // embedded one at a time via ?slide=N. The deck carries its own IT/EN/FR
@@ -35,7 +42,7 @@ const faqs = [
     id: 3,
     icon: BookOpen,
     key: "q3",
-    slides: [5, 9],
+    slides: [5],
   },
   {
     id: 4,
@@ -59,9 +66,41 @@ const faqs = [
     id: 7,
     icon: FileText,
     key: "q7",
-    slides: [2, 11],
+    slides: [2],
+    link: { href: PAPER_URL, labelKey: "hero.readPaper" },
+  },
+  {
+    // Industry / pharma / CRO notice (Fondazione Dravet feedback): text, not slides.
+    id: 8,
+    icon: Building2,
+    key: "industry",
+    slides: [],
+    industry: true,
   },
 ];
+
+// Same agreed texts as the modal shown before sign-in (IndustryNotice.tsx).
+const IndustryContent = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="px-2 py-1 text-sm text-muted-foreground leading-relaxed space-y-3">
+      <p>
+        {t("industryNotice.body")}{" "}
+        <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary hover:underline">
+          {CONTACT_EMAIL}
+        </a>
+        .
+      </p>
+      <p>{t("industryNotice.afterContact")}</p>
+      <Button asChild size="sm" className="bg-[hsl(316,91%,40%)] hover:bg-[hsl(316,91%,34%)] text-white rounded-lg gap-2">
+        <a href={`mailto:${CONTACT_EMAIL}`}>
+          <Mail className="w-4 h-4" />
+          {t("industryNotice.contactCta")}
+        </a>
+      </Button>
+    </div>
+  );
+};
 
 // Accordion item con animazione grid fluida e scroll-into-view
 const AccordionItem = ({
@@ -69,6 +108,7 @@ const AccordionItem = ({
   question,
   lang,
   openSlideLabel,
+  linkLabel,
   isOpen,
   onToggle,
 }: {
@@ -76,6 +116,7 @@ const AccordionItem = ({
   question: string;
   lang: string;
   openSlideLabel: string;
+  linkLabel?: string;
   isOpen: boolean;
   onToggle: () => void;
 }) => {
@@ -143,6 +184,7 @@ const AccordionItem = ({
           <div className="px-3 pb-3 sm:px-5 sm:pb-5">
             <div className="h-px bg-gradient-to-r from-[hsl(95,87%,34%,0.25)] to-[hsl(316,91%,40%,0.25)] mb-4" />
             <div className="flex flex-col gap-3">
+              {faq.industry && <IndustryContent />}
               {faq.slides.map((n) => (
                 <div
                   key={n}
@@ -167,6 +209,17 @@ const AccordionItem = ({
                   </a>
                 </div>
               ))}
+              {faq.link && (
+                <a
+                  href={faq.link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 self-start text-sm font-semibold text-[hsl(95,87%,34%)] hover:underline"
+                >
+                  {linkLabel}
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -205,7 +258,7 @@ export const Hero = () => {
             />
 
             <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-[hsl(95,87%,34%)] to-[hsl(316,91%,40%)] bg-clip-text text-transparent">
-              D-DAND
+              DAND
             </h1>
 
             <p className="text-sm text-muted-foreground max-w-[200px] leading-relaxed">
@@ -217,9 +270,12 @@ export const Hero = () => {
 
             <div className="w-12 h-px bg-gradient-to-r from-[hsl(95,87%,34%)] to-[hsl(316,91%,40%)]" />
 
-            <p className="text-xs text-muted-foreground/60 italic">
-              {t('hero.foundation')}
-            </p>
+            <img
+              src={logoDravet}
+              alt={t('hero.foundation')}
+              className="w-20 lg:w-24 select-none"
+              draggable={false}
+            />
 
             {/* CTA registrati / accedi */}
             <Button
@@ -243,7 +299,7 @@ export const Hero = () => {
           <div className="flex md:hidden items-center gap-3 mb-4">
             <img src="/logo.png" alt="D-DAND" className="w-11 h-11 object-contain" />
             <span className="text-2xl font-extrabold bg-gradient-to-r from-[hsl(95,87%,34%)] to-[hsl(316,91%,40%)] bg-clip-text text-transparent">
-              D-DAND
+              DAND
             </span>
           </div>
 
@@ -269,6 +325,7 @@ export const Hero = () => {
                 question={t(`hero.faq.${faq.key}`)}
                 lang={i18n.resolvedLanguage ?? i18n.language}
                 openSlideLabel={t('hero.openSlide')}
+                linkLabel={faq.link ? t(faq.link.labelKey) : undefined}
                 isOpen={openId === faq.id}
                 onToggle={() => toggle(faq.id)}
               />

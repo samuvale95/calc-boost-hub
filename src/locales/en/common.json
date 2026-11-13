@@ -25,7 +25,7 @@
   },
   "hero": {
     "eyebrow": "Discover the tool",
-    "title": "Everything you need to know about the D-DAND Scale",
+    "title": "D-DAND (Dravet Disease Associated Neuropsychiatric Disorders): everything you need to know about the scale",
     "subtitle": "Click a question to see the answer.",
     "acronym": "Disease Associated Neuropsychiatric Disorders",
     "foundation": "Fondazione Dravet ETS",
@@ -37,8 +37,10 @@
       "q4": "What does the D-DAND assess?",
       "q5": "How is it used in practice?",
       "q6": "What are the strengths of the D-DAND?",
-      "q7": "Who developed the D-DAND and where is it published?"
-    }
+      "q7": "Who developed the D-DAND and where is it published?",
+      "industry": "Industry / Pharma / CRO / Sponsored Clinical Trials"
+    },
+    "readPaper": "Read the paper in Epilepsia"
   },
   "access": {
     "eyebrow": "Access to the scale",
@@ -46,6 +48,7 @@
     "subtitle": "Clinical, academic and non-commercial research use of the DAND Scale is free. Just register to download the scale, the manual, and use the automatic calculator.",
     "features": {
       "pdf": "D-DAND Scale in PDF format",
+      "results": "Results downloadable as PDF or Excel",
       "manual": "User manual included",
       "calculator": "Automatic calculator for the 25 outcomes",
       "privacy": "No patient data stored on the server",
@@ -58,7 +61,15 @@
     "title": "Industry / Pharma / CRO / Sponsored Clinical Trials.",
     "body": "Use of the DAND Scale by pharmaceutical companies, CROs, in the context of sponsored clinical trials or for other commercial purposes is subject to a specific request to Fondazione Dravet ETS. Contact:",
     "afterContact": "Fondazione Dravet ETS will evaluate the request and contact the applicant to agree on the terms of use and any collaboration.",
-    "acknowledge": "I understand"
+    "acknowledge": "I understand",
+    "contactCta": "Write to Fondazione Dravet ETS"
+  },
+  "supportedBy": {
+    "eyebrow": "Acknowledgements",
+    "title": "Supported by",
+    "lollo": "This project was supported by donations from Lollo's family, in his memory.",
+    "alsoBy": "The D-DAND was also supported by",
+    "grants": "Fondazione Dravet ETS also gratefully acknowledges the support received through unrestricted grants from Jazz Pharmaceuticals, UCB, Lundbeck and Biocodex."
   },
   "login": {
     "title": "Log in to the DAND Scale",

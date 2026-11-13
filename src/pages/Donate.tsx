@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Heart, Copy, Check } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import logoDravet from "@/assets/logo-dravet.png";
 
 // PayPal hosted donate button, provided by Fondazione Dravet ETS (email
 // "Sito e preventivo", 17/09/2026). Do not swap this id without the
@@ -41,9 +42,12 @@ const Donate = () => {
     <div className="min-h-screen bg-background py-16">
       <div className="container mx-auto px-4 max-w-2xl">
         <div className="text-center mb-10">
-          <div className="mx-auto w-16 h-16 rounded-full bg-[hsl(316,91%,40%,0.1)] flex items-center justify-center mb-4">
-            <Heart className="h-8 w-8 text-[hsl(316,91%,40%)]" />
-          </div>
+          <img
+            src={logoDravet}
+            alt={FOUNDATION.name}
+            className="mx-auto h-32 w-auto mb-6 select-none"
+            draggable={false}
+          />
           <h1 className="text-4xl font-extrabold text-foreground mb-3">Sostieni Fondazione Dravet ETS</h1>
           <p className="text-muted-foreground">
             Il tuo contributo sostiene la ricerca, lo sviluppo di strumenti come la DAND Scale e il supporto alle famiglie.
