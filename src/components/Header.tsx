@@ -22,7 +22,7 @@ import {
   LogIn,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import Icon from "@/assets/icon.png";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
@@ -80,10 +80,10 @@ export const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-4">
             <Button variant={isActivePage("/publications") ? "default" : "ghost"} asChild>
-              <a href="/publications" className="flex items-center gap-2"><BookOpen className="h-4 w-4" />{t('header.publications')}</a>
+              <Link to="/publications" className="flex items-center gap-2"><BookOpen className="h-4 w-4" />{t('header.publications')}</Link>
             </Button>
             <Button variant={isActivePage("/donate") ? "default" : "ghost"} asChild>
-              <a href="/donate" className="flex items-center gap-2"><Heart className="h-4 w-4" />{t('header.donate')}</a>
+              <Link to="/donate" className="flex items-center gap-2"><Heart className="h-4 w-4" />{t('header.donate')}</Link>
             </Button>
             {isAuthenticated ? (
               <>
@@ -135,7 +135,7 @@ export const Header = () => {
             ) : (
               <div className="flex items-center gap-2">
                 <Button variant="ghost" asChild>
-                  <a href="/login" className="flex items-center gap-2"><LogIn className="h-4 w-4" />{t('header.login')}</a>
+                  <Link to="/login" className="flex items-center gap-2"><LogIn className="h-4 w-4" />{t('header.login')}</Link>
                 </Button>
               </div>
             )}
@@ -164,10 +164,10 @@ export const Header = () => {
           <div className="md:hidden border-t py-4">
             <div className="space-y-2">
               <Button variant={isActivePage("/publications") ? "default" : "ghost"} asChild className="w-full justify-start">
-                <a href="/publications" className="flex items-center gap-2"><BookOpen className="h-4 w-4" />{t('header.publications')}</a>
+                <Link onClick={() => setIsMobileMenuOpen(false)} to="/publications" className="flex items-center gap-2"><BookOpen className="h-4 w-4" />{t('header.publications')}</Link>
               </Button>
               <Button variant={isActivePage("/donate") ? "default" : "ghost"} asChild className="w-full justify-start">
-                <a href="/donate" className="flex items-center gap-2"><Heart className="h-4 w-4" />{t('header.donate')}</a>
+                <Link onClick={() => setIsMobileMenuOpen(false)} to="/donate" className="flex items-center gap-2"><Heart className="h-4 w-4" />{t('header.donate')}</Link>
               </Button>
               {isAuthenticated ? (
                 <>
@@ -214,7 +214,7 @@ export const Header = () => {
               ) : (
                 <>
                   <Button variant="ghost" asChild className="w-full justify-start">
-                    <a href="/login" className="flex items-center gap-2"><LogIn className="h-4 w-4" />{t('header.login')}</a>
+                    <Link onClick={() => setIsMobileMenuOpen(false)} to="/login" className="flex items-center gap-2"><LogIn className="h-4 w-4" />{t('header.login')}</Link>
                   </Button>
                 </>
               )}

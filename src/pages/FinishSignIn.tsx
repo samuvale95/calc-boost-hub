@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -142,7 +142,7 @@ const FinishSignIn = () => {
               Il tuo indirizzo email è stato confermato. Ora puoi accedere con le tue credenziali.
             </p>
             <Button asChild className="w-full">
-              <a href="/login">Accedi al tuo account</a>
+              <Link to="/login">Accedi al tuo account</Link>
             </Button>
           </CardContent>
         </Card>
@@ -198,7 +198,7 @@ const FinishSignIn = () => {
               {error || t('finishSignIn.invalidLinkDescription')}
             </p>
             <Button asChild className="w-full">
-              <a href="/login">{t('finishSignIn.backToLogin')}</a>
+              <Link to="/login">{t('finishSignIn.backToLogin')}</Link>
             </Button>
           </CardContent>
         </Card>

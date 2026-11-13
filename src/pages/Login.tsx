@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, ArrowLeft } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { LoginSection } from "@/components/LoginSection";
 
 const Login = () => {
@@ -35,7 +35,7 @@ const Login = () => {
                 {t('login.alreadyAuthenticatedDescription')}
               </p>
               <Button asChild className="w-full">
-                <a href="/profile">{t('login.goToProfile')}</a>
+                <Link to="/profile">{t('login.goToProfile')}</Link>
               </Button>
             </CardContent>
           </Card>
@@ -49,10 +49,10 @@ const Login = () => {
       <div className="w-full max-w-md">
         <div className="mb-6">
           <Button variant="ghost" asChild className="mb-4">
-            <a href="/" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <ArrowLeft className="h-4 w-4" />
               {t('login.backHome')}
-            </a>
+            </Link>
           </Button>
         </div>
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -98,10 +98,10 @@ const ResetPassword = () => {
       <div className="w-full max-w-md">
         <div className="mb-6">
           <Button variant="ghost" asChild className="mb-4">
-            <a href="/" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <ArrowLeft className="h-4 w-4" />
               {t("login.backHome")}
-            </a>
+            </Link>
           </Button>
         </div>
 
