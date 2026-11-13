@@ -6,6 +6,16 @@ import logoJazz from "@/assets/logo-jazz-pharma.png";
 import logoUcb from "@/assets/ubc_premiere.svg";
 import logoLundbeck from "@/assets/lundbeck.svg";
 import logoBiocodex from "@/assets/logo-biocodex.png";
+import logoAoui from "@/assets/aoui.png";
+import logoUnipv from "@/assets/logo-unipv.svg";
+import logoNecker from "@/assets/logo-necker.png";
+
+// Clinical/academic partners of the D-DAND working group (deck slide 2).
+const PARTNER_LOGOS = [
+  { src: logoAoui, alt: "AOUI Verona" },
+  { src: logoUnipv, alt: "Università degli Studi di Pavia" },
+  { src: logoNecker, alt: "Hôpital Necker-Enfants malades" },
+];
 
 // Unrestricted-grant sponsors, in the order given by Fondazione Dravet.
 const GRANT_LOGOS = [
@@ -33,9 +43,16 @@ export const SupportedBySection = () => {
         <img
           src={logoDravet}
           alt="Fondazione Dravet ETS"
-          className="mx-auto h-24 md:h-28 w-auto mb-10 select-none"
+          className="mx-auto h-24 md:h-28 w-auto mb-8 select-none"
           draggable={false}
         />
+        <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5 mb-12">
+          {PARTNER_LOGOS.map(({ src, alt }) => (
+            <li key={alt}>
+              <img src={src} alt={alt} title={alt} className="h-10 md:h-12 w-auto max-w-[180px] object-contain select-none" draggable={false} />
+            </li>
+          ))}
+        </ul>
 
         <div className="flex flex-col items-center gap-10">
           <p className="flex items-start gap-3 text-lg text-foreground leading-relaxed max-w-2xl">
