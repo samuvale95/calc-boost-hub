@@ -2,8 +2,18 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent} from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
-import { Brain, CheckCircle, Play, Home, ChevronLeft, ChevronRight, Download, FileSpreadsheet } from "lucide-react";
+import { AlertTriangle, Brain, CheckCircle, Play, Home, ChevronLeft, ChevronRight, Download, FileSpreadsheet } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useLeaveGuard } from "@/hooks/useLeaveGuard";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAdmin } from "@/hooks/useAdmin";
@@ -366,6 +376,10 @@ const resetQuiz = () => {
   const isLastQuestion =
     currentSectionIndex === sections.length - 1 &&
     currentQuestionIndex === currentSection.questions.length - 1;
+
+  // Results live only in this page (nothing is stored server-side): once the
+  // test is finished, warn before any action that would lose them.
+  const leaveGuard = useLeaveGuard(showResults);
 
   return (
 
@@ -760,7 +774,7 @@ const resetQuiz = () => {
                     <FileSpreadsheet className="h-4 w-4" />
                     Scarica Excel
                   </Button>
-                  <Button onClick={resetQuiz} className="flex items-center gap-2">
+                  <Button onClick={leaveGuard.guard(resetQuiz)} className="flex items-center gap-2">
                     <Play className="h-4 w-4" />
                     Rifai il Test
                   </Button>
@@ -780,6 +794,36 @@ const resetQuiz = () => {
           </CardContent>
         </Card>
       </div>
+
+      <AlertDialog open={leaveGuard.pending} onOpenChange={(open) => !open && leaveGuard.cancel()}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2 text-destructive">
+              <AlertTriangle className="h-5 w-5" />
+              ATTENZIONE!
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-base text-foreground">
+              Hai scaricato i risultati? Se non hai scaricato né il PDF né l'Excel i dati del/la paziente andranno persi.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="flex flex-col sm:flex-row gap-2">
+            <Button onClick={handleGeneratePDF} variant="outline" className="flex-1 flex items-center gap-2">
+              <Download className="h-4 w-4" />
+              Scarica PDF
+            </Button>
+            <Button onClick={handleGenerateExcel} variant="outline" className="flex-1 flex items-center gap-2">
+              <FileSpreadsheet className="h-4 w-4" />
+              Scarica Excel
+            </Button>
+          </div>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Resta sulla pagina</AlertDialogCancel>
+            <Button variant="destructive" onClick={leaveGuard.confirm}>
+              Esci comunque
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
