@@ -484,7 +484,7 @@ const resetQuiz = () => {
                               {isCompleted ? (
                                 <CheckCircle className="w-6 h-6" />
                               ) : (
-                                <span className="text-base">{index + 1}</span>
+                                <span className="text-base">{index}</span>
                               )}
                             </button>
                             
