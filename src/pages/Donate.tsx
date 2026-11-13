@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { FOUNDATION } from "@/config/legal";
 import logoDravet from "@/assets/logo-dravet.png";
+import logoPaypal from "@/assets/logo-paypal.svg";
 
 // PayPal hosted donate button, provided by Fondazione Dravet ETS (email
 // "Sito e preventivo", 17/09/2026). Do not swap this id without the
@@ -50,7 +51,10 @@ const Donate = () => {
 
         <Card className="mb-6">
           <CardHeader>
-            <CardTitle>Dona con PayPal</CardTitle>
+            <CardTitle className="flex items-center gap-3">
+              Dona con
+              <img src={logoPaypal} alt="PayPal" className="h-7 w-auto select-none" draggable={false} />
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <Button asChild size="lg" className="w-full bg-[hsl(316,91%,40%)] hover:bg-[hsl(316,91%,34%)] text-white">

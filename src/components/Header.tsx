@@ -16,7 +16,10 @@ import {
   Calculator,
   FileText,
   Menu,
-  X
+  X,
+  BookOpen,
+  Heart,
+  LogIn,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -77,10 +80,10 @@ export const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-4">
             <Button variant={isActivePage("/publications") ? "default" : "ghost"} asChild>
-              <a href="/publications">{t('header.publications')}</a>
+              <a href="/publications" className="flex items-center gap-2"><BookOpen className="h-4 w-4" />{t('header.publications')}</a>
             </Button>
             <Button variant={isActivePage("/donate") ? "default" : "ghost"} asChild>
-              <a href="/donate">{t('header.donate')}</a>
+              <a href="/donate" className="flex items-center gap-2"><Heart className="h-4 w-4" />{t('header.donate')}</a>
             </Button>
             {isAuthenticated ? (
               <>
@@ -132,7 +135,7 @@ export const Header = () => {
             ) : (
               <div className="flex items-center gap-2">
                 <Button variant="ghost" asChild>
-                  <a href="/login">{t('header.login')}</a>
+                  <a href="/login" className="flex items-center gap-2"><LogIn className="h-4 w-4" />{t('header.login')}</a>
                 </Button>
               </div>
             )}
@@ -161,10 +164,10 @@ export const Header = () => {
           <div className="md:hidden border-t py-4">
             <div className="space-y-2">
               <Button variant={isActivePage("/publications") ? "default" : "ghost"} asChild className="w-full justify-start">
-                <a href="/publications">{t('header.publications')}</a>
+                <a href="/publications" className="flex items-center gap-2"><BookOpen className="h-4 w-4" />{t('header.publications')}</a>
               </Button>
               <Button variant={isActivePage("/donate") ? "default" : "ghost"} asChild className="w-full justify-start">
-                <a href="/donate">{t('header.donate')}</a>
+                <a href="/donate" className="flex items-center gap-2"><Heart className="h-4 w-4" />{t('header.donate')}</a>
               </Button>
               {isAuthenticated ? (
                 <>
@@ -211,7 +214,7 @@ export const Header = () => {
               ) : (
                 <>
                   <Button variant="ghost" asChild className="w-full justify-start">
-                    <a href="/login">{t('header.login')}</a>
+                    <a href="/login" className="flex items-center gap-2"><LogIn className="h-4 w-4" />{t('header.login')}</a>
                   </Button>
                 </>
               )}
