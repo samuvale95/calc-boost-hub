@@ -330,7 +330,7 @@
                     "score": 4
                 }
             ],
-            "section": "GROSSOMOTORIO",
+            "section": "ENERGIA, DESIDERIO E CAPACITÀ NELL’ATTIVITÀ SPORTIVA",
             "subdom": 2,
             "dom": "Mot"
         },
@@ -724,7 +724,7 @@
                     "score": 4
                 }
             ],
-            "section": "LINGUAGGIO E INTERAZIONE SOCIALE",
+            "section": "COMPRENSIONE VERBALE",
             "subdom": 6,
             "dom": "Lan"
         },
@@ -753,7 +753,7 @@
                     "score": 4
                 }
             ],
-            "section": "LINGUAGGIO E INTERAZIONE SOCIALE",
+            "section": "PRODUZIONE VERBALE",
             "subdom": 7,
             "dom": "Lan"
         },
@@ -778,7 +778,7 @@
                     "score": 3
                 }
             ],
-            "section": "LINGUAGGIO E INTERAZIONE SOCIALE",
+            "section": "PRODUZIONE VERBALE",
             "subdom": 7,
             "dom": "Lan"
         },
@@ -807,7 +807,7 @@
                     "score": 4
                 }
             ],
-            "section": "LINGUAGGIO E INTERAZIONE SOCIALE",
+            "section": "PRODUZIONE VERBALE",
             "subdom": 7,
             "dom": "Lan"
         },
@@ -828,7 +828,7 @@
                     "score": 2
                 }
             ],
-            "section": "LINGUAGGIO E INTERAZIONE SOCIALE",
+            "section": "PRODUZIONE VERBALE",
             "subdom": 7,
             "dom": "Lan"
         },
@@ -853,7 +853,7 @@
                     "score": 3
                 }
             ],
-            "section": "LINGUAGGIO E INTERAZIONE SOCIALE",
+            "section": "PRODUZIONE VERBALE",
             "subdom": 7,
             "dom": "Lan"
         },
@@ -1057,7 +1057,7 @@
                     "score": 3
                 }
             ],
-            "section": "AUTONOMIE PERSONALI",
+            "section": "AUTONOMIE DOMESTICHE",
             "subdom": 10,
             "dom": "Aut"
         },
@@ -1082,7 +1082,7 @@
                     "score": 3
                 }
             ],
-            "section": "AUTONOMIE PERSONALI",
+            "section": "AUTONOMIE DOMESTICHE",
             "subdom": 10,
             "dom": "Aut"
         },
@@ -1107,7 +1107,7 @@
                     "score": 3
                 }
             ],
-            "section": "AUTONOMIE PERSONALI",
+            "section": "AUTONOMIE DOMESTICHE",
             "subdom": 10,
             "dom": "Aut"
         },
@@ -1132,7 +1132,7 @@
                     "score": 3
                 }
             ],
-            "section": "AUTONOMIE PERSONALI",
+            "section": "AUTONOMIE SOCIALI",
             "subdom": 11,
             "dom": "Aut"
         },
@@ -1161,7 +1161,7 @@
                     "score": 4
                 }
             ],
-            "section": "AUTONOMIE PERSONALI",
+            "section": "AUTONOMIE SOCIALI",
             "subdom": 11,
             "dom": "Aut"
         },
@@ -1194,7 +1194,7 @@
                     "score": 5
                 }
             ],
-            "section": "AUTONOMIE PERSONALI",
+            "section": "AUTONOMIE SOCIALI",
             "subdom": 11,
             "dom": "Aut"
         },
@@ -1219,7 +1219,7 @@
                     "score": 3
                 }
             ],
-            "section": "AUTONOMIE PERSONALI",
+            "section": "AUTONOMIE SOCIALI",
             "subdom": 11,
             "dom": "Aut"
         },
@@ -1373,7 +1373,7 @@
                     "score": 4
                 }
             ],
-            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
+            "section": "REGOLAZIONE EMOTIVA",
             "subdom": 13,
             "dom": "Emo"
         },
@@ -1402,7 +1402,7 @@
                     "score": 4
                 }
             ],
-            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
+            "section": "COMPORTAMENTO INTERNALIZZANTE",
             "subdom": 14,
             "dom": "Emo"
         },
@@ -1431,7 +1431,7 @@
                     "score": 4
                 }
             ],
-            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
+            "section": "COMPORTAMENTO INTERNALIZZANTE",
             "subdom": 14,
             "dom": "Emo"
         },
@@ -1460,7 +1460,7 @@
                     "score": 4
                 }
             ],
-            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
+            "section": "COMPORTAMENTO INTERNALIZZANTE",
             "subdom": 14,
             "dom": "Emo"
         },
@@ -1489,7 +1489,7 @@
                     "score": 4
                 }
             ],
-            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
+            "section": "ATTENZIONE E CONTROLLO MOTORIO",
             "subdom": 15,
             "dom": "Emo"
         },
@@ -1518,7 +1518,7 @@
                     "score": 4
                 }
             ],
-            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
+            "section": "ATTENZIONE E CONTROLLO MOTORIO",
             "subdom": 15,
             "dom": "Emo"
         },
@@ -1548,10 +1548,9 @@
                 }
 
             ],
-            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
+            "section": "ATTENZIONE E CONTROLLO MOTORIO",
             "subdom": 15,
             "dom": "Emo"
-
         },
         {
             "text": "IMPULSIVITÀ",
@@ -1578,7 +1577,7 @@
                     "score": 4
                 }
             ],
-            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
+            "section": "ATTENZIONE E CONTROLLO MOTORIO",
             "subdom": 15,
             "dom": "Emo"
         },
@@ -1607,7 +1606,7 @@
                     "score": 4
                 }
             ],
-            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
+            "section": "PROBLEMI SOCIALI E COMUNICATIVI",
             "subdom": 16,
             "dom": "Emo"
         },
@@ -1632,7 +1631,7 @@
                     "score": 3
                 }
             ],
-            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
+            "section": "PROBLEMI SOCIALI E COMUNICATIVI",
             "subdom": 16,
             "dom": "Emo"
         },
@@ -1661,7 +1660,7 @@
                     "score": 4
                 }
             ],
-            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
+            "section": "PROBLEMI SOCIALI E COMUNICATIVI",
             "subdom": 16,
             "dom": "Emo"
         },
@@ -1686,7 +1685,7 @@
                     "score": 3
                 }
             ],
-            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
+            "section": "PROBLEMI SOCIALI E COMUNICATIVI",
             "subdom": 16,
             "dom": "Emo"
         },
@@ -1715,7 +1714,7 @@
                     "score": 4
                 }
             ],
-            "section": "REGOLAZIONE EMOTIVO COMPORTAMENTALE",
+            "section": "COMPORTAMENTO ESTERNALIZZANTE",
             "subdom": 17,
             "dom": "Emo"
         },

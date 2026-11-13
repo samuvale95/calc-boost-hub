@@ -205,7 +205,7 @@ export const Hero = () => {
             />
 
             <h1 className="text-4xl lg:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-[hsl(95,87%,34%)] to-[hsl(316,91%,40%)] bg-clip-text text-transparent">
-              D-DAND
+              DAND
             </h1>
 
             <p className="text-sm text-muted-foreground max-w-[200px] leading-relaxed">
